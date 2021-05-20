@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PixelDefense.Gameplay;
 using System;
 using TiledSharp;
 
@@ -21,6 +22,9 @@ namespace PixelDefense
         bool showCollisionGeometry;
         Texture2D collisionTexture;
 
+        public int defaultWidth = 720;
+        public int defaultHeight = 720;
+
         int tileWidth;
         int tileHeight;
         int tilesetTilesWide;
@@ -28,6 +32,8 @@ namespace PixelDefense
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferredBackBufferWidth = defaultWidth;
+            graphics.PreferredBackBufferHeight = defaultHeight;
             Content.RootDirectory = "Content";
             /*graphics.ToggleFullScreen();*/
             
@@ -56,10 +62,11 @@ namespace PixelDefense
             spriteBatch = new SpriteBatch(GraphicsDevice);
             map = new TmxMap("Content/map.tmx");
             tileSet = map.Tilesets[0];
-            tileTexture = Content.Load<Texture2D>(tileSet.Name);
+            var myLayer = map.Layers[1];
+            tileTexture = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
-            tileWidth = tileSet.TileWidth;
-            tileHeight = tileSet.TileHeight;
+            tileWidth = map.Tilesets[0].TileWidth;
+            tileHeight = map.Tilesets[0].TileHeight;
 
             tilesetTilesWide = tileTexture.Width / tileWidth;
             tilesetTilesHigh = tileTexture.Height / tileHeight;
@@ -99,15 +106,13 @@ namespace PixelDefense
         {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            int margin = tileSet.Margin;
-            int spacing = tileSet.Spacing;
-
             spriteBatch.Begin();
+
+
 
             for (var i = 0; i < map.Layers[0].Tiles.Count; i++)
             {
-                var tile = map.Layers[0].Tiles[i];
-                int gid = tile.Gid;
+                int gid = map.Layers[0].Tiles[i].Gid;
 
                 // Empty tile, do nothing
                 if (gid == 0)
@@ -116,74 +121,44 @@ namespace PixelDefense
                 }
                 else
                 {
-                    int tileFrame = (int)gid - 1;
+                    int tileFrame = gid - 1;
+                    int column = 100;
+                    int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
+
+                    float x = (i % map.Width) * map.TileWidth;
+                    float y = (float)Math.Floor(i / (double)map.Width) * map.TileHeight;
+
+                    Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
+
+                    spriteBatch.Draw(tileTexture, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
+                }
+            }
+
+            for (var i = 0; i < map.Layers[1].Tiles.Count; i++)
+            {
+                int gid = map.Layers[1].Tiles[i].Gid;
+
+                // Empty tile, do nothing
+                if (gid == 0)
+                {
+
+                }
+                else
+                {
+                    int tileFrame = gid - 1;
                     int column = tileFrame % tilesetTilesWide;
                     int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
 
                     float x = (i % map.Width) * map.TileWidth;
                     float y = (float)Math.Floor(i / (double)map.Width) * map.TileHeight;
 
-                    Rectangle tilesetRec = new Rectangle(margin + (tileWidth + spacing) * column,
-                                                         margin + (tileHeight + spacing) * row,
-                                                         tileWidth,
-                                                         tileHeight);
+                    Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
 
-                    var effects = SpriteEffects.None;
-                    if (tile.HorizontalFlip)
-                    {
-                        effects = SpriteEffects.FlipHorizontally;
-                    }
-                    if (tile.VerticalFlip)
-                    {
-                        effects = SpriteEffects.FlipVertically;
-                    }
-
-                    spriteBatch.Draw(tileTexture, new Rectangle((int)x, (int)y, 16, 16), tilesetRec, Color.White,
-                                     0.0f, Vector2.Zero, effects, 0.0f);
-#if DEBUG
-                    if (showCollisionGeometry)
-                    {
-                        var tileSetLookup = map.Tilesets[0].Tiles;
-
-                        // if the tile is not in the tile set, no collision is possible
-                        if (tileFrame > tileSetLookup.Count - 1)
-                            continue;
-
-
-                        var groups = tileSetLookup[tileFrame].ObjectGroups;
-                        // assume that the object groups on the tile represent collision geometry
-                        if (groups.Count == 0)
-                            continue;
-
-                        var collObjects = groups[0];
-                        foreach (var obj in collObjects.Objects)
-                        {
-                            // check if collision boundary is a rectangle
-                            // Tiled editor does not set type, so check attr values
-                            if (obj.Width > 0 && obj.Height > 0)
-                            {
-                                int width = (int)Math.Round(obj.Width);
-                                int height = (int)Math.Round(obj.Height);
-                                int xoffset = (tile.HorizontalFlip) ? map.TileWidth - (int)obj.X - width : (int)obj.X;
-                                int yoffset = (tile.VerticalFlip) ? map.TileHeight - (int)obj.Y - height : (int)obj.Y;
-
-                                effects = SpriteEffects.None;
-
-                                // rectangle is in tile coordinates
-                                var rect = new Rectangle(tile.X * map.TileWidth + xoffset,
-                                                         tile.Y * map.TileHeight + yoffset,
-                                                         width,
-                                                         height);
-                                spriteBatch.Draw(collisionTexture, rect, null, Color.White,
-                                                 0.0f, Vector2.Zero, effects, 0.0f);
-                            }
-                        }
-                    }
-#endif
+                    spriteBatch.Draw(tileTexture, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
                 }
             }
 
-           
+
 
             spriteBatch.End();
 
