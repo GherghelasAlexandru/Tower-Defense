@@ -15,28 +15,25 @@ namespace PixelDefense
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        TmxMap map;
-        TmxTileset tileSet;
-        Texture2D tileTexture;
+        Map map;
+      
 
         bool showCollisionGeometry;
         Texture2D collisionTexture;
 
-        public int defaultWidth = 720;
-        public int defaultHeight = 720;
+        public int defaultWidth = 640;
+        public int defaultHeight = 367;
 
-        int tileWidth;
-        int tileHeight;
-        int tilesetTilesWide;
-        int tilesetTilesHigh;
+   
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = defaultWidth;
-            graphics.PreferredBackBufferHeight = defaultHeight;
+            graphics.PreferredBackBufferWidth = 1024;
+            graphics.PreferredBackBufferHeight = 720;
             Content.RootDirectory = "Content";
             /*graphics.ToggleFullScreen();*/
-            
+            graphics.ApplyChanges();
+
         }
 
         /// <summary>
@@ -60,16 +57,9 @@ namespace PixelDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            map = new TmxMap("Content/map.tmx");
-            tileSet = map.Tilesets[0];
-            var myLayer = map.Layers[1];
-            tileTexture = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
+            map = new Map(Content,"Content/FinishedVersion.tmx");
+           
 
-            tileWidth = map.Tilesets[0].TileWidth;
-            tileHeight = map.Tilesets[0].TileHeight;
-
-            tilesetTilesWide = tileTexture.Width / tileWidth;
-            tilesetTilesHigh = tileTexture.Height / tileHeight;
 
             // TODO: use this.Content to load your game content here
         }
@@ -104,59 +94,19 @@ namespace PixelDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
+            graphics.GraphicsDevice.Clear(Color.Green);
 
             spriteBatch.Begin();
 
+            map.DrawGrass(spriteBatch);
 
+            map.DrawPath(spriteBatch);
 
-            for (var i = 0; i < map.Layers[0].Tiles.Count; i++)
-            {
-                int gid = map.Layers[0].Tiles[i].Gid;
+            map.DrawShadow(spriteBatch);
 
-                // Empty tile, do nothing
-                if (gid == 0)
-                {
+            map.DrawBase(spriteBatch);
 
-                }
-                else
-                {
-                    int tileFrame = gid - 1;
-                    int column = 100;
-                    int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-
-                    float x = (i % map.Width) * map.TileWidth;
-                    float y = (float)Math.Floor(i / (double)map.Width) * map.TileHeight;
-
-                    Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
-
-                    spriteBatch.Draw(tileTexture, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
-                }
-            }
-
-            for (var i = 0; i < map.Layers[1].Tiles.Count; i++)
-            {
-                int gid = map.Layers[1].Tiles[i].Gid;
-
-                // Empty tile, do nothing
-                if (gid == 0)
-                {
-
-                }
-                else
-                {
-                    int tileFrame = gid - 1;
-                    int column = tileFrame % tilesetTilesWide;
-                    int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-
-                    float x = (i % map.Width) * map.TileWidth;
-                    float y = (float)Math.Floor(i / (double)map.Width) * map.TileHeight;
-
-                    Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
-
-                    spriteBatch.Draw(tileTexture, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
-                }
-            }
+            map.DrawDecorations(spriteBatch);
 
 
 
