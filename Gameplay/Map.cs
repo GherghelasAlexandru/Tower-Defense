@@ -19,12 +19,17 @@ namespace PixelDefense.Gameplay
         int tileHeight;
         int tilesetTilesWide;
         int tilesetTilesHigh;
+
+
         public Map(ContentManager content, string mapPath)
         {
             map = new TmxMap(mapPath);
+            
             tileTexture = content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
             tileWidth = map.Tilesets[0].TileWidth;
             tileHeight = map.Tilesets[0].TileHeight;
+
+            
 
             tilesetTilesWide = tileTexture.Width / tileWidth;
             tilesetTilesHigh = tileTexture.Height / tileHeight;

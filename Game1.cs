@@ -22,16 +22,21 @@ namespace PixelDefense
         Texture2D collisionTexture;
 
         public int defaultWidth = 640;
-        public int defaultHeight = 367;
+        public int defaultHeight = 448;
 
+ 
    
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = defaultWidth,
+                PreferredBackBufferHeight = defaultHeight
+            };
+            
+            
             Content.RootDirectory = "Content";
-            /*graphics.ToggleFullScreen();*/
+            graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
         }
@@ -45,7 +50,7 @@ namespace PixelDefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            
             base.Initialize();
         }
 
@@ -58,7 +63,8 @@ namespace PixelDefense
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             map = new Map(Content,"Content/FinishedVersion.tmx");
-           
+
+            
 
 
             // TODO: use this.Content to load your game content here
@@ -94,7 +100,7 @@ namespace PixelDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.Green);
+            graphics.GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
 
