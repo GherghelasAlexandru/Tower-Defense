@@ -5,6 +5,7 @@ using PixelDefense.Gameplay;
 using System;
 using TiledSharp;
 using PixelDefense.States;
+using System.Collections.Generic;
 
 namespace PixelDefense
 {
@@ -23,11 +24,9 @@ namespace PixelDefense
         private State _currentState;
 
         private State _nextState;
+        private Enemy enemy;
 
-        public void ChangeState(State state)
-        {
-            _nextState = state;
-        }
+       
 
         public Game1()
         {
@@ -41,6 +40,8 @@ namespace PixelDefense
            // graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
+            
+
         }
 
         /// <summary>
@@ -53,6 +54,7 @@ namespace PixelDefense
         {
             // TODO: Add your initialization logic here
             IsMouseVisible = true;
+            
             base.Initialize();
         }
 
@@ -65,10 +67,12 @@ namespace PixelDefense
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             
-
+            
             _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
 
-
+           
+            
+            
             // TODO: use this.Content to load your game content here
         }
 
@@ -125,6 +129,11 @@ namespace PixelDefense
             spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        public void ChangeState(State state)
+        {
+            _nextState = state;
         }
     }
 }
