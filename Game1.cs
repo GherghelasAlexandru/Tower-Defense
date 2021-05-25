@@ -31,12 +31,14 @@ namespace PixelDefense
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = defaultWidth;
-            graphics.PreferredBackBufferHeight = defaultHeight;
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = defaultWidth,
+                PreferredBackBufferHeight = defaultHeight
+            };
             Content.RootDirectory = "Content";
             
-            graphics.ToggleFullScreen();
+           // graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
         }
