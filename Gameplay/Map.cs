@@ -12,12 +12,11 @@ namespace PixelDefense.Gameplay
 {
     class Map
     {
-        TmxMap map;
-        TmxTileset tileSet;
-        Texture2D tileTexture;
-        int tileWidth;
-        int tileHeight;
-        int tilesetTilesWide;
+        readonly TmxMap map;
+        readonly Texture2D tileTexture;
+        readonly int tileWidth;
+        readonly int tileHeight;
+        readonly int tilesetTilesWide;
         int tilesetTilesHigh;
 
 

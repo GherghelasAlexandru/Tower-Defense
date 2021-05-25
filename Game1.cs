@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PixelDefense.Gameplay;
 using System;
+using System.Collections.Generic;
 using TiledSharp;
 
 namespace PixelDefense
@@ -16,8 +17,8 @@ namespace PixelDefense
         SpriteBatch spriteBatch;
 
         Map map;
-      
 
+        List<Enemy> enemies;
         bool showCollisionGeometry;
         Texture2D collisionTexture;
 
