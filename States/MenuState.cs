@@ -23,23 +23,23 @@ namespace PixelDefense.States
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 200),
+                Position = new Vector2(250, 200),
                 Text = "New Game",
             };
 
             newGameButton.Click += NewGameButton_Click;
 
-            var loadGameButton = new Button(buttonTexture, buttonFont)
+            var instructionsButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 250),
-                Text = "Load Game",
+                Position = new Vector2(250, 250),
+                Text = "Instructions",
             };
 
-            loadGameButton.Click += LoadGameButton_Click;
+            instructionsButton.Click += IntructionsButton_Click;
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 300),
+                Position = new Vector2(250, 300),
                 Text = "Quit Game",
             };
 
@@ -48,7 +48,7 @@ namespace PixelDefense.States
             _components = new List<IActor>()
       {
         newGameButton,
-        loadGameButton,
+        instructionsButton,
         quitGameButton,
       };
         }
@@ -63,9 +63,9 @@ namespace PixelDefense.States
           
         }
 
-        private void LoadGameButton_Click(object sender, EventArgs e)
+        private void IntructionsButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Load Game");
+            Console.WriteLine("Instructions");
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)
