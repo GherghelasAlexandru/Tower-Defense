@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using PixelDefense.Gameplay;
 using System;
 using TiledSharp;
+using PixelDefense.States;
 
 namespace PixelDefense
 {
@@ -14,24 +15,30 @@ namespace PixelDefense
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        MouseState mouse;
 
-        Map map;
-      
-
-        bool showCollisionGeometry;
-        Texture2D collisionTexture;
+        //Map map;
 
         public int defaultWidth = 640;
-        public int defaultHeight = 367;
+        public int defaultHeight = 448;
 
-   
+        private State _currentState;
+
+        private State _nextState;
+
+        public void ChangeState(State state)
+        {
+            _nextState = state;
+        }
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = 1024;
-            graphics.PreferredBackBufferHeight = 720;
+            graphics.PreferredBackBufferWidth = defaultWidth;
+            graphics.PreferredBackBufferHeight = defaultHeight;
             Content.RootDirectory = "Content";
-            /*graphics.ToggleFullScreen();*/
+            
+            graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
         }
@@ -45,7 +52,7 @@ namespace PixelDefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            IsMouseVisible = true;
             base.Initialize();
         }
 
@@ -57,8 +64,9 @@ namespace PixelDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            map = new Map(Content,"Content/FinishedVersion.tmx");
-           
+            
+
+            _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
 
 
             // TODO: use this.Content to load your game content here
@@ -80,6 +88,20 @@ namespace PixelDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            mouse = Mouse.GetState();
+            Console.WriteLine("X:{0} Y:{1}.", mouse.X, mouse.Y);
+
+            if (_nextState != null)
+            {
+                _currentState = _nextState;
+
+                _nextState = null;
+            }
+
+            _currentState.Update(gameTime);
+
+            _currentState.PostUpdate(gameTime);
+
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
@@ -97,8 +119,9 @@ namespace PixelDefense
             graphics.GraphicsDevice.Clear(Color.Green);
 
             spriteBatch.Begin();
+            _currentState.Draw(gameTime, spriteBatch);
 
-            map.DrawGrass(spriteBatch);
+           /* map.DrawGrass(spriteBatch);
 
             map.DrawPath(spriteBatch);
 
@@ -106,9 +129,7 @@ namespace PixelDefense
 
             map.DrawBase(spriteBatch);
 
-            map.DrawDecorations(spriteBatch);
-
-
+            map.DrawDecorations(spriteBatch);*/
 
             spriteBatch.End();
 

@@ -19,6 +19,11 @@ namespace PixelDefense.Gameplay
         int tileHeight;
         int tilesetTilesWide;
         int tilesetTilesHigh;
+
+
+        public object Tilesets { get; internal set; }
+        public object Position { get; private set; }
+
         public Map(ContentManager content, string mapPath)
         {
             map = new TmxMap(mapPath);
@@ -32,8 +37,10 @@ namespace PixelDefense.Gameplay
 
         public void DrawLayer(int index, SpriteBatch batch)
         {
+
             for (var i = 0; i < map.Layers[index].Tiles.Count; i++)
             {
+                
                 //Get the identification of the tile
                 int gid = map.Layers[index].Tiles[i].Gid;
 
@@ -54,6 +61,7 @@ namespace PixelDefense.Gameplay
                     //Draw the tile that is within the tilesetRec
                     batch.Draw(tileTexture, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
                 }
+               
             }
         }
 
