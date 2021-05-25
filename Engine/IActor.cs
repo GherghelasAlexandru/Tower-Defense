@@ -29,6 +29,6 @@ namespace PixelDefense.Engine
 
         void Update(GameTime gameTime);
 
-        void Draw(SpriteBatch spriteBatch);
+        void Draw(GameTime gameTime,SpriteBatch spriteBatch);
     }
 }

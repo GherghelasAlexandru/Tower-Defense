@@ -17,8 +17,6 @@ namespace PixelDefense
         SpriteBatch spriteBatch;
         MouseState mouse;
 
-        //Map map;
-
         public int defaultWidth = 640;
         public int defaultHeight = 448;
 
@@ -119,17 +117,8 @@ namespace PixelDefense
             graphics.GraphicsDevice.Clear(Color.Green);
 
             spriteBatch.Begin();
+
             _currentState.Draw(gameTime, spriteBatch);
-
-           /* map.DrawGrass(spriteBatch);
-
-            map.DrawPath(spriteBatch);
-
-            map.DrawShadow(spriteBatch);
-
-            map.DrawBase(spriteBatch);
-
-            map.DrawDecorations(spriteBatch);*/
 
             spriteBatch.End();
 

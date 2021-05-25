@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PixelDefense.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Controls
 {
-    public class Button : Component
+    public class Button : IActor
     {
         #region Fields
 
@@ -45,6 +46,11 @@ namespace PixelDefense.Controls
 
         public string Text { get; set; }
 
+        public Rectangle BoundingBox => throw new NotImplementedException();
+
+        public bool ToRemove { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public bool IsActive { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         #endregion
 
         #region Methods
@@ -58,7 +64,7 @@ namespace PixelDefense.Controls
             PenColour = Color.Black;
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             var colour = Color.White;
 
@@ -76,7 +82,7 @@ namespace PixelDefense.Controls
             }
         }
 
-        public override void Update(GameTime gameTime)
+        public  void Update(GameTime gameTime)
         {
             _previousMouse = _currentMouse;
             _currentMouse = Mouse.GetState();
@@ -95,6 +101,8 @@ namespace PixelDefense.Controls
                 }
             }
         }
+
+      
 
         #endregion
     }

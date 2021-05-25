@@ -7,12 +7,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PixelDefense.Controls;
+using PixelDefense.Engine;
 
 namespace PixelDefense.States
 {
     public class MenuState : State
     {
-        private List<Component> _components;
+        private List<IActor> _components;
 
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -44,7 +45,7 @@ namespace PixelDefense.States
 
             quitGameButton.Click += QuitGameButton_Click;
 
-            _components = new List<Component>()
+            _components = new List<IActor>()
       {
         newGameButton,
         loadGameButton,

@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Engine\AnimatedSprite.cs" />
-    <Compile Include="Engine\Component.cs" />
     <Compile Include="Engine\IActor.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\Animation.cs" />

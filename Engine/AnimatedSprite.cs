@@ -115,7 +115,7 @@ namespace PixelDefense.Engine
             base.Update(gameTime);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             if (CurrentAnimation == null) return;
 
