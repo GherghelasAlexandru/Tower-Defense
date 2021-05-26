@@ -20,12 +20,13 @@ namespace PixelDefense.Gameplay
         int tilesetTilesWide;
         int tilesetTilesHigh;
 
-
+        private readonly int mapID;
         public object Tilesets { get; internal set; }
         public object Position { get; private set; }
 
-        public Map(ContentManager content, string mapPath)
+        public Map(ContentManager content, string mapPath,int mapID)
         {
+            this.mapID = mapID;
             map = new TmxMap(mapPath);
             tileTexture = content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
             tileWidth = map.Tilesets[0].TileWidth;
@@ -35,6 +36,10 @@ namespace PixelDefense.Gameplay
             tilesetTilesHigh = tileTexture.Height / tileHeight;
         }
 
+        public int GetMapID()
+        {
+            return mapID;
+        }
         public void DrawLayer(int index, SpriteBatch batch)
         {
 

@@ -18,7 +18,7 @@ namespace PixelDefense.Controls
 
         private SpriteFont _font;
 
-        private bool _isHovering;
+        public bool _isHovering;
 
         private MouseState _previousMouse;
 

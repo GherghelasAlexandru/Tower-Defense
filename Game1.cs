@@ -20,9 +20,6 @@ namespace PixelDefense
         public int defaultWidth = 640;
         public int defaultHeight = 448;
 
-        public int screenWidth = 640;
-        public int screenHeight = 448;
-
         private State _currentState;
         private State _nextState;
         //private GameModel _gameModel;
@@ -89,8 +86,8 @@ namespace PixelDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            mouse = Mouse.GetState();
-            Console.WriteLine("X:{0} Y:{1}.", mouse.X, mouse.Y);
+            /*mouse = Mouse.GetState();
+            Console.WriteLine("X:{0} Y:{1}.", mouse.X, mouse.Y);*/
 
             if (_nextState != null)
             {
