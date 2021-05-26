@@ -20,7 +20,15 @@ namespace PixelDefense.States
             map = new Map(content, "Content/SecondMap.tmx");
         }
 
+        public override void PostUpdate(GameTime gameTime)
+        {
 
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+
+        }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -34,16 +42,6 @@ namespace PixelDefense.States
             map.DrawBase(spriteBatch);
 
             map.DrawDecorations(spriteBatch);
-
-        }
-
-        public override void PostUpdate(GameTime gameTime)
-        {
-
-        }
-
-        public override void Update(GameTime gameTime)
-        {
 
         }
     }
