@@ -70,7 +70,7 @@ namespace PixelDefense.States
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            _game.ChangeState(new MapSelectionState(_game, _graphicsDevice, _content));
         }
 
         public override void PostUpdate(GameTime gameTime)

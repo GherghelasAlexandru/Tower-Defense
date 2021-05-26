@@ -20,9 +20,14 @@ namespace PixelDefense
         public int defaultWidth = 640;
         public int defaultHeight = 448;
 
-        private State _currentState;
+        public int screenWidth = 640;
+        public int screenHeight = 448;
 
+        private State _currentState;
         private State _nextState;
+        //private GameModel _gameModel;
+
+        public static int ScreenWidth { get; internal set; }
 
         public void ChangeState(State state)
         {
@@ -36,7 +41,7 @@ namespace PixelDefense
             graphics.PreferredBackBufferHeight = defaultHeight;
             Content.RootDirectory = "Content";
             
-            graphics.ToggleFullScreen();
+            //graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
         }
@@ -62,10 +67,8 @@ namespace PixelDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            
 
             _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
-
 
             // TODO: use this.Content to load your game content here
         }

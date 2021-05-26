@@ -10,19 +10,17 @@ using PixelDefense.Gameplay;
 
 namespace PixelDefense.States
 {
-    
-
-    public class GameState : State
+    class SecondMapState : State
     {
         readonly Map map;
 
-        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
+        public SecondMapState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            map = new Map(content, "Content/FinishedVersion.tmx");
+            map = new Map(content, "Content/SecondMap.tmx");
         }
 
-       
+
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
@@ -50,3 +48,5 @@ namespace PixelDefense.States
         }
     }
 }
+
+

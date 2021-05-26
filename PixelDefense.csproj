@@ -58,6 +58,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controls\Button.cs" />
+    <Compile Include="Controls\MapSelector.cs" />
     <Compile Include="Engine\AnimatedSprite.cs" />
     <Compile Include="Engine\IActor.cs" />
     <Compile Include="Game1.cs" />
@@ -67,8 +68,11 @@
     <Compile Include="Engine\Sprite.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="States\GameState.cs" />
+    <Compile Include="States\FirstMapState.cs" />
+    <Compile Include="States\InstructionsState.cs" />
+    <Compile Include="States\MapSelectionState.cs" />
     <Compile Include="States\MenuState.cs" />
+    <Compile Include="States\SecondMapState.cs" />
     <Compile Include="States\State.cs" />
   </ItemGroup>
   <ItemGroup>

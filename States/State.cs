@@ -23,10 +23,6 @@ namespace PixelDefense.States
 
         #region Methods
 
-        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
-
-        public abstract void PostUpdate(GameTime gameTime);
-
         public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
         {
             _game = game;
@@ -35,6 +31,10 @@ namespace PixelDefense.States
 
             _content = content;
         }
+
+        public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+
+        public abstract void PostUpdate(GameTime gameTime);
 
         public abstract void Update(GameTime gameTime);
 
