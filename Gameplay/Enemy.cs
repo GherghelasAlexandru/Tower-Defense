@@ -14,20 +14,24 @@ namespace PixelDefense.Gameplay
 
     class Enemy: AnimatedSprite
     {
-
+        Texture2D enemyTexture;
+        int health;
+        bool isDead = false;
         float mSpeed = 1f;
+        int Width =8;
+        int Height = 13;
         public enum ECollisionSide { LEFT, RIGHT, TOP, BOTTOM }
         public enum EAnimState { RUN, ATTACK, TAKE_HIT, DEATH, NONE }
-        public Enemy(ContentManager content)
+
+        public Enemy(ContentManager content, int health)
         {
-            Texture = content.Load<Texture2D>("Run");
-            Dictionary<string, Animation> dicAnim = new Dictionary<string, Animation>
-            {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheet/Run"), 8)},
-                {"Attack",new Animation(content.Load<Texture2D>("spritesheet/Attack"),8 )},
-                {"Take_Hit",new Animation(content.Load<Texture2D>("spritesheet/Take_Hit"),8 )},
-                {"Death",new Animation(content.Load<Texture2D>("spritesheet/Death"),8 )}
-            };
+            this.health = health;
+
+            enemyTexture = content.Load<Texture2D>("spritesheets/Run");
+            enemyTexture = content.Load<Texture2D>("spritesheets/Attack");
+            enemyTexture = content.Load<Texture2D>("spritesheets/Take_Hit");
+            enemyTexture = content.Load<Texture2D>("spritesheets/Death");
+
         }
 
         public EAnimState AnimState
@@ -70,14 +74,61 @@ namespace PixelDefense.Gameplay
             }
         }
 
+       
+
         public void SpawnEnemy()
         {
 
 
         }
-        /*public void DrawEnemy(SpriteBatch spritebatch)
+
+        public override void Update(GameTime gameTime)
         {
-            spritebatch.Draw(enemyTexture, Position, new Rectangle);
-        }*/
+            vx = 0;
+            vy = 0;
+
+            float velocityValue = mSpeed * 60 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (isDead == false)
+            {
+                vy -= velocityValue;
+                AnimState = EAnimState.RUN;
+            }
+            /*else if (Input.GetKey(Keys.S))
+            {
+                vy += velocityValue;
+                AnimState = EAnimState.ATTACK;
+            }
+
+            if (Input.GetKey(Keys.A))
+            {
+                health -= 1;
+                AnimState = EAnimState.TAKE_HIT;
+            }*/
+            else if (health == 0)
+            {
+                isDead = true;
+                vx += velocityValue;
+                AnimState = EAnimState.DEATH;
+            }
+
+            if (vx == 0 && vy == 0)
+            {
+                StopAnim();
+                CurrentAnimation.CurrentFrame = 0;
+            }
+
+            base.Update(gameTime);
+        }
+
+
+        public void DrawEnemy(SpriteBatch spriteBatch)
+        {
+            var destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
+
+            spriteBatch.Draw(enemyTexture, destinationRectangle, Color.White);
+            
+        }
+       
     }
 }
