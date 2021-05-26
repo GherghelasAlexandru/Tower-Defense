@@ -65,7 +65,7 @@ namespace PixelDefense.States
 
         private void IntructionsButton_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("Instructions");
+            _game.ChangeState(new InstructionsState(_game, _graphicsDevice, _content));
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)

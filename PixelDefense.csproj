@@ -58,7 +58,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Controls\Button.cs" />
-    <Compile Include="Controls\MapSelector.cs" />
     <Compile Include="Engine\AnimatedSprite.cs" />
     <Compile Include="Engine\IActor.cs" />
     <Compile Include="Game1.cs" />

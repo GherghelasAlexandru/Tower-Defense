@@ -19,6 +19,7 @@ namespace PixelDefense.States
         public MapSelectionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
+            var buttonTexture = _content.Load<Texture2D>("Controls/Button");
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
             var secondMapTexture= _content.Load<Texture2D>("Controls/SecondMap");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
@@ -32,18 +33,27 @@ namespace PixelDefense.States
 
             chooseFirstMapButton.Click += FirstMapButton_Click;
 
-            var ChooseSecondMapButton = new Button(secondMapTexture, buttonFont)
+            var chooseSecondMapButton = new Button(secondMapTexture, buttonFont)
             {
                 Position = new Vector2(350, 150),
                 Text = "2",
             };
 
-            ChooseSecondMapButton.Click += SecondMapButton_Click;
+            chooseSecondMapButton.Click += SecondMapButton_Click;
+
+            var chooseBackButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(250, 350),
+                Text = "Back",
+            };
+
+            chooseBackButton.Click += BackButton_Click;
 
             _components = new List<IActor>()
             {
-                chooseFirstMapButton,
-            ChooseSecondMapButton,
+            chooseFirstMapButton,
+            chooseSecondMapButton,
+            chooseBackButton,
             };
 
         }
@@ -62,6 +72,11 @@ namespace PixelDefense.States
         private void FirstMapButton_Click(object sender, EventArgs e)
         {
             _game.ChangeState(new FirstMapState(_game, _graphicsDevice, _content));
+        }
+
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
         }
 
         public override void PostUpdate(GameTime gameTime)
