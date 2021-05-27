@@ -5,6 +5,7 @@ using PixelDefense.Gameplay;
 using System;
 using TiledSharp;
 using PixelDefense.States;
+using System.Collections.Generic;
 
 namespace PixelDefense
 {
@@ -22,6 +23,9 @@ namespace PixelDefense
 
         private State _currentState;
         private State _nextState;
+
+        //shooting sprites
+        private List<Sprite> _sprites;
         //private GameModel _gameModel;
 
         public static int ScreenWidth { get; internal set; }
@@ -66,6 +70,7 @@ namespace PixelDefense
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
+
 
             // TODO: use this.Content to load your game content here
         }

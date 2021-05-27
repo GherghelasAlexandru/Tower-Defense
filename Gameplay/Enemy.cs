@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿/*using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PixelDefense.Engine;
@@ -94,7 +94,7 @@ namespace PixelDefense.Gameplay
                 vy -= velocityValue;
                 AnimState = EAnimState.RUN;
             }
-            /*else if (Input.GetKey(Keys.S))
+            *//*else if (Input.GetKey(Keys.S))
             {
                 vy += velocityValue;
                 AnimState = EAnimState.ATTACK;
@@ -104,7 +104,7 @@ namespace PixelDefense.Gameplay
             {
                 health -= 1;
                 AnimState = EAnimState.TAKE_HIT;
-            }*/
+            }*//*
             else if (health == 0)
             {
                 isDead = true;
@@ -132,3 +132,4 @@ namespace PixelDefense.Gameplay
        
     }
 }
+*/

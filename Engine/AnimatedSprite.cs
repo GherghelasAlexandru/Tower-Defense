@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework;
+﻿/*using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PixelDefense.Gameplay;
 using System;
@@ -78,7 +78,7 @@ namespace PixelDefense.Engine
 
         #region Sprite Methods
 
-        public override void UpdateBoundingBox()
+        public void UpdateBoundingBox()
         {
             int width = 0;
             int height = 0;
@@ -95,7 +95,7 @@ namespace PixelDefense.Engine
                 width, height);
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             if (CurrentAnimation == null || !IsPlayed)
                 return;
@@ -125,3 +125,4 @@ namespace PixelDefense.Engine
         #endregion
     }
 }
+*/

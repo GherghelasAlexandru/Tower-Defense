@@ -62,6 +62,8 @@
     <Compile Include="Engine\IActor.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\Animation.cs" />
+    <Compile Include="Gameplay\BasicTower.cs" />
+    <Compile Include="Gameplay\Bullet.cs" />
     <Compile Include="Gameplay\Enemy.cs" />
     <Compile Include="Gameplay\Map.cs" />
     <Compile Include="Engine\Sprite.cs" />

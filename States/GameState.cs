@@ -14,24 +14,51 @@ namespace PixelDefense.States
     {
 
         List<Map> maps;
-        
+        //shooting sprites
+        private List<Sprite> _sprites;
+
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             maps = new List<Map>();
-            
-           
+
+            var basicTowerTexture = content.Load<Texture2D>("Tower/tower");
+
+            _sprites = new List<Sprite>()
+      {
+        new BasicTower(basicTowerTexture)
+        {
+          Position = new Vector2(100, 100),
+          Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
+        },
+      };
+
+
+
         }
 
         
         public override void PostUpdate(GameTime gameTime)
         {
-
+            
         }
 
+        public void postupdate()
+        {
+            for (int i = 0; i < _sprites.Count; i++)
+            {
+                if (_sprites[i].IsRemoved)
+                {
+                    _sprites.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
         public override void Update(GameTime gameTime)
         {
-
+            foreach (var sprite in _sprites.ToArray())
+                sprite.Update(gameTime, _sprites);
+            postupdate();
         }
 
         public void AddMap(Map map)
@@ -57,6 +84,13 @@ namespace PixelDefense.States
                 
             }
         }
+
+        public void DrawSprites(SpriteBatch spriteBatch)
+
+        {
+            foreach (var sprite in _sprites.ToArray())
+                sprite.Draw(spriteBatch);
+        }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
@@ -64,8 +98,10 @@ namespace PixelDefense.States
                 MapSelectionState mapSelection = new MapSelectionState(_game, _graphicsDevice, _content);
 
             DrawMap(spriteBatch);
-            
-        
+            DrawSprites(spriteBatch);
+
+
+
         }
     }
 }
