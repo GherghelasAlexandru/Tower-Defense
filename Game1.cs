@@ -2,7 +2,9 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using TiledSharp;
+using Tutorial006.Sprites;
 
 namespace PixelDefense
 {
@@ -14,12 +16,18 @@ namespace PixelDefense
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        //shooting sprites
+        private List<Sprite> _sprites;
+
         TmxMap map;
         TmxTileset tileSet;
         Texture2D tileTexture;
 
         bool showCollisionGeometry;
         Texture2D collisionTexture;
+
+
+        
 
         int tileWidth;
         int tileHeight;
@@ -30,6 +38,10 @@ namespace PixelDefense
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             /*graphics.ToggleFullScreen();*/
+
+
+          
+        
             
         }
 
@@ -64,6 +76,21 @@ namespace PixelDefense
             tilesetTilesWide = tileTexture.Width / tileWidth;
             tilesetTilesHigh = tileTexture.Height / tileHeight;
 
+
+            var basicTowerTexture = Content.Load<Texture2D>("tower");
+
+            _sprites = new List<Sprite>()
+      {
+        new BasicTower(basicTowerTexture)
+        {
+          Position = new Vector2(100, 100),
+          Bullet = new Bullet(Content.Load<Texture2D>("bullet")),
+        },
+      };
+
+
+
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -83,12 +110,29 @@ namespace PixelDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+            foreach (var sprite in _sprites.ToArray())
+                sprite.Update(gameTime, _sprites);
+
+            PostUpdate();
+
+
+
 
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        private void PostUpdate()
+        {
+            for (int i = 0; i < _sprites.Count; i++)
+            {
+                if (_sprites[i].IsRemoved)
+                {
+                    _sprites.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         /// <summary>
@@ -183,11 +227,18 @@ namespace PixelDefense
                 }
             }
 
-           
+            foreach (var sprite in _sprites.ToArray())
+                sprite.Draw(spriteBatch);
+
 
             spriteBatch.End();
 
+            
+
             base.Draw(gameTime);
         }
+
+
+       
     }
 }

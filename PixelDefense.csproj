@@ -45,6 +45,10 @@
     <Compile Include="Gameplay\Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RotationVelocity.cs" />
+    <Compile Include="Sprites\BasicTower.cs" />
+    <Compile Include="Sprites\Bullet.cs" />
+    <Compile Include="Sprites\Sprite.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
