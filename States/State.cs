@@ -36,9 +36,9 @@ namespace PixelDefense.States
             _content = content;
 
             _maps = new List<Map>();
+
             map1 = new Map(content, "Content/FinishedVersion.tmx", 1);
             map2 = new Map(content, "Content/SecondMap.tmx", 2);
-
         }
 
 
@@ -47,6 +47,10 @@ namespace PixelDefense.States
             _maps.Add(map);
         }
         
+        public void RemoveMap(Map map)
+        {
+            _maps.Remove(map);
+        }
         
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 

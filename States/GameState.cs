@@ -25,7 +25,6 @@ namespace PixelDefense.States
           : base(game, graphicsDevice, content)
         {
 
-            
             //shop = new ShopState(game, graphicsDevice, content);
             
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
@@ -114,15 +113,9 @@ namespace PixelDefense.States
         {
             foreach(var map in _maps)
             {
-                
-                    map.DrawPath(spriteBatch);
-              
-              
-                
-                    map.DrawPath(spriteBatch);
-                
+   
 
-                /*map.DrawGrass(spriteBatch);
+                map.DrawGrass(spriteBatch);
 
                 map.DrawPath(spriteBatch);
 
@@ -130,7 +123,7 @@ namespace PixelDefense.States
 
                 map.DrawBase(spriteBatch);
 
-                map.DrawDecorations(spriteBatch);*/
+                map.DrawDecorations(spriteBatch);
 
             }
         }
@@ -152,10 +145,7 @@ namespace PixelDefense.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
-            foreach(var map in _maps)
-            {
-               map.DrawBase(spriteBatch);
-            }
+            
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);

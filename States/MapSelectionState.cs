@@ -93,17 +93,20 @@ namespace PixelDefense.States
         private void SecondMapButton_Click(object sender, EventArgs e)
         {
             
-            AddMap(map2);
            
-            
+            _game.ChangeState(_game.gameState);
+
+            _game.gameState.AddMap(map2);
+            _game.gameState.RemoveMap(map1);
         }
 
         private void FirstMapButton_Click(object sender, EventArgs e)
         {
 
-            AddMap(map1);
-            
-            
+            _game.ChangeState(_game.gameState);
+
+            _game.gameState.AddMap(map1);
+            _game.gameState.RemoveMap(map2);
         }
 
 
