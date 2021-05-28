@@ -16,7 +16,7 @@ namespace PixelDefense
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        MouseState mouse;
+        //MouseState mouse;
 
         public int defaultWidth = 640;
         public int defaultHeight = 448;
@@ -24,8 +24,10 @@ namespace PixelDefense
         private State _currentState;
         private State _nextState;
 
+
+
         //shooting sprites
-        private List<Sprite> _sprites;
+        //private List<Sprite> _sprites;
         //private GameModel _gameModel;
 
         public static int ScreenWidth { get; internal set; }

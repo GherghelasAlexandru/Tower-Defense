@@ -51,6 +51,8 @@ namespace PixelDefense.Controls
         public bool ToRemove { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public bool IsActive { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public bool IsRemoved => throw new NotImplementedException();
+
         #endregion
 
         #region Methods
@@ -61,7 +63,7 @@ namespace PixelDefense.Controls
 
             _font = font;
 
-            PenColour = Color.Black;
+            PenColour = Color.White;
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

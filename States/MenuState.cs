@@ -18,7 +18,7 @@ namespace PixelDefense.States
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            var buttonTexture = _content.Load<Texture2D>("Controls/Button");
+            var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
             var newGameButton = new Button(buttonTexture, buttonFont)
