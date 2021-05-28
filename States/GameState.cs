@@ -11,27 +11,23 @@ using PixelDefense.Controls;
 
 namespace PixelDefense.States
 {
-    class GameState : State
+    public class GameState : State
     {
         private List<Button> _button;
-        List<Map> maps;
+        
         //shooting sprites
         private List<Sprite> _sprites;
 
-
-        Map map1;
-        Map map2;
+        
         //ShopState shop;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            maps = new List<Map>();
-            map1 = new Map(content, "Content/FinishedVersion.tmx", 1);
-            map2 = new Map(content, "Content/SecondMap.tmx", 2);
+
+            
             //shop = new ShopState(game, graphicsDevice, content);
-            AddMap(map1);
-            AddMap(map2);
+            
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
@@ -60,7 +56,7 @@ namespace PixelDefense.States
                 Text = "Shop",
             };
 
-            shopButton.Click += shopButton_click;
+            shopButton.Click += ShopButton_click;
 
             _button = new List<Button>()
             {
@@ -78,7 +74,7 @@ namespace PixelDefense.States
 
         }
 
-        private void shopButton_click(object sender, EventArgs e)
+        private void ShopButton_click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
             _game.ChangeState(new ShopState(_game, _graphicsDevice, _content));
@@ -105,7 +101,7 @@ namespace PixelDefense.States
         {
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
-           
+         
 
             foreach (var button in _button)
                 button.Update(gameTime);
@@ -113,17 +109,20 @@ namespace PixelDefense.States
             postupdate();
         }
 
-        public void AddMap(Map map)
-        {
-            maps.Add(map);
-        }
-
+       
         public void DrawMap(SpriteBatch spriteBatch)
         {
-            foreach (var map in maps)
+            foreach(var map in _maps)
             {
+                
+                    map.DrawPath(spriteBatch);
+              
+              
+                
+                    map.DrawPath(spriteBatch);
+                
 
-                map.DrawGrass(spriteBatch);
+                /*map.DrawGrass(spriteBatch);
 
                 map.DrawPath(spriteBatch);
 
@@ -131,7 +130,7 @@ namespace PixelDefense.States
 
                 map.DrawBase(spriteBatch);
 
-                map.DrawDecorations(spriteBatch);
+                map.DrawDecorations(spriteBatch);*/
 
             }
         }
@@ -153,11 +152,11 @@ namespace PixelDefense.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
-            foreach(var map in maps)
+            foreach(var map in _maps)
             {
-                DrawMap(spriteBatch);
+               map.DrawBase(spriteBatch);
             }
-            
+            DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
 

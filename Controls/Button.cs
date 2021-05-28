@@ -88,11 +88,12 @@ namespace PixelDefense.Controls
 
             if (mouseRectangle.Intersects(Rectangle))
             {
+                Clicked = true;
                 _isHovering = true;
-
+                
                 if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
                 {
-                    Click?.Invoke(this, new EventArgs());
+                   Click?.Invoke(this, new EventArgs()); ;
                 }
             }
         }

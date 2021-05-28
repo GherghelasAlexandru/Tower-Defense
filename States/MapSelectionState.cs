@@ -16,19 +16,22 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
 
+        public bool IsFirstMapChosen;
+        public bool IsSecondMapChosen;
+
       
-        GameState gameState;
         public MapSelectionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-          
-
+            IsFirstMapChosen = false;
+            IsSecondMapChosen = false;
+        
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
             var secondMapTexture= _content.Load<Texture2D>("Controls/SecondMap");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
-            gameState = new GameState(game, graphicsDevice, content);
+            
 
             
          
@@ -37,6 +40,7 @@ namespace PixelDefense.States
             {
                 Position = new Vector2(100, 150),
                 Text = "1",
+                
               
             };
 
@@ -60,11 +64,20 @@ namespace PixelDefense.States
 
             chooseBackButton.Click += BackButton_Click;
 
+            var chooseCofirmButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(250, 200),
+                Text = "Confirm Map",
+            };
+
+            chooseCofirmButton.Click += ConfirmMapButton_Click;
+
             _button = new List<Button>()
             {
             chooseFirstMapButton,
             chooseSecondMapButton,
             chooseBackButton,
+            chooseCofirmButton
             };
 
         }
@@ -75,25 +88,33 @@ namespace PixelDefense.States
                 button.Draw(gameTime, spriteBatch);
         }
 
+      
+
         private void SecondMapButton_Click(object sender, EventArgs e)
         {
-
-        
-            _game.ChangeState(gameState);
+            
+            AddMap(map2);
+           
             
         }
 
         private void FirstMapButton_Click(object sender, EventArgs e)
         {
 
-     
-            _game.ChangeState(gameState);
+            AddMap(map1);
             
+            
+        }
+
+
+        private void ConfirmMapButton_Click(object sender,EventArgs e)
+        {
+            _game.ChangeState(_game.gameState);
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+            _game.ChangeState(_game.menuState);
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -105,6 +126,8 @@ namespace PixelDefense.States
         {
             foreach (var button in _button)
                 button.Update(gameTime);
+           
+            
         }
     }
 }

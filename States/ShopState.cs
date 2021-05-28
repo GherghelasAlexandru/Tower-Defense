@@ -22,12 +22,12 @@ namespace PixelDefense.States
         BasicTower basicTower4;
         BasicTower basicTower5;
 
-        GameState gameState;
+
         private readonly List<Sprite> basicTowers;
         public ShopState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            gameState = new GameState(game, graphicsDevice, content);
+
 
             basicTowers = new List<Sprite>();
 
@@ -69,10 +69,12 @@ namespace PixelDefense.States
             this.basicTowers.Add(basicTower);
         }
 
+        
+
         private void BackButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
-            _game.ChangeState(gameState);
+            _game.ChangeState(_game.gameState);
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -100,5 +102,6 @@ namespace PixelDefense.States
 
         }
 
+      
     }
 }

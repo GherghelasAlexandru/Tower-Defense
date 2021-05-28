@@ -63,12 +63,12 @@ namespace PixelDefense.States
 
         private void IntructionsButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new InstructionsState(_game, _graphicsDevice, _content));
+            _game.ChangeState(_game.instructionsState);
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new MapSelectionState(_game, _graphicsDevice, _content));
+            _game.ChangeState(_game.mapSelection);
         }
 
         public override void PostUpdate(GameTime gameTime)

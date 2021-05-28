@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PixelDefense.Controls;
+using PixelDefense.Gameplay;
 
 namespace PixelDefense.States
 {
@@ -47,14 +48,14 @@ namespace PixelDefense.States
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+            _game.ChangeState(_game.menuState);
         }
 
         public override void PostUpdate(GameTime gameTime)
         {
             // remove sprites if they're not needed
         }
-
+      
         public override void Update(GameTime gameTime)
         {
             foreach (var button in _button)

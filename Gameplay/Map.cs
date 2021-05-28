@@ -10,7 +10,7 @@ using TiledSharp;
 
 namespace PixelDefense.Gameplay
 {
-    class Map
+    public class Map
     {
         TmxMap map;
         TmxTileset tileSet;

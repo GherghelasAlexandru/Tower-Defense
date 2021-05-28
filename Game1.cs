@@ -18,6 +18,14 @@ namespace PixelDefense
         SpriteBatch spriteBatch;
         //MouseState mouse;
 
+
+        //States
+        public GameState gameState;
+        public InstructionsState instructionsState;
+        public MapSelectionState mapSelection;
+        public ShopState shopState;
+        public MenuState menuState;
+
         public int defaultWidth = 640;
         public int defaultHeight = 448;
 
@@ -62,6 +70,12 @@ namespace PixelDefense
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+
+            gameState = new GameState(this, graphics.GraphicsDevice, Content);
+            instructionsState = new InstructionsState(this, graphics.GraphicsDevice, Content);
+            mapSelection = new MapSelectionState(this, graphics.GraphicsDevice, Content);
+            shopState = new ShopState(this, graphics.GraphicsDevice, Content);
+            menuState = new MenuState(this, graphics.GraphicsDevice, Content);
             IsMouseVisible = true;
             base.Initialize();
         }
@@ -75,7 +89,7 @@ namespace PixelDefense
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _currentState = new MenuState(this, graphics.GraphicsDevice, Content);
+            _currentState = menuState;
 
 
             // TODO: use this.Content to load your game content here
