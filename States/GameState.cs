@@ -95,8 +95,7 @@ namespace PixelDefense.States
         {
 
            
-                MapSelectionState mapSelection = new MapSelectionState(_game, _graphicsDevice, _content);
-
+          
             DrawMap(spriteBatch);
             DrawSprites(spriteBatch);
 

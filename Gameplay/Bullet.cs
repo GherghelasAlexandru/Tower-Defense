@@ -11,13 +11,13 @@ namespace PixelDefense.Gameplay
     public class Bullet : Sprite
     {
         private float _timer;
-
+        
         public Bullet(Texture2D texture)
           : base(texture)
         {
-
+         
         }
-
+        
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;

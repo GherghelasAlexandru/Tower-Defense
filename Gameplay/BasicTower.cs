@@ -16,7 +16,8 @@ namespace PixelDefense.Gameplay
         public BasicTower(Texture2D texture)
           : base(texture)
         {
-
+            RotationVelocity += 3f;
+            LinearVelocity += 4f;
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -44,7 +45,7 @@ namespace PixelDefense.Gameplay
             var bullet = Bullet.Clone() as Bullet;
             bullet.Direction = this.Direction;
             bullet.Position = this.Position;
-            bullet.LinearVelocity = this.LinearVelocity * 2;
+            bullet.LinearVelocity = LinearVelocity * 2;
             bullet.LifeSpan = 2f;
             bullet.Parent = this;
 

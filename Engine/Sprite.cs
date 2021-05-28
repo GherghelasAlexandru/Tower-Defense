@@ -8,54 +8,54 @@ using System.Collections.Generic;
 
 namespace PixelDefense.Gameplay
 {
-        public class Sprite : ICloneable
+    public class Sprite : ICloneable
+    {
+        protected Texture2D _texture;
+
+        protected float _rotation;
+
+        //protected KeyboardState _currentKey;
+
+        //protected KeyboardState _previousKey;
+
+        public Vector2 Position;
+
+        public Vector2 Origin;
+
+        public Vector2 Direction;
+
+        public float RotationVelocity;
+
+        public float LinearVelocity;
+
+        public Sprite Parent;
+
+        public float LifeSpan = 0f;
+
+        public bool IsRemoved = false;
+
+        public Sprite(Texture2D texture)
         {
-            protected Texture2D _texture;
+            _texture = texture;
 
-            protected float _rotation;
+            // The default origin in the centre of the sprite
+            Origin = new Vector2(0, 0);
+        }
 
-            //protected KeyboardState _currentKey;
+        public virtual void Update(GameTime gameTime, List<Sprite> sprites)
+        {
 
-            //protected KeyboardState _previousKey;
+        }
 
-            public Vector2 Position;
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
 
-            public Vector2 Origin;
+            spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+        }
 
-            public Vector2 Direction;
-
-            public float RotationVelocity = 3f;
-
-            public float LinearVelocity = 4f;
-
-            public Sprite Parent;
-
-            public float LifeSpan = 0f;
-
-            public bool IsRemoved = false;
-
-            public Sprite(Texture2D texture)
-            {
-                _texture = texture;
-
-                // The default origin in the centre of the sprite
-                Origin = new Vector2(0,0);
-            }
-
-            public virtual void Update(GameTime gameTime, List<Sprite> sprites)
-            {
-
-            }
-
-            public virtual void Draw(SpriteBatch spriteBatch)
-            {
-                
-                spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
-            }
-
-            public object Clone()
-            {
-                return this.MemberwiseClone();
-            }
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
+}
