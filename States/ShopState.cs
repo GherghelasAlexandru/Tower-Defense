@@ -9,26 +9,27 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PixelDefense.Controls;
 using PixelDefense.Engine;
+using PixelDefense.Gameplay;
 
 namespace PixelDefense.States
 {
     public class ShopState : State
     {
-        private List<IActor> _components;
+        List<IActor> _components;
+
         GameState gameState;
-        private ShopState shop;
 
         public ShopState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            var buttonTexture = _content.Load<Texture2D>("Controls/Button");
-            var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
+            gameState = new GameState(game, graphicsDevice, content);
 
-            gameState = new GameState(game, graphicsDevice, content, shop);
+            var buttonTexture = _content.Load<Texture2D>("Controls/button3");
+            var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(500, 0),
+                Position = new Vector2(480, 0),
                 Text = "Back",
             };
 
@@ -41,23 +42,15 @@ namespace PixelDefense.States
 
         }
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            foreach (var component in _components)
-                component.Draw(gameTime, spriteBatch);
-        }
-
         private void BackButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
             _game.ChangeState(gameState);
-            
-
         }
 
         public override void PostUpdate(GameTime gameTime)
         {
-            // remove sprites if they're not needed
+           
         }
 
         public override void Update(GameTime gameTime)
@@ -65,5 +58,19 @@ namespace PixelDefense.States
             foreach (var component in _components)
                 component.Update(gameTime);
         }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+
+            foreach (var component in _components)
+                component.Draw(gameTime, spriteBatch);
+
+            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T1"), new Vector2(10, 10), Color.White);
+            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T2"), new Vector2(10, 100), Color.White);
+            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T3"), new Vector2(10, 180), Color.White);
+            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T4"), new Vector2(10, 250), Color.White);
+            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T5"), new Vector2(10, 340), Color.White);
+        }
+
     }
 }

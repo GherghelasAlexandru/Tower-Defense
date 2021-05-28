@@ -21,11 +21,7 @@ namespace PixelDefense.Gameplay
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
-           
-
-
             Direction = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
-
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             timer -= elapsed;

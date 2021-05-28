@@ -26,6 +26,7 @@ namespace PixelDefense.Engine
         /// If IsActive is equal to false this actor will not be updated and draw
         /// </summary>
         bool IsActive { get; set; }
+        bool IsRemoved { get; }
 
         void Update(GameTime gameTime);
 

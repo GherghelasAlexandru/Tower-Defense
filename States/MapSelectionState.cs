@@ -26,7 +26,7 @@ namespace PixelDefense.States
             map1 = new Map(content, "Content/FinishedVersion.tmx", 1);
             map2 = new Map(content, "Content/SecondMap.tmx", 2);
 
-            var buttonTexture = _content.Load<Texture2D>("Controls/Button");
+            var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
             var secondMapTexture= _content.Load<Texture2D>("Controls/SecondMap");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
@@ -42,8 +42,6 @@ namespace PixelDefense.States
                 Text = "1",
               
             };
-
-         
 
             chooseFirstMapButton.Click += FirstMapButton_Click;
 
