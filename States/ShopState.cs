@@ -16,12 +16,35 @@ namespace PixelDefense.States
     {
         List<Button> _button;
 
-        GameState gameState;
+        BasicTower basicTower1;
+        BasicTower basicTower2;
+        BasicTower basicTower3;
+        BasicTower basicTower4;
+        BasicTower basicTower5;
 
+        GameState gameState;
+        private readonly List<Sprite> basicTowers;
         public ShopState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             gameState = new GameState(game, graphicsDevice, content);
+
+            basicTowers = new List<Sprite>();
+
+            basicTower1 = new BasicTower(content.Load<Texture2D>("Tower/T1"),10) { Position = new Vector2(10, 10) };
+            basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { Position = new Vector2(10, 100) };
+            basicTower3 = new BasicTower(content.Load<Texture2D>("Tower/T3"),20) { Position = new Vector2(10, 180) };
+            basicTower4 = new BasicTower(content.Load<Texture2D>("Tower/T4"),25) { Position = new Vector2(10, 250) };
+            basicTower5 = new BasicTower(content.Load<Texture2D>("Tower/T5"),30) { Position = new Vector2(10, 340) };
+
+
+            AddBasicTower(basicTower1);
+            AddBasicTower(basicTower2);
+            AddBasicTower(basicTower3);
+            AddBasicTower(basicTower4);
+            AddBasicTower(basicTower5);
+
+            var basicTowerTexture = content.Load<Texture2D>("Tower/tower");
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
@@ -39,6 +62,11 @@ namespace PixelDefense.States
             chooseBackButton,
             };
 
+        }
+
+        public void AddBasicTower(BasicTower basicTower)
+        {
+            this.basicTowers.Add(basicTower);
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -64,11 +92,18 @@ namespace PixelDefense.States
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
 
+            foreach (var tower in basicTowers)
+            {
+                tower.Draw(spriteBatch);
+            }
+
+          
+/*
             spriteBatch.Draw(_content.Load<Texture2D>("Tower/T1"), new Vector2(10, 10), Color.White);
             spriteBatch.Draw(_content.Load<Texture2D>("Tower/T2"), new Vector2(10, 100), Color.White);
             spriteBatch.Draw(_content.Load<Texture2D>("Tower/T3"), new Vector2(10, 180), Color.White);
             spriteBatch.Draw(_content.Load<Texture2D>("Tower/T4"), new Vector2(10, 250), Color.White);
-            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T5"), new Vector2(10, 340), Color.White);
+            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T5"), new Vector2(10, 340), Color.White);*/
         }
 
     }

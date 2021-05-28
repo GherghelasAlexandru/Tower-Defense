@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using PixelDefense.Engine;
 using System;
 using System.Collections.Generic;
 
@@ -10,7 +9,7 @@ namespace PixelDefense.Gameplay
 {
     public class Sprite : ICloneable
     {
-        protected Texture2D _texture;
+        public Texture2D _texture;
 
         protected float _rotation;
 

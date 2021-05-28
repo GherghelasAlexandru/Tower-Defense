@@ -13,9 +13,11 @@ namespace PixelDefense.Gameplay
         public Bullet Bullet;
         public float timer = 3;         //Initialize a 10 second timer
         public const float TIMER = 3;
-        public BasicTower(Texture2D texture)
+        public int towerPrice;
+        public BasicTower(Texture2D texture,int towerPrice)
           : base(texture)
         {
+            this.towerPrice = towerPrice;
             RotationVelocity += 3f;
             LinearVelocity += 4f;
         }
@@ -36,6 +38,11 @@ namespace PixelDefense.Gameplay
 
         }
 
+        public int GetPrice()
+        {
+            return towerPrice;
+        }
+
         private void AddBullet(List<Sprite> sprites)
         {
             var bullet = Bullet.Clone() as Bullet;
@@ -48,5 +55,11 @@ namespace PixelDefense.Gameplay
             sprites.Add(bullet);
         }
 
+
+        public void DrawBasicTower(SpriteBatch spriteBatch)
+
+        {
+            spriteBatch.Draw(_texture, Position, Color.White);
+        }
     }
 }

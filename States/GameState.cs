@@ -34,7 +34,7 @@ namespace PixelDefense.States
 
             _sprites = new List<Sprite>()
             {
-                new BasicTower(basicTowerTexture)
+                new BasicTower(basicTowerTexture,10)
                 {
                     Position = new Vector2(200, 200),
                     Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
@@ -147,8 +147,7 @@ namespace PixelDefense.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
-            MapSelectionState mapSelection = new MapSelectionState(_game, _graphicsDevice, _content);
-
+            
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);

@@ -45,13 +45,7 @@ namespace PixelDefense.Controls
 
         public string Text { get; set; }
 
-        public Rectangle BoundingBox => throw new NotImplementedException();
-
-        public bool ToRemove { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool IsActive { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public bool IsRemoved => throw new NotImplementedException();
-
+       
         #endregion
 
         #region Methods
