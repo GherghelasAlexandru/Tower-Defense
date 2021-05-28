@@ -89,6 +89,7 @@ namespace PixelDefense.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
+
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
 
@@ -97,13 +98,6 @@ namespace PixelDefense.States
                 tower.Draw(spriteBatch);
             }
 
-          
-/*
-            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T1"), new Vector2(10, 10), Color.White);
-            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T2"), new Vector2(10, 100), Color.White);
-            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T3"), new Vector2(10, 180), Color.White);
-            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T4"), new Vector2(10, 250), Color.White);
-            spriteBatch.Draw(_content.Load<Texture2D>("Tower/T5"), new Vector2(10, 340), Color.White);*/
         }
 
     }

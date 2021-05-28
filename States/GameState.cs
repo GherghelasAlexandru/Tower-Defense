@@ -18,15 +18,20 @@ namespace PixelDefense.States
         //shooting sprites
         private List<Sprite> _sprites;
 
+
+        Map map1;
+        Map map2;
         //ShopState shop;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             maps = new List<Map>();
-
+            map1 = new Map(content, "Content/FinishedVersion.tmx", 1);
+            map2 = new Map(content, "Content/SecondMap.tmx", 2);
             //shop = new ShopState(game, graphicsDevice, content);
-
+            AddMap(map1);
+            AddMap(map2);
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
@@ -69,6 +74,7 @@ namespace PixelDefense.States
         {
             // to be modified to change back to the gameState
             _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+         
 
         }
 
@@ -147,8 +153,11 @@ namespace PixelDefense.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
+            foreach(var map in maps)
+            {
+                DrawMap(spriteBatch);
+            }
             
-            DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
 

@@ -16,14 +16,12 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
 
-        Map map1;
-        Map map2;
+      
         GameState gameState;
         public MapSelectionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            map1 = new Map(content, "Content/FinishedVersion.tmx", 1);
-            map2 = new Map(content, "Content/SecondMap.tmx", 2);
+          
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
@@ -80,7 +78,7 @@ namespace PixelDefense.States
         private void SecondMapButton_Click(object sender, EventArgs e)
         {
 
-            gameState.AddMap(map2);
+        
             _game.ChangeState(gameState);
             
         }
@@ -88,7 +86,7 @@ namespace PixelDefense.States
         private void FirstMapButton_Click(object sender, EventArgs e)
         {
 
-            gameState.AddMap(map1);
+     
             _game.ChangeState(gameState);
             
         }

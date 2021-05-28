@@ -24,8 +24,9 @@ namespace PixelDefense
         private State _currentState;
         private State _nextState;
 
-
-
+        
+       
+       
         //shooting sprites
         //private List<Sprite> _sprites;
         //private GameModel _gameModel;
@@ -39,11 +40,14 @@ namespace PixelDefense
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            graphics.PreferredBackBufferWidth = defaultWidth;
-            graphics.PreferredBackBufferHeight = defaultHeight;
+            graphics = new GraphicsDeviceManager(this)
+            {
+                PreferredBackBufferWidth = defaultWidth,
+                PreferredBackBufferHeight = defaultHeight
+            };
             Content.RootDirectory = "Content";
-            
+
+           
             //graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
@@ -121,8 +125,9 @@ namespace PixelDefense
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            graphics.GraphicsDevice.Clear(Color.Green);
-
+        
+            graphics.GraphicsDevice.Clear(Color.Beige);
+            
             spriteBatch.Begin();
 
             _currentState.Draw(gameTime, spriteBatch);
