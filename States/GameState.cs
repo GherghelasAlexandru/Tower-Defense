@@ -8,13 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PixelDefense.Controls;
-using PixelDefense.Engine;
 
 namespace PixelDefense.States
 {
     class GameState : State
     {
-        private List<IActor> _components;
+        private List<Button> _button;
         List<Map> maps;
         //shooting sprites
         private List<Sprite> _sprites;
@@ -58,7 +57,7 @@ namespace PixelDefense.States
 
             shopButton.Click += shopButton_click;
 
-            _components = new List<IActor>()
+            _button = new List<Button>()
             {
             chooseBackButton,
             shopButton,
@@ -102,8 +101,8 @@ namespace PixelDefense.States
                 sprite.Update(gameTime, _sprites);
            
 
-            foreach (var component in _components)
-                component.Update(gameTime);
+            foreach (var button in _button)
+                button.Update(gameTime);
 
             postupdate();
         }
@@ -141,8 +140,8 @@ namespace PixelDefense.States
 
         public void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (var component in _components)
-                component.Draw(gameTime, spriteBatch);
+            foreach (var button in _button)
+                button.Draw(gameTime, spriteBatch);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

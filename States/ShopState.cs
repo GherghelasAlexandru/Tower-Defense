@@ -8,14 +8,13 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PixelDefense.Controls;
-using PixelDefense.Engine;
 using PixelDefense.Gameplay;
 
 namespace PixelDefense.States
 {
     public class ShopState : State
     {
-        List<IActor> _components;
+        List<Button> _button;
 
         GameState gameState;
 
@@ -35,7 +34,7 @@ namespace PixelDefense.States
 
             chooseBackButton.Click += BackButton_Click;
 
-            _components = new List<IActor>()
+            _button = new List<Button>()
             {
             chooseBackButton,
             };
@@ -55,15 +54,15 @@ namespace PixelDefense.States
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var component in _components)
-                component.Update(gameTime);
+            foreach (var button in _button)
+                button.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
-            foreach (var component in _components)
-                component.Draw(gameTime, spriteBatch);
+            foreach (var button in _button)
+                button.Draw(gameTime, spriteBatch);
 
             spriteBatch.Draw(_content.Load<Texture2D>("Tower/T1"), new Vector2(10, 10), Color.White);
             spriteBatch.Draw(_content.Load<Texture2D>("Tower/T2"), new Vector2(10, 100), Color.White);
