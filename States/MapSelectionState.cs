@@ -64,20 +64,11 @@ namespace PixelDefense.States
 
             chooseBackButton.Click += BackButton_Click;
 
-            var chooseCofirmButton = new Button(buttonTexture, buttonFont)
-            {
-                Position = new Vector2(250, 200),
-                Text = "Confirm Map",
-            };
-
-            chooseCofirmButton.Click += ConfirmMapButton_Click;
-
             _button = new List<Button>()
             {
             chooseFirstMapButton,
             chooseSecondMapButton,
             chooseBackButton,
-            chooseCofirmButton
             };
 
         }
@@ -107,12 +98,6 @@ namespace PixelDefense.States
 
             _game.gameState.AddMap(map1);
             _game.gameState.RemoveMap(map2);
-        }
-
-
-        private void ConfirmMapButton_Click(object sender,EventArgs e)
-        {
-            _game.ChangeState(_game.gameState);
         }
 
         private void BackButton_Click(object sender, EventArgs e)

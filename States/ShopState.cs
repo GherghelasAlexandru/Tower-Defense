@@ -16,11 +16,15 @@ namespace PixelDefense.States
     {
         List<Button> _button;
 
+        public Texture2D bkg;
+
         BasicTower basicTower1;
         BasicTower basicTower2;
         BasicTower basicTower3;
         BasicTower basicTower4;
         BasicTower basicTower5;
+
+        public SpriteFont textFont;
 
 
         private readonly List<Sprite> basicTowers;
@@ -28,15 +32,13 @@ namespace PixelDefense.States
           : base(game, graphicsDevice, content)
         {
 
-
             basicTowers = new List<Sprite>();
 
-            basicTower1 = new BasicTower(content.Load<Texture2D>("Tower/T1"),10) { Position = new Vector2(10, 10) };
-            basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { Position = new Vector2(10, 100) };
-            basicTower3 = new BasicTower(content.Load<Texture2D>("Tower/T3"),20) { Position = new Vector2(10, 180) };
-            basicTower4 = new BasicTower(content.Load<Texture2D>("Tower/T4"),25) { Position = new Vector2(10, 250) };
-            basicTower5 = new BasicTower(content.Load<Texture2D>("Tower/T5"),30) { Position = new Vector2(10, 340) };
-
+            basicTower1 = new BasicTower(content.Load<Texture2D>("Tower/T1"),10) { Position = new Vector2(120, 75) };
+            basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { Position = new Vector2(120, 150) };
+            basicTower3 = new BasicTower(content.Load<Texture2D>("Tower/T3"),20) { Position = new Vector2(120, 225) };
+            basicTower4 = new BasicTower(content.Load<Texture2D>("Tower/T4"),25) { Position = new Vector2(120, 300) };
+            basicTower5 = new BasicTower(content.Load<Texture2D>("Tower/T5"),30) { Position = new Vector2(120, 375) };
 
             AddBasicTower(basicTower1);
             AddBasicTower(basicTower2);
@@ -44,24 +46,33 @@ namespace PixelDefense.States
             AddBasicTower(basicTower4);
             AddBasicTower(basicTower5);
 
-            var basicTowerTexture = content.Load<Texture2D>("Tower/tower");
+            bkg = content.Load<Texture2D>("Controls/bkg");
+            textFont = _content.Load<SpriteFont>("Fonts/Font");
 
-            var buttonTexture = _content.Load<Texture2D>("Controls/button3");
+            var basicTowerTexture = content.Load<Texture2D>("Tower/tower");
+            var buttonTexture = _content.Load<Texture2D>("Controls/xxButton");
+            var buttonTexture4 = _content.Load<Texture2D>("Controls/button4");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
+            
+            var buyButton = new Button(buttonTexture4, buttonFont)
+            {
+                Position = new Vector2(120, 75),
+            };
+
+            buyButton.Click += BuyButton_Click;
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(480, 0),
-                Text = "Back",
+                Position = new Vector2(490, 5),
             };
 
             chooseBackButton.Click += BackButton_Click;
 
             _button = new List<Button>()
             {
+            buyButton,
             chooseBackButton,
             };
-
         }
 
         public void AddBasicTower(BasicTower basicTower)
@@ -69,7 +80,11 @@ namespace PixelDefense.States
             this.basicTowers.Add(basicTower);
         }
 
-        
+        private void BuyButton_Click(object sender, EventArgs e)
+        {
+            // to be modified to change back to the gameState
+            _game.ChangeState(_game.gameState);
+        }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
@@ -91,6 +106,14 @@ namespace PixelDefense.States
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
+            spriteBatch.Draw(bkg, new Vector2(100, 0), Color.Gray);
+
+            string deployable = "Deployable";
+            string gold = "Gold";
+            spriteBatch.DrawString(textFont, deployable, new Vector2(120, 40), Color.White);
+            spriteBatch.DrawString(textFont, gold, new Vector2(300, 40), Color.White);
+
+            
 
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
@@ -99,9 +122,6 @@ namespace PixelDefense.States
             {
                 tower.Draw(spriteBatch);
             }
-
         }
-
-      
     }
 }

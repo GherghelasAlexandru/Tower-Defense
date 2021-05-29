@@ -14,11 +14,14 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
 
+        public SpriteFont textFont;
+
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
+            textFont = _content.Load<SpriteFont>("Fonts/TextFont");
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
@@ -58,6 +61,9 @@ namespace PixelDefense.States
 
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
+
+            string tempStr = "Pixel Defense";
+            spriteBatch.DrawString(textFont, tempStr, new Vector2(140, 120), Color.Black);
 
         }
 

@@ -25,6 +25,7 @@ namespace PixelDefense
         public MapSelectionState mapSelection;
         public ShopState shopState;
         public MenuState menuState;
+        public MouseState mouseState;
 
         public int defaultWidth = 640;
         public int defaultHeight = 448;
@@ -71,7 +72,8 @@ namespace PixelDefense
         {
             // TODO: Add your initialization logic here
 
-            gameState = new GameState(this, graphics.GraphicsDevice, Content);
+            mouseState = Mouse.GetState();
+            gameState = new GameState(this, graphics.GraphicsDevice, Content, mouseState, shopState);
             instructionsState = new InstructionsState(this, graphics.GraphicsDevice, Content);
             mapSelection = new MapSelectionState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PixelDefense.Controls;
+using Microsoft.Xna.Framework.Input;
+
 
 namespace PixelDefense.States
 {
@@ -18,21 +20,24 @@ namespace PixelDefense.States
         //shooting sprites
         private List<Sprite> _sprites;
 
-        
-        //ShopState shop;
+        MouseState mouseState;
+        ShopState shop;
 
-        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
+        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, MouseState mouseState, ShopState shop)
           : base(game, graphicsDevice, content)
         {
 
             //shop = new ShopState(game, graphicsDevice, content);
-            
+
+            this.mouseState = mouseState;
+            this.shop = shop;
+
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
-
-            var basicTowerTexture = content.Load<Texture2D>("Tower/tower");
-
-            _sprites = new List<Sprite>()
+           
+            
+                var basicTowerTexture = content.Load<Texture2D>("Tower/T3");
+                _sprites = new List<Sprite>()
             {
                 new BasicTower(basicTowerTexture,10)
                 {
@@ -40,6 +45,7 @@ namespace PixelDefense.States
                     Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
                 },
             };
+            
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
@@ -65,12 +71,16 @@ namespace PixelDefense.States
 
         }
 
+        public void AddTower()
+        { 
+
+        }
+
         private void ChooseBackButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
             _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
          
-
         }
 
         private void ShopButton_click(object sender, EventArgs e)
@@ -83,10 +93,6 @@ namespace PixelDefense.States
         public override void PostUpdate(GameTime gameTime)
         {
 
-        }
-
-        public void postupdate()
-        {
             for (int i = 0; i < _sprites.Count; i++)
             {
                 if (_sprites[i].IsRemoved)
@@ -96,6 +102,21 @@ namespace PixelDefense.States
                 }
             }
         }
+
+        public void postUpdate()
+        {
+
+            for (int i = 0; i < _sprites.Count; i++)
+            {
+                if (_sprites[i].IsRemoved)
+                {
+                    _sprites.RemoveAt(i);
+                    i--;
+                }
+            }
+
+        }
+
         public override void Update(GameTime gameTime)
         {
             foreach (var sprite in _sprites.ToArray())
@@ -105,7 +126,9 @@ namespace PixelDefense.States
             foreach (var button in _button)
                 button.Update(gameTime);
 
-            postupdate();
+            postUpdate();
+
+            //postupdate();
         }
 
        
