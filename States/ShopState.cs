@@ -34,11 +34,11 @@ namespace PixelDefense.States
 
             basicTowers = new List<Sprite>();
 
-            basicTower1 = new BasicTower(content.Load<Texture2D>("Tower/T1"),10) { Position = new Vector2(120, 75) };
-            basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { Position = new Vector2(120, 150) };
-            basicTower3 = new BasicTower(content.Load<Texture2D>("Tower/T3"),20) { Position = new Vector2(120, 225) };
-            basicTower4 = new BasicTower(content.Load<Texture2D>("Tower/T4"),25) { Position = new Vector2(120, 300) };
-            basicTower5 = new BasicTower(content.Load<Texture2D>("Tower/T5"),30) { Position = new Vector2(120, 375) };
+            basicTower1 = new BasicTower(content.Load<Texture2D>("Tower/T1"),10) { Position = new Vector2(120, 75), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
+            basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { Position = new Vector2(120, 150), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
+            basicTower3 = new BasicTower(content.Load<Texture2D>("Tower/T3"),20) { Position = new Vector2(120, 225), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
+            basicTower4 = new BasicTower(content.Load<Texture2D>("Tower/T4"),25) { Position = new Vector2(120, 300), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
+            basicTower5 = new BasicTower(content.Load<Texture2D>("Tower/T5"),30) { Position = new Vector2(120, 375), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
 
             AddBasicTower(basicTower1);
             AddBasicTower(basicTower2);
@@ -84,6 +84,7 @@ namespace PixelDefense.States
         {
             // to be modified to change back to the gameState
             _game.ChangeState(_game.gameState);
+           _game.gameState.AddTower(basicTower1);
         }
 
         private void BackButton_Click(object sender, EventArgs e)

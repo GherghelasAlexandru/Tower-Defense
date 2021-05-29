@@ -18,7 +18,8 @@ namespace PixelDefense.States
         private List<Button> _button;
         
         //shooting sprites
-        private List<Sprite> _sprites;
+        private List<Sprite> _towers;
+        //private BasicTower tower1;
 
         MouseState mouseState;
         ShopState shop;
@@ -35,16 +36,15 @@ namespace PixelDefense.States
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
            
+
+            _towers = new List<Sprite>();
             
-                var basicTowerTexture = content.Load<Texture2D>("Tower/T3");
-                _sprites = new List<Sprite>()
-            {
-                new BasicTower(basicTowerTexture,10)
+/*                tower1 = new BasicTower(basicTowerTexture,10)
                 {
                     Position = new Vector2(200, 200),
                     Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
-                },
-            };
+                
+            };*/
             
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
@@ -71,9 +71,9 @@ namespace PixelDefense.States
 
         }
 
-        public void AddTower()
-        { 
-
+        public void AddTower(BasicTower tower)
+        {
+            _towers.Add(tower);
         }
 
         private void ChooseBackButton_Click(object sender, EventArgs e)
@@ -93,11 +93,11 @@ namespace PixelDefense.States
         public override void PostUpdate(GameTime gameTime)
         {
 
-            for (int i = 0; i < _sprites.Count; i++)
+            for (int i = 0; i < _towers.Count; i++)
             {
-                if (_sprites[i].IsRemoved)
+                if (_towers[i].IsRemoved)
                 {
-                    _sprites.RemoveAt(i);
+                    _towers.RemoveAt(i);
                     i--;
                 }
             }
@@ -106,11 +106,11 @@ namespace PixelDefense.States
         public void postUpdate()
         {
 
-            for (int i = 0; i < _sprites.Count; i++)
+            for (int i = 0; i < _towers.Count; i++)
             {
-                if (_sprites[i].IsRemoved)
+                if (_towers[i].IsRemoved)
                 {
-                    _sprites.RemoveAt(i);
+                    _towers.RemoveAt(i);
                     i--;
                 }
             }
@@ -119,8 +119,8 @@ namespace PixelDefense.States
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var sprite in _sprites.ToArray())
-                sprite.Update(gameTime, _sprites);
+            foreach (var sprite in _towers.ToArray())
+                sprite.Update(gameTime, _towers);
          
 
             foreach (var button in _button)
@@ -154,7 +154,7 @@ namespace PixelDefense.States
         public void DrawSprites(SpriteBatch spriteBatch)
 
         {
-            foreach (var sprite in _sprites.ToArray())
+            foreach (var sprite in _towers.ToArray())
                 sprite.Draw(spriteBatch);
 
         }
