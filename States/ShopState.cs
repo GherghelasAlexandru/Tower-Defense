@@ -85,6 +85,7 @@ namespace PixelDefense.States
             // to be modified to change back to the gameState
             _game.ChangeState(_game.gameState);
            _game.gameState.AddTower(basicTower1);
+         
         }
 
         private void BackButton_Click(object sender, EventArgs e)

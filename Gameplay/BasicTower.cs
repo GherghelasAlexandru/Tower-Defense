@@ -17,6 +17,8 @@ namespace PixelDefense.Gameplay
         public BasicTower(Texture2D texture,int towerPrice)
           : base(texture)
         {
+            
+            Bullet = new Bullet(_texture);
             this.towerPrice = towerPrice;
             xVelocity += Bullet.xVelocity;
             yVelocity += Bullet.yVelocity;

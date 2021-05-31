@@ -20,19 +20,33 @@ namespace PixelDefense.States
         //shooting sprites
         private List<Sprite> _towers;
         //private BasicTower tower1;
-       
-        Enemy enemy;
+        Texture2D goblinTexture;
+        Goblin goblin;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, MouseState mouseState, ShopState shop)
           : base(game, graphicsDevice, content)
         {
-            enemy = new Enemy(content.Load<Texture2D>("spritesheets/Run"),7,3) { Position = new Vector2(120, 225) };
 
+            var goblinAnimations = new Dictionary<string, Animation>()
+            {
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Run"),7) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Attack"),7) }
+            };
+
+            goblinTexture = _content.Load<Texture2D>("spritesheets/Run");
+            goblin = new Goblin(goblinAnimations) { Position = new Vector2(200, 225) };
+
+            
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
-            AddEnemy(enemy);
+
             _towers = new List<Sprite>();
+
+
+            AddEnemy(goblin);
+
+          
             
 /*                tower1 = new BasicTower(basicTowerTexture,10)
                 {
@@ -40,7 +54,7 @@ namespace PixelDefense.States
                     Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
                 
             };*/
-            
+           
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
@@ -172,8 +186,8 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
-            
 
+           
 
         }
     }

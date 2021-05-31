@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using PixelDefense.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +12,42 @@ namespace PixelDefense.Gameplay
 {
 
 
-    public class Enemy : Animation
+    public abstract class Enemy:AnimationManager
     {
 
-        int health;
-        bool isDead = false;
-        float mSpeed = 1f;
+        public int health;
+        public bool isDead = false;
+        public float mSpeed = 1f;
         int Width = 8;
         int Height = 13;
-        public enum ECollisionSide { LEFT, RIGHT, TOP, BOTTOM }
-        public enum EAnimState { RUN, ATTACK, TAKE_HIT, DEATH, NONE }
+        
+        
 
-        public Enemy(Texture2D texture,int frameCount, int health):base(texture,frameCount)
+        public Enemy(Dictionary<string,Animation>animations) : base(animations)
+
         {
-            this.health = health;
-  
+
+            _animations = animations;
+            _animationManager = new AnimationManager(animations);
+           
         }
 
+        //box for enemy to interact with surroundings
+        public Rectangle InteractionBox
+        {
+            get
+            {
+                // interactionBox need to be bigger than bounding box
+                Rectangle interactionBox = BoundingBox;
 
+                interactionBox.X -= 4;
+                interactionBox.Y -= 4;
+                interactionBox.Width += 8;
+                interactionBox.Height += 8;
+
+                return interactionBox;
+            }
+        }
 
         public void SpawnEnemy()
         {
@@ -36,11 +55,16 @@ namespace PixelDefense.Gameplay
 
         }
 
+
+    
+
         public override void Update(GameTime gameTime,List<Sprite>sprites)
         {
-            xVelocity = 0;
-            yVelocity = 0;
 
+        
+           
+
+            
             float velocityValue = mSpeed * 60 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             /*if (isDead == false)
@@ -71,17 +95,44 @@ namespace PixelDefense.Gameplay
                 StopAnim();
                 CurrentAnimation.CurrentFrame = 0;
             }*/
+           
 
+            SetAnimations();
+            _animationManager.Update(gameTime);
             base.Update(gameTime,sprites);
         }
 
 
-        public void DrawEnemy(SpriteBatch spriteBatch)
+        protected virtual void SetAnimations()
         {
-            var destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
-            spriteBatch.Draw(_texture, destinationRectangle, Color.White);
+            
+            if (xVelocity > 0)
+                _animationManager.Play(_animations["Run"]);
+            else _animationManager.Stop();
+            _animationManager.UpdateBoundingBox();
 
+          
+        }
+
+        public override void UpdateBoundingBox()
+        {
+            // The collision is at the feet of the enemy
+            BoundingBox = new Rectangle(
+            (int)(Position.X + 5),
+            (int)(Position.Y + 21),
+            10,
+            10
+            );
+        }
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (_animationManager != null)
+            {
+                _animationManager.Draw(spriteBatch);
+            }
+            else throw new Exception("wait a second, who are you?!");
+            // runAnimation.DrawAnimation(spriteBatch);
         }
 
     }

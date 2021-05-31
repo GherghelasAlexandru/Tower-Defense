@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-    public class Animation :Sprite
+    public class Animation
     {
         public int CurrentFrame { get; set; }
 
@@ -23,14 +24,16 @@ namespace PixelDefense.Gameplay
 
         public Texture2D Texture { get; private set; }
 
-        public Animation(Texture2D texture, int frameCount):base(texture)
+        public Animation(Texture2D texture, int frameCount)
         {
-  
+            
+            Texture = texture;
+
             FrameCount = frameCount;
 
             IsLooping = true;
 
-            FrameSpeed = 0.2f;
+            FrameSpeed = 0.15f;
         }
     }
 }
