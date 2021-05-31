@@ -37,8 +37,8 @@ namespace PixelDefense.States
 
             _maps = new List<Map>();
 
-            map1 = new Map(content, "Content/FinishedVersion.tmx", 1);
-            map2 = new Map(content, "Content/SecondMap.tmx", 2);
+            map1 = new Map(content, "Content/FinishedVersion.tmx");
+            map2 = new Map(content, "Content/SecondMap.tmx");
         }
 
 
