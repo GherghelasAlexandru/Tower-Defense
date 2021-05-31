@@ -23,6 +23,8 @@ namespace PixelDefense.Gameplay
 
         public Vector2 Direction;
 
+        
+
         public float RotationVelocity;
 
         public float LinearVelocity;
@@ -56,5 +58,15 @@ namespace PixelDefense.Gameplay
         {
             return this.MemberwiseClone();
         }
+
+        public virtual void Move()
+        {
+            
+        }
+
+
+
+
+
     }
 }

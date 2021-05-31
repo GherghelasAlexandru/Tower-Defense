@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-    class Animation
+   public class Animation
     {
         public int CurrentFrame { get; set; }
 

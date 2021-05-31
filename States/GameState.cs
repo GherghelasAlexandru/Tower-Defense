@@ -19,33 +19,64 @@ namespace PixelDefense.States
         
         //shooting sprites
         private List<Sprite> _towers;
+
+
+        //
+        private EnemyV1 enemy;
+
+
+
         //private BasicTower tower1;
 
         MouseState mouseState;
         ShopState shop;
+
+        public Map map;
+        
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, MouseState mouseState, ShopState shop)
           : base(game, graphicsDevice, content)
         {
 
             //shop = new ShopState(game, graphicsDevice, content);
-
+            
             this.mouseState = mouseState;
             this.shop = shop;
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
-           
+            
+
+            var animations = new Dictionary<string, Animation>()
+            {
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Run"),4) }
+            };
+
 
             _towers = new List<Sprite>();
+
+
+            var enemyTexture = _content.Load<Texture2D>("Enemy/enemy");
+
+            map1.GetStartingPoint();
+            enemy = new EnemyV1();
+            enemy.Initialize(enemyTexture, map1.GetStartingPoint(),map1.GetPath());
+
             
-/*                tower1 = new BasicTower(basicTowerTexture,10)
-                {
-                    Position = new Vector2(200, 200),
-                    Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
-                
-            };*/
+
             
+
+
+
+
+
+            /*                tower1 = new BasicTower(basicTowerTexture,10)
+                            {
+                                Position = new Vector2(200, 200),
+                                Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
+
+                        };*/
+
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
@@ -128,6 +159,9 @@ namespace PixelDefense.States
 
             postUpdate();
 
+            enemy.Active = true;
+            enemy.Update(gameTime);
+
             //postupdate();
         }
 
@@ -172,6 +206,7 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
+            enemy.Draw(spriteBatch);
 
 
 

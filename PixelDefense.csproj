@@ -57,6 +57,7 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Controls\AnimationManager.cs" />
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Engine\AnimatedSprite.cs" />
     <Compile Include="Game1.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Gameplay\BasicTower.cs" />
     <Compile Include="Gameplay\Bullet.cs" />
     <Compile Include="Gameplay\Enemy.cs" />
+    <Compile Include="Gameplay\EnemyV1.cs" />
     <Compile Include="Gameplay\Map.cs" />
     <Compile Include="Engine\Sprite.cs" />
     <Compile Include="Program.cs" />

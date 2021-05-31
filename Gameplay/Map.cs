@@ -15,6 +15,7 @@ namespace PixelDefense.Gameplay
         TmxMap map;
         TmxTileset tileSet;
         Texture2D tileTexture;
+        public Queue<Vector2> path;
         int tileWidth;
         int tileHeight;
         int tilesetTilesWide;
@@ -34,6 +35,11 @@ namespace PixelDefense.Gameplay
 
             tilesetTilesWide = tileTexture.Width / tileWidth;
             tilesetTilesHigh = tileTexture.Height / tileHeight;
+
+            path = new Queue<Vector2>();
+
+
+            
         }
 
         public int GetMapID()
@@ -94,6 +100,38 @@ namespace PixelDefense.Gameplay
         public void DrawDecorations(SpriteBatch spritebatch)
         {
             DrawLayer(4, spritebatch);
+        }
+
+       
+
+
+      /*  public void AddPath()
+        {
+
+            int points = Convert.ToInt32(map.ObjectGroups["Objects"].Properties["Points"]);
+
+            for (int i = 1; i <= points; i++)
+            {
+                path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["Points" + i].X, (float)map.ObjectGroups["Objects"].Objects["Points"
+                     + i].Y));
+            }
+            path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["End"].X, (float)map.ObjectGroups["Objects"].Objects["End"].Y));
+        }*/
+
+
+        public Queue<Vector2> GetPath()
+        {
+            return path;
+        }
+
+        public Vector2 GetStartingPoint()
+        {
+            return new Vector2((float)map.ObjectGroups["Objects"].Objects["Start"].X, (float)map.ObjectGroups["Objects"].Objects["Start"].Y);
+        }
+        
+        public TmxMap GetMap()
+        {
+            return this.map;
         }
     }
 }
