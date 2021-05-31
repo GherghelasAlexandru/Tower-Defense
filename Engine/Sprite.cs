@@ -49,7 +49,7 @@ namespace PixelDefense.Gameplay
             spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
         }
 
-        public  void UpdateBoundingBox()
+        public void UpdateBoundingBox()
         {
             BoundingBox = new Rectangle(
                 (int)(Position.X - (int)Math.Ceiling(Origin.X)),

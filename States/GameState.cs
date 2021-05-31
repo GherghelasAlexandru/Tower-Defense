@@ -20,18 +20,18 @@ namespace PixelDefense.States
         //shooting sprites
         private List<Sprite> _towers;
         //private BasicTower tower1;
-
-      
+       
+        Enemy enemy;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, MouseState mouseState, ShopState shop)
           : base(game, graphicsDevice, content)
         {
+            enemy = new Enemy(content.Load<Texture2D>("spritesheets/Run"),7,3) { Position = new Vector2(120, 225) };
 
-    
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
-           
 
+            AddEnemy(enemy);
             _towers = new List<Sprite>();
             
 /*                tower1 = new BasicTower(basicTowerTexture,10)
@@ -69,6 +69,11 @@ namespace PixelDefense.States
         public void AddTower(BasicTower tower)
         {
             _towers.Add(tower);
+        }
+
+        public void AddEnemy(Enemy enemy)
+        {
+            _towers.Add(enemy);
         }
 
         private void ChooseBackButton_Click(object sender, EventArgs e)
@@ -167,7 +172,7 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
-
+            
 
 
         }

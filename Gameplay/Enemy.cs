@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using PixelDefense.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +11,9 @@ namespace PixelDefense.Gameplay
 {
 
 
-    class Enemy : AnimatedSprite
+    public class Enemy : Animation
     {
-        Texture2D enemyTexture;
+
         int health;
         bool isDead = false;
         float mSpeed = 1f;
@@ -23,55 +22,10 @@ namespace PixelDefense.Gameplay
         public enum ECollisionSide { LEFT, RIGHT, TOP, BOTTOM }
         public enum EAnimState { RUN, ATTACK, TAKE_HIT, DEATH, NONE }
 
-        public Enemy(ContentManager content, int health)
+        public Enemy(Texture2D texture,int frameCount, int health):base(texture,frameCount)
         {
             this.health = health;
-
-            enemyTexture = content.Load<Texture2D>("spritesheets/Run");
-            enemyTexture = content.Load<Texture2D>("spritesheets/Attack");
-            enemyTexture = content.Load<Texture2D>("spritesheets/Take_Hit");
-            enemyTexture = content.Load<Texture2D>("spritesheets/Death");
-
-        }
-
-        public EAnimState AnimState
-        {
-            get
-            {
-                switch (CurrentKeyAnim)
-                {
-                    case "Run":
-                        return EAnimState.RUN;
-                    case "Attack":
-                        return EAnimState.ATTACK;
-                    case "Take_Hit":
-                        return EAnimState.TAKE_HIT;
-                    case "Death":
-                        return EAnimState.DEATH;
-                    default:
-                        return EAnimState.NONE;
-                }
-            }
-            set
-            {
-                switch (value)
-                {
-                    case EAnimState.RUN:
-                        SetAnimation("Run");
-                        break;
-                    case EAnimState.ATTACK:
-                        SetAnimation("Attack");
-                        break;
-                    case EAnimState.TAKE_HIT:
-                        SetAnimation("Take_Hit");
-                        break;
-                    case EAnimState.DEATH:
-                        SetAnimation("Death");
-                        break;
-                    default:
-                        break;
-                }
-            }
+  
         }
 
 
@@ -82,21 +36,21 @@ namespace PixelDefense.Gameplay
 
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime,List<Sprite>sprites)
         {
-            vx = 0;
-            vy = 0;
+            xVelocity = 0;
+            yVelocity = 0;
 
             float velocityValue = mSpeed * 60 * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (isDead == false)
+            /*if (isDead == false)
             {
-                vy -= velocityValue;
+                yVelocity -= velocityValue;
                 AnimState = EAnimState.RUN;
             }
             else if (Input.GetKey(Keys.S))
             {
-                vy += velocityValue;
+                yVelocity += velocityValue;
                 AnimState = EAnimState.ATTACK;
             }
 
@@ -108,17 +62,17 @@ namespace PixelDefense.Gameplay
             else if (health == 0)
             {
                 isDead = true;
-                vx += velocityValue;
+                xVelocity += velocityValue;
                 AnimState = EAnimState.DEATH;
             }
 
-            if (vx == 0 && vy == 0)
+            if (xVelocity == 0 && xVelocity == 0)
             {
                 StopAnim();
                 CurrentAnimation.CurrentFrame = 0;
-            }
+            }*/
 
-            base.Update(gameTime);
+            base.Update(gameTime,sprites);
         }
 
 
@@ -126,7 +80,7 @@ namespace PixelDefense.Gameplay
         {
             var destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
-            spriteBatch.Draw(enemyTexture, destinationRectangle, Color.White);
+            spriteBatch.Draw(_texture, destinationRectangle, Color.White);
 
         }
 

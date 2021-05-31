@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-    class Animation
+    public class Animation :Sprite
     {
         public int CurrentFrame { get; set; }
 
@@ -23,10 +23,9 @@ namespace PixelDefense.Gameplay
 
         public Texture2D Texture { get; private set; }
 
-        public Animation(Texture2D texture, int frameCount)
+        public Animation(Texture2D texture, int frameCount):base(texture)
         {
-            Texture = texture;
-
+  
             FrameCount = frameCount;
 
             IsLooping = true;
