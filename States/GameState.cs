@@ -21,18 +21,13 @@ namespace PixelDefense.States
         private List<Sprite> _towers;
         //private BasicTower tower1;
 
-        MouseState mouseState;
-        ShopState shop;
+      
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, MouseState mouseState, ShopState shop)
           : base(game, graphicsDevice, content)
         {
 
-            //shop = new ShopState(game, graphicsDevice, content);
-
-            this.mouseState = mouseState;
-            this.shop = shop;
-
+    
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
            
@@ -79,14 +74,14 @@ namespace PixelDefense.States
         private void ChooseBackButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
-            _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+            _game.ChangeState(_game.menuState);
          
         }
 
         private void ShopButton_click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
-            _game.ChangeState(new ShopState(_game, _graphicsDevice, _content));
+            _game.ChangeState(_game.shopState);
 
         }
 

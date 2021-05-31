@@ -15,19 +15,12 @@ namespace PixelDefense.States
     public class InstructionsState : State
     {
         private List<Button> _button;
-/*
-        SpriteFont font;
-        Vector2 posFont;*/
 
         public InstructionsState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var font = _content.Load<SpriteFont>("Fonts/Font");
-
-/*            posFont = new Vector2(100, 100);
-            string text = "This are the instructions for the game";
-            Vector2 FontOrigin = font.MeasureString(text) / 2;*/
 
 
 

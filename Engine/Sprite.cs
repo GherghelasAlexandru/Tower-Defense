@@ -13,25 +13,22 @@ namespace PixelDefense.Gameplay
 
         protected float _rotation;
 
-        //protected KeyboardState _currentKey;
-
-        //protected KeyboardState _previousKey;
-
         public Vector2 Position;
 
         public Vector2 Origin;
 
         public Vector2 Direction;
 
-        public float RotationVelocity;
+        public float yVelocity;
 
-        public float LinearVelocity;
+        public float xVelocity;
 
         public Sprite Parent;
 
         public float LifeSpan = 0f;
 
         public bool IsRemoved = false;
+        public Rectangle BoundingBox { get; set; }
 
         public Sprite(Texture2D texture)
         {
@@ -50,6 +47,16 @@ namespace PixelDefense.Gameplay
         {
 
             spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+        }
+
+        public  void UpdateBoundingBox()
+        {
+            BoundingBox = new Rectangle(
+                (int)(Position.X - (int)Math.Ceiling(Origin.X)),
+                (int)(Position.Y - (int)Math.Ceiling(Origin.Y)),
+                (int)Math.Ceiling((double)_texture.Width),
+                (int)Math.Ceiling((double)_texture.Height)
+                );
         }
 
         public object Clone()

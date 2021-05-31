@@ -1,4 +1,4 @@
-﻿/*using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PixelDefense.Gameplay;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Engine
 {
-    class AnimatedSprite: Sprite
+    class AnimatedSprite : Sprite
     {
         #region Fields
 
@@ -57,7 +57,7 @@ namespace PixelDefense.Engine
 
             CurrentAnimation = mAnimations[CurrentKeyAnim];
 
-            Texture = CurrentAnimation.Texture;
+            _texture  = CurrentAnimation.Texture;
 
             UpdateBoundingBox();
 
@@ -78,7 +78,7 @@ namespace PixelDefense.Engine
 
         #region Sprite Methods
 
-        public void UpdateBoundingBox()
+        public  void UpdateBoundingBox()
         {
             int width = 0;
             int height = 0;
@@ -125,4 +125,3 @@ namespace PixelDefense.Engine
         #endregion
     }
 }
-*/

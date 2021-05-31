@@ -15,7 +15,8 @@ namespace PixelDefense.Gameplay
         public Bullet(Texture2D texture)
           : base(texture)
         {
-         
+            xVelocity = 4f;
+            yVelocity = 4f;
         }
         
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -25,7 +26,7 @@ namespace PixelDefense.Gameplay
             if (_timer >= LifeSpan)
                 IsRemoved = true;
 
-            Position += Direction * LinearVelocity;
+            Position += Direction * xVelocity;
         }
     }
 }

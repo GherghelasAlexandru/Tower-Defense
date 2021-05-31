@@ -18,8 +18,8 @@ namespace PixelDefense.Gameplay
           : base(texture)
         {
             this.towerPrice = towerPrice;
-            RotationVelocity += 3f;
-            LinearVelocity += 4f;
+            xVelocity += Bullet.xVelocity;
+            yVelocity += Bullet.yVelocity;
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -48,7 +48,7 @@ namespace PixelDefense.Gameplay
             var bullet = Bullet.Clone() as Bullet;
             bullet.Direction = this.Direction;
             bullet.Position = this.Position;
-            bullet.LinearVelocity = LinearVelocity * 2;
+            bullet.xVelocity = xVelocity * 2;
             bullet.LifeSpan = 2f;
             bullet.Parent = this;
 

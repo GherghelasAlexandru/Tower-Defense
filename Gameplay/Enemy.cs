@@ -1,4 +1,4 @@
-﻿/*using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PixelDefense.Engine;
@@ -12,13 +12,13 @@ namespace PixelDefense.Gameplay
 {
 
 
-    class Enemy: AnimatedSprite
+    class Enemy : AnimatedSprite
     {
         Texture2D enemyTexture;
         int health;
         bool isDead = false;
         float mSpeed = 1f;
-        int Width =8;
+        int Width = 8;
         int Height = 13;
         public enum ECollisionSide { LEFT, RIGHT, TOP, BOTTOM }
         public enum EAnimState { RUN, ATTACK, TAKE_HIT, DEATH, NONE }
@@ -74,7 +74,7 @@ namespace PixelDefense.Gameplay
             }
         }
 
-       
+
 
         public void SpawnEnemy()
         {
@@ -94,7 +94,7 @@ namespace PixelDefense.Gameplay
                 vy -= velocityValue;
                 AnimState = EAnimState.RUN;
             }
-            *//*else if (Input.GetKey(Keys.S))
+            else if (Input.GetKey(Keys.S))
             {
                 vy += velocityValue;
                 AnimState = EAnimState.ATTACK;
@@ -104,7 +104,7 @@ namespace PixelDefense.Gameplay
             {
                 health -= 1;
                 AnimState = EAnimState.TAKE_HIT;
-            }*//*
+            }
             else if (health == 0)
             {
                 isDead = true;
@@ -127,9 +127,8 @@ namespace PixelDefense.Gameplay
             var destinationRectangle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
 
             spriteBatch.Draw(enemyTexture, destinationRectangle, Color.White);
-            
+
         }
-       
+
     }
 }
-*/
