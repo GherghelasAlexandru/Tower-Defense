@@ -22,11 +22,12 @@ namespace PixelDefense.Gameplay
         int Height = 13;
         
         
+        
 
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
         {
-
+            
             _animations = animations;
             _animationManager = new AnimationManager(animations);
            
@@ -49,9 +50,12 @@ namespace PixelDefense.Gameplay
             }
         }
 
+        
+
         public void SpawnEnemy()
         {
-
+            _position = Position;
+            IsActive = true;
 
         }
 

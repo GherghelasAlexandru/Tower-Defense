@@ -34,7 +34,7 @@ namespace PixelDefense.States
             };
 
             goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
-            goblin = new Goblin(goblinAnimations) { Position = new Vector2(200, 225) };
+            goblin = new Goblin(goblinAnimations) { Position = new Vector2(-40, 325) };
 
             
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");

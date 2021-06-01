@@ -45,7 +45,7 @@ namespace PixelDefense.Gameplay
 
         public float LifeSpan = 0f;
 
-        public bool IsRemoved = false;
+        public bool IsActive = false;
         public Rectangle BoundingBox { get; set; }
 
   /*      public Rectangle Bounds
