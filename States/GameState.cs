@@ -29,11 +29,11 @@ namespace PixelDefense.States
 
             var goblinAnimations = new Dictionary<string, Animation>()
             {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Run"),7) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Attack"),7) }
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Run"),8) },
+                {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Idle"),4) }
             };
 
-            goblinTexture = _content.Load<Texture2D>("spritesheets/Run");
+            goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
             goblin = new Goblin(goblinAnimations) { Position = new Vector2(200, 225) };
 
             

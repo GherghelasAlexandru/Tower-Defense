@@ -109,6 +109,10 @@ namespace PixelDefense.Gameplay
             
             if (xVelocity > 0)
                 _animationManager.Play(_animations["Run"]);
+            else if (xVelocity == 0)
+            {
+                _animationManager.Play(_animations["Idle"]);
+            }
             else _animationManager.Stop();
             _animationManager.UpdateBoundingBox();
 
