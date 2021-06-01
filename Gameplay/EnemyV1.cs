@@ -63,6 +63,7 @@ namespace PixelDefense.Gameplay
                         Active = false;
                     else
                         Active = true;
+                    Console.WriteLine(path);
                 }
 
                 position += movement;
@@ -72,7 +73,7 @@ namespace PixelDefense.Gameplay
         public void Draw(SpriteBatch spriteBatch)
         {
             if (active)
-                spriteBatch.Draw(texture, position);
+                spriteBatch.Draw(texture, position, Color.White);
         }
 
     }

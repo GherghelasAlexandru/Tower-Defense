@@ -102,21 +102,22 @@ namespace PixelDefense.Gameplay
             DrawLayer(4, spritebatch);
         }
 
-       
 
 
-      /*  public void AddPath()
+
+        public void AddPath()
         {
 
             int points = Convert.ToInt32(map.ObjectGroups["Objects"].Properties["Points"]);
 
             for (int i = 1; i <= points; i++)
             {
-                path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["Points" + i].X, (float)map.ObjectGroups["Objects"].Objects["Points"
-                     + i].Y));
+                path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["Point" + i].X, (float)map.ObjectGroups["Objects"].Objects["Point" + i].Y));
             }
+           
+
             path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["End"].X, (float)map.ObjectGroups["Objects"].Objects["End"].Y));
-        }*/
+        }
 
 
         public Queue<Vector2> GetPath()

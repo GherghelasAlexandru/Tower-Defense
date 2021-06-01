@@ -58,6 +58,7 @@ namespace PixelDefense.States
 
             var enemyTexture = _content.Load<Texture2D>("Enemy/enemy");
 
+            map1.AddPath();
             map1.GetStartingPoint();
             enemy = new EnemyV1();
             enemy.Initialize(enemyTexture, map1.GetStartingPoint(),map1.GetPath());
