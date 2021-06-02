@@ -22,6 +22,7 @@ namespace PixelDefense.States
         //private BasicTower tower1;
         Texture2D goblinTexture;
         Goblin goblin;
+        Mushroom mushroom;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -33,10 +34,16 @@ namespace PixelDefense.States
                 {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Idle"),4) }
             };
 
+            var mushroomAnimations = new Dictionary<string, Animation>()
+            {
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Run"),8) },
+                {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Idle"),4) }
+            };
+
             goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
             goblin = new Goblin(goblinAnimations) { Position = new Vector2(-40, 325) };
+            mushroom = new Mushroom(mushroomAnimations) { Position = new Vector2(-20, 325) };
 
-            
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
@@ -45,7 +52,7 @@ namespace PixelDefense.States
 
 
             AddEnemy(goblin);
-
+            AddEnemy(mushroom);
           
             
 /*                tower1 = new BasicTower(basicTowerTexture,10)
