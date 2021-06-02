@@ -26,6 +26,7 @@ namespace PixelDefense.Gameplay
 
         protected Dictionary<string, Animation> _animations;
         
+        public bool dragging;
 
         public Vector2 Origin;
 

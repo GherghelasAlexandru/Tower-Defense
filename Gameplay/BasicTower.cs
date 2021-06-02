@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +39,33 @@ namespace PixelDefense.Gameplay
                 timer = TIMER;   //Reset Timer
             }
 
+            DragTower();
+
+        }
+
+        public void DragTower()
+        {
+            UpdateBoundingBox();
+
+            MouseState mouseState = Mouse.GetState();
+
+            Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
+
+            if (BoundingBox.Contains(mousePosition))
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed)
+                {
+                    dragging = true;
+
+                    if (dragging)
+                    {
+                        _position.X = mouseState.X;
+                        _position.Y = mouseState.Y;
+
+                    }
+                }
+
+            }
         }
 
         public int GetPrice()

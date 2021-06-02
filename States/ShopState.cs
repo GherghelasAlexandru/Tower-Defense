@@ -84,7 +84,7 @@ namespace PixelDefense.States
         {
             // to be modified to change back to the gameState
             _game.ChangeState(_game.gameState);
-           _game.gameState.AddTower(basicTower1);
+           _game.gameState.AddTower(new BasicTower(_content.Load<Texture2D>("Tower/T1"), 10) { Bullet = new Bullet(_content.Load<Texture2D>("Tower/bullet"))});
          
         }
 
