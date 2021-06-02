@@ -19,14 +19,16 @@ namespace PixelDefense.Gameplay
         public BasicTower(Texture2D texture)
           : base(texture)
         {
-            
+
+
            
-            
-            
+
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
+            CenterOrigin();
+           
             Direction = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -38,14 +40,14 @@ namespace PixelDefense.Gameplay
 
                 timer = TIMER;   //Reset Timer
             }
-
-            DragTower();
-
+           
+                DragTower();
+        
         }
 
         public void DragTower()
         {
-            UpdateBoundingBox();
+           
 
             MouseState mouseState = Mouse.GetState();
 
@@ -60,10 +62,15 @@ namespace PixelDefense.Gameplay
                     if (dragging)
                     {
                         _position.X = mouseState.X;
-                        _position.Y = mouseState.Y;
+                        _position.Y =   mouseState.Y ;
 
                     }
+                    
                 }
+               /* else if (mouseState.LeftButton == ButtonState.Released)
+                {
+                    dragging = false;
+                }*/
 
             }
         }

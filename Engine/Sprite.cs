@@ -62,12 +62,12 @@ namespace PixelDefense.Gameplay
 
             // The default origin in the centre of the sprite
             Origin = new Vector2(0, 0);
-            UpdateBoundingBox();
+            
         }
 
         public Sprite(Dictionary<string, Animation> animations)
         {
-            UpdateBoundingBox();
+           
         }
      
 
@@ -95,7 +95,14 @@ namespace PixelDefense.Gameplay
                 );
         }
 
-        
+
+        public void CenterOrigin()
+        {
+            Origin = new Vector2(_texture.Width / 2.0f, _texture.Height / 2.0f);
+
+            UpdateBoundingBox();
+        }
+
 
         public object Clone()
         {
