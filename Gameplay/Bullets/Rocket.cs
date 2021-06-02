@@ -11,7 +11,8 @@ namespace PixelDefense.Gameplay.Bullets
     {
         public Rocket(Texture2D texture) : base(texture)
         {
-
+            xVelocity = 1f;
+            yVelocity = 1f;
         }
     }
 }

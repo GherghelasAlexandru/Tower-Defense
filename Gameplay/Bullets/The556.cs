@@ -11,7 +11,8 @@ namespace PixelDefense.Gameplay.Bullets
     {
         public The556(Texture2D texture) : base(texture)
         {
-
+            xVelocity = 10f;
+            yVelocity = 10f;
         }
     }
 }

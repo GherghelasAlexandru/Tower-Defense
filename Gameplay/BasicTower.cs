@@ -13,8 +13,8 @@ namespace PixelDefense.Gameplay
     public abstract class BasicTower : Sprite
     {
         public Bullet Bullet;
-        public float timer = 3;         //Initialize a 10 second timer
-        public const float TIMER = 3;
+        public float timer;         //Initialize a 10 second timer
+        public float TIMER;
         public int towerPrice;
         public BasicTower(Texture2D texture)
           : base(texture)
