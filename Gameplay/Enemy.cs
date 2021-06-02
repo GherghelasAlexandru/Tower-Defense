@@ -23,6 +23,7 @@ namespace PixelDefense.Gameplay
 
 
         public Queue<Vector2> path;
+        public bool active;
 
 
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
@@ -31,6 +32,8 @@ namespace PixelDefense.Gameplay
             
             _animations = animations;
             _animationManager = new AnimationManager(animations);
+            active = false;
+            path = new Queue<Vector2>();
 
            
         }
@@ -57,16 +60,30 @@ namespace PixelDefense.Gameplay
             }
         }
 
-        
+        public bool Active
+        {
+            get { return active; }
+            set
+            {
+                active = value;
+                if (path.Count() > 0)
+                    _destination = path.FirstOrDefault<Vector2>();
+                Vector2 difference = (_destination - _animationManager._position);
+                _movement = difference / Vector2.Distance(_destination, _animationManager._position);
+
+            }
+        }
 
         public void SpawnEnemy(Vector2 pos,Queue<Vector2> p)
         {
 
          
-            _position = pos;
-            IsActive = true;
+            _animationManager._position = pos;
+            //IsActive = true;
             _movement = new Vector2(0, 0);
             path = p;
+            Active = true;
+            
 
         }
 
@@ -77,20 +94,21 @@ namespace PixelDefense.Gameplay
         {
 
 
-            if (IsActive)
+            if (Active)
             {
-                Vector2 difference = (_destination - _position);
+                Vector2 difference = (_destination -_animationManager._position);
                 if (difference.X > -1 && difference.X < 1 && difference.Y > -1 && difference.Y < 1)
                 {
+                    Console.WriteLine(path.Peek());
                     path.Dequeue();
                     if (path.Count == 0)
-                        IsActive = false;
+                        Active = false;
                     else
-                        IsActive = true;
-                    Console.WriteLine(path);
+                        Active = true;
+
                 }
 
-                _position += _movement;
+                _animationManager._position += _movement;
             }
 
 
@@ -115,7 +133,6 @@ namespace PixelDefense.Gameplay
 
           
         }
-
         public override void UpdateBoundingBox()
         {
             // The collision is at the feet of the enemy
@@ -128,6 +145,7 @@ namespace PixelDefense.Gameplay
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
+            
             if (_animationManager != null)
             {
                 _animationManager.Draw(spriteBatch);

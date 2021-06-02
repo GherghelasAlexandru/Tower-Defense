@@ -27,8 +27,8 @@ namespace PixelDefense
         public MenuState menuState;
         public MouseState mouseState;
 
-        public int defaultWidth = 640;
-        public int defaultHeight = 448;
+        public int defaultWidth = 900;
+        public int defaultHeight = 900;
 
         private State _currentState;
         private State _nextState;

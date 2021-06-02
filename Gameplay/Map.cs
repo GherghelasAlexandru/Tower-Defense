@@ -116,7 +116,7 @@ namespace PixelDefense.Gameplay
 
         public Vector2 GetStartingPoint()
         {
-            return new Vector2(-40,325);
+            return new Vector2((float)map.ObjectGroups["Objects"].Objects["Start"].X, (float)map.ObjectGroups["Objects"].Objects["Start"].Y);
         }
     }
 }

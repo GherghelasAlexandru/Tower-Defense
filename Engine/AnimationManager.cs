@@ -24,7 +24,7 @@ namespace PixelDefense.Engine
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_animation.Texture,
-                             _position,
+                            _position,
                              new Rectangle(_animation.CurrentFrame * _animation.FrameWidth,
                                            0,
                                            _animation.FrameWidth,
