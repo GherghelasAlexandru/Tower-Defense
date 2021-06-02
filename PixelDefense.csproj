@@ -63,6 +63,10 @@
     <Compile Include="Engine\Animation.cs" />
     <Compile Include="Gameplay\BasicTower.cs" />
     <Compile Include="Gameplay\Bullet.cs" />
+    <Compile Include="Gameplay\Bullets\Brokenshot.cs" />
+    <Compile Include="Gameplay\Bullets\Grapeshot.cs" />
+    <Compile Include="Gameplay\Bullets\Rocket.cs" />
+    <Compile Include="Gameplay\Bullets\The556.cs" />
     <Compile Include="Gameplay\Enemy.cs" />
     <Compile Include="Gameplay\Enemies\FlyingEye.cs" />
     <Compile Include="Gameplay\Enemies\Goblin.cs" />
@@ -116,9 +120,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Gameplay\Bullets\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

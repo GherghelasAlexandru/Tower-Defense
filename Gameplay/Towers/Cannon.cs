@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using PixelDefense.Gameplay.Bullets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace PixelDefense.Gameplay.Towers
     {
         public Cannon (Texture2D texture) : base(texture)
         {
+            Bullet = new Grapeshot(_texture);
+            xVelocity += Bullet.xVelocity;
+            yVelocity += Bullet.yVelocity;
             towerPrice = 10;
         }
     }

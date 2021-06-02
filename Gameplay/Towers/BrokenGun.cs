@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using PixelDefense.Gameplay.Bullets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace PixelDefense.Gameplay.Towers
     {
         public BrokenGun(Texture2D texture) : base(texture)
         {
+            Bullet = new Brokenshot(_texture);
+
             towerPrice = 45;
         }
     }

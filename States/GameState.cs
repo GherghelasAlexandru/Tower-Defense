@@ -89,6 +89,11 @@ namespace PixelDefense.States
 
         }
 
+        public List<Sprite> getSprites()
+        {
+            return _towers;
+        }
+
         public void AddTower(BasicTower tower)
         {
             _towers.Add(tower);

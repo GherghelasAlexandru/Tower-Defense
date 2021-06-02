@@ -29,7 +29,7 @@ namespace PixelDefense.Controls
 
         public event EventHandler Click;
 
-        public bool Clicked { get; private set; }
+        public bool Clicked { get;  set; }
 
         public Color PenColour { get; set; }
 
@@ -88,12 +88,12 @@ namespace PixelDefense.Controls
 
             if (mouseRectangle.Intersects(Rectangle))
             {
-                Clicked = true;
+                
                 _isHovering = true;
                 
                 if (_currentMouse.LeftButton == ButtonState.Released && _previousMouse.LeftButton == ButtonState.Pressed)
                 {
-                   Click?.Invoke(this, new EventArgs()); ;
+                    Clicked = true; Click?.Invoke(this, new EventArgs()); ;
                 }
             }
         }

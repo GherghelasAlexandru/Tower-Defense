@@ -20,10 +20,9 @@ namespace PixelDefense.Gameplay
           : base(texture)
         {
             
-            Bullet = new Bullet(_texture);
+           
             
-            xVelocity += Bullet.xVelocity;
-            yVelocity += Bullet.yVelocity;
+            
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)

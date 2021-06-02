@@ -8,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-    public class Bullet : Sprite
+    public abstract class Bullet : Sprite
     {
         private float _timer;
         
         public Bullet(Texture2D texture)
           : base(texture)
         {
-            xVelocity = 4f;
-            yVelocity = 4f;
+            
         }
         
         public override void Update(GameTime gameTime, List<Sprite> sprites)
