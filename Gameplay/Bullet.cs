@@ -24,7 +24,7 @@ namespace PixelDefense.Gameplay
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (_timer >= LifeSpan)
-                IsRemoved = true;
+                IsActive = true;
 
             Position += Direction * xVelocity;
         }

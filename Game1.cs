@@ -73,7 +73,7 @@ namespace PixelDefense
             // TODO: Add your initialization logic here
 
             mouseState = Mouse.GetState();
-            gameState = new GameState(this, graphics.GraphicsDevice, Content, mouseState, shopState);
+            gameState = new GameState(this, graphics.GraphicsDevice, Content);
             instructionsState = new InstructionsState(this, graphics.GraphicsDevice, Content);
             mapSelection = new MapSelectionState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);

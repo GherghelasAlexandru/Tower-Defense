@@ -23,7 +23,7 @@ namespace PixelDefense.States
         Texture2D goblinTexture;
         Goblin goblin;
 
-        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, MouseState mouseState, ShopState shop)
+        public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
 
@@ -109,7 +109,7 @@ namespace PixelDefense.States
 
             for (int i = 0; i < _towers.Count; i++)
             {
-                if (_towers[i].IsRemoved)
+                if (_towers[i].IsActive)
                 {
                     _towers.RemoveAt(i);
                     i--;
@@ -122,7 +122,7 @@ namespace PixelDefense.States
 
             for (int i = 0; i < _towers.Count; i++)
             {
-                if (_towers[i].IsRemoved)
+                if (_towers[i].IsActive)
                 {
                     _towers.RemoveAt(i);
                     i--;
