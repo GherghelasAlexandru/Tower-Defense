@@ -19,6 +19,7 @@ namespace PixelDefense.Gameplay
         int tileHeight;
         int tilesetTilesWide;
         int tilesetTilesHigh;
+        public Queue<Vector2> path;
 
         public object Tilesets { get; internal set; }
         public object Position { get; private set; }
@@ -33,6 +34,8 @@ namespace PixelDefense.Gameplay
 
             tilesetTilesWide = tileTexture.Width / tileWidth;
             tilesetTilesHigh = tileTexture.Height / tileHeight;
+
+            path = new Queue<Vector2>();
         }
 
       
@@ -90,6 +93,30 @@ namespace PixelDefense.Gameplay
         public void DrawDecorations(SpriteBatch spritebatch)
         {
             DrawLayer(4, spritebatch);
+        }
+
+        public void AddPath()
+        {
+
+            int points = Convert.ToInt32(map.ObjectGroups["Objects"].Properties["Points"]);
+
+            for (int i = 1; i <= points; i++)
+            {
+                path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["Point" + i].X, (float)map.ObjectGroups["Objects"].Objects["Point" + i].Y));
+            }
+
+
+            path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["End"].X, (float)map.ObjectGroups["Objects"].Objects["End"].Y));
+        }
+
+        public Queue<Vector2> GetPath()
+        {
+            return path;
+        }
+
+        public Vector2 GetStartingPoint()
+        {
+            return new Vector2(-40,325);
         }
     }
 }

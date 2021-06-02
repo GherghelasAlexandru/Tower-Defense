@@ -24,7 +24,7 @@ namespace PixelDefense.Engine
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(_animation.Texture,
-                             Position,
+                             _position,
                              new Rectangle(_animation.CurrentFrame * _animation.FrameWidth,
                                            0,
                                            _animation.FrameWidth,
@@ -78,8 +78,8 @@ namespace PixelDefense.Engine
             }
 
             BoundingBox = new Rectangle(
-                (int)(Position.X - (int)Math.Ceiling(Origin.X)),
-                (int)(Position.Y - (int)Math.Ceiling(Origin.Y)),
+                (int)(_position.X - (int)Math.Ceiling(Origin.X)),
+                (int)(_position.Y - (int)Math.Ceiling(Origin.Y)),
                 width, height);
         }
     }

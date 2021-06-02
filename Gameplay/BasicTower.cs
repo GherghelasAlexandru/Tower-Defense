@@ -49,7 +49,7 @@ namespace PixelDefense.Gameplay
         {
             var bullet = Bullet.Clone() as Bullet;
             bullet.Direction = this.Direction;
-            bullet.Position = this.Position;
+            bullet._position = this._position;
             bullet.xVelocity = xVelocity * 2;
             bullet.LifeSpan = 2f;
             bullet.Parent = this;
@@ -61,7 +61,7 @@ namespace PixelDefense.Gameplay
         public void DrawBasicTower(SpriteBatch spriteBatch)
 
         {
-            spriteBatch.Draw(_texture, Position, Color.White);
+            spriteBatch.Draw(_texture, _position, Color.White);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace PixelDefense.Gameplay
             if (_timer >= LifeSpan)
                 IsActive = true;
 
-            Position += Direction * xVelocity;
+            _position += Direction * xVelocity;
         }
     }
 }

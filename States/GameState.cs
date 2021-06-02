@@ -41,8 +41,8 @@ namespace PixelDefense.States
             };
 
             goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
-            goblin = new Goblin(goblinAnimations) { Position = new Vector2(-40, 325) };
-            mushroom = new Mushroom(mushroomAnimations) { Position = new Vector2(-20, 325) };
+            goblin = new Goblin(goblinAnimations);
+            mushroom = new Mushroom(mushroomAnimations) { _position = new Vector2(-20, 325) };
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
@@ -50,7 +50,9 @@ namespace PixelDefense.States
 
             _towers = new List<Sprite>();
 
-
+            
+            goblin.SpawnEnemy(new Vector2(-40,325), map1.GetPath());
+            //mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
             AddEnemy(goblin);
             AddEnemy(mushroom);
           

@@ -16,22 +16,16 @@ namespace PixelDefense.Gameplay
 
         protected float _rotation;
 
-        protected Vector2 _position;
+        public Vector2 _position;
+
+        public Vector2 _movement;
+
+        public Vector2 _destination;
 
         protected AnimationManager _animationManager;
 
         protected Dictionary<string, Animation> _animations;
-        public Vector2 Position
-        {
-            get { return _position; }
-            set
-            {
-                _position = value;
-
-                if (_animationManager != null)
-                    _animationManager.Position = _position;
-            }
-        }
+        
 
         public Vector2 Origin;
 
@@ -86,15 +80,15 @@ namespace PixelDefense.Gameplay
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             
-                spriteBatch.Draw(_texture, Position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+                spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
  
         }
 
         public virtual void UpdateBoundingBox()
         {
             BoundingBox = new Rectangle(
-                (int)(Position.X - (int)Math.Ceiling(Origin.X)),
-                (int)(Position.Y - (int)Math.Ceiling(Origin.Y)),
+                (int)(_position.X - (int)Math.Ceiling(Origin.X)),
+                (int)(_position.Y - (int)Math.Ceiling(Origin.Y)),
                 (int)Math.Ceiling((double)_texture.Width),
                 (int)Math.Ceiling((double)_texture.Height)
                 );

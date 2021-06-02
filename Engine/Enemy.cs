@@ -20,9 +20,10 @@ namespace PixelDefense.Gameplay
         public float mSpeed = 1f;
         int Width = 8;
         int Height = 13;
-        
-        
-        
+
+
+        public Queue<Vector2> path;
+
 
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
@@ -30,8 +31,14 @@ namespace PixelDefense.Gameplay
             
             _animations = animations;
             _animationManager = new AnimationManager(animations);
+
            
         }
+
+
+        
+           
+        
 
         //box for enemy to interact with surroundings
         public Rectangle InteractionBox
@@ -52,10 +59,14 @@ namespace PixelDefense.Gameplay
 
         
 
-        public void SpawnEnemy()
+        public void SpawnEnemy(Vector2 pos,Queue<Vector2> p)
         {
-            _position = Position;
+
+         
+            _position = pos;
             IsActive = true;
+            _movement = new Vector2(0, 0);
+            path = p;
 
         }
 
@@ -65,41 +76,23 @@ namespace PixelDefense.Gameplay
         public override void Update(GameTime gameTime,List<Sprite>sprites)
         {
 
-        
-           
 
-            
-            float velocityValue = mSpeed * 60 * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            if (IsActive)
+            {
+                Vector2 difference = (_destination - _position);
+                if (difference.X > -1 && difference.X < 1 && difference.Y > -1 && difference.Y < 1)
+                {
+                    path.Dequeue();
+                    if (path.Count == 0)
+                        IsActive = false;
+                    else
+                        IsActive = true;
+                    Console.WriteLine(path);
+                }
 
-            /*if (isDead == false)
-            {
-                yVelocity -= velocityValue;
-                AnimState = EAnimState.RUN;
-            }
-            else if (Input.GetKey(Keys.S))
-            {
-                yVelocity += velocityValue;
-                AnimState = EAnimState.ATTACK;
-            }
-
-            if (Input.GetKey(Keys.A))
-            {
-                health -= 1;
-                AnimState = EAnimState.TAKE_HIT;
-            }
-            else if (health == 0)
-            {
-                isDead = true;
-                xVelocity += velocityValue;
-                AnimState = EAnimState.DEATH;
+                _position += _movement;
             }
 
-            if (xVelocity == 0 && xVelocity == 0)
-            {
-                StopAnim();
-                CurrentAnimation.CurrentFrame = 0;
-            }*/
-           
 
             SetAnimations();
             _animationManager.Update(gameTime);
@@ -127,8 +120,8 @@ namespace PixelDefense.Gameplay
         {
             // The collision is at the feet of the enemy
             BoundingBox = new Rectangle(
-            (int)(Position.X + 5),
-            (int)(Position.Y + 21),
+            (int)(_position.X + 5),
+            (int)(_position.Y + 21),
             10,
             10
             );
