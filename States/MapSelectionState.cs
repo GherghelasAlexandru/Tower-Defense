@@ -19,7 +19,9 @@ namespace PixelDefense.States
         public bool IsFirstMapChosen;
         public bool IsSecondMapChosen;
 
-      
+        Button chooseFirstMapButton;
+        Button chooseSecondMapButton;
+
         public MapSelectionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
@@ -36,7 +38,7 @@ namespace PixelDefense.States
             
          
 
-            var chooseFirstMapButton = new Button(firstMapTexture, buttonFont)
+           chooseFirstMapButton = new Button(firstMapTexture, buttonFont)
             {
                 Position = new Vector2(100, 150),
                 Text = "1",
@@ -44,9 +46,9 @@ namespace PixelDefense.States
               
             };
 
-            chooseFirstMapButton.Click += FirstMapButton_Click;
+            chooseFirstMapButton.Click += MapButton_Click;
 
-            var chooseSecondMapButton = new Button(secondMapTexture, buttonFont)
+           chooseSecondMapButton = new Button(secondMapTexture, buttonFont)
             {
                 Position = new Vector2(350, 150),
                 Text = "2",
@@ -54,7 +56,7 @@ namespace PixelDefense.States
             };
 
   
-            chooseSecondMapButton.Click += SecondMapButton_Click;
+            chooseSecondMapButton.Click += MapButton_Click;
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
@@ -81,23 +83,21 @@ namespace PixelDefense.States
 
       
 
-        private void SecondMapButton_Click(object sender, EventArgs e)
+
+        private void MapButton_Click(object sender, EventArgs e)
         {
+
+            _game.ChangeState(_game.gameState);
+            if (chooseFirstMapButton.Clicked)
+            {
+                _game.gameState.AddMap(map1);
+            }
+            else if(chooseSecondMapButton.Clicked)
+            {
+                _game.gameState.AddMap(map2);
+            }
             
            
-            _game.ChangeState(_game.gameState);
-
-            _game.gameState.AddMap(map2);
-            _game.gameState.RemoveMap(map1);
-        }
-
-        private void FirstMapButton_Click(object sender, EventArgs e)
-        {
-
-            _game.ChangeState(_game.gameState);
-
-            _game.gameState.AddMap(map1);
-            _game.gameState.RemoveMap(map2);
         }
 
         private void BackButton_Click(object sender, EventArgs e)

@@ -65,13 +65,13 @@ namespace PixelDefense.States
             };*/
            
 
-            var chooseBackButton = new Button(buttonTexture, buttonFont)
+            var chooseSurrenderButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(480, 0),
-                Text = "Main menu",
+                Text = "Surrender",
             };
 
-            chooseBackButton.Click += ChooseBackButton_Click;
+            /*chooseSurrenderButton.Click += ChooseBackButton_Click;*/
 
             var shopButton = new Button(buttonTexture, buttonFont)
             {
@@ -83,7 +83,7 @@ namespace PixelDefense.States
 
             _button = new List<Button>()
             {
-            chooseBackButton,
+            chooseSurrenderButton,
             shopButton,
             };
 
@@ -104,12 +104,12 @@ namespace PixelDefense.States
             _towers.Add(enemy);
         }
 
-        private void ChooseBackButton_Click(object sender, EventArgs e)
+       /* private void ChooseBackButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
             _game.ChangeState(_game.menuState);
          
-        }
+        }*/
 
         private void ShopButton_click(object sender, EventArgs e)
         {
