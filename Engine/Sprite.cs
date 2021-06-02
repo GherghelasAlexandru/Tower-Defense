@@ -25,8 +25,8 @@ namespace PixelDefense.Gameplay
         protected AnimationManager _animationManager;
 
         protected Dictionary<string, Animation> _animations;
-        
-        public bool dragging;
+
+        public bool dragging = true;
 
         public Vector2 Origin;
 
@@ -43,18 +43,18 @@ namespace PixelDefense.Gameplay
         public bool IsActive = false;
         public Rectangle BoundingBox { get; set; }
 
-  /*      public Rectangle Bounds
+        public Rectangle Bounds
         {
             get
             {
                 return new Rectangle(
-                    (int)(Position.X - (int)Math.Ceiling(Origin.X)),
-                    (int)(Position.Y - (int)Math.Ceiling(Origin.Y)),
+                    (int)(_position.X - (int)Math.Ceiling(Origin.X)),
+                    (int)(_position.Y - (int)Math.Ceiling(Origin.Y)),
                     (int)Math.Ceiling((double)_texture.Width),
                     (int)Math.Ceiling((double)_texture.Height)
                     );
             }
-        }*/
+        }
 
         public Sprite(Texture2D texture)
         {
