@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="village-palette01-day.tsx"/>
  <objectgroup id="10" name="Objects">
   <properties>
-   <property name="Points" value="10"/>
+   <property name="Points" value="9"/>
   </properties>
   <object id="1" name="Start" x="0.666667" y="400" width="16" height="46">
    <properties>
@@ -30,27 +30,27 @@
     <property name="path" type="object" value="6"/>
    </properties>
   </object>
-  <object id="6" name="Point6" x="384.667" y="272" width="48" height="46">
+  <object id="6" name="Point5" x="384.667" y="272" width="48" height="46">
    <properties>
     <property name="path" type="object" value="7"/>
    </properties>
   </object>
-  <object id="7" name="Point7" x="385.333" y="32.6667" width="45.3333" height="46.6667">
+  <object id="7" name="Point6" x="385.333" y="32.6667" width="45.3333" height="46.6667">
    <properties>
     <property name="path" type="object" value="8"/>
    </properties>
   </object>
-  <object id="8" name="Point8" x="305.333" y="32.6667" width="47.3333" height="48.6667">
+  <object id="8" name="Point7" x="305.333" y="32.6667" width="47.3333" height="48.6667">
    <properties>
     <property name="path" type="object" value="9"/>
    </properties>
   </object>
-  <object id="9" name="Point9" x="304.667" y="272" width="45.3333" height="45.3333">
+  <object id="9" name="Point8" x="304.667" y="272" width="45.3333" height="45.3333">
    <properties>
     <property name="path" type="object" value="10"/>
    </properties>
   </object>
-  <object id="10" name="Point10" x="48" y="272" width="50" height="45.3333">
+  <object id="10" name="Point9" x="48" y="272" width="50" height="45.3333">
    <properties>
     <property name="path" type="object" value="11"/>
    </properties>
