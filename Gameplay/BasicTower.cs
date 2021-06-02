@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -9,18 +10,18 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-    public class BasicTower : Sprite
+    public abstract class BasicTower : Sprite
     {
         public Bullet Bullet;
         public float timer = 3;         //Initialize a 10 second timer
         public const float TIMER = 3;
         public int towerPrice;
-        public BasicTower(Texture2D texture,int towerPrice)
+        public BasicTower(Texture2D texture)
           : base(texture)
         {
             
             Bullet = new Bullet(_texture);
-            this.towerPrice = towerPrice;
+            
             xVelocity += Bullet.xVelocity;
             yVelocity += Bullet.yVelocity;
         }

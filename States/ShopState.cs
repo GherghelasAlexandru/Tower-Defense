@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PixelDefense.Controls;
 using PixelDefense.Gameplay;
+using PixelDefense.Gameplay.Towers;
 
 namespace PixelDefense.States
 {
@@ -18,7 +19,7 @@ namespace PixelDefense.States
 
         public Texture2D bkg;
 
-        BasicTower basicTower1;
+        Cannon basicTower1;
         BasicTower basicTower2;
         BasicTower basicTower3;
         BasicTower basicTower4;
@@ -34,18 +35,18 @@ namespace PixelDefense.States
 
             basicTowers = new List<Sprite>();
 
-            basicTower1 = new BasicTower(content.Load<Texture2D>("Tower/T1"),10) { _position = new Vector2(120, 75), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
-            basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { _position = new Vector2(120, 150), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
+            basicTower1 = new Cannon(content.Load<Texture2D>("Tower/T1")) { _position = new Vector2(120, 75), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
+           /* basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { _position = new Vector2(120, 150), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
             basicTower3 = new BasicTower(content.Load<Texture2D>("Tower/T3"),20) { _position = new Vector2(120, 225), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
             basicTower4 = new BasicTower(content.Load<Texture2D>("Tower/T4"),25) { _position = new Vector2(120, 300), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
             basicTower5 = new BasicTower(content.Load<Texture2D>("Tower/T5"),30) { _position = new Vector2(120, 375), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
-
+*/
             AddBasicTower(basicTower1);
-            AddBasicTower(basicTower2);
+           /* AddBasicTower(basicTower2);
             AddBasicTower(basicTower3);
             AddBasicTower(basicTower4);
             AddBasicTower(basicTower5);
-
+*/
             bkg = content.Load<Texture2D>("Controls/bkg");
             textFont = _content.Load<SpriteFont>("Fonts/Font");
 
@@ -84,7 +85,7 @@ namespace PixelDefense.States
         {
             // to be modified to change back to the gameState
             _game.ChangeState(_game.gameState);
-           _game.gameState.AddTower(new BasicTower(_content.Load<Texture2D>("Tower/T1"), 10) { Bullet = new Bullet(_content.Load<Texture2D>("Tower/bullet"))});
+           _game.gameState.AddTower(new Cannon(_content.Load<Texture2D>("Tower/T1")) { Bullet = new Bullet(_content.Load<Texture2D>("Tower/bullet"))});
          
         }
 
