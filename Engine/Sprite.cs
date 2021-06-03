@@ -18,6 +18,18 @@ namespace PixelDefense.Gameplay
 
         public Vector2 _position;
 
+        public Vector2 Position
+        {
+            get { return _position; }
+            set
+            {
+                _position = value;
+
+                if (_animationManager != null)
+                    _animationManager.Position = _position;
+            }
+        }
+
         public Vector2 _movement;
 
         public Vector2 _destination;
@@ -61,7 +73,7 @@ namespace PixelDefense.Gameplay
             _texture = texture;
 
             // The default origin in the centre of the sprite
-            Origin = new Vector2(0, 0);
+            Origin = new Vector2(600, 600);
             
         }
 

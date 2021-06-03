@@ -34,6 +34,9 @@ namespace PixelDefense.Gameplay
             IsLooping = true;
 
             FrameSpeed = 0.15f;
+           
         }
+
+
     }
 }

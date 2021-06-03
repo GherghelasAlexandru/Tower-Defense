@@ -12,7 +12,7 @@ namespace PixelDefense.Gameplay
 
         public Goblin(Dictionary<string,Animation> animations) : base(animations)
         {
-           
+        
             health = 3;
             mSpeed = 1f;
             xVelocity = 1f;

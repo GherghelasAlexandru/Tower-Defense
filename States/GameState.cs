@@ -23,12 +23,13 @@ namespace PixelDefense.States
         Texture2D goblinTexture;
         Goblin goblin;
         Mushroom mushroom;
+        Dictionary<string, Animation> goblinAnimations;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
 
-            var goblinAnimations = new Dictionary<string, Animation>()
+            goblinAnimations = new Dictionary<string, Animation>()
             {
                 {"Run", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Run"),8) },
                 {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Idle"),4) }
@@ -39,10 +40,10 @@ namespace PixelDefense.States
                 {"Run", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Run"),8) },
                 {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Idle"),4) }
             };
-
+            map1.AddPath();
             goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
             goblin = new Goblin(goblinAnimations);
-            mushroom = new Mushroom(mushroomAnimations);
+            mushroom = new Mushroom(mushroomAnimations)  ;
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
@@ -50,21 +51,23 @@ namespace PixelDefense.States
 
             _towers = new List<Sprite>();
 
-            map1.AddPath();
-            Console.WriteLine(map1.GetPath().Count);
+            
+            
             goblin.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
             //mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
             AddEnemy(goblin);
+
+            Console.WriteLine(goblin._position);
             //AddEnemy(mushroom);
-          
-            
-/*                tower1 = new BasicTower(basicTowerTexture,10)
-                {
-                    Position = new Vector2(200, 200),
-                    Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
-                
-            };*/
-           
+
+
+            /*                tower1 = new BasicTower(basicTowerTexture,10)
+                            {
+                                Position = new Vector2(200, 200),
+                                Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
+
+                        };*/
+
 
             var chooseSurrenderButton = new Button(buttonTexture, buttonFont)
             {

@@ -29,13 +29,13 @@ namespace PixelDefense.Gameplay
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
         {
-            
+           
             _animations = animations;
             _animationManager = new AnimationManager(animations);
             active = false;
             path = new Queue<Vector2>();
 
-           
+           UpdateBoundingBox();
         }
 
 
@@ -67,9 +67,10 @@ namespace PixelDefense.Gameplay
             {
                 active = value;
                 if (path.Count() > 0)
+                
                     _destination = path.FirstOrDefault<Vector2>();
-                Vector2 difference = (_destination - _animationManager._position);
-                _movement = difference / Vector2.Distance(_destination, _animationManager._position);
+                Vector2 difference = _destination - Position;
+                _movement = difference / Vector2.Distance(_destination, Position);
 
             }
         }
@@ -77,10 +78,10 @@ namespace PixelDefense.Gameplay
         public void SpawnEnemy(Vector2 pos,Queue<Vector2> p)
         {
 
-         
-            _animationManager._position = pos;
+           
+            Position = pos;
             //IsActive = true;
-            _movement = new Vector2(0, 0);
+      
             path = p;
             Active = true;
             
@@ -92,11 +93,11 @@ namespace PixelDefense.Gameplay
 
         public override void Update(GameTime gameTime,List<Sprite>sprites)
         {
-
+            
 
             if (Active)
             {
-                Vector2 difference = (_destination -_animationManager._position);
+                Vector2 difference = _destination - Position;
                 if (difference.X > -1 && difference.X < 1 && difference.Y > -1 && difference.Y < 1)
                 {
                     Console.WriteLine(path.Peek());
@@ -108,7 +109,7 @@ namespace PixelDefense.Gameplay
 
                 }
 
-                _animationManager._position += _movement;
+                Position += _movement;
             }
 
 
@@ -137,8 +138,8 @@ namespace PixelDefense.Gameplay
         {
             // The collision is at the feet of the enemy
             BoundingBox = new Rectangle(
-            (int)(_position.X + 5),
-            (int)(_position.Y + 21),
+            (int)(Position.X + 5),
+            (int)(Position.Y + 21),
             10,
             10
             );

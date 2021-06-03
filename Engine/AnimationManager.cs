@@ -16,9 +16,10 @@ namespace PixelDefense.Engine
         private float _timer;
 
 
+
         public AnimationManager(Dictionary<string, Animation> animations):base(animations.ElementAt(0).Value.Texture)
         {
-           
+            
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -30,6 +31,7 @@ namespace PixelDefense.Engine
                                            _animation.FrameWidth,
                                            _animation.FrameHeight),
                              Color.White);
+            
         }
 
         public void Play(Animation animation)
@@ -53,6 +55,7 @@ namespace PixelDefense.Engine
 
         public void Update(GameTime gameTime)
         {
+            
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (_timer > _animation.FrameSpeed)
@@ -64,6 +67,7 @@ namespace PixelDefense.Engine
                 if (_animation.CurrentFrame >= _animation.FrameCount)
                     _animation.CurrentFrame = 0;
             }
+            UpdateBoundingBox();
         }
 
         public override void UpdateBoundingBox()
