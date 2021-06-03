@@ -16,6 +16,8 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
 
+        public SpriteFont textFont;
+
         public bool IsFirstMapChosen;
         public bool IsSecondMapChosen;
 
@@ -32,13 +34,14 @@ namespace PixelDefense.States
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
             var secondMapTexture= _content.Load<Texture2D>("Controls/SecondMap");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
+            textFont = _content.Load<SpriteFont>("Fonts/TextFont");
 
-            
 
-            
-         
 
-           chooseFirstMapButton = new Button(firstMapTexture, buttonFont)
+
+
+
+            chooseFirstMapButton = new Button(firstMapTexture, buttonFont)
             {
                 Position = new Vector2(100, 150),
                 Text = "1",
@@ -79,6 +82,9 @@ namespace PixelDefense.States
         {
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
+
+            string tempStr = "Choose your map";
+            spriteBatch.DrawString(textFont, tempStr, new Vector2(110, 95), Color.Black);
         }
 
       

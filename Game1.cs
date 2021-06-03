@@ -24,11 +24,12 @@ namespace PixelDefense
         public InstructionsState instructionsState;
         public MapSelectionState mapSelection;
         public ShopState shopState;
+        public GameOverState gameOverState;
         public MenuState menuState;
         public MouseState mouseState;
 
-        public int defaultWidth = 900;
-        public int defaultHeight = 900;
+        public int defaultWidth = 660;
+        public int defaultHeight = 500;
 
         private State _currentState;
         private State _nextState;
@@ -78,6 +79,7 @@ namespace PixelDefense
             mapSelection = new MapSelectionState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);
             menuState = new MenuState(this, graphics.GraphicsDevice, Content);
+            gameOverState = new GameOverState(this, graphics.GraphicsDevice, Content);
             IsMouseVisible = true;
             base.Initialize();
         }

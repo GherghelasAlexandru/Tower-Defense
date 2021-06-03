@@ -72,7 +72,7 @@ namespace PixelDefense.States
                 Text = "Surrender",
             };
 
-            /*chooseSurrenderButton.Click += ChooseBackButton_Click;*/
+            chooseSurrenderButton.Click += ChooseSurrenderButton_Click;
 
             var shopButton = new Button(buttonTexture, buttonFont)
             {
@@ -90,6 +90,11 @@ namespace PixelDefense.States
 
         }
 
+        private void ChooseSurrenderButton_Click(object sender, EventArgs e)
+        {
+            _game.ChangeState(_game.gameOverState);
+        }
+
         public List<Sprite> getSprites()
         {
             return _towers;
@@ -104,13 +109,6 @@ namespace PixelDefense.States
         {
             _towers.Add(enemy);
         }
-
-       /* private void ChooseBackButton_Click(object sender, EventArgs e)
-        {
-            // to be modified to change back to the gameState
-            _game.ChangeState(_game.menuState);
-         
-        }*/
 
         private void ShopButton_click(object sender, EventArgs e)
         {
