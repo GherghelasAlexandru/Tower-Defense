@@ -73,7 +73,7 @@ namespace PixelDefense.Gameplay
             _texture = texture;
 
             // The default origin in the centre of the sprite
-            Origin = new Vector2(600, 600);
+            Origin = new Vector2(0, 0);
             
         }
 
