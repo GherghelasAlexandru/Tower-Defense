@@ -38,10 +38,6 @@ namespace PixelDefense.States
         readonly Button buyDoubleCannonButton;
         readonly Button buyMachineGunButton;
 
-
-        public SpriteFont textFont;
-
-
         private readonly List<Sprite> basicTowers;
         public ShopState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -108,7 +104,6 @@ namespace PixelDefense.States
           
 
             bkg = content.Load<Texture2D>("Controls/bkg");
-            textFont = _content.Load<SpriteFont>("Fonts/Font");
 
 
             buyMachineGunButton.Click += BuyButton_Click;
@@ -148,26 +143,31 @@ namespace PixelDefense.States
             {
                 _game.gameState.AddTower(new Cannon(cannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) });
                 buyCannonButton.Clicked = false;
+                _game.gameState.SetGold(-10);
             }
             else if(buyBrokenGunButton.Clicked)
             {
                 _game.gameState.AddTower(new BrokenGun(brokenGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
                 buyBrokenGunButton.Clicked = false;
+                _game.gameState.SetGold(-45);
             }
             if(buyRocketLauncherButton.Clicked)
             {
                 _game.gameState.AddTower(new RocketLauncher(rocketLauncherTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
                 buyRocketLauncherButton.Clicked = false;
+                _game.gameState.SetGold(-30);
             }
             else if (buyDoubleCannonButton.Clicked)
             {
                 _game.gameState.AddTower(new DoubleCannon(doubleCannonTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
                 buyDoubleCannonButton.Clicked = false;
+                _game.gameState.SetGold(-25);
             }
             else if (buyMachineGunButton.Clicked)
             {
                 _game.gameState.AddTower(new MachineGun(machineGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
                 buyMachineGunButton.Clicked = false;
+                _game.gameState.SetGold(-20);
             }
 
         }
@@ -194,6 +194,8 @@ namespace PixelDefense.States
         {
             
             spriteBatch.Draw(bkg, new Vector2(140, 50), Color.Gray);
+
+            spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
 
             string deployable = "Deployable";
             string gold = "Pirce";

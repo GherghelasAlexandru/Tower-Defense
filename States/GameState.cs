@@ -24,9 +24,12 @@ namespace PixelDefense.States
         Bat bat;
         Dictionary<string, Animation> crabAnimations;
 
+        public int gold;
+
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
+            gold = 30;
 
             crabAnimations = new Dictionary<string, Animation>()
             {
@@ -93,6 +96,15 @@ namespace PixelDefense.States
 
         }
 
+        public int GetGold()
+        {
+            return gold;
+        }
+
+        public void SetGold(int goldToAdd)
+        {
+            gold += goldToAdd;
+        }
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
         {
             _game.ChangeState(_game.gameOverState);
@@ -191,7 +203,8 @@ namespace PixelDefense.States
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
 
-           
+            spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
+
 
         }
     }

@@ -23,6 +23,8 @@ namespace PixelDefense.States
         protected Map map1;
         protected Map map2;
 
+        protected SpriteFont textFont;
+
         #endregion
 
         #region Methods
@@ -39,8 +41,9 @@ namespace PixelDefense.States
 
             map1 = new Map(content, "Content/Test.tmx");
             map2 = new Map(content, "Content/SecondMap.tmx");
-        }
 
+            textFont = _content.Load<SpriteFont>("Fonts/Font");
+        }
 
         public void AddMap(Map map)
         {
