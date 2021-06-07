@@ -38,6 +38,8 @@ namespace PixelDefense.States
         readonly Button buyDoubleCannonButton;
         readonly Button buyMachineGunButton;
 
+        public bool notEnoughtMoney = false;
+
         private readonly List<Sprite> basicTowers;
         public ShopState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -138,36 +140,80 @@ namespace PixelDefense.States
         private void BuyButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
-            _game.ChangeState(_game.gameState);
+            
             if (buyCannonButton.Clicked)
             {
-                _game.gameState.AddTower(new Cannon(cannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) });
-                buyCannonButton.Clicked = false;
-                _game.gameState.SetGold(-10);
+                if(cannonTower.GetPrice() <= _game.gameState.GetGold())
+                {
+                    _game.ChangeState(_game.gameState);
+                    _game.gameState.AddTower(new Cannon(cannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    buyCannonButton.Clicked = false;
+                    _game.gameState.SetGold(-cannonTower.GetPrice());
+                }
+                else
+                {
+                    notEnoughtMoney = true;
+                }
             }
             else if(buyBrokenGunButton.Clicked)
             {
-                _game.gameState.AddTower(new BrokenGun(brokenGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
-                buyBrokenGunButton.Clicked = false;
-                _game.gameState.SetGold(-45);
+                if (brokenGunTower.GetPrice() <= _game.gameState.GetGold())
+                {
+                    _game.ChangeState(_game.gameState);
+                    _game.gameState.AddTower(new BrokenGun(brokenGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    buyBrokenGunButton.Clicked = false;
+                    _game.gameState.SetGold(-45);
+                }
+                else
+                {
+                    notEnoughtMoney = true;
+                }
+               
             }
             if(buyRocketLauncherButton.Clicked)
             {
-                _game.gameState.AddTower(new RocketLauncher(rocketLauncherTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
-                buyRocketLauncherButton.Clicked = false;
-                _game.gameState.SetGold(-30);
+                if (rocketLauncherTower.GetPrice() <= _game.gameState.GetGold()) 
+                {
+                    _game.ChangeState(_game.gameState);
+                    _game.gameState.AddTower(new RocketLauncher(rocketLauncherTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    buyRocketLauncherButton.Clicked = false;
+                    _game.gameState.SetGold(-30);
+                }
+                else
+                {
+                    notEnoughtMoney = true;
+                }
+               
             }
             else if (buyDoubleCannonButton.Clicked)
             {
-                _game.gameState.AddTower(new DoubleCannon(doubleCannonTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
-                buyDoubleCannonButton.Clicked = false;
-                _game.gameState.SetGold(-25);
+                if (doubleCannonTower.GetPrice() <= _game.gameState.GetGold())
+                {
+                    _game.ChangeState(_game.gameState);
+                    _game.gameState.AddTower(new DoubleCannon(doubleCannonTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    buyDoubleCannonButton.Clicked = false;
+                    _game.gameState.SetGold(-25);
+                }
+                else
+                {
+                    notEnoughtMoney = true;
+                }
+                    
             }
             else if (buyMachineGunButton.Clicked)
             {
-                _game.gameState.AddTower(new MachineGun(machineGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
-                buyMachineGunButton.Clicked = false;
-                _game.gameState.SetGold(-20);
+                if (machineGunTower.GetPrice() <= _game.gameState.GetGold())
+                {
+                    _game.ChangeState(_game.gameState);
+                    _game.gameState.AddTower(new MachineGun(machineGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    buyMachineGunButton.Clicked = false;
+                    _game.gameState.SetGold(-20);
+                }
+                else 
+                {
+                    notEnoughtMoney = true;
+                }
+                    
             }
 
         }
@@ -177,6 +223,7 @@ namespace PixelDefense.States
             // to be modified to change back to the gameState
             
             _game.ChangeState(_game.gameState);
+            notEnoughtMoney = false;
         }
 
         public override void PostUpdate(GameTime gameTime)
@@ -192,9 +239,14 @@ namespace PixelDefense.States
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            
-            spriteBatch.Draw(bkg, new Vector2(140, 50), Color.Gray);
+            if(notEnoughtMoney)
+            {
+                spriteBatch.DrawString(textFont, "Not enought gold!! Go back & play some more..", new Vector2(150, 10), Color.Black);
+            }
 
+
+            spriteBatch.Draw(bkg, new Vector2(140, 50), Color.Gray);
+            
             spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
 
             string deployable = "Deployable";

@@ -16,12 +16,10 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
 
-        public SpriteFont textFont;
-
-
-
         Button chooseFirstMapButton;
         Button chooseSecondMapButton;
+
+        public SpriteFont textFontTitle;
 
         public MapSelectionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -31,10 +29,7 @@ namespace PixelDefense.States
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
             var secondMapTexture= _content.Load<Texture2D>("Controls/SecondMap");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
-            textFont = _content.Load<SpriteFont>("Fonts/TextFont");
-
-
-
+            textFontTitle = _content.Load<SpriteFont>("Fonts/TextFont");
 
 
 
@@ -81,7 +76,7 @@ namespace PixelDefense.States
                 button.Draw(gameTime, spriteBatch);
 
             string tempStr = "Choose your map";
-            spriteBatch.DrawString(textFont, tempStr, new Vector2(420, 150), Color.Black);
+            spriteBatch.DrawString(textFontTitle, tempStr, new Vector2(420, 150), Color.Black);
         }
 
       

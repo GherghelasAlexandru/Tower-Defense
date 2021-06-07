@@ -16,14 +16,11 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
 
-        public SpriteFont textFont;
-
         public GameOverState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var font = _content.Load<SpriteFont>("Fonts/Font");
-            textFont = _content.Load<SpriteFont>("Fonts/TextFont");
 
 
 
