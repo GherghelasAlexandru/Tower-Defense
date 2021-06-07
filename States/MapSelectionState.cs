@@ -18,8 +18,7 @@ namespace PixelDefense.States
 
         public SpriteFont textFont;
 
-        public bool IsFirstMapChosen;
-        public bool IsSecondMapChosen;
+
 
         Button chooseFirstMapButton;
         Button chooseSecondMapButton;
@@ -27,9 +26,7 @@ namespace PixelDefense.States
         public MapSelectionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            IsFirstMapChosen = false;
-            IsSecondMapChosen = false;
-        
+
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
             var secondMapTexture= _content.Load<Texture2D>("Controls/SecondMap");

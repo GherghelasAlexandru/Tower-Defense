@@ -16,7 +16,7 @@ namespace PixelDefense.Gameplay
         public float timer;         //Initialize a 10 second timer
         public float TIMER;
         public int towerPrice;
-        public MouseState prevMouseState;
+        
         public MouseState mouseState;
         
         public BasicTower(Texture2D texture)
@@ -49,17 +49,17 @@ namespace PixelDefense.Gameplay
 
         public void PlaceTower()
         {
-            prevMouseState = mouseState;
+           
             mouseState = Mouse.GetState();
             Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
 
             {
-                if (prevMouseState.LeftButton == ButtonState.Released && mouseState.LeftButton == ButtonState.Released && dragging)
+                if (mouseState.LeftButton == ButtonState.Released && dragging)
                 {
                     _position.X = mouseState.X;
                     _position.Y = mouseState.Y;  
                 }
-                else if (mouseState.LeftButton == ButtonState.Pressed && prevMouseState.LeftButton == ButtonState.Released && BoundingBox.Contains(mousePosition) && dragging)
+                else if (mouseState.LeftButton == ButtonState.Pressed  && BoundingBox.Contains(mousePosition) && dragging)
                 {
                     dragging = false;
                     _position.X = mouseState.X;
