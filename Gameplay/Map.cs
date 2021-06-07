@@ -13,7 +13,7 @@ namespace PixelDefense.Gameplay
     public class Map
     {
         TmxMap map;
-        TmxTileset tileSet;
+       // TmxTileset tileSet;
         Texture2D tileTexture;
         int tileWidth;
         int tileHeight;

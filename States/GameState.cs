@@ -22,6 +22,8 @@ namespace PixelDefense.States
         //private BasicTower tower1;
         Texture2D goblinTexture;
         Goblin goblin;
+
+        Wave wave;
         Mushroom mushroom;
         Dictionary<string, Animation> goblinAnimations;
 
@@ -40,8 +42,8 @@ namespace PixelDefense.States
                 {"Run", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Run"),8) },
                 {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Idle"),4) }
             };
-            map1.AddPath();
-            goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
+          //  map1.AddPath();
+          //  goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
             goblin = new Goblin(goblinAnimations);
             mushroom = new Mushroom(mushroomAnimations)  ;
 
@@ -50,15 +52,18 @@ namespace PixelDefense.States
 
 
             _towers = new List<Sprite>();
+            wave = new Wave(map1);
 
-            
-            
-            goblin.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-            //mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-            AddEnemy(goblin);
+
+
+            //goblin.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
+           // mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
+           // AddEnemy(goblin);
+            wave.LoadEnemyOption(goblin);
+            wave.LoadEnemyOption(mushroom);
 
             Console.WriteLine(goblin._position);
-            //AddEnemy(mushroom);
+           // AddEnemy(mushroom);
 
 
             /*                tower1 = new BasicTower(basicTowerTexture,10)
@@ -158,6 +163,8 @@ namespace PixelDefense.States
 
             postUpdate();
 
+           wave.Update(gameTime,_towers);
+
             //postupdate();
         }
 
@@ -202,6 +209,7 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
+            wave.Draw(spriteBatch);
 
            
 

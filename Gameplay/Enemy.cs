@@ -18,8 +18,8 @@ namespace PixelDefense.Gameplay
         public int health;
         public bool isDead = false;
         public float mSpeed = 1f;
-        int Width = 8;
-        int Height = 13;
+       // int Width = 8;
+       // int Height = 13;
 
 
         public Queue<Vector2> path;
@@ -100,8 +100,8 @@ namespace PixelDefense.Gameplay
                 Vector2 difference = _destination - Position;
                 if (difference.X > -1 && difference.X < 1 && difference.Y > -1 && difference.Y < 1)
                 {
-                    Console.WriteLine(path.Peek());
-                    path.Dequeue();
+                    //Console.WriteLine(path.Peek());
+                    //path.Dequeue();
                     if (path.Count == 0)
                         Active = false;
                     else
