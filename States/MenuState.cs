@@ -25,7 +25,7 @@ namespace PixelDefense.States
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(250, 200),
+                Position = new Vector2(550, 350),
                 Text = "New Game",
             };
 
@@ -33,7 +33,7 @@ namespace PixelDefense.States
 
             var instructionsButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(250, 250),
+                Position = new Vector2(550, 400),
                 Text = "Instructions",
             };
 
@@ -41,7 +41,7 @@ namespace PixelDefense.States
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(250, 300),
+                Position = new Vector2(550, 450),
                 Text = "Quit Game",
             };
 
@@ -63,7 +63,7 @@ namespace PixelDefense.States
                 button.Draw(gameTime, spriteBatch);
 
             string tempStr = "Pixel Defense";
-            spriteBatch.DrawString(textFont, tempStr, new Vector2(140, 120), Color.Black);
+            spriteBatch.DrawString(textFont, tempStr, new Vector2(450, 200), Color.Black);
 
         }
 

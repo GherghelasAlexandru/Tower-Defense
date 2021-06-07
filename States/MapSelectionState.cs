@@ -43,7 +43,7 @@ namespace PixelDefense.States
 
             chooseFirstMapButton = new Button(firstMapTexture, buttonFont)
             {
-                Position = new Vector2(100, 150),
+                Position = new Vector2(400, 250),
                 Text = "1",
                 
               
@@ -53,7 +53,7 @@ namespace PixelDefense.States
 
            chooseSecondMapButton = new Button(secondMapTexture, buttonFont)
             {
-                Position = new Vector2(350, 150),
+                Position = new Vector2(650, 250),
                 Text = "2",
                 
             };
@@ -63,7 +63,7 @@ namespace PixelDefense.States
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(250, 350),
+                Position = new Vector2(550, 450),
                 Text = "Back",
             };
 
@@ -84,7 +84,7 @@ namespace PixelDefense.States
                 button.Draw(gameTime, spriteBatch);
 
             string tempStr = "Choose your map";
-            spriteBatch.DrawString(textFont, tempStr, new Vector2(110, 95), Color.Black);
+            spriteBatch.DrawString(textFont, tempStr, new Vector2(420, 150), Color.Black);
         }
 
       

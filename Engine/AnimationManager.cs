@@ -26,7 +26,7 @@ namespace PixelDefense.Engine
         {
             spriteBatch.Draw(_animation.Texture,
                             _position,
-                             new Rectangle(_animation.CurrentFrame * _animation.FrameWidth,
+                             new Rectangle(_animation.CurrentFrame * _animation.FrameWidth + 50,
                                            0,
                                            _animation.FrameWidth,
                                            _animation.FrameHeight),
