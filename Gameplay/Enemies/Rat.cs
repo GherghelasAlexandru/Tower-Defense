@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-    class Mushroom:Enemy
+    public class Rat:Enemy
     {
 
-        public Mushroom(Dictionary<string, Animation> animations) : base(animations)
+        public Rat(Dictionary<string, Animation> animations) : base(animations)
         {
 
             health = 3;

@@ -68,12 +68,12 @@
     <Compile Include="Gameplay\Bullets\Rocket.cs" />
     <Compile Include="Gameplay\Bullets\The556.cs" />
     <Compile Include="Gameplay\Enemy.cs" />
-    <Compile Include="Gameplay\Enemies\FlyingEye.cs" />
-    <Compile Include="Gameplay\Enemies\Goblin.cs" />
+    <Compile Include="Gameplay\Enemies\Rat.cs" />
+    <Compile Include="Gameplay\Enemies\Crab.cs" />
     <Compile Include="Gameplay\Map.cs" />
     <Compile Include="Engine\Sprite.cs" />
-    <Compile Include="Gameplay\Enemies\Mushroom.cs" />
-    <Compile Include="Gameplay\Enemies\Skeleton.cs" />
+    <Compile Include="Gameplay\Enemies\Bat.cs" />
+    <Compile Include="Gameplay\Enemies\Slime.cs" />
     <Compile Include="Gameplay\Towers\BrokenGun.cs" />
     <Compile Include="Gameplay\Towers\Cannon.cs" />
     <Compile Include="Gameplay\Towers\DoubleCannon.cs" />

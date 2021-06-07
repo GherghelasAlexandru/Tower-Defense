@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-    public class FlyingEye:Enemy
+    class Bat:Enemy
     {
 
-        public FlyingEye(Dictionary<string, Animation> animations) : base(animations)
+        public Bat(Dictionary<string, Animation> animations) : base(animations)
         {
 
             health = 3;

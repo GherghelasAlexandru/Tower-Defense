@@ -20,8 +20,7 @@ namespace PixelDefense.Gameplay
         public float mSpeed = 1f;
         int Width = 8;
         int Height = 13;
-        protected int xOffset;
-        protected int yOffset;
+ 
 
 
         public Queue<Vector2> path;
@@ -128,12 +127,18 @@ namespace PixelDefense.Gameplay
         protected virtual void SetAnimations()
         {
 
-            
+
             if (xVelocity > 0)
                 _animationManager.Play(_animations["Run"]);
             else if (xVelocity == 0)
             {
                 _animationManager.Play(_animations["Attack"]);
+            }
+
+            else if (health == 0)
+            {
+                _animationManager.Play(_animations["Death"]);
+                isDead = true;
             }
             else _animationManager.Stop();
             _animationManager.UpdateBoundingBox();

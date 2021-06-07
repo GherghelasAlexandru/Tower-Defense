@@ -20,19 +20,19 @@ namespace PixelDefense.States
         //shooting sprites
         private List<Sprite> _towers;
         //private BasicTower tower1;
-        Texture2D goblinTexture;
-        Goblin goblin;
-        Mushroom mushroom;
-        Dictionary<string, Animation> goblinAnimations;
+        Crab crab;
+        Bat bat;
+        Dictionary<string, Animation> crabAnimations;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
 
-            goblinAnimations = new Dictionary<string, Animation>()
+            crabAnimations = new Dictionary<string, Animation>()
             {
                 {"Run", new Animation(content.Load<Texture2D>("spritesheets/Crab_Run"),4,2) },
-                /*{"Attack", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Attack"),8) }*/
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Crab_AttackB"),4,2) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Crab_Death"),4,2) }
             };
 
             /*var mushroomAnimations = new Dictionary<string, Animation>()
@@ -41,8 +41,8 @@ namespace PixelDefense.States
                 {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Idle"),4) }
             };*/
             map1.AddPath();
-            goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
-            goblin = new Goblin(goblinAnimations);
+       
+            crab = new Crab(crabAnimations);
             /*mushroom = new Mushroom(mushroomAnimations)  ;*/
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
@@ -53,11 +53,11 @@ namespace PixelDefense.States
 
             
             
-            goblin.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
+            crab.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
             //mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-            AddEnemy(goblin);
+            AddEnemy(crab);
 
-            Console.WriteLine(goblin._position);
+            Console.WriteLine(crab._position);
             //AddEnemy(mushroom);
 
 
@@ -133,19 +133,7 @@ namespace PixelDefense.States
             }
         }
 
-        public void postUpdate()
-        {
 
-            for (int i = 0; i < _towers.Count; i++)
-            {
-                if (_towers[i].IsActive)
-                {
-                    _towers.RemoveAt(i);
-                    i--;
-                }
-            }
-
-        }
 
         public override void Update(GameTime gameTime)
         {
@@ -156,7 +144,7 @@ namespace PixelDefense.States
             foreach (var button in _button)
                 button.Update(gameTime);
 
-            postUpdate();
+            PostUpdate(gameTime);
 
             //postupdate();
         }
