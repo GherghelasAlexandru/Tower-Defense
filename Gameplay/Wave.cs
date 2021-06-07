@@ -72,20 +72,22 @@ namespace PixelDefense.Gameplay
                 // aici e buba, doar 2 elemente. mai trebuie instante
                 //SpawnEnemies(map);
 
-                var index = random.Next(enemiesOptions.Count());
+                // var index = random.Next(enemiesOptions.Count());
                 //Console.WriteLine(enemiesOptions.Count());
-                Console.WriteLine(index);
-               
-               // Enemy inamic = enemiesOptions[index];
-              //  Console.WriteLine(inamic);
+                //  Console.WriteLine(index);
+
+                // Enemy inamic = enemiesOptions[index];
+                //  Console.WriteLine(inamic);
                 //AddEnemy(inamic);
 
+                CreateEnemy(enemies);
 
-
-                Enemy enemy = enemiesOptions[index];
-                enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
+                //Enemy enemy = enemiesOptions[index];
+               // enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
                 //Enemy enemy = (Enemy)enemies[index].Clone();
-                AddEnemy(enemy);
+                //AddEnemy((Enemy)enemy.Clone());
+
+                // ENEMIES increase, but the elements are on top of each other
                 Console.WriteLine(enemies.Count);
               
                 timer = 0;
@@ -93,7 +95,10 @@ namespace PixelDefense.Gameplay
 
             foreach (Enemy enemy in enemies)
             {
-                enemy.Update(gameTime,sprites);
+                if (enemy.Active)
+                {
+                    enemy.Update(gameTime, sprites);
+                }
             }
 
         }
@@ -107,8 +112,14 @@ namespace PixelDefense.Gameplay
             }
         }
 
-        public void CreateEnemy(ContentManager content)
+        public void CreateEnemy(List<Enemy> enemies)
         {
+            var index = random.Next(enemiesOptions.Count());
+            Enemy enemy = enemiesOptions[index].Clone() as Enemy;
+            enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
+            enemies.Add(enemy);
+    
+            // maybe create the enemy from scratch her?
 
         }
 

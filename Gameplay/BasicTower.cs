@@ -82,7 +82,6 @@ namespace PixelDefense.Gameplay
             bullet.xVelocity = xVelocity * 2;
             bullet.LifeSpan = 2f;
             bullet.Parent = this;
-
             sprites.Add(bullet);
         }
 
