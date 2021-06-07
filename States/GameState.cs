@@ -71,7 +71,7 @@ namespace PixelDefense.States
 
             var chooseSurrenderButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(480, 0),
+                Position = new Vector2(1110, 740),
                 Text = "Surrender",
             };
 
@@ -79,7 +79,7 @@ namespace PixelDefense.States
 
             var shopButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(320, 0),
+                Position = new Vector2(945, 740),
                 Text = "Shop",
             };
 
