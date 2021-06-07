@@ -11,7 +11,7 @@ namespace PixelDefense.Engine
 {
     public class AnimationManager:Sprite
     {
-        private Animation _animation;
+        protected Animation _animation;
 
         private float _timer;
 
@@ -26,12 +26,12 @@ namespace PixelDefense.Engine
         {
             spriteBatch.Draw(_animation.Texture,
                             _position,
-                             new Rectangle(_animation.CurrentFrame * _animation.FrameWidth + 50,
-                                           60,
+                             new Rectangle(_animation.CurrentFrame * _animation.FrameWidth,
+                                           0,
                                            _animation.FrameWidth,
                                            _animation.FrameHeight),
                              Color.White);
-            
+
         }
 
         public void Play(Animation animation)
@@ -67,7 +67,7 @@ namespace PixelDefense.Engine
                 if (_animation.CurrentFrame >= _animation.FrameCount)
                     _animation.CurrentFrame = 0;
             }
-            UpdateBoundingBox();
+         
         }
 
         public override void UpdateBoundingBox()

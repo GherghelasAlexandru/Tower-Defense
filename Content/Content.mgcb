@@ -111,6 +111,18 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/textFont.spritefont
 
+#begin spritesheets/Crab_Run.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spritesheets/Crab_Run.png
+
 #begin spritesheets/FlyingEye_Attack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -338,6 +350,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:spritesheets/Skeleton_Walk.png
+
+#begin spritesheets/spritesheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:spritesheets/spritesheet.png
 
 #begin Tower/bullet.png
 /importer:TextureImporter

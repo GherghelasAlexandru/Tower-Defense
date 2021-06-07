@@ -31,19 +31,19 @@ namespace PixelDefense.States
 
             goblinAnimations = new Dictionary<string, Animation>()
             {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Run"),8) },
-                {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Idle"),4) }
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Crab_Run"),4,2) },
+                /*{"Attack", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Attack"),8) }*/
             };
 
-            var mushroomAnimations = new Dictionary<string, Animation>()
+            /*var mushroomAnimations = new Dictionary<string, Animation>()
             {
                 {"Run", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Run"),8) },
                 {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Idle"),4) }
-            };
+            };*/
             map1.AddPath();
             goblinTexture = _content.Load<Texture2D>("spritesheets/Goblin_Run");
             goblin = new Goblin(goblinAnimations);
-            mushroom = new Mushroom(mushroomAnimations)  ;
+            /*mushroom = new Mushroom(mushroomAnimations)  ;*/
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");

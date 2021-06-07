@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,17 +11,17 @@ namespace PixelDefense.Gameplay
     public class Goblin : Enemy
     {
 
-        public Goblin(Dictionary<string,Animation> animations) : base(animations)
+        public Goblin(Dictionary<string, Animation> animations) : base(animations)
         {
-        
+
             health = 3;
             mSpeed = 1f;
             xVelocity = 1f;
+            rotationVelocity = 2f;
 
         }
 
-        
-        
-      
+
+
     }
 }

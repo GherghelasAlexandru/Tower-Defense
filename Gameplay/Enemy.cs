@@ -20,6 +20,8 @@ namespace PixelDefense.Gameplay
         public float mSpeed = 1f;
         int Width = 8;
         int Height = 13;
+        protected int xOffset;
+        protected int yOffset;
 
 
         public Queue<Vector2> path;
@@ -103,7 +105,11 @@ namespace PixelDefense.Gameplay
                     Console.WriteLine(path.Peek());
                     path.Dequeue();
                     if (path.Count == 0)
+                    {
                         Active = false;
+                        xVelocity = 0;
+                    }
+
                     else
                         Active = true;
 
@@ -127,7 +133,7 @@ namespace PixelDefense.Gameplay
                 _animationManager.Play(_animations["Run"]);
             else if (xVelocity == 0)
             {
-                _animationManager.Play(_animations["Idle"]);
+                _animationManager.Play(_animations["Attack"]);
             }
             else _animationManager.Stop();
             _animationManager.UpdateBoundingBox();

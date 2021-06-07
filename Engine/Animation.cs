@@ -14,7 +14,8 @@ namespace PixelDefense.Gameplay
 
         public int FrameCount { get; private set; }
 
-        public int FrameHeight { get { return Texture.Height; } }
+        public int FrameHeightCount { get; set; }
+        public int FrameHeight { get { return Texture.Height / FrameHeightCount ; } }
 
         public float FrameSpeed { get; set; }
 
@@ -24,9 +25,10 @@ namespace PixelDefense.Gameplay
 
         public Texture2D Texture { get; private set; }
 
-        public Animation(Texture2D texture, int frameCount)
+        public Animation(Texture2D texture, int frameCount,int frameHeightCount)
         {
-            
+
+            FrameHeightCount = frameHeightCount;
             Texture = texture;
 
             FrameCount = frameCount;
