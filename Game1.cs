@@ -58,7 +58,7 @@ namespace PixelDefense
             Content.RootDirectory = "Content";
 
            
-            graphics.ToggleFullScreen();
+           // graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
         }
