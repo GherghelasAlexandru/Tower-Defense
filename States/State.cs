@@ -40,7 +40,7 @@ namespace PixelDefense.States
             _maps = new List<Map>();
 
             map1 = new Map(content, "Content/Test.tmx");
-            map2 = new Map(content, "Content/SecondMap.tmx");
+            map2 = new Map(content, "Content/SecondMap2.tmx");
 
             textFont = _content.Load<SpriteFont>("Fonts/Font");
         }
