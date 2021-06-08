@@ -31,14 +31,10 @@ namespace PixelDefense.States
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
             textFontTitle = _content.Load<SpriteFont>("Fonts/TextFont");
 
-
-
             chooseFirstMapButton = new Button(firstMapTexture, buttonFont)
             {
                 Position = new Vector2(400, 250),
                 Text = "1",
-                
-              
             };
 
             chooseFirstMapButton.Click += MapButton_Click;
@@ -46,11 +42,9 @@ namespace PixelDefense.States
            chooseSecondMapButton = new Button(secondMapTexture, buttonFont)
             {
                 Position = new Vector2(650, 250),
-                Text = "2",
-                
+                Text = "2", 
             };
 
-  
             chooseSecondMapButton.Click += MapButton_Click;
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
@@ -67,7 +61,6 @@ namespace PixelDefense.States
             chooseSecondMapButton,
             chooseBackButton,
             };
-
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -79,12 +72,8 @@ namespace PixelDefense.States
             spriteBatch.DrawString(textFontTitle, tempStr, new Vector2(420, 150), Color.Black);
         }
 
-      
-
-
         private void MapButton_Click(object sender, EventArgs e)
         {
-
             _game.ChangeState(_game.gameState);
             if (chooseFirstMapButton.Clicked)
             {
@@ -93,9 +82,7 @@ namespace PixelDefense.States
             else if(chooseSecondMapButton.Clicked)
             {
                 _game.gameState.AddMap(map2);
-            }
-            
-           
+            } 
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -112,8 +99,6 @@ namespace PixelDefense.States
         {
             foreach (var button in _button)
                 button.Update(gameTime);
-           
-            
         }
     }
 }

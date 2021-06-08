@@ -20,6 +20,7 @@ namespace PixelDefense.States
 
         protected Game1 _game;
         protected List<Map> _maps;
+
         protected Map map1;
         protected Map map2;
 
@@ -43,6 +44,8 @@ namespace PixelDefense.States
             map2 = new Map(content, "Content/SecondMap2.tmx");
 
             textFont = _content.Load<SpriteFont>("Fonts/Font");
+
+
         }
 
         public void AddMap(Map map)
