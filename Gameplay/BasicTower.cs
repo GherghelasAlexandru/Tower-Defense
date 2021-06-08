@@ -20,6 +20,8 @@ namespace PixelDefense.Gameplay
         public MouseState mouseState;
 
         public Rectangle TowerCollision;
+
+        private List<Bullet> bullets;
             
        
 
@@ -27,7 +29,7 @@ namespace PixelDefense.Gameplay
           : base(texture)
         {
 
-           
+           bullets = new List<Bullet>();
 
 
         }
@@ -99,8 +101,12 @@ namespace PixelDefense.Gameplay
             bullet.Parent = this;
 
             sprites.Add(bullet);
+            bullets.Add(bullet);
         }
 
+        public List<Bullet> getBullets() {
+            return bullets;
+        }
 
         public void DrawBasicTower(SpriteBatch spriteBatch)
 

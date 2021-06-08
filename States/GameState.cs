@@ -19,6 +19,7 @@ namespace PixelDefense.States
         
         //shooting sprites
         private List<Sprite> _towers;
+        private List<BasicTower> basicTowers;
         //private BasicTower tower1;
         Crab crab;
         Bat bat;
@@ -54,7 +55,7 @@ namespace PixelDefense.States
 
             _towers = new List<Sprite>();
 
-            
+            basicTowers = new List<BasicTower>();
             
             crab.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
             //mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
@@ -94,6 +95,14 @@ namespace PixelDefense.States
             shopButton,
             };
 
+        }
+
+        private void addBasicTowers() {
+            foreach (var basicTower in _towers) {
+                if (basicTower is BasicTower) {
+                    basicTowers.Add((BasicTower)basicTower);
+                }
+            }
         }
 
         public int GetGold()
@@ -159,6 +168,22 @@ namespace PixelDefense.States
             PostUpdate(gameTime);
 
             //postupdate();
+            addBasicTowers();
+
+            foreach (var tower in basicTowers)
+            {
+                foreach (var bullet in tower.getBullets())
+                {
+                    
+                    if (bullet.Rectangle.Intersects(crab.Rectangle))
+                    {
+                        crab._movement = new Vector2(0, 0);
+                        Console.WriteLine("Wtf");
+                        bullet._position += crab.Position;
+                        
+                    }
+                }
+            }
         }
 
        

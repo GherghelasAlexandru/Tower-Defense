@@ -116,8 +116,6 @@ namespace PixelDefense.Gameplay
 
                 Position += _movement;
             }
-
-
             SetAnimations();
             _animationManager.Update(gameTime);
             base.Update(gameTime,sprites);

@@ -40,7 +40,7 @@ namespace PixelDefense.States
 
         public bool notEnoughtMoney = false;
 
-        private readonly List<Sprite> basicTowers;
+        public readonly List<Sprite> basicTowers;
         public ShopState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
