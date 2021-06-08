@@ -17,9 +17,13 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
         
-        private List<Sprite> _towers;
+        private List<Sprite> _sprites;
+        public Map map1;
+        public Map map2;
+        public List<Map> _maps;
+        public Crab crab;
 
-        Crab crab;
+
         Bat bat;
         Dictionary<string, Animation> crabAnimations;
 
@@ -28,9 +32,12 @@ namespace PixelDefense.States
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            _towers = new List<Sprite>();
+            _sprites = new List<Sprite>();
             gold = 100;
+            _maps = new List<Map>();
 
+            map1 = new Map(content, "Content/Test.tmx");
+            map2 = new Map(content, "Content/SecondMap2.tmx");
             crabAnimations = new Dictionary<string, Animation>()
             {
                 {"Run", new Animation(content.Load<Texture2D>("spritesheets/Crab_Run"),4,2) },
@@ -40,9 +47,11 @@ namespace PixelDefense.States
 
             crab = new Crab(crabAnimations);
 
+
             map1.AddPath();
-            crab.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-            AddEnemy(crab);
+            map2.AddPath();
+            
+           
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
@@ -70,6 +79,10 @@ namespace PixelDefense.States
             };
         }
 
+        public void AddMap(Map map)
+        {
+            _maps.Add(map);
+        }
         public int GetGold()
         {
             return gold;
@@ -86,17 +99,31 @@ namespace PixelDefense.States
 
         public List<Sprite> getSprites()
         {
-            return _towers;
+            return _sprites;
         }
 
         public void AddTower(BasicTower tower)
         {
-            _towers.Add(tower);
+            _sprites.Add(tower);
         }
 
         public void AddEnemy(Enemy enemy)
         {
-            _towers.Add(enemy);
+
+          
+                _sprites.Add(enemy);
+           
+            if (_maps.Contains(map1))
+            {
+
+                enemy.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
+
+            }
+            else if (_maps.Contains(map2))
+            {
+
+                enemy.SpawnEnemy(map2.GetStartingPoint(), map2.GetPath());
+            }
         }
 
         private void ShopButton_click(object sender, EventArgs e)
@@ -107,11 +134,11 @@ namespace PixelDefense.States
 
         public override void PostUpdate(GameTime gameTime)
         {
-            for (int i = 0; i < _towers.Count; i++)
+            for (int i = 0; i < _sprites.Count; i++)
             {
-                if (_towers[i].IsActive)
+                if (_sprites[i].IsActive)
                 {
-                    _towers.RemoveAt(i);
+                    _sprites.RemoveAt(i);
                     i--;
                 }
             }
@@ -119,17 +146,32 @@ namespace PixelDefense.States
 
         public override void Update(GameTime gameTime)
         {
-            foreach (var sprite in _towers.ToArray())
-                sprite.Update(gameTime, _towers);
+
+
+            
+
+
+
+
+            foreach (var sprite in _sprites.ToArray())
+                sprite.Update(gameTime, _sprites);
          
 
             foreach (var button in _button)
                 button.Update(gameTime);
 
-            PostUpdate(gameTime);
+            
+
+                PostUpdate(gameTime);
         }
 
        
+        public void AddPathToEnemy(Enemy enemy)
+        {
+
+          
+
+        }
         public void DrawMap(SpriteBatch spriteBatch)
         {
             foreach(var map in _maps)
@@ -145,7 +187,7 @@ namespace PixelDefense.States
         public void DrawSprites(SpriteBatch spriteBatch)
 
         {
-            foreach (var sprite in _towers.ToArray())
+            foreach (var sprite in _sprites.ToArray())
                 sprite.Draw(spriteBatch);
 
         }

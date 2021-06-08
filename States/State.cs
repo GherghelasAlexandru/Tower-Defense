@@ -19,11 +19,7 @@ namespace PixelDefense.States
         protected GraphicsDevice _graphicsDevice;
 
         protected Game1 _game;
-        protected List<Map> _maps;
-
-        protected Map map1;
-        protected Map map2;
-
+       
         protected SpriteFont textFont;
 
         #endregion
@@ -36,27 +32,13 @@ namespace PixelDefense.States
 
             _graphicsDevice = graphicsDevice;
 
-            _content = content;
-
-            _maps = new List<Map>();
-
-            map1 = new Map(content, "Content/Test.tmx");
-            map2 = new Map(content, "Content/SecondMap2.tmx");
-
+            _content = content; 
+            
             textFont = _content.Load<SpriteFont>("Fonts/Font");
 
 
         }
 
-        public void AddMap(Map map)
-        {
-            _maps.Add(map);
-        }
-        
-        public void RemoveMap(Map map)
-        {
-            _maps.Remove(map);
-        }
         
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 

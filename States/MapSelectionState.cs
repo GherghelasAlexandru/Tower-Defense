@@ -74,15 +74,24 @@ namespace PixelDefense.States
 
         private void MapButton_Click(object sender, EventArgs e)
         {
+            
             _game.ChangeState(_game.gameState);
             if (chooseFirstMapButton.Clicked)
             {
-                _game.gameState.AddMap(map1);
+                _game.gameState.AddMap(_game.gameState.map1);
+
+
+                _game.gameState.AddEnemy(_game.gameState.crab);
             }
+
             else if(chooseSecondMapButton.Clicked)
             {
-                _game.gameState.AddMap(map2);
-            } 
+                _game.gameState.AddMap(_game.gameState.map2);
+                
+                   _game.gameState.AddEnemy(_game.gameState.crab);
+            }
+
+            
         }
 
         private void BackButton_Click(object sender, EventArgs e)

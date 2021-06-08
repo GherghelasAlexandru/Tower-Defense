@@ -20,8 +20,7 @@ namespace PixelDefense.Gameplay
         
         public MouseState mouseState;
         
-        public Rectangle TowerCollision;
-            
+  
        
 
         public BasicTower(Texture2D texture)
@@ -55,13 +54,7 @@ namespace PixelDefense.Gameplay
 
         public void PlaceTower()
         {
-            TowerCollision = new Rectangle(
-                    (int)(_position.X - (int)Math.Ceiling(Origin.X)),
-                    (int)(_position.Y - (int)Math.Ceiling(Origin.Y)),
-                    (int)Math.Ceiling((double)_texture.Width),
-                    (int)Math.Ceiling((double)_texture.Height)
-                    );
-
+      
             mouseState = Mouse.GetState();
             Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
 
@@ -77,10 +70,7 @@ namespace PixelDefense.Gameplay
                         _position.X = mouseState.X;
                         _position.Y = mouseState.Y;
 
-                    /*if (TowerCollision.Intersects(BoundingBox))
-                    {
-                        Console.WriteLine("NOOO!");
-                    }*/
+                 
                 }
 
             }
