@@ -92,21 +92,13 @@ namespace PixelDefense.States
 
             brokenGunTower = new BrokenGun(brokenGunTexture) { _position = new Vector2(190, 640) };
 
-
-            /* basicTower2 = new BasicTower(content.Load<Texture2D>("Tower/T2"),15) { _position = new Vector2(120, 150), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
-             basicTower3 = new BasicTower(content.Load<Texture2D>("Tower/T3"),20) { _position = new Vector2(120, 225), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
-             basicTower4 = new BasicTower(content.Load<Texture2D>("Tower/T4"),25) { _position = new Vector2(120, 300), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
-             basicTower5 = new BasicTower(content.Load<Texture2D>("Tower/T5"),30) { _position = new Vector2(120, 375), Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")) };
- */
             AddBasicTower(cannonTower);
             AddBasicTower(brokenGunTower);
             AddBasicTower(rocketLauncherTower);
             AddBasicTower(doubleCannonTower);
             AddBasicTower(machineGunTower);
           
-
             bkg = content.Load<Texture2D>("Controls/bkg");
-
 
             buyMachineGunButton.Click += BuyButton_Click;
             buyDoubleCannonButton.Click += BuyButton_Click;
@@ -168,7 +160,6 @@ namespace PixelDefense.States
                 {
                     notEnoughtMoney = true;
                 }
-               
             }
             if(buyRocketLauncherButton.Clicked)
             {
@@ -183,7 +174,6 @@ namespace PixelDefense.States
                 {
                     notEnoughtMoney = true;
                 }
-               
             }
             else if (buyDoubleCannonButton.Clicked)
             {
@@ -197,8 +187,7 @@ namespace PixelDefense.States
                 else
                 {
                     notEnoughtMoney = true;
-                }
-                    
+                }    
             }
             else if (buyMachineGunButton.Clicked)
             {
@@ -212,10 +201,8 @@ namespace PixelDefense.States
                 else 
                 {
                     notEnoughtMoney = true;
-                }
-                    
+                }      
             }
-
         }
 
         private void BackButton_Click(object sender, EventArgs e)
@@ -243,7 +230,6 @@ namespace PixelDefense.States
             {
                 spriteBatch.DrawString(textFont, "Not enought gold!! Go back & play some more..", new Vector2(150, 10), Color.Black);
             }
-
 
             spriteBatch.Draw(bkg, new Vector2(140, 50), Color.Gray);
             
@@ -290,11 +276,6 @@ namespace PixelDefense.States
             spriteBatch.DrawString(textFont, brokenGun, new Vector2(270, 650), Color.White);
             spriteBatch.DrawString(textFont, brokenGunText, new Vector2(270, 670), Color.White);
             spriteBatch.DrawString(textFont, price2, new Vector2(720, 670), Color.Yellow);
-
-            
-
-
-
 
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);

@@ -41,10 +41,8 @@ namespace PixelDefense.Gameplay
       
         public void DrawLayer(int index, SpriteBatch batch)
         {
-
             for (var i = 0; i < map.Layers[index].Tiles.Count; i++)
             {
-                
                 //Get the identification of the tile
                 int gid = map.Layers[index].Tiles[i].Gid;
 
@@ -65,10 +63,8 @@ namespace PixelDefense.Gameplay
                     //Draw the tile that is within the tilesetRec
                     batch.Draw(tileTexture, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
                 }
-               
             }
         }
-
         
         public void DrawGrass(SpriteBatch spritebatch)
         {
@@ -97,14 +93,12 @@ namespace PixelDefense.Gameplay
 
         public void AddPath()
         {
-
             int points = Convert.ToInt32(map.ObjectGroups["Objects"].Properties["Points"]);
 
             for (int i = 1; i <= points; i++)
             {
                 path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["Point" + i].X, (float)map.ObjectGroups["Objects"].Objects["Point" + i].Y));
             }
-
 
             path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["End"].X, (float)map.ObjectGroups["Objects"].Objects["End"].Y));
         }

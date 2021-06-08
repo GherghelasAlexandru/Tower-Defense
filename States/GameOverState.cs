@@ -22,8 +22,6 @@ namespace PixelDefense.States
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var font = _content.Load<SpriteFont>("Fonts/Font");
 
-
-
             var chooseBackButton = new Button(buttonTexture, font)
             {
                 Position = new Vector2(250, 350),
@@ -36,7 +34,6 @@ namespace PixelDefense.States
             {
             chooseBackButton,
             };
-
         }
 
         private void BackButton_Click(object sender, EventArgs e)

@@ -10,39 +10,27 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay
 {
-
-
     public abstract class Enemy:AnimationManager
     {
-
         public int health;
         public bool isDead = false;
         public float mSpeed = 1f;
         int Width = 8;
         int Height = 13;
- 
-
 
         public Queue<Vector2> path;
         public bool active;
 
-
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
         {
-           
-            _animations = animations;
-            _animationManager = new AnimationManager(animations);
-            active = false;
-            path = new Queue<Vector2>();
+           _animations = animations;
+           _animationManager = new AnimationManager(animations);
+           active = false;
+           path = new Queue<Vector2>();
 
            UpdateBoundingBox();
         }
-
-
-        
-           
-        
 
         //box for enemy to interact with surroundings
         public Rectangle InteractionBox
@@ -72,30 +60,19 @@ namespace PixelDefense.Gameplay
                     _destination = path.FirstOrDefault<Vector2>();
                 Vector2 difference = _destination - Position;
                 _movement = difference / Vector2.Distance(_destination, Position);
-
             }
         }
-
         public void SpawnEnemy(Vector2 pos,Queue<Vector2> p)
         {
-
-           
             Position = pos;
             //IsActive = true;
-      
             path = p;
             Active = true;
-            
 
         }
-
-
-    
 
         public override void Update(GameTime gameTime,List<Sprite>sprites)
         {
-            
-
             if (Active)
             {
                 Vector2 difference = _destination - Position;
@@ -111,23 +88,18 @@ namespace PixelDefense.Gameplay
 
                     else
                         Active = true;
-
                 }
 
                 Position += _movement;
             }
-
 
             SetAnimations();
             _animationManager.Update(gameTime);
             base.Update(gameTime,sprites);
         }
 
-
         protected virtual void SetAnimations()
         {
-
-
             if (xVelocity > 0)
                 _animationManager.Play(_animations["Run"]);
             else if (xVelocity == 0)
@@ -142,9 +114,8 @@ namespace PixelDefense.Gameplay
             }
             else _animationManager.Stop();
             _animationManager.UpdateBoundingBox();
-
-          
         }
+
         public override void UpdateBoundingBox()
         {
             // The collision is at the feet of the enemy
@@ -155,6 +126,7 @@ namespace PixelDefense.Gameplay
             10
             );
         }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             
@@ -163,8 +135,6 @@ namespace PixelDefense.Gameplay
                 _animationManager.Draw(spriteBatch);
             }
             else throw new Exception("wait a second, who are you?!");
-            // runAnimation.DrawAnimation(spriteBatch);
         }
-
     }
 }

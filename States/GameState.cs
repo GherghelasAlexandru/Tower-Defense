@@ -17,9 +17,8 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
         
-        //shooting sprites
         private List<Sprite> _towers;
-        //private BasicTower tower1;
+
         Crab crab;
         Bat bat;
         Dictionary<string, Animation> crabAnimations;
@@ -29,7 +28,8 @@ namespace PixelDefense.States
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            gold = 30;
+            _towers = new List<Sprite>();
+            gold = 100;
 
             crabAnimations = new Dictionary<string, Animation>()
             {
@@ -38,39 +38,14 @@ namespace PixelDefense.States
                 {"Death", new Animation(content.Load<Texture2D>("spritesheets/Crab_Death"),4,2) }
             };
 
-            /*var mushroomAnimations = new Dictionary<string, Animation>()
-            {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Run"),8) },
-                {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Idle"),4) }
-            };*/
-            map1.AddPath();
-       
             crab = new Crab(crabAnimations);
-            /*mushroom = new Mushroom(mushroomAnimations)  ;*/
+
+            map1.AddPath();
+            crab.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
+            AddEnemy(crab);
 
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
-
-
-            _towers = new List<Sprite>();
-
-            
-            
-            crab.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-            //mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-            AddEnemy(crab);
-
-            Console.WriteLine(crab._position);
-            //AddEnemy(mushroom);
-
-
-            /*                tower1 = new BasicTower(basicTowerTexture,10)
-                            {
-                                Position = new Vector2(200, 200),
-                                Bullet = new Bullet(content.Load<Texture2D>("Tower/bullet")),
-
-                        };*/
-
 
             var chooseSurrenderButton = new Button(buttonTexture, buttonFont)
             {
@@ -93,7 +68,6 @@ namespace PixelDefense.States
             chooseSurrenderButton,
             shopButton,
             };
-
         }
 
         public int GetGold()
@@ -129,12 +103,10 @@ namespace PixelDefense.States
         {
             // to be modified to change back to the gameState
             _game.ChangeState(_game.shopState);
-
         }
 
         public override void PostUpdate(GameTime gameTime)
         {
-
             for (int i = 0; i < _towers.Count; i++)
             {
                 if (_towers[i].IsActive)
@@ -144,8 +116,6 @@ namespace PixelDefense.States
                 }
             }
         }
-
-
 
         public override void Update(GameTime gameTime)
         {
@@ -157,8 +127,6 @@ namespace PixelDefense.States
                 button.Update(gameTime);
 
             PostUpdate(gameTime);
-
-            //postupdate();
         }
 
        
@@ -166,18 +134,11 @@ namespace PixelDefense.States
         {
             foreach(var map in _maps)
             {
-   
-
                 map.DrawGrass(spriteBatch);
-
                 map.DrawPath(spriteBatch);
-
                 map.DrawShadow(spriteBatch);
-
                 map.DrawBase(spriteBatch);
-
                 map.DrawDecorations(spriteBatch);
-
             }
         }
 
@@ -197,15 +158,11 @@ namespace PixelDefense.States
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
-            
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
 
             spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
-
-
         }
     }
 }
