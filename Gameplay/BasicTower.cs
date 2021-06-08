@@ -13,12 +13,13 @@ namespace PixelDefense.Gameplay
     public abstract class BasicTower : Sprite
     {
         public Bullet Bullet;
+        public Enemy enemy;
         public float timer;         //Initialize a 10 second timer
         public float TIMER;
         public int towerPrice;
         
         public MouseState mouseState;
-
+        
         public Rectangle TowerCollision;
             
        
@@ -27,7 +28,7 @@ namespace PixelDefense.Gameplay
           : base(texture)
         {
 
-           
+            
 
 
         }
@@ -47,6 +48,7 @@ namespace PixelDefense.Gameplay
 
                 timer = TIMER;   //Reset Timer
             }
+     
 
             PlaceTower();
         }

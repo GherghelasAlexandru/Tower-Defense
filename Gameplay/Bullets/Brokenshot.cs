@@ -13,6 +13,7 @@ namespace PixelDefense.Gameplay.Bullets
         {
             xVelocity = 5f;
             yVelocity = 5f;
+
         }
     }
 }

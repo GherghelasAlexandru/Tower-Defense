@@ -18,9 +18,6 @@ namespace PixelDefense.Gameplay
         public int health;
         public bool isDead = false;
         public float mSpeed = 1f;
-        int Width = 8;
-        int Height = 13;
- 
 
 
         public Queue<Vector2> path;
@@ -30,7 +27,7 @@ namespace PixelDefense.Gameplay
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
         {
-           
+            
             _animations = animations;
             _animationManager = new AnimationManager(animations);
             active = false;
@@ -115,6 +112,7 @@ namespace PixelDefense.Gameplay
                 }
 
                 Position += _movement;
+
             }
 
 

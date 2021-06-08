@@ -82,7 +82,7 @@ namespace PixelDefense.States
 
             basicTowers = new List<Sprite>();
 
-            cannonTower = new Cannon(cannonTexture) { _position = new Vector2(190, 160) };
+            cannonTower = new Cannon(cannonTexture) {Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
 
             machineGunTower = new MachineGun(machineGunTexture) { _position = new Vector2(190, 280) };
 
@@ -146,7 +146,7 @@ namespace PixelDefense.States
                 if(cannonTower.GetPrice() <= _game.gameState.GetGold())
                 {
                     _game.ChangeState(_game.gameState);
-                    _game.gameState.AddTower(new Cannon(cannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    _game.gameState.AddTower(cannonTower.Clone() as Cannon);
                     buyCannonButton.Clicked = false;
                     _game.gameState.SetGold(-cannonTower.GetPrice());
                 }
