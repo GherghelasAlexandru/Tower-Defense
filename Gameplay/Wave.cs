@@ -24,6 +24,7 @@ namespace PixelDefense.Gameplay
         public float waveTime;
         public float waveBreak;
         public float timer;
+        public float spawn;
 
 
         public Wave(Map map)
@@ -37,6 +38,7 @@ namespace PixelDefense.Gameplay
             waveBreak = 25f;
             this.map = map;
             this.map.AddPath();
+            spawn = 0;
         }
 
         public void AddEnemy(Enemy enemy)
@@ -47,6 +49,7 @@ namespace PixelDefense.Gameplay
 
         public void LoadEnemyOption(Enemy enemy)
         {
+            
             enemiesOptions.Add(enemy);
         }
 
@@ -66,40 +69,51 @@ namespace PixelDefense.Gameplay
         public void Update(GameTime gameTime, List<Sprite> sprites)
         {
              timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            Console.WriteLine(timer);
-            if(timer > timebeetweenspawn)
-            {
+             Console.WriteLine(timer);
+           
                 // aici e buba, doar 2 elemente. mai trebuie instante
                 //SpawnEnemies(map);
 
-                // var index = random.Next(enemiesOptions.Count());
-                //Console.WriteLine(enemiesOptions.Count());
-                //  Console.WriteLine(index);
+                var index = random.Next(enemies.Count());
+            //Console.WriteLine(enemiesOptions.Count());
+            //  Console.WriteLine(index);
 
-                // Enemy inamic = enemiesOptions[index];
-                //  Console.WriteLine(inamic);
-                //AddEnemy(inamic);
+            //Enemy inamic = enemiesOptions[index];
+            //  Console.WriteLine(inamic);
+            //AddEnemy(inamic);
 
-                CreateEnemy(enemies);
 
-                //Enemy enemy = enemiesOptions[index];
-               // enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
-                //Enemy enemy = (Enemy)enemies[index].Clone();
-                //AddEnemy((Enemy)enemy.Clone());
 
-                // ENEMIES increase, but the elements are on top of each other
-                Console.WriteLine(enemies.Count);
-              
-                timer = 0;
-            }
+            CreateEnemy(enemies);
+
+
+
+
+
+
+
+
+
+            //Enemy enemy = enemiesOptions[index];
+            // enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
+            //Enemy enemy = (Enemy)enemies[index].Clone();
+            // AddEnemy(enemy);
+
+            // ENEMIES increase, but the elements are on top of each other
+            Console.WriteLine(enemies.Count);
+
 
             foreach (Enemy enemy in enemies)
             {
                 if (enemy.Active)
                 {
                     enemy.Update(gameTime, sprites);
+                    Console.WriteLine(enemy._position);
                 }
             }
+
+
+
 
         }
 
@@ -114,12 +128,31 @@ namespace PixelDefense.Gameplay
 
         public void CreateEnemy(List<Enemy> enemies)
         {
-            var index = random.Next(enemiesOptions.Count());
-            Enemy enemy = enemiesOptions[index].Clone() as Enemy;
-            enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
-            enemies.Add(enemy);
-    
-            // maybe create the enemy from scratch her?
+            if (timer > timebeetweenspawn)
+            {
+                var index = random.Next(enemiesOptions.Count);
+                //Console.WriteLine(enemies[index]._position);
+
+                // spawn same enemy???????
+                Enemy Newenemy = enemiesOptions[index].Clone() as Enemy;
+                Newenemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
+                Newenemy.Active = true;
+                //Console.WriteLine(Newenemy._position);
+
+                if (enemies.Count < 4)
+                {
+                    enemies.Add(Newenemy);
+                    
+                    // maybe create the enemy from scratch her?
+                }
+
+                timer = 0;
+
+            }
+        }
+
+        public void CreateGoblin(ContentManager content)
+        {
 
         }
 
