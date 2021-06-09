@@ -15,7 +15,7 @@ namespace PixelDefense.States
     public class GameOverState : State
     {
         private List<Button> _button;
-
+        public bool IsRestarted = false;
         public GameOverState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
@@ -38,6 +38,7 @@ namespace PixelDefense.States
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            IsRestarted = true;
             _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
         }
 

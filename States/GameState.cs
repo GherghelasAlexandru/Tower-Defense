@@ -23,6 +23,7 @@ namespace PixelDefense.States
         public List<Map> _maps;
         public Crab crab;
 
+        public bool IsOnPath;
 
         Bat bat;
         readonly Dictionary<string, Animation> crabAnimations;
@@ -74,9 +75,9 @@ namespace PixelDefense.States
 
             map1.AddPath();
             map2.AddPath();
-            
-           
 
+            map1.AddCollisionPath();
+            
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
@@ -118,6 +119,7 @@ namespace PixelDefense.States
         }
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
         {
+           
             _game.ChangeState(_game.gameOverState);
         }
 
@@ -125,6 +127,44 @@ namespace PixelDefense.States
         {
             return _sprites;
         }
+
+        public void PlaceTower()
+        {
+            
+            _game.mouseState = Mouse.GetState();
+            Vector2 mousePosition = new Vector2(_game.mouseState.X, _game.mouseState.Y);
+
+            {
+                foreach (var tower in _sprites)
+                    
+                if (tower is BasicTower)
+                {
+                    if (_game.mouseState.LeftButton == ButtonState.Released && tower.dragging)
+                    {
+                        tower._position.X = _game.mouseState.X;
+                        tower._position.Y = _game.mouseState.Y;
+                    }
+                    else if (_game.mouseState.LeftButton == ButtonState.Pressed && tower.BoundingBox.Contains(mousePosition) && tower.dragging)
+                    {     
+                            if (map1.IsCollision(tower.BoundingBox) == true)
+                            {
+                                IsOnPath = true;
+                                tower.dragging = true;
+                                Console.WriteLine("FOOK");
+                            }
+                            else 
+                            {
+                                IsOnPath = false;
+                                tower.dragging = false;
+                                tower._position.X = _game.mouseState.X;
+                                tower._position.Y = _game.mouseState.Y;
+                            }
+                        }
+                }
+
+            }
+        }
+
 
         public void AddTower(BasicTower tower)
         {
@@ -152,6 +192,7 @@ namespace PixelDefense.States
 
         private void ShopButton_click(object sender, EventArgs e)
         {
+
             // to be modified to change back to the gameState
             _game.ChangeState(_game.shopState);
         }
@@ -168,22 +209,30 @@ namespace PixelDefense.States
             }
         }
 
+
+        public void RemoveMap(Map map)
+        {
+            _maps.Remove(map);
+        }
+
         public override void Update(GameTime gameTime)
         {
+            
+            PlaceTower();
 
-
-
-            if(_game.mapSelection.chooseFirstMapButton.Clicked)
+            if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
                 AddMap(map1);
+                RemoveMap(map2);
                 AddEnemy(bat);
+               
                 _game.mapSelection.chooseFirstMapButton.Clicked = false;
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
             {
-                AddMap(_game.gameState.map2);
-
-                AddEnemy(_game.gameState.crab);
+                AddMap(map2);
+                RemoveMap(map1);
+                AddEnemy(crab);
 
                 _game.mapSelection.chooseSecondMapButton.Clicked = false;
             }
@@ -202,12 +251,6 @@ namespace PixelDefense.States
         }
 
        
-        public void AddPathToEnemy(Enemy enemy)
-        {
-
-          
-
-        }
         public void DrawMap(SpriteBatch spriteBatch)
         {
             foreach(var map in _maps)
@@ -224,8 +267,11 @@ namespace PixelDefense.States
 
         {
             foreach (var sprite in _sprites.ToArray())
-                sprite.Draw(spriteBatch);
-
+                
+                   
+                        sprite.Draw(spriteBatch);
+                  
+               
         }
 
         public void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch)
@@ -239,7 +285,10 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
-
+            if(IsOnPath)
+            {
+                spriteBatch.DrawString(textFont, "Can't place on path", new Vector2(150, 10), Color.Black);
+            }
             spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
         }
     }

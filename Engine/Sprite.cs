@@ -14,7 +14,7 @@ namespace PixelDefense.Gameplay
 
         public Texture2D _texture;
 
-        protected float _rotation;
+        public float _rotation;
 
         public Vector2 _position;
 
@@ -39,6 +39,7 @@ namespace PixelDefense.Gameplay
         protected AnimationManager _animationManager;
 
         protected Dictionary<string, Animation> _animations;
+
 
         public bool dragging = true;
 

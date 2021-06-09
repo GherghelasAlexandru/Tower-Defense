@@ -84,6 +84,8 @@ namespace PixelDefense
             base.Initialize();
         }
 
+
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -117,7 +119,11 @@ namespace PixelDefense
         {
             /*mouse = Mouse.GetState();
             Console.WriteLine("X:{0} Y:{1}.", mouse.X, mouse.Y);*/
-
+            if(gameOverState.IsRestarted == true)
+            {
+                Initialize();
+            }
+            
             if (_nextState != null)
             {
                 _currentState = _nextState;

@@ -49,33 +49,10 @@ namespace PixelDefense.Gameplay
             }
      
 
-            PlaceTower();
+            
         }
 
-        public void PlaceTower()
-        {
-      
-            mouseState = Mouse.GetState();
-            Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);
-
-            {
-                if (mouseState.LeftButton == ButtonState.Released && dragging)
-                {
-                    _position.X = mouseState.X;
-                    _position.Y = mouseState.Y;  
-                }
-                else if (mouseState.LeftButton == ButtonState.Pressed  && BoundingBox.Contains(mousePosition) && dragging)
-                {
-                        dragging = false;
-                        _position.X = mouseState.X;
-                        _position.Y = mouseState.Y;
-
-                 
-                }
-
-            }
-        }
-
+        
         public int GetPrice()
         {
             return towerPrice;
@@ -94,10 +71,5 @@ namespace PixelDefense.Gameplay
         }
 
 
-        public void DrawBasicTower(SpriteBatch spriteBatch)
-
-        {
-            spriteBatch.Draw(_texture, _position, Color.White);
-        }
     }
 }

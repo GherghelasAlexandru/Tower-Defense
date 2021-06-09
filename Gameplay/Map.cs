@@ -20,13 +20,15 @@ namespace PixelDefense.Gameplay
         int tilesetTilesWide;
         int tilesetTilesHigh;
         public Queue<Vector2> path;
+        public List<Rectangle> pathList;
 
         public object Tilesets { get; internal set; }
         public object Position { get; private set; }
 
         public Map(ContentManager content, string mapPath)
         {
-         
+
+            pathList = new List<Rectangle>();
             map = new TmxMap(mapPath);
             tileTexture = content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
             tileWidth = map.Tilesets[0].TileWidth;
@@ -36,6 +38,8 @@ namespace PixelDefense.Gameplay
             tilesetTilesHigh = tileTexture.Height / tileHeight;
 
             path = new Queue<Vector2>();
+
+
         }
 
       
@@ -89,6 +93,30 @@ namespace PixelDefense.Gameplay
         public void DrawDecorations(SpriteBatch spritebatch)
         {
             DrawLayer(4, spritebatch);
+        }
+
+        public void AddCollisionPath()
+        {
+
+            foreach (var point in map.ObjectGroups["CollisionPath"].Objects)
+            {
+                pathList.Add(new Rectangle((int)point.X, (int)point.Y, (int)point.Width, (int)point.Height));
+            }
+        }
+
+        public List<Rectangle> GetCollisionPath()
+        {
+            return pathList;
+        }
+
+        public bool IsCollision(Rectangle target)
+        {
+            foreach (Rectangle rec in pathList)
+                if (rec.Intersects(target))
+                {
+                    return true;
+                }
+            return false;
         }
 
         public void AddPath()

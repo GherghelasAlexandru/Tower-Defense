@@ -99,6 +99,7 @@ namespace PixelDefense.Gameplay
                 if (difference.X > -1 && difference.X < 1 && difference.Y > -1 && difference.Y < 1)
                 {
                     Console.WriteLine(path.Peek());
+                 
                     path.Dequeue();
                     if (path.Count == 0)
                     {
