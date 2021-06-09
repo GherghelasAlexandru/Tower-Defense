@@ -22,6 +22,7 @@ namespace PixelDefense.States
         //private BasicTower tower1;
         Texture2D goblinTexture;
         Goblin goblin;
+        ContentManager content;
 
         Wave wave;
         Mushroom mushroom;
@@ -55,6 +56,7 @@ namespace PixelDefense.States
             wave = new Wave(map1);
 
 
+            this.content = content;
 
             //goblin.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
            // mushroom.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
@@ -163,7 +165,7 @@ namespace PixelDefense.States
 
             postUpdate();
 
-           wave.Update(gameTime,_towers);
+           wave.Update(gameTime,_towers,content);
 
             //postupdate();
         }

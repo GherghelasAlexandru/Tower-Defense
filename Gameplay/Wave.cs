@@ -66,15 +66,15 @@ namespace PixelDefense.Gameplay
             waveTime += 30f;
         }
 
-        public void Update(GameTime gameTime, List<Sprite> sprites)
+        public void Update(GameTime gameTime, List<Sprite> sprites,ContentManager content)
         {
              timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
              Console.WriteLine(timer);
            
-                // aici e buba, doar 2 elemente. mai trebuie instante
-                //SpawnEnemies(map);
+            // aici e buba, doar 2 elemente. mai trebuie instante
+            //SpawnEnemies(map);
 
-                var index = random.Next(enemies.Count());
+            var index = random.Next(enemies.Count());
             //Console.WriteLine(enemiesOptions.Count());
             //  Console.WriteLine(index);
 
@@ -82,17 +82,7 @@ namespace PixelDefense.Gameplay
             //  Console.WriteLine(inamic);
             //AddEnemy(inamic);
 
-
-
-            CreateEnemy(enemies);
-
-
-
-
-
-
-
-
+            CreateEnemy(enemies,content);
 
             //Enemy enemy = enemiesOptions[index];
             // enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
@@ -108,7 +98,7 @@ namespace PixelDefense.Gameplay
                 if (enemy.Active)
                 {
                     enemy.Update(gameTime, sprites);
-                    Console.WriteLine(enemy._position);
+                    Console.WriteLine(enemy.name);
                 }
             }
 
@@ -126,7 +116,7 @@ namespace PixelDefense.Gameplay
             }
         }
 
-        public void CreateEnemy(List<Enemy> enemies)
+        public void CreateEnemy(List<Enemy> enemies, ContentManager content)
         {
             if (timer > timebeetweenspawn)
             {
@@ -134,14 +124,22 @@ namespace PixelDefense.Gameplay
                 //Console.WriteLine(enemies[index]._position);
 
                 // spawn same enemy???????
-                Enemy Newenemy = enemiesOptions[index].Clone() as Enemy;
-                Newenemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
-                Newenemy.Active = true;
-                //Console.WriteLine(Newenemy._position);
+               // Enemy Newenemy = enemiesOptions[index].Clone() as Enemy;
+
+                var goblinAnimations = new Dictionary<string, Animation>()
+            {
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Run"),8) },
+                {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Goblin_Idle"),4) }
+            };
+
+                Enemy enemy = new Goblin(goblinAnimations);
+                //Newenemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
+              //  Newenemy.Active = true;
+              //  Console.WriteLine(Newenemy._position);
 
                 if (enemies.Count < 4)
-                {
-                    enemies.Add(Newenemy);
+                {   enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
+                    this.enemies.Add(enemy);
                     
                     // maybe create the enemy from scratch her?
                 }

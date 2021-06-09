@@ -18,6 +18,7 @@ namespace PixelDefense.Gameplay
         public int health;
         public bool isDead = false;
         public float mSpeed = 1f;
+        public string name;
        // int Width = 8;
        // int Height = 13;
 
