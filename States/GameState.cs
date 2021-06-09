@@ -179,7 +179,7 @@ namespace PixelDefense.States
                     if (bullet.Rectangle.Intersects(crab.Rectangle))
                     {
 
-                        crab.health -= 1;
+                        crab.health -= bullet.dmg;
                         bullet._position += crab.Position;
                         if (crab.health < 1)
                         {

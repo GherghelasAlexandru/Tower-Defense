@@ -11,6 +11,7 @@ namespace PixelDefense.Gameplay
     public abstract class Bullet : Sprite
     {
         private float _timer;
+        public int dmg;
         
         public Bullet(Texture2D texture)
           : base(texture)
