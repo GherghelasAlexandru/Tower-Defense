@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="80" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="13" nextobjectid="41">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="80" height="50" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="59">
  <tileset firstgid="1" source="village-palette01-day.tsx"/>
  <layer id="1" name="Grass" width="80" height="50" locked="1">
   <data encoding="csv">
@@ -271,7 +271,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="12" name="Objects">
+ <objectgroup id="12" name="Objects" visible="0" locked="1">
   <properties>
    <property name="Points" type="int" value="9"/>
   </properties>
@@ -326,5 +326,26 @@
    </properties>
   </object>
   <object id="40" name="End" x="957.358" y="320.557" width="21.9971" height="36.6605" rotation="0.277267"/>
+ </objectgroup>
+ <objectgroup id="13" name="CollisionPath">
+  <properties>
+   <property name="Points" type="int" value="15"/>
+  </properties>
+  <object id="41" name="C1" x="4" y="87" width="480.333" height="46"/>
+  <object id="43" name="C2" x="441.5" y="134" width="43" height="159.5"/>
+  <object id="44" name="C3" x="42" y="247.333" width="399.333" height="43.3333"/>
+  <object id="46" name="C4" x="42" y="291.333" width="43.3333" height="352.667"/>
+  <object id="47" name="C5" x="86" y="599.333" width="366" height="44.6667"/>
+  <object id="48" name="C6" x="409.333" y="425.333" width="42.6667" height="173.333"/>
+  <object id="49" name="C7" x="453.333" y="427.333" width="222" height="42"/>
+  <object id="50" name="C8" x="634.667" y="468.667" width="42" height="178"/>
+  <object id="51" name="C9" x="677" y="602.667" width="306.333" height="41"/>
+  <object id="52" name="C10" x="941" y="382.5" width="40.5" height="221"/>
+  <object id="53" name="C11" x="679" y="0" width="599" height="379"/>
+  <object id="54" name="C12" x="197" y="376" width="100" height="136"/>
+  <object id="55" name="C12" x="2.66667" y="738.667" width="1274.67" height="57.3333"/>
+  <object id="56" name="C13" x="1117.33" y="652" width="160.667" height="81.3333"/>
+  <object id="57" name="C14" x="1197.33" y="634" width="79.3333" height="14.6667"/>
+  <object id="58" name="C15" x="1089.33" y="704.667" width="26" height="28"/>
  </objectgroup>
 </map>

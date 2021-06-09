@@ -26,7 +26,7 @@ namespace PixelDefense.States
 
             var chooseBackButton = new Button(buttonTexture, font)
             {
-                Position = new Vector2(250, 350),
+                Position = new Vector2(550, 450),
                 Text = "Back",
             };
 

@@ -77,6 +77,7 @@ namespace PixelDefense.States
             map2.AddPath();
 
             map1.AddCollisionPath();
+            map2.AddCollisionPath();
             
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
@@ -130,29 +131,27 @@ namespace PixelDefense.States
 
         public void PlaceTower()
         {
-            
             _game.mouseState = Mouse.GetState();
             Vector2 mousePosition = new Vector2(_game.mouseState.X, _game.mouseState.Y);
 
             {
                 foreach (var tower in _sprites)
-                    
-                if (tower is BasicTower)
-                {
-                    if (_game.mouseState.LeftButton == ButtonState.Released && tower.dragging)
+
+                    if (tower is BasicTower)
                     {
-                        tower._position.X = _game.mouseState.X;
-                        tower._position.Y = _game.mouseState.Y;
-                    }
-                    else if (_game.mouseState.LeftButton == ButtonState.Pressed && tower.BoundingBox.Contains(mousePosition) && tower.dragging)
-                    {     
+                        if (_game.mouseState.LeftButton == ButtonState.Released && tower.dragging)
+                        {
+                            tower._position.X = _game.mouseState.X;
+                            tower._position.Y = _game.mouseState.Y;
+                        }
+                        else if (_game.mouseState.LeftButton == ButtonState.Pressed && tower.BoundingBox.Contains(mousePosition) && tower.dragging)
+                        {
                             if (map1.IsCollision(tower.BoundingBox) == true)
                             {
                                 IsOnPath = true;
                                 tower.dragging = true;
-                                Console.WriteLine("FOOK");
                             }
-                            else 
+                            else
                             {
                                 IsOnPath = false;
                                 tower.dragging = false;
@@ -160,9 +159,9 @@ namespace PixelDefense.States
                                 tower._position.Y = _game.mouseState.Y;
                             }
                         }
-                }
-
+                    }
             }
+
         }
 
 
@@ -287,7 +286,7 @@ namespace PixelDefense.States
             DrawSprites(spriteBatch);
             if(IsOnPath)
             {
-                spriteBatch.DrawString(textFont, "Can't place on path", new Vector2(150, 10), Color.Black);
+                spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 760), Color.Black);
             }
             spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
         }
