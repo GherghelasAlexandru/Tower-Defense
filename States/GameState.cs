@@ -22,14 +22,12 @@ namespace PixelDefense.States
         public Map map2;
         public List<Map> _maps;
         public Crab crab;
+        public Wave wave;
 
         public bool IsOnPath;
 
-        Bat bat;
-        readonly Dictionary<string, Animation> crabAnimations;
-        readonly Dictionary<string, Animation> slimeAnimations;
-        readonly Dictionary<string, Animation> batAnimations;
-        readonly Dictionary<string, Animation> ratAnimations;
+        //Bat bat;
+        
 
         public int gold;
 
@@ -42,39 +40,11 @@ namespace PixelDefense.States
 
             map1 = new Map(content, "Content/Test.tmx");
             map2 = new Map(content, "Content/SecondMap2.tmx");
-            crabAnimations = new Dictionary<string, Animation>()
-            {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Crab_Run"),4,2) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Crab_AttackB"),4,2) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Crab_Death"),4,2) }
-            };
 
-            slimeAnimations = new Dictionary<string, Animation>()
-            {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Run"),4,1) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Ability"),4,1) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Death"),4,2) }
-            };
+            wave = new Wave(content);
 
-            batAnimations = new Dictionary<string, Animation>()
-            {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Bat_Fly"),4,1) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Bat_Attack"),4,2) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Bat_Death"),4,3) }
-            };
-
-            ratAnimations = new Dictionary<string, Animation>()
-            {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Rat_Run"),4,2) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Rat_Attack"),4,2) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Rat_Death"),4,2) }
-            };
-
-            crab = new Crab(crabAnimations);
-            bat = new Bat(batAnimations);
-
-            map1.AddPath();
-            map2.AddPath();
+            //map1.AddPath();
+            //map2.AddPath();
 
             map1.AddCollisionPath();
             map2.AddCollisionPath();
@@ -221,17 +191,21 @@ namespace PixelDefense.States
 
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
+                wave.SetMap(map1);
+                wave.CreateEnemy();
                 AddMap(map1);
                 RemoveMap(map2);
-                AddEnemy(bat);
+                
                
                 _game.mapSelection.chooseFirstMapButton.Clicked = false;
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
             {
+                wave.SetMap(map2);
+                wave.CreateEnemy();
                 AddMap(map2);
                 RemoveMap(map1);
-                AddEnemy(crab);
+               
 
                 _game.mapSelection.chooseSecondMapButton.Clicked = false;
             }
@@ -244,8 +218,8 @@ namespace PixelDefense.States
             foreach (var button in _button)
                 button.Update(gameTime);
 
-            
 
+            wave.Update(gameTime,_sprites);
                 PostUpdate(gameTime);
         }
 
@@ -284,6 +258,7 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
+            wave.Draw(spriteBatch);
             if(IsOnPath)
             {
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 760), Color.Black);
