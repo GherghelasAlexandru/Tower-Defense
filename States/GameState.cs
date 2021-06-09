@@ -23,6 +23,7 @@ namespace PixelDefense.States
         //private BasicTower tower1;
         Crab crab;
         Bat bat;
+        private int hit = 0;
         Dictionary<string, Animation> crabAnimations;
 
         public int gold;
@@ -177,9 +178,17 @@ namespace PixelDefense.States
                     
                     if (bullet.Rectangle.Intersects(crab.Rectangle))
                     {
-                        crab._movement = new Vector2(0, 0);
-                        Console.WriteLine("Wtf");
+
+                        crab.health -= 1;
                         bullet._position += crab.Position;
+                        if (crab.health < 1)
+                        {
+                            Console.WriteLine("hit");
+                            crab._movement = new Vector2(0, 0);
+                            gold += 10;
+                        }
+                        
+                       
                         
                     }
                 }
