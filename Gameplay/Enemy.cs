@@ -128,17 +128,17 @@ namespace PixelDefense.Gameplay
 
             if (xVelocity > 0)
                 _animationManager.Play(_animations["Run"]);
-            else if (xVelocity == 0)
+            if (xVelocity == 0)
             {
                 _animationManager.Play(_animations["Attack"]);
             }
 
-            else if (health == 0)
+             if (health <= 0)
             {
-                _animationManager.Play(_animations["Death"]);
                 isDead = true;
+                _animationManager.Play(_animations["Death"]);
             }
-            else _animationManager.Stop();
+
             _animationManager.UpdateBoundingBox();
 
           
@@ -160,6 +160,7 @@ namespace PixelDefense.Gameplay
             {
                 _animationManager.Draw(spriteBatch);
             }
+            
             else throw new Exception("wait a second, who are you?!");
             // runAnimation.DrawAnimation(spriteBatch);
         }
