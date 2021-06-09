@@ -16,9 +16,9 @@ namespace PixelDefense.Gameplay
         public float timer;         //Initialize a 10 second timer
         public float TIMER;
         public int towerPrice;
-        
+        public Vector2 position;
         public MouseState mouseState;
-
+        public Vector2 center;
         public Rectangle TowerCollision;
 
         private List<Bullet> bullets;
@@ -29,9 +29,7 @@ namespace PixelDefense.Gameplay
           : base(texture)
         {
 
-           bullets = new List<Bullet>();
-
-
+            bullets = new List<Bullet>();
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -61,6 +59,8 @@ namespace PixelDefense.Gameplay
                     (int)Math.Ceiling((double)_texture.Width),
                     (int)Math.Ceiling((double)_texture.Height)
                     );
+
+            center = new Vector2((_position.X + _texture.Width / 2), (_position.Y + _texture.Height / 2));
 
             mouseState = Mouse.GetState();
             Vector2 mousePosition = new Vector2(mouseState.X, mouseState.Y);

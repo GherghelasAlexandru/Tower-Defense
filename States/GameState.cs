@@ -23,7 +23,6 @@ namespace PixelDefense.States
         //private BasicTower tower1;
         Crab crab;
         Bat bat;
-        private int hit = 0;
         Dictionary<string, Animation> crabAnimations;
 
         public int gold;
@@ -180,6 +179,7 @@ namespace PixelDefense.States
                     {
 
                         crab.health -= bullet.dmg;
+                        Console.WriteLine(tower.getBullets());
                         bullet._position += crab.Position;
                         if (crab.health < 1)
                         {
