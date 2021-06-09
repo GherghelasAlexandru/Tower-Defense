@@ -74,11 +74,11 @@ namespace PixelDefense
             // TODO: Add your initialization logic here
 
             mouseState = Mouse.GetState();
-            gameState = new GameState(this, graphics.GraphicsDevice, Content);
+            menuState = new MenuState(this, graphics.GraphicsDevice, Content);
             instructionsState = new InstructionsState(this, graphics.GraphicsDevice, Content);
             mapSelection = new MapSelectionState(this, graphics.GraphicsDevice, Content);
+            gameState = new GameState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);
-            menuState = new MenuState(this, graphics.GraphicsDevice, Content);
             gameOverState = new GameOverState(this, graphics.GraphicsDevice, Content);
             IsMouseVisible = true;
             base.Initialize();

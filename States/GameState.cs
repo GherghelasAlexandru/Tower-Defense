@@ -150,7 +150,20 @@ namespace PixelDefense.States
 
             
 
+            if(_game.mapSelection.chooseFirstMapButton.Clicked)
+            {
+                AddMap(map1);
+                AddEnemy(crab);
+                _game.mapSelection.chooseFirstMapButton.Clicked = false;
+            }
+            else if (_game.mapSelection.chooseSecondMapButton.Clicked)
+            {
+                AddMap(_game.gameState.map2);
 
+                AddEnemy(_game.gameState.crab);
+
+                _game.mapSelection.chooseSecondMapButton.Clicked = false;
+            }
 
 
             foreach (var sprite in _sprites.ToArray())

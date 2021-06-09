@@ -16,8 +16,8 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
 
-        Button chooseFirstMapButton;
-        Button chooseSecondMapButton;
+        public Button chooseFirstMapButton;
+        public Button chooseSecondMapButton;
 
         public SpriteFont textFontTitle;
 
@@ -76,20 +76,9 @@ namespace PixelDefense.States
         {
             
             _game.ChangeState(_game.gameState);
-            if (chooseFirstMapButton.Clicked)
-            {
-                _game.gameState.AddMap(_game.gameState.map1);
+           
 
-
-                _game.gameState.AddEnemy(_game.gameState.crab);
-            }
-
-            else if(chooseSecondMapButton.Clicked)
-            {
-                _game.gameState.AddMap(_game.gameState.map2);
-                
-                   _game.gameState.AddEnemy(_game.gameState.crab);
-            }
+            
 
             
         }
