@@ -25,7 +25,10 @@ namespace PixelDefense.States
 
 
         Bat bat;
-        Dictionary<string, Animation> crabAnimations;
+        readonly Dictionary<string, Animation> crabAnimations;
+        readonly Dictionary<string, Animation> slimeAnimations;
+        readonly Dictionary<string, Animation> batAnimations;
+        readonly Dictionary<string, Animation> ratAnimations;
 
         public int gold;
 
@@ -45,8 +48,29 @@ namespace PixelDefense.States
                 {"Death", new Animation(content.Load<Texture2D>("spritesheets/Crab_Death"),4,2) }
             };
 
-            crab = new Crab(crabAnimations);
+            slimeAnimations = new Dictionary<string, Animation>()
+            {
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Run"),4,1) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Ability"),4,1) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Death"),4,2) }
+            };
 
+            batAnimations = new Dictionary<string, Animation>()
+            {
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Bat_Fly"),4,1) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Bat_Attack"),4,2) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Bat_Death"),4,3) }
+            };
+
+            ratAnimations = new Dictionary<string, Animation>()
+            {
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Rat_Run"),4,2) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Rat_Attack"),4,2) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Rat_Death"),4,2) }
+            };
+
+            crab = new Crab(crabAnimations);
+            bat = new Bat(batAnimations);
 
             map1.AddPath();
             map2.AddPath();
@@ -148,12 +172,11 @@ namespace PixelDefense.States
         {
 
 
-            
 
             if(_game.mapSelection.chooseFirstMapButton.Clicked)
             {
                 AddMap(map1);
-                AddEnemy(crab);
+                AddEnemy(bat);
                 _game.mapSelection.chooseFirstMapButton.Clicked = false;
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)

@@ -74,13 +74,9 @@ namespace PixelDefense.States
 
         private void MapButton_Click(object sender, EventArgs e)
         {
-            
+
             _game.ChangeState(_game.gameState);
-           
 
-            
-
-            
         }
 
         private void BackButton_Click(object sender, EventArgs e)
