@@ -221,7 +221,7 @@ namespace PixelDefense.States
                 button.Update(gameTime);
 
 
-            wave.Update(gameTime,_sprites);
+            wave.Update(gameTime, _game.shopState.basicTowers);
                 PostUpdate(gameTime);
 
            
@@ -235,14 +235,16 @@ namespace PixelDefense.States
                         
                         if (bullet.Bounds.Intersects(enemy.InteractionBox))
                         {
-                            
+
                             bullet._position += enemy.Position;
+                            
                             enemy.setHealth(enemy.getHealth() - bullet.getDmg());
                             if (enemy.getHealth() == 0)
                             {
                                 enemy.isDead = true;
                                 enemy._movement = new Vector2(0, 0);
-                                gold += 10;
+                                gold += enemy.goldDrop;
+                                
                             }
                             
                         }

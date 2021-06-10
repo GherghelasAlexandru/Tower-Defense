@@ -19,7 +19,7 @@ namespace PixelDefense.Gameplay
         public bool isDead = false;
         public float mSpeed = 1f;
 
-
+        public int goldDrop;
         public Queue<Vector2> path;
         public bool active;
 
