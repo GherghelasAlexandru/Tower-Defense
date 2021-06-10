@@ -27,13 +27,13 @@ namespace PixelDefense.Gameplay
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
         {
-            
+            LifeSpan = 2f;
             _animations = animations;
             _animationManager = new AnimationManager(animations);
             active = false;
             path = new Queue<Vector2>();
 
-           UpdateBoundingBox();
+          
         }
 
         public int getHealth()
@@ -57,12 +57,12 @@ namespace PixelDefense.Gameplay
             get
             {
                 // interactionBox need to be bigger than bounding box
-                Rectangle interactionBox = BoundingBox;
+                Rectangle interactionBox = _animationManager.BoundingBox;
 
-                interactionBox.X -= 4;
-                interactionBox.Y -= 4;
-                interactionBox.Width += 8;
-                interactionBox.Height += 8;
+                interactionBox.X += 45;
+                interactionBox.Y += 40;
+                interactionBox.Width -= 55;
+                interactionBox.Height -= 60;
 
                 return interactionBox;
             }
@@ -136,34 +136,32 @@ namespace PixelDefense.Gameplay
         protected virtual void SetAnimations()
         {
 
+            
 
-
-            if (xVelocity > 0)
+            if (health > 0)
                 _animationManager.Play(_animations["Run"]);
-            if (xVelocity == 0)
+            else if (xVelocity == 0)
             {
                 _animationManager.Play(_animations["Attack"]);
             }
 
-            if (health <= 0)
+            if (health == 0 && isDead == true)
             {
-                isDead = true;
+                
                 _animationManager.Play(_animations["Death"]);
+
+                _animationManager._animation.IsLooping = false;
             }
+
+
+         
+
+
             _animationManager.UpdateBoundingBox();
 
           
         }
-        public override void UpdateBoundingBox()
-        {
-            // The collision is at the feet of the enemy
-            BoundingBox = new Rectangle(
-            (int)(Position.X + 5),
-            (int)(Position.Y + 21),
-            10,
-            10
-            );
-        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             

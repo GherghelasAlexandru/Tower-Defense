@@ -12,26 +12,31 @@ namespace PixelDefense.Gameplay
     {
         public int CurrentFrame { get; set; }
 
-        public int FrameCount { get; private set; }
+        public int FrameCount { get;  set; }
 
-        public int FrameHeightCount { get; set; }
-        public int FrameHeight { get { return Texture.Height / FrameHeightCount ; } }
-
+        public int Rows { get; set; }
+        public int Columns { get; set; }
+        public int FrameHeight { get { return Texture.Height / Rows; } }
+        public int EmptyFrame { get; set; }
         public float FrameSpeed { get; set; }
 
-        public int FrameWidth { get { return Texture.Width / FrameCount; } }
-
+        public int FrameWidth { get { return Texture.Width / Columns; } }
+        public bool IsDone { get; set; }
         public bool IsLooping { get; set; }
 
         public Texture2D Texture { get; private set; }
 
-        public Animation(Texture2D texture, int frameCount,int frameHeightCount)
+        public Animation(Texture2D texture,int column, int row, int emptyFrames)
         {
 
-            FrameHeightCount = frameHeightCount;
+            EmptyFrame = emptyFrames;
+            Rows = row;
+            Columns = column;
+
+            CurrentFrame = 0;
             Texture = texture;
 
-            FrameCount = frameCount;
+            FrameCount = (Rows * Columns) - EmptyFrame;
 
             IsLooping = true;
 

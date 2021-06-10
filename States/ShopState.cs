@@ -40,7 +40,7 @@ namespace PixelDefense.States
 
         public bool notEnoughtMoney = false;
 
-        private readonly List<Sprite> basicTowers;
+        public readonly List<Sprite> basicTowers;
         public ShopState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
@@ -84,13 +84,13 @@ namespace PixelDefense.States
 
             cannonTower = new Cannon(cannonTexture) {Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
 
-            machineGunTower = new MachineGun(machineGunTexture) { _position = new Vector2(190, 280) };
+            machineGunTower = new MachineGun(machineGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 280) };
 
-            doubleCannonTower = new DoubleCannon(doubleCannonTexture) { _position = new Vector2(190, 400)  };
+            doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 400)  };
 
-            rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { _position = new Vector2(190, 520) };
+            rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 520) };
 
-            brokenGunTower = new BrokenGun(brokenGunTexture) { _position = new Vector2(190, 640) };
+            brokenGunTower = new BrokenGun(brokenGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 640) };
 
             AddBasicTower(cannonTower);
             AddBasicTower(brokenGunTower);
@@ -152,7 +152,7 @@ namespace PixelDefense.States
                 if (brokenGunTower.GetPrice() <= _game.gameState.GetGold())
                 {
                     _game.ChangeState(_game.gameState);
-                    _game.gameState.AddTower(new BrokenGun(brokenGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    _game.gameState.AddTower(brokenGunTower.Clone() as BrokenGun);
                     buyBrokenGunButton.Clicked = false;
                     _game.gameState.SetGold(-45);
                 }
@@ -166,7 +166,7 @@ namespace PixelDefense.States
                 if (rocketLauncherTower.GetPrice() <= _game.gameState.GetGold()) 
                 {
                     _game.ChangeState(_game.gameState);
-                    _game.gameState.AddTower(new RocketLauncher(rocketLauncherTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    _game.gameState.AddTower(rocketLauncherTower.Clone() as RocketLauncher);
                     buyRocketLauncherButton.Clicked = false;
                     _game.gameState.SetGold(-30);
                 }
@@ -180,7 +180,7 @@ namespace PixelDefense.States
                 if (doubleCannonTower.GetPrice() <= _game.gameState.GetGold())
                 {
                     _game.ChangeState(_game.gameState);
-                    _game.gameState.AddTower(new DoubleCannon(doubleCannonTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    _game.gameState.AddTower(doubleCannonTower.Clone() as DoubleCannon);
                     buyDoubleCannonButton.Clicked = false;
                     _game.gameState.SetGold(-25);
                 }
@@ -194,7 +194,7 @@ namespace PixelDefense.States
                 if (machineGunTower.GetPrice() <= _game.gameState.GetGold())
                 {
                     _game.ChangeState(_game.gameState);
-                    _game.gameState.AddTower(new MachineGun(machineGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/bullet")) });
+                    _game.gameState.AddTower(machineGunTower.Clone() as MachineGun);
                     buyMachineGunButton.Clicked = false;
                     _game.gameState.SetGold(-20);
                 }

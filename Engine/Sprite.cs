@@ -11,6 +11,7 @@ namespace PixelDefense.Gameplay
 {
     public class Sprite : ICloneable
     {
+        protected float _timer;
 
         public Texture2D _texture;
 
@@ -27,6 +28,7 @@ namespace PixelDefense.Gameplay
 
                 if (_animationManager != null)
                     _animationManager.Position = _position;
+                UpdateBoundingBox();
             }
         }
 
@@ -56,16 +58,8 @@ namespace PixelDefense.Gameplay
         public float LifeSpan = 0f;
 
         public bool IsActive = false;
-        public Rectangle BoundingBox { get; set; }
+        public Rectangle BoundingBox { get; protected set; }
 
-
-        public Rectangle Rectangle
-        {
-            get
-            {
-                return new Rectangle((int)Position.X, (int)Position.Y, _texture.Width, _texture.Height);
-            }
-        }
         public Rectangle Bounds
         {
             get

@@ -23,7 +23,7 @@ namespace PixelDefense.States
         public List<Map> _maps;
         public Crab crab;
         public Wave wave;
-        private List<BasicTower> basicTowers;
+  
 
         public bool IsOnPath;
 
@@ -35,7 +35,7 @@ namespace PixelDefense.States
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            basicTowers = new List<BasicTower>();
+     
             _sprites = new List<Sprite>();
             gold = 100;
             _maps = new List<Map>();
@@ -181,16 +181,6 @@ namespace PixelDefense.States
         }
 
 
-        private void addBasicTowers()
-        {
-            foreach (var basicTower in _sprites)
-            {
-                if (basicTower is BasicTower)
-                {
-                    basicTowers.Add((BasicTower)basicTower);
-                }
-            }
-        }
 
 
         public void RemoveMap(Map map)
@@ -234,20 +224,23 @@ namespace PixelDefense.States
             wave.Update(gameTime,_sprites);
                 PostUpdate(gameTime);
 
-            addBasicTowers();
+           
 
-            foreach (var tower in basicTowers)
+            foreach (BasicTower tower in _game.shopState.basicTowers)
             {
-                foreach (var bullet in tower.getBullets())
+                foreach (Bullet bullet in tower.getBullets())
                 {
-                    foreach (var enemy in getEnemies())
+                    foreach (Enemy enemy in getEnemies())
                     {
-                        if (bullet.Rectangle.Intersects(enemy.Rectangle))
+                        
+                        if (bullet.Bounds.Intersects(enemy.InteractionBox))
                         {
+                            
                             bullet._position += enemy.Position;
                             enemy.setHealth(enemy.getHealth() - bullet.getDmg());
-                            if (enemy.getHealth() <= 0)
+                            if (enemy.getHealth() == 0)
                             {
+                                enemy.isDead = true;
                                 enemy._movement = new Vector2(0, 0);
                                 gold += 10;
                             }

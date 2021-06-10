@@ -11,10 +11,9 @@ namespace PixelDefense.Engine
 {
     public class AnimationManager:Sprite
     {
-        protected Animation _animation;
+        public Animation _animation;
 
-        private float _timer;
-
+       
 
 
         public AnimationManager(Dictionary<string, Animation> animations):base(animations.ElementAt(0).Value.Texture)
@@ -24,11 +23,13 @@ namespace PixelDefense.Engine
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-          
+            
+            int row = _animation.CurrentFrame / _animation.Columns;
+            int column = _animation.CurrentFrame % _animation.Columns;
             spriteBatch.Draw(_animation.Texture,
                             _position,
-                             new Rectangle(_animation.CurrentFrame * _animation.FrameWidth,
-                                           0,
+                             new Rectangle(_animation.FrameWidth * column ,
+                                           _animation.FrameHeight * row,
                                            _animation.FrameWidth,
                                            _animation.FrameHeight),
                              Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
@@ -40,11 +41,13 @@ namespace PixelDefense.Engine
             if (_animation == animation)
                 return;
 
+            
             _animation = animation;
 
             _animation.CurrentFrame = 0;
 
             _timer = 0;
+           
         }
 
         public void Stop()
@@ -59,17 +62,37 @@ namespace PixelDefense.Engine
             
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (_timer > _animation.FrameSpeed)
+
+
+            if (_timer > _animation.FrameSpeed && _animation.IsLooping == true)
             {
                 _timer = 0f;
 
                 _animation.CurrentFrame++;
 
                 if (_animation.CurrentFrame >= _animation.FrameCount)
+                {
                     _animation.CurrentFrame = 0;
+                    
+                }
             }
+            if(_timer > _animation.FrameSpeed && _animation.IsLooping == false && _animation.IsDone == false)
+            {
+                _timer = 0f;
+                _animation.CurrentFrame++ ;
+                
+                if (_animation.CurrentFrame >= _animation.FrameCount)
+                {
+                    _animation.IsDone = true;
+                    _animation.CurrentFrame = _animation.FrameCount;
+                }
+            }
+        
+            
          
         }
+
+  
 
         public override void UpdateBoundingBox()
         {

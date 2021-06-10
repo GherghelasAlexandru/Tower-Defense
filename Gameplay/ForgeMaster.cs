@@ -81,9 +81,9 @@ namespace PixelDefense.Gameplay
         {
             var crabAnimations = new Dictionary<string, Animation>()
             {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Crab_Run"),4,2) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Crab_AttackB"),4,2) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Crab_Death"),4,2) }
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Crab_Run"),4,2,2) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Crab_AttackB"),4,2,2) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Crab_Death"),4,2,4){ IsLooping = false } }
             };
 
 
@@ -96,9 +96,9 @@ namespace PixelDefense.Gameplay
         {
              var slimeAnimations = new Dictionary<string, Animation>()
             {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Run"),4,1) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Ability"),4,1) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Death"),4,2) }
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Run"),4,1,0) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Ability"),4,1,0) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Slime_Spiked_Death"),4,2,3){ IsLooping = false } }
             };
 
             Enemy slime = new Slime(slimeAnimations);
@@ -111,9 +111,9 @@ namespace PixelDefense.Gameplay
         {
             var batAnimations = new Dictionary<string, Animation>()
             {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Bat_Fly"),4,1) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Bat_Attack"),4,2) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Bat_Death"),4,3) }
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Bat_Fly"),4,1,0) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Bat_Attack"),4,2,1) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Bat_Death"),4,3,2){ IsLooping = false } }
             };
 
             Enemy bat = new Bat(batAnimations);
@@ -126,9 +126,9 @@ namespace PixelDefense.Gameplay
         {
             var ratAnimations = new Dictionary<string, Animation>()
             {
-                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Rat_Run"),4,2) },
-                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Rat_Attack"),4,2) },
-                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Rat_Death"),4,2) }
+                {"Run", new Animation(content.Load<Texture2D>("spritesheets/Rat_Run"),4,2,2) },
+                {"Attack", new Animation(content.Load<Texture2D>("spritesheets/Rat_Attack"),4,2,0) },
+                {"Death", new Animation(content.Load<Texture2D>("spritesheets/Rat_Death"),4,2,4) { IsLooping = false } }
             };
 
             Enemy rat = new Rat(ratAnimations);
