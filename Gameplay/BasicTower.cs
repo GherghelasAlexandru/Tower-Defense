@@ -17,6 +17,7 @@ namespace PixelDefense.Gameplay
         public float timer;         //Initialize a 10 second timer
         public float TIMER;
         public int towerPrice;
+        private List<Bullet> bullets;
         
         public MouseState mouseState;
         
@@ -26,10 +27,7 @@ namespace PixelDefense.Gameplay
         public BasicTower(Texture2D texture)
           : base(texture)
         {
-
-            
-
-
+            bullets = new List<Bullet>();
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -47,9 +45,6 @@ namespace PixelDefense.Gameplay
 
                 timer = TIMER;   //Reset Timer
             }
-     
-
-            
         }
 
         
@@ -66,8 +61,12 @@ namespace PixelDefense.Gameplay
             bullet.xVelocity = xVelocity * 2;
             bullet.LifeSpan = 2f;
             bullet.Parent = this;
-
             sprites.Add(bullet);
+            bullets.Add(bullet);
+        }
+
+        public List<Bullet> getBullets() {
+            return bullets;
         }
 
 

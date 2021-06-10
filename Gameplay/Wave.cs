@@ -73,7 +73,6 @@ namespace PixelDefense.Gameplay
                 if (enemy.Active)
                 {
                     enemy.Update(gameTime, sprites);
-                    
                 }
             }
         }

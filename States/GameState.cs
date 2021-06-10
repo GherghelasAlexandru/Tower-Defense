@@ -23,6 +23,7 @@ namespace PixelDefense.States
         public List<Map> _maps;
         public Crab crab;
         public Wave wave;
+        private List<BasicTower> basicTowers;
 
         public bool IsOnPath;
 
@@ -34,6 +35,7 @@ namespace PixelDefense.States
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
+            basicTowers = new List<BasicTower>();
             _sprites = new List<Sprite>();
             gold = 100;
             _maps = new List<Map>();
@@ -179,6 +181,18 @@ namespace PixelDefense.States
         }
 
 
+        private void addBasicTowers()
+        {
+            foreach (var basicTower in _sprites)
+            {
+                if (basicTower is BasicTower)
+                {
+                    basicTowers.Add((BasicTower)basicTower);
+                }
+            }
+        }
+
+
         public void RemoveMap(Map map)
         {
             _maps.Remove(map);
@@ -192,7 +206,7 @@ namespace PixelDefense.States
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
                 wave.SetMap(map1);
-                wave.CreateEnemy();
+                //wave.CreateEnemy();
                 AddMap(map1);
                 RemoveMap(map2);
                 
@@ -205,11 +219,9 @@ namespace PixelDefense.States
                 wave.CreateEnemy();
                 AddMap(map2);
                 RemoveMap(map1);
-               
 
                 _game.mapSelection.chooseSecondMapButton.Clicked = false;
             }
-
 
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
@@ -221,6 +233,28 @@ namespace PixelDefense.States
 
             wave.Update(gameTime,_sprites);
                 PostUpdate(gameTime);
+
+            addBasicTowers();
+
+            foreach (var tower in basicTowers)
+            {
+                foreach (var bullet in tower.getBullets())
+                {
+                    foreach (var enemy in getEnemies())
+                    {
+                        if (bullet.Rectangle.Intersects(enemy.Rectangle))
+                        {
+                            enemy._movement = new Vector2(0, 0);
+                            Console.WriteLine("Wtf");
+                            bullet._position += enemy.Position;
+                        }
+                    }
+                }
+            }
+        }
+
+        private List<Enemy> getEnemies() {
+            return wave.enemies;
         }
 
        
