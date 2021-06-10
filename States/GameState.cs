@@ -244,9 +244,14 @@ namespace PixelDefense.States
                     {
                         if (bullet.Rectangle.Intersects(enemy.Rectangle))
                         {
-                            enemy._movement = new Vector2(0, 0);
-                            Console.WriteLine("Wtf");
                             bullet._position += enemy.Position;
+                            enemy.setHealth(enemy.getHealth() - bullet.getDmg());
+                            if (enemy.getHealth() <= 0)
+                            {
+                                enemy._movement = new Vector2(0, 0);
+                                gold += 10;
+                            }
+                            
                         }
                     }
                 }
