@@ -22,7 +22,6 @@ namespace PixelDefense.States
         private List<BasicTower> basicTowers;
         //private BasicTower tower1;
         Crab crab;
-        Bat bat;
         Dictionary<string, Animation> crabAnimations;
 
         public int gold;
@@ -45,7 +44,7 @@ namespace PixelDefense.States
                 {"Idle", new Animation(content.Load<Texture2D>("spritesheets/Mushroom_Idle"),4) }
             };*/
             map1.AddPath();
-       
+            
             crab = new Crab(crabAnimations);
             /*mushroom = new Mushroom(mushroomAnimations)  ;*/
 
