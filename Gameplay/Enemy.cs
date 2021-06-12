@@ -162,7 +162,7 @@ namespace PixelDefense.Gameplay
                 _animationManager.Play(_animations["Attack"]);
             }
 
-            else if (health == 0)
+            else if (health <= 0)
             {
 
                 _animationManager.Play(_animations["Death"]);
