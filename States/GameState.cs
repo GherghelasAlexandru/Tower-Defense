@@ -23,6 +23,8 @@ namespace PixelDefense.States
         public List<Map> _maps;
         public Crab crab;
         public Wave wave;
+
+        public List<Rectangle> towerPlacements;
   
 
         public bool IsOnPath;
@@ -47,7 +49,7 @@ namespace PixelDefense.States
 
             //map1.AddPath();
             //map2.AddPath();
-
+            towerPlacements = new List<Rectangle>();
             map1.AddCollisionPath();
             map2.AddCollisionPath();
             
@@ -77,6 +79,26 @@ namespace PixelDefense.States
             };
         }
 
+        public void AddTowerPlacement()
+        {
+            foreach (var tower in _sprites)
+            {
+                if(tower.IsPlaced)
+                {
+                    towerPlacements.Add(new Rectangle((int)tower._position.X, (int)tower._position.Y, (int)tower._texture.Width, (int)tower._texture.Height));
+                }
+            }
+        }
+
+        public bool IsTowerColliding(Rectangle target)
+        {
+            foreach (Rectangle rec in towerPlacements)
+                if (rec.Intersects(target))
+                {
+                    return true;
+                }
+            return false;
+        }
         public void AddMap(Map map)
         {
             _maps.Add(map);
@@ -122,13 +144,15 @@ namespace PixelDefense.States
                             {
                                 IsOnPath = true;
                                 tower.dragging = true;
+                                
                             }
-                            else
+                            else if(!IsTowerColliding(tower.BoundingBox))
                             {
                                 IsOnPath = false;
                                 tower.dragging = false;
                                 tower._position.X = _game.mouseState.X;
                                 tower._position.Y = _game.mouseState.Y;
+                                tower.IsPlaced = true;
                             }
                         }
                     }
@@ -192,7 +216,7 @@ namespace PixelDefense.States
         {
             
             PlaceTower();
-
+            AddTowerPlacement();
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
                 wave.SetMap(map1);
@@ -230,7 +254,7 @@ namespace PixelDefense.States
             {
                 foreach (Bullet bullet in tower.getBullets())
                 {
-                    foreach (Enemy enemy in getEnemies())
+                    foreach (Enemy enemy in wave.enemies)
                     {
                         
                         if (bullet.Bounds.Intersects(enemy.InteractionBox))
@@ -253,9 +277,6 @@ namespace PixelDefense.States
             }
         }
 
-        private List<Enemy> getEnemies() {
-            return wave.enemies;
-        }
 
        
         public void DrawMap(SpriteBatch spriteBatch)

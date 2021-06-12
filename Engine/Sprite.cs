@@ -41,7 +41,7 @@ namespace PixelDefense.Gameplay
         protected AnimationManager _animationManager;
 
         protected Dictionary<string, Animation> _animations;
-
+        public bool IsPlaced = false;
 
         public bool dragging = true;
 
