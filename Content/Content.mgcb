@@ -99,6 +99,24 @@
 /processorParam:TextureFormat=Compressed
 /build:Fonts/textFont.spritefont
 
+#begin sounds/button-click.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/button-click.mp3
+
+#begin sounds/earn_money.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/earn_money.wav
+
+#begin sounds/shoot.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/shoot.wav
+
 #begin spritesheets/Bat_Attack.png
 /importer:TextureImporter
 /processor:TextureProcessor

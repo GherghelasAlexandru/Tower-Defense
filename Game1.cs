@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
 using PixelDefense.Gameplay;
 using System;
 using TiledSharp;
@@ -16,6 +17,9 @@ namespace PixelDefense
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SoundEffect shootSound;
+        SoundEffect killSound;
+        SoundEffect clickButtonSound;
         //MouseState mouse;
 
 
@@ -57,6 +61,7 @@ namespace PixelDefense
             };
             Content.RootDirectory = "Content";
 
+
            
            // graphics.ToggleFullScreen();
             graphics.ApplyChanges();
@@ -96,7 +101,13 @@ namespace PixelDefense
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _currentState = menuState;
+            
 
+            clickButtonSound = Content.Load<SoundEffect>("sounds/button-click");
+            killSound = Content.Load<SoundEffect>("sounds/earn_money");
+            shootSound = Content.Load<SoundEffect>("sounds/shoot");
+
+            SoundEffect.MasterVolume = 0.1f;
 
             // TODO: use this.Content to load your game content here
         }
