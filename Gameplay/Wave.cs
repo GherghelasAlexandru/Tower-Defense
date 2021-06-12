@@ -21,7 +21,9 @@ namespace PixelDefense.Gameplay
         public float waveBreak;
         public float timebeetweenspawn;
         public int enemyNumbers;
-        
+
+        public int deadEnemies;
+
 
         public Wave(ContentManager content)
         {
@@ -69,6 +71,10 @@ namespace PixelDefense.Gameplay
 
             foreach (Enemy enemy in enemies)
             {
+                if(enemy.isDead)
+                {
+                    deadEnemies++;
+                }
                 if (enemy.Active)
                 {
                     enemy.Update(gameTime, sprites);
@@ -89,8 +95,8 @@ namespace PixelDefense.Gameplay
         {
             if( timer > timebeetweenspawn)
             {
-
-                if(enemies.Count < enemyNumbers)
+                
+                if(enemies.Count + deadEnemies < enemyNumbers)
                 {
                     Enemy enemy = forge.ForgeEnemy(forge.GetRandomEnemy());
                     enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());

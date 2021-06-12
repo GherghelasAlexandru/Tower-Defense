@@ -16,6 +16,7 @@ namespace PixelDefense.Gameplay
             mSpeed = 1f;
             xVelocity = 1f;
             goldDrop = 10;
+            _timer = 1;
         }
     }
 }

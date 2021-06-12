@@ -11,7 +11,7 @@ namespace PixelDefense.Gameplay
 {
     public class Sprite : ICloneable
     {
-        protected float _timer;
+        public float _timer;
 
         public Texture2D _texture;
 
@@ -79,7 +79,7 @@ namespace PixelDefense.Gameplay
 
             // The default origin in the centre of the sprite
             Origin = new Vector2(0, 0);
-            
+            IsActive = true;
         }
 
         public Sprite(Dictionary<string, Animation> animations)

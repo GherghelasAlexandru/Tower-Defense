@@ -25,8 +25,8 @@ namespace PixelDefense.States
         public Wave wave;
 
         public List<Rectangle> towerPlacements;
-  
 
+        float timer;
         public bool IsOnPath;
 
         //Bat bat;
@@ -196,9 +196,21 @@ namespace PixelDefense.States
         {
             for (int i = 0; i < _sprites.Count; i++)
             {
-                if (_sprites[i].IsActive)
+                if (!_sprites[i].IsActive)
                 {
                     _sprites.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        public void RemoveEnemy(GameTime gameTime)
+        {
+            for (int i = 0; i < wave.enemies.Count; i++)
+            {
+                if (!wave.enemies[i].IsActive)
+                {
+                    wave.enemies.RemoveAt(i);
                     i--;
                 }
             }
@@ -230,7 +242,7 @@ namespace PixelDefense.States
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
             {
                 wave.SetMap(map2);
-                wave.CreateEnemy();
+                
                 AddMap(map2);
                 RemoveMap(map1);
 
@@ -259,22 +271,24 @@ namespace PixelDefense.States
                         
                         if (bullet.Bounds.Intersects(enemy.InteractionBox))
                         {
-
+                            
                             bullet._position += enemy.Position;
                             
                             enemy.setHealth(enemy.getHealth() - bullet.getDmg());
                             if (enemy.getHealth() == 0)
                             {
-                                enemy.isDead = true;
+
                                 enemy._movement = new Vector2(0, 0);
                                 gold += enemy.goldDrop;
+
                                 
                             }
-                            
+
                         }
                     }
                 }
             }
+            RemoveEnemy(gameTime);
         }
 
 

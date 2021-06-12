@@ -24,6 +24,7 @@ namespace PixelDefense.Gameplay
         public bool active;
 
 
+
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
         {
@@ -102,6 +103,19 @@ namespace PixelDefense.Gameplay
         public override void Update(GameTime gameTime,List<Sprite>sprites)
         {
             
+            
+
+            if(isDead)
+            {
+                _timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+
+                
+            }
+            if(_timer < 0)
+                {
+                    _timer = 0f;
+                    IsActive = false;
+                }
 
             if (Active)
             {
@@ -137,40 +151,41 @@ namespace PixelDefense.Gameplay
         protected virtual void SetAnimations()
         {
 
-            
+
 
             if (health > 0)
+            {
                 _animationManager.Play(_animations["Run"]);
+            }
             else if (xVelocity == 0)
             {
                 _animationManager.Play(_animations["Attack"]);
             }
 
-            if (health == 0 && isDead == true)
+            else if (health == 0)
             {
-                
+
                 _animationManager.Play(_animations["Death"]);
 
                 _animationManager._animation.IsLooping = false;
+                isDead = true;
             }
 
-
-         
-
+            else _animationManager.Stop();
 
             _animationManager.UpdateBoundingBox();
-
-          
         }
+          
+        
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             
-            if (_animationManager != null)
+            if (_animationManager != null && IsActive)
             {
                 _animationManager.Draw(spriteBatch);
             }
-            else throw new Exception("wait a second, who are you?!");
+     
             // runAnimation.DrawAnimation(spriteBatch);
         }
 
