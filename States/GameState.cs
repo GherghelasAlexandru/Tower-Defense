@@ -34,6 +34,7 @@ namespace PixelDefense.States
         
 
         public int gold;
+        private float FollowDistance;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -143,7 +144,7 @@ namespace PixelDefense.States
                         {
                             foreach (var map in _maps)
                             {
-                                if (map1.IsCollision(tower.BoundingBox) == true)
+                                if (map.IsCollision(tower.BoundingBox) == true)
                                 {
                                     IsOnPath = true;
                                     tower.dragging = true;
@@ -279,13 +280,28 @@ namespace PixelDefense.States
                 {
                     foreach (Enemy enemy in wave.enemies)
                     {
+                        if (!bullet.bulletIsDead)
+                        {
+
+                            var distance = enemy._position - bullet._position;
+                            bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
+                            Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
+                            var currentDistance = Vector2.Distance(bullet._position, enemy._position);
+                            if (currentDistance > FollowDistance)
+                            {
+                                var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
+                                var velocity = Direction * t;
+
+                                bullet._position += velocity;
+                            }
+                        }
 
                         if (bullet.Bounds.Intersects(enemy.InteractionBox))
                         {
-
-                            bullet._position += enemy.Position;
-       
+                            bullet.bulletIsDead = true;
+                            bullet._position += enemy._position;
                             enemy.setHealth(enemy.getHealth() - bullet.getDmg());
+
                             if (enemy.getHealth() == 0)
                             {
 

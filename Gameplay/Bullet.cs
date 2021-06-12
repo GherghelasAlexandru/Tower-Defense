@@ -10,12 +10,12 @@ namespace PixelDefense.Gameplay
 {
     public abstract class Bullet : Sprite
     {
-        
+        public bool bulletIsDead = false;
         protected int dmg;
         public Bullet(Texture2D texture)
           : base(texture)
         {
-            
+            LifeSpan = 1f;
         }
 
         public int getDmg()
