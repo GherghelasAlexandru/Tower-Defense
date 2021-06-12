@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using PixelDefense.Controls;
+using PixelDefense.Engine;
 
 namespace PixelDefense.States
 {
@@ -69,11 +70,15 @@ namespace PixelDefense.States
 
         private void IntructionsButton_Click(object sender, EventArgs e)
         {
+            _game.click.playSound();
             _game.ChangeState(_game.instructionsState);
         }
 
+       
+
         private void NewGameButton_Click(object sender, EventArgs e)
         {
+            _game.click.playSound();
             _game.ChangeState(_game.mapSelection);
         }
 
@@ -90,6 +95,7 @@ namespace PixelDefense.States
 
         private void QuitGameButton_Click(object sender, EventArgs e)
         {
+            _game.click.playSound();
             _game.Exit();
         }
     }

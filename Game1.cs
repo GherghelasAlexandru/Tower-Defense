@@ -7,6 +7,7 @@ using System;
 using TiledSharp;
 using PixelDefense.States;
 using System.Collections.Generic;
+using PixelDefense.Engine;
 
 namespace PixelDefense
 {
@@ -17,9 +18,6 @@ namespace PixelDefense
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        SoundEffect shootSound;
-        SoundEffect killSound;
-        SoundEffect clickButtonSound;
         //MouseState mouse;
 
 
@@ -30,6 +28,10 @@ namespace PixelDefense
         public ShopState shopState;
         public GameOverState gameOverState;
         public MenuState menuState;
+        public SoundControl click;
+        public SoundControl shoot;
+        public SoundControl kill;
+
         public MouseState mouseState;
 
         public int defaultWidth = 1280;
@@ -38,9 +40,8 @@ namespace PixelDefense
         private State _currentState;
         private State _nextState;
 
-        
-       
-       
+
+
         //shooting sprites
         //private List<Sprite> _sprites;
         //private GameModel _gameModel;
@@ -85,6 +86,9 @@ namespace PixelDefense
             gameState = new GameState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);
             gameOverState = new GameOverState(this, graphics.GraphicsDevice, Content);
+            click = new SoundControl("sounds/button-click", Content);
+            kill = new SoundControl("sounds/earn_money", Content);
+            shoot = new SoundControl("sounds/shoot", Content);
             IsMouseVisible = true;
             base.Initialize();
         }
@@ -99,15 +103,8 @@ namespace PixelDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            _currentState = menuState;
             
-
-            clickButtonSound = Content.Load<SoundEffect>("sounds/button-click");
-            killSound = Content.Load<SoundEffect>("sounds/earn_money");
-            shootSound = Content.Load<SoundEffect>("sounds/shoot");
-
-            SoundEffect.MasterVolume = 0.1f;
+            _currentState = menuState;
 
             // TODO: use this.Content to load your game content here
         }

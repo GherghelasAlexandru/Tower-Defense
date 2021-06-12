@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Controls\Button.cs" />
     <Compile Include="Engine\AnimationManager.cs" />
+    <Compile Include="Engine\SoundControl.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\Animation.cs" />
     <Compile Include="Gameplay\BasicTower.cs" />
