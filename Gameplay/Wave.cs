@@ -53,9 +53,8 @@ namespace PixelDefense.Gameplay
 
         public void SetMap(Map map)
         {
-            //get the map and create the path
+            //get the map 
             this.map = map;
-            map.AddPath();
 
         }
 

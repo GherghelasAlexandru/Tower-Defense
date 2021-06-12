@@ -119,9 +119,13 @@ namespace PixelDefense.Gameplay
             return false;
         }
 
-        public void AddPath()
+        
+
+        public Queue<Vector2> GetPath()
         {
             int points = Convert.ToInt32(map.ObjectGroups["Objects"].Properties["Points"]);
+
+            Queue<Vector2> path = new Queue<Vector2>();
 
             for (int i = 1; i <= points; i++)
             {
@@ -129,10 +133,7 @@ namespace PixelDefense.Gameplay
             }
 
             path.Enqueue(new Vector2((float)map.ObjectGroups["Objects"].Objects["End"].X, (float)map.ObjectGroups["Objects"].Objects["End"].Y));
-        }
 
-        public Queue<Vector2> GetPath()
-        {
             return path;
         }
 

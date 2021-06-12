@@ -113,6 +113,7 @@ namespace PixelDefense.Gameplay
                     path.Dequeue();
                     if (path.Count == 0)
                     {
+                        // active need to be changed, here must be implemented the atack logic
                         Active = false;
                         xVelocity = 0;
                     }
