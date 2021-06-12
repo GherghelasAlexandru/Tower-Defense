@@ -28,10 +28,9 @@ namespace PixelDefense.States
 
         float timer;
         public bool IsOnPath;
-        public bool IsOnAnotherTower;
 
         //Bat bat;
-
+        
 
         public int gold;
 
@@ -141,25 +140,24 @@ namespace PixelDefense.States
                         }
                         else if (_game.mouseState.LeftButton == ButtonState.Pressed && tower.BoundingBox.Contains(mousePosition) && tower.dragging)
                         {
-                            if (map1.IsCollision(tower.BoundingBox) == true)
+                            foreach (var map in _maps)
                             {
-                                IsOnPath = true;
-                                tower.dragging = true;
+                                if (map.IsCollision(tower.BoundingBox))
+                                {
+                                    IsOnPath = true;
+                                    tower.dragging = true;
 
-                            }
-                            else if (IsTowerColliding(tower.BoundingBox))
-                            {
-                                IsOnAnotherTower = true;
-                                tower.dragging = true;
-                            }
-                            else
-                            {
-                                IsOnPath = false;
-                                IsOnAnotherTower = false;
-                                tower.dragging = false;
-                                tower._position.X = _game.mouseState.X;
-                                tower._position.Y = _game.mouseState.Y;
-                                tower.IsPlaced = true;
+                                }
+
+
+                                else if (!IsTowerColliding(tower.BoundingBox))
+                                {
+                                    IsOnPath = false;
+                                    tower.dragging = false;
+                                    tower._position.X = _game.mouseState.X;
+                                    tower._position.Y = _game.mouseState.Y;
+                                    tower.IsPlaced = true;
+                                }
                             }
                         }
                     }
@@ -275,12 +273,12 @@ namespace PixelDefense.States
                 {
                     foreach (Enemy enemy in wave.enemies)
                     {
-                        
+
                         if (bullet.Bounds.Intersects(enemy.InteractionBox))
                         {
-                            
+
                             bullet._position += enemy.Position;
-                            
+       
                             enemy.setHealth(enemy.getHealth() - bullet.getDmg());
                             if (enemy.getHealth() == 0)
                             {
@@ -338,10 +336,6 @@ namespace PixelDefense.States
             if(IsOnPath)
             {
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 760), Color.Black);
-            }
-            else if (IsOnAnotherTower)
-            {
-                spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(10, 760), Color.Black);
             }
             spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
         }
