@@ -34,8 +34,8 @@ namespace PixelDefense.Gameplay
             this.enemies = new List<Enemy>();
 
             // required for wave lenght,difficulty,
-            this.timebeetweenspawn = 3f;
-            this.enemyNumbers = 3;
+            this.timebeetweenspawn = 0.7f;
+            this.enemyNumbers = 10;
             this.waveTime = 50f;
             this.waveBreak = 25f;
 

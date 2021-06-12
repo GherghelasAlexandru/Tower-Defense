@@ -28,9 +28,10 @@ namespace PixelDefense.States
 
         float timer;
         public bool IsOnPath;
+        public bool IsOnAnotherTower;
 
         //Bat bat;
-        
+
 
         public int gold;
 
@@ -144,11 +145,17 @@ namespace PixelDefense.States
                             {
                                 IsOnPath = true;
                                 tower.dragging = true;
-                                
+
                             }
-                            else if(!IsTowerColliding(tower.BoundingBox))
+                            else if (IsTowerColliding(tower.BoundingBox))
+                            {
+                                IsOnAnotherTower = true;
+                                tower.dragging = true;
+                            }
+                            else
                             {
                                 IsOnPath = false;
+                                IsOnAnotherTower = false;
                                 tower.dragging = false;
                                 tower._position.X = _game.mouseState.X;
                                 tower._position.Y = _game.mouseState.Y;
@@ -331,6 +338,10 @@ namespace PixelDefense.States
             if(IsOnPath)
             {
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 760), Color.Black);
+            }
+            else if (IsOnAnotherTower)
+            {
+                spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(10, 760), Color.Black);
             }
             spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
         }
