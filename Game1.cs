@@ -31,6 +31,9 @@ namespace PixelDefense
         public SoundControl click;
         public SoundControl shoot;
         public SoundControl kill;
+        public SoundControl openShop;
+        public SoundControl towerSound;
+        public SoundControl chooseSound;
 
         public int defaultWidth = 1280;
         public int defaultHeight = 800;
@@ -87,6 +90,8 @@ namespace PixelDefense
             click = new SoundControl("sounds/button-click", Content);
             kill = new SoundControl("sounds/earn_money", Content);
             shoot = new SoundControl("sounds/shoot", Content);
+            openShop = new SoundControl("sounds/shop_open", Content);
+            chooseSound = new SoundControl("sounds/place_tower", Content);
             click.playSound();
             IsMouseVisible = true;
             base.Initialize();

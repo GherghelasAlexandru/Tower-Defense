@@ -87,6 +87,7 @@ namespace PixelDefense.States
             {
                 if(tower.IsPlaced)
                 {
+                    
                     towerPlacements.Add(new Rectangle((int)tower._position.X, (int)tower._position.Y, (int)tower._texture.Width, (int)tower._texture.Height));
                 }
             }
@@ -116,7 +117,7 @@ namespace PixelDefense.States
         }
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
         {
-           
+              
             _game.ChangeState(_game.gameOverState);
         }
 
@@ -199,7 +200,7 @@ namespace PixelDefense.States
 
         private void ShopButton_click(object sender, EventArgs e)
         {
-
+            _game.openShop.playSound();
             // to be modified to change back to the gameState
             _game.ChangeState(_game.shopState);
         }
@@ -304,7 +305,7 @@ namespace PixelDefense.States
 
                             if (enemy.getHealth() == 0)
                             {
-
+                                _game.kill.playSound();
                                 enemy._movement = new Vector2(0, 0);
                                 gold += enemy.goldDrop;
 

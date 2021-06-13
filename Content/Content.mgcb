@@ -111,11 +111,29 @@
 /processorParam:Quality=Best
 /build:Sounds/earn_money.wav
 
+#begin Sounds/place_tower.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/place_tower.mp3
+
 #begin Sounds/shoot.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/shoot.wav
+
+#begin Sounds/shop_open.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/shop_open.mp3
+
+#begin Sounds/tower_choose.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/tower_choose.mp3
 
 #begin spritesheets/Bat_Attack.png
 /importer:TextureImporter
