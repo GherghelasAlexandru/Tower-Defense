@@ -6,6 +6,7 @@ using System;
 using TiledSharp;
 using PixelDefense.States;
 using System.Collections.Generic;
+using PixelDefense.Engine;
 
 namespace PixelDefense
 {
@@ -27,6 +28,9 @@ namespace PixelDefense
         public GameOverState gameOverState;
         public MenuState menuState;
         public MouseState mouseState;
+        public SoundControl click;
+        public SoundControl shoot;
+        public SoundControl kill;
 
         public int defaultWidth = 1280;
         public int defaultHeight = 800;
@@ -80,6 +84,10 @@ namespace PixelDefense
             gameState = new GameState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);
             gameOverState = new GameOverState(this, graphics.GraphicsDevice, Content);
+            click = new SoundControl("sounds/button-click", Content);
+            kill = new SoundControl("sounds/earn_money", Content);
+            shoot = new SoundControl("sounds/shoot", Content);
+            click.playSound();
             IsMouseVisible = true;
             base.Initialize();
         }
