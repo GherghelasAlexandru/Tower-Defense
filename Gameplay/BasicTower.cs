@@ -42,7 +42,7 @@ namespace PixelDefense.Gameplay
             {
                 //Timer expired, execute action
                 AddBullet(sprites);
-
+                
                 timer = TIMER;   //Reset Timer
             }
         }
@@ -63,6 +63,7 @@ namespace PixelDefense.Gameplay
             bullet.Parent = this;
             sprites.Add(bullet);
             bullets.Add(bullet);
+           
         }
 
         public List<Bullet> getBullets() {

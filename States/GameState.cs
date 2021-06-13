@@ -241,6 +241,7 @@ namespace PixelDefense.States
                             enemy.setHealth(enemy.getHealth() - bullet.getDmg());
                             if (enemy.getHealth() == 0)
                             {
+                                _game.kill.playSound();
                                 enemy.isDead = true;
                                 enemy._movement = new Vector2(0, 0);
                                 gold += enemy.goldDrop;
