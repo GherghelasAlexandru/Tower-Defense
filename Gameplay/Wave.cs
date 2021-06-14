@@ -16,12 +16,11 @@ namespace PixelDefense.Gameplay
         public List<Enemy> enemies;
         public ContentManager content;
 
+        protected bool waveBreak;
         public float timer;
-        public float waveTime;
-        public float waveBreak;
+        public int waveNumber;
         public float timebeetweenspawn;
         public int enemyNumbers;
-
         public int deadEnemies;
 
 
@@ -35,9 +34,11 @@ namespace PixelDefense.Gameplay
 
             // required for wave lenght,difficulty,
             this.timebeetweenspawn = 0.7f;
-            this.enemyNumbers = 10;
-            this.waveTime = 50f;
-            this.waveBreak = 25f;
+            this.enemyNumbers = 3;
+           // this.waveTime = 50f;
+            this.waveBreak = false;
+            this.waveNumber = 1;
+
 
         }
 
@@ -45,11 +46,30 @@ namespace PixelDefense.Gameplay
         {
             this.enemies.Add(enemy);
         }
+        public void SetWaveBreak(bool waveBreak)
+        {
+            this.waveBreak = waveBreak;
+        }
+
+        public int GetWaveNumber()
+        {
+            return this.waveNumber;
+        }
+
+        public bool GetWaveBreak()
+        {
+            return this.waveBreak;
+        }
+
+        public List<Enemy> GetEnemies()
+        {
+            return this.enemies;
+        }
 
         public void IncreaseDifficulty()
         {
-            waveTime += 20;
-            enemyNumbers += 2;
+           // waveTime += 20;
+            enemyNumbers += 4;
             // timebeetweenspawn -= 1;
         }
 
@@ -82,6 +102,18 @@ namespace PixelDefense.Gameplay
             }
         }
 
+        public void RemoveEnemies()
+        {
+            for (int i = 0; i < enemies.Count; i++)
+            {
+                if (!enemies[i].IsActive)
+                {
+                    enemies.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Enemy enemy in enemies)
@@ -104,6 +136,21 @@ namespace PixelDefense.Gameplay
                 }
                 timer = 0;
             }
+        }
+
+
+        public void WaveBreak()
+        {
+            if(deadEnemies ==  enemyNumbers)
+            {
+                deadEnemies = 0;
+               // enemies.Clear();
+                IncreaseDifficulty();
+                waveBreak = false;
+                waveNumber += 1;
+
+            }
+
         }
 
 
