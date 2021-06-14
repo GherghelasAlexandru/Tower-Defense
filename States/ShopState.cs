@@ -137,7 +137,6 @@ namespace PixelDefense.States
             {
                 if(cannonTower.GetPrice() <= _game.gameState.GetGold())
                 {
-                    _game.chooseSound.playSound();
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(cannonTower.Clone()  as Cannon );
                     buyCannonButton.Clicked = false;
@@ -152,7 +151,6 @@ namespace PixelDefense.States
             {
                 if (brokenGunTower.GetPrice() <= _game.gameState.GetGold())
                 {
-                    _game.chooseSound.playSound();
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(brokenGunTower.Clone() as BrokenGun);
                     buyBrokenGunButton.Clicked = false;
@@ -167,7 +165,6 @@ namespace PixelDefense.States
             {
                 if (rocketLauncherTower.GetPrice() <= _game.gameState.GetGold()) 
                 {
-                    _game.chooseSound.playSound();
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(rocketLauncherTower.Clone() as RocketLauncher);
                     buyRocketLauncherButton.Clicked = false;
@@ -182,7 +179,6 @@ namespace PixelDefense.States
             {
                 if (doubleCannonTower.GetPrice() <= _game.gameState.GetGold())
                 {
-                    _game.chooseSound.playSound();
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(doubleCannonTower.Clone() as DoubleCannon);
                     buyDoubleCannonButton.Clicked = false;
@@ -197,7 +193,6 @@ namespace PixelDefense.States
             {
                 if (machineGunTower.GetPrice() <= _game.gameState.GetGold())
                 {
-                    _game.chooseSound.playSound();
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(machineGunTower.Clone() as MachineGun);
                     buyMachineGunButton.Clicked = false;
