@@ -15,8 +15,10 @@ namespace PixelDefense.Engine
         public float volume;
         public SoundEffect sound;
         public SoundEffectInstance instance;
-        public SoundControl(string soundPath, ContentManager content)
+        protected Game1 _game;
+        public SoundControl(Game1 game, string soundPath, ContentManager content)
         {
+            _game = game;
             sound = null;
             instance = null;
 
