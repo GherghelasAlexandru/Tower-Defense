@@ -17,13 +17,10 @@ namespace PixelDefense.Gameplay
         public float TIMER;
         public int towerPrice;
         private List<Bullet> bullets;
-        public int towerRange;
+
         
         public MouseState mouseState;
         
-  
-       
-
         public BasicTower(Texture2D texture)
           : base(texture)
         {
@@ -33,14 +30,16 @@ namespace PixelDefense.Gameplay
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
             CenterOrigin();
-
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            timer -= elapsed;
-            if (timer < 0)
+            if(firing)
             {
-                //Timer expired, execute action
-                AddBullet(sprites);
-                timer = TIMER;   //Reset Timer
+                float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                timer -= elapsed;
+                if (timer < 0)
+                {
+                    //Timer expired, execute action
+                    AddBullet(sprites);
+                    timer = TIMER;   //Reset Timer
+                }
             }
         }
         
@@ -49,7 +48,6 @@ namespace PixelDefense.Gameplay
             return towerPrice;
         }
 
-
         private void AddBullet(List<Sprite> sprites)
         {
             //Bullet newBullet = new Bullet()
@@ -57,7 +55,7 @@ namespace PixelDefense.Gameplay
             bullet.Direction = this.Direction;
             bullet._position = this._position;
             bullet.xVelocity = xVelocity * 2;
-            bullet.LifeSpan = 0.1f;
+            bullet.LifeSpan = 0f;
             bullet.Parent = this;
             sprites.Add(bullet);
             bullets.Add(bullet);
@@ -69,9 +67,10 @@ namespace PixelDefense.Gameplay
 
         public void RemoveBullet()
         {
+
             foreach(Bullet bullet in GetBullets())
             {
-                if(bullet.bulletIsDead)
+                if(bullet.bulletIsDead == true)
                 {
                     bullets.Remove(bullet);
                 }

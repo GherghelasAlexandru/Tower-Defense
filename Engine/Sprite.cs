@@ -13,9 +13,13 @@ namespace PixelDefense.Gameplay
     {
         public float _timer;
 
+        public bool firing = false;
+
         public Texture2D _texture;
 
         public float _rotation;
+
+        public float radius;
 
         public Vector2 _position;
 
@@ -84,12 +88,6 @@ namespace PixelDefense.Gameplay
             IsActive = true;
         }
 
-        public Sprite(Dictionary<string, Animation> animations)
-        {
-           
-        }
-     
-
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
         {
             
@@ -99,8 +97,7 @@ namespace PixelDefense.Gameplay
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            
-                spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
  
         }
 

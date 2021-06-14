@@ -18,6 +18,7 @@ namespace PixelDefense.Gameplay.Towers
             xVelocity += Bullet.xVelocity;
             yVelocity += Bullet.yVelocity;
             towerPrice = 10;
+            radius = 300;
         }
     }
 }

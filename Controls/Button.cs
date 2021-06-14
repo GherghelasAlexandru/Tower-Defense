@@ -57,6 +57,7 @@ namespace PixelDefense.Controls
             _font = font;
 
             PenColour = Color.White;
+
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
