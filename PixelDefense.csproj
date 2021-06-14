@@ -91,6 +91,7 @@
     <Compile Include="States\InstructionsState.cs" />
     <Compile Include="States\MapSelectionState.cs" />
     <Compile Include="States\MenuState.cs" />
+    <Compile Include="States\SettingsState.cs" />
     <Compile Include="States\ShopState.cs" />
     <Compile Include="States\State.cs" />
   </ItemGroup>

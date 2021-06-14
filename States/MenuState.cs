@@ -39,9 +39,17 @@ namespace PixelDefense.States
 
             instructionsButton.Click += IntructionsButton_Click;
 
-            var quitGameButton = new Button(buttonTexture, buttonFont)
+            var settingsButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(550, 450),
+                Text = "Settings",
+            };
+
+            settingsButton.Click += SettingsButton_Click;
+
+            var quitGameButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(550, 500),
                 Text = "Quit Game",
             };
 
@@ -51,6 +59,7 @@ namespace PixelDefense.States
       {
         newGameButton,
         instructionsButton,
+        settingsButton,
         quitGameButton,
       };
         }
@@ -70,6 +79,11 @@ namespace PixelDefense.States
         private void IntructionsButton_Click(object sender, EventArgs e)
         {
             _game.ChangeState(_game.instructionsState);
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            _game.ChangeState(_game.settingsState);
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)

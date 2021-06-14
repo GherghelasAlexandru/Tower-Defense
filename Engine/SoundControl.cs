@@ -15,25 +15,27 @@ namespace PixelDefense.Engine
         public float volume;
         public SoundEffect sound;
         public SoundEffectInstance instance;
-        protected Game1 _game;
-        public SoundControl(Game1 game, string soundPath, ContentManager content)
+
+        public SoundControl(string soundPath)
         {
-            _game = game;
+
             sound = null;
             instance = null;
 
             if (soundPath != null)
             {
-                ChangeMusic(soundPath, content);
+                ChangeMusic(soundPath);
             }
         }
 
-        public virtual void ChangeMusic(string soundPath, ContentManager content)
+        public virtual void ChangeMusic(string soundPath)
         {
-            sound = content.Load<SoundEffect>(soundPath);
+            sound = Globals.content.Load<SoundEffect>(soundPath);
             instance = sound.CreateInstance();
-            volume = .01f;
+            volume = .25f;
             instance.Volume = volume;
+            instance.IsLooped = true;
+            instance.Play();
 
         }
 

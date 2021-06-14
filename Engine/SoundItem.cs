@@ -18,7 +18,8 @@ namespace PixelDefense.Engine
         {
             this.name = name;
             this.volume = volume;
-            //sound = Globals.content.Load()
+            sound = Globals.content.Load<SoundEffect>(path);
+            instance = sound.CreateInstance();
         }
     }
 }

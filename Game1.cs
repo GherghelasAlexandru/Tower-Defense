@@ -23,6 +23,7 @@ namespace PixelDefense
         //States
         public GameState gameState;
         public InstructionsState instructionsState;
+        public SettingsState settingsState;
         public MapSelectionState mapSelection;
         public ShopState shopState;
         public GameOverState gameOverState;
@@ -78,6 +79,7 @@ namespace PixelDefense
             mouseState = Mouse.GetState();
             menuState = new MenuState(this, graphics.GraphicsDevice, Content);
             instructionsState = new InstructionsState(this, graphics.GraphicsDevice, Content);
+            settingsState = new SettingsState(this, graphics.GraphicsDevice, Content);
             mapSelection = new MapSelectionState(this, graphics.GraphicsDevice, Content);
             gameState = new GameState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);
