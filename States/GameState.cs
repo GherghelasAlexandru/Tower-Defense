@@ -117,7 +117,8 @@ namespace PixelDefense.States
         }
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
         {
-              
+            _game.gameOverSound.playSound();
+
             _game.ChangeState(_game.gameOverState);
         }
 

@@ -34,6 +34,7 @@ namespace PixelDefense
         public SoundControl openShop;
         public SoundControl towerSound;
         public SoundControl chooseSound;
+        public SoundControl gameOverSound;
 
         public int defaultWidth = 1280;
         public int defaultHeight = 800;
@@ -92,6 +93,8 @@ namespace PixelDefense
             shoot = new SoundControl("sounds/shoot", Content);
             openShop = new SoundControl("sounds/shop_open", Content);
             chooseSound = new SoundControl("sounds/place_tower", Content);
+            gameOverSound = new SoundControl("sounds/gameOver", Content);
+            
             click.playSound();
             IsMouseVisible = true;
             base.Initialize();

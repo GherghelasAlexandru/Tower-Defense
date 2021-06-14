@@ -20,6 +20,7 @@ namespace PixelDefense.States
         public GameOverState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
+            
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var font = _content.Load<SpriteFont>("Fonts/Font");
             textFontTitle = _content.Load<SpriteFont>("Fonts/TextFont");
@@ -41,6 +42,7 @@ namespace PixelDefense.States
         private void BackButton_Click(object sender, EventArgs e)
         {
             IsRestarted = true;
+            _game.click.playSound();
             _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
         }
 
