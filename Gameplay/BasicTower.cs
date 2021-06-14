@@ -17,8 +17,9 @@ namespace PixelDefense.Gameplay
         public float TIMER;
         public int towerPrice;
         private List<Bullet> bullets;
-        public int towerRange;
-        
+
+
+
         public MouseState mouseState;
         
   
@@ -28,21 +29,25 @@ namespace PixelDefense.Gameplay
           : base(texture)
         {
             bullets = new List<Bullet>();
+            firing = false;
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
             CenterOrigin();
-           
-            Direction = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
 
-            float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            timer -= elapsed;
-            if (timer < 0)
+            if (firing)
             {
-                //Timer expired, execute action
-                AddBullet(sprites);
-                timer = TIMER;   //Reset Timer
+                //Direction = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
+
+                float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                timer -= elapsed;
+                if (timer < 0)
+                {
+                    //Timer expired, execute action
+                    AddBullet(sprites);
+                    timer = TIMER;   //Reset Timer
+                }
             }
         }
         

@@ -122,7 +122,7 @@ namespace PixelDefense.Gameplay
                 Vector2 difference = _destination - Position;
                 if (difference.X > -1 && difference.X < 1 && difference.Y > -1 && difference.Y < 1)
                 {
-                    Console.WriteLine(path.Peek());
+                    //Console.WriteLine(path.Peek());
                  
                     path.Dequeue();
                     if (path.Count == 0)

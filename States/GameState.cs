@@ -274,47 +274,67 @@ namespace PixelDefense.States
             wave.Update(gameTime, _game.shopState.basicTowers);
                 PostUpdate(gameTime);
 
-           
+
 
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
-                foreach (Bullet bullet in tower.getBullets())
+
+                foreach (Enemy enemy in wave.enemies)
                 {
-                    foreach (Enemy enemy in wave.enemies)
+                    foreach (var towers in _sprites)
                     {
-                        if (!bullet.bulletIsDead)
+                        if (towers.IsActive)
                         {
-
-                            var distance = enemy._position - bullet._position;
-                            bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
-                            Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
-                            var currentDistance = Vector2.Distance(bullet._position, enemy._position);
-                            if (currentDistance > FollowDistance)
+                            float dis = Vector2.Distance(enemy.Position, towers.Position);
+                            Console.WriteLine(dis);
+                            Console.WriteLine(towers.radius);
+                            if (dis <= towers.radius)
                             {
-                                var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
-                                var velocity = Direction * t;
+                                towers.firing = true;
 
-                                bullet._position += velocity;
                             }
-                        }
+                            else { towers.firing = false; }
 
-                        if (bullet.Bounds.Intersects(enemy.InteractionBox))
-                        {
-                            bullet.bulletIsDead = true;
-                            bullet._position += enemy._position;
-                            enemy.setHealth(enemy.getHealth() - bullet.getDmg());
-
-                            if (enemy.getHealth() == 0)
+                            foreach (Bullet bullet in tower.getBullets())
                             {
-                                _game.kill.playSound();
-                                enemy._movement = new Vector2(0, 0);
-                                gold += enemy.goldDrop;
+                                if (!bullet.bulletIsDead)
+                                {
 
-                                
+                                    var distance = enemy._position - bullet._position;
+                                    bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
+                                    Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
+                                    var currentDistance = Vector2.Distance(bullet._position, enemy._position);
+                                    if (currentDistance > FollowDistance)
+                                    {
+                                        var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
+                                        var velocity = Direction * t;
+
+                                        bullet._position += velocity;
+                                    }
+                                }
+
+                                if (bullet.Bounds.Intersects(enemy.InteractionBox))
+                                {
+                                    bullet.bulletIsDead = true;
+                                    bullet._position = enemy._position;
+                                    enemy.setHealth(enemy.getHealth() - bullet.getDmg());
+
+                                    if (enemy.getHealth() == 0)
+                                    {
+
+                                        enemy._movement = new Vector2(0, 0);
+                                        gold += enemy.goldDrop;
+
+
+                                    }
+
+                                }
                             }
 
                         }
                     }
+
+
                 }
             }
             RemoveEnemy(gameTime);

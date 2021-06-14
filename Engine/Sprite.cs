@@ -11,6 +11,10 @@ namespace PixelDefense.Gameplay
 {
     public class Sprite : ICloneable
     {
+        public bool firing = false;
+
+        public int radius;
+
         public float _timer;
 
         public Texture2D _texture;
