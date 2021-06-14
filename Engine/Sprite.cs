@@ -32,7 +32,9 @@ namespace PixelDefense.Gameplay
             }
         }
 
-        public float rotationVelocity;
+        public float rotationVelocity = 3f;
+
+        public float LinearVelocity = 4f;
 
         public Vector2 _movement;
 

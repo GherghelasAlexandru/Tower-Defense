@@ -84,13 +84,13 @@ namespace PixelDefense.States
 
             cannonTower = new Cannon(cannonTexture) {Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
 
-            machineGunTower = new MachineGun(machineGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 280) };
+            machineGunTower = new MachineGun(machineGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/MG")), _position = new Vector2(190, 280) };
 
-            doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 400)  };
+            doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/GrapeShot")), _position = new Vector2(190, 400)  };
 
-            rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 520) };
+            rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/Rocket")), _position = new Vector2(190, 520) };
 
-            brokenGunTower = new BrokenGun(brokenGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")), _position = new Vector2(190, 640) };
+            brokenGunTower = new BrokenGun(brokenGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/BrokenShot")), _position = new Vector2(190, 640) };
 
             AddBasicTower(cannonTower);
             AddBasicTower(brokenGunTower);

@@ -33,8 +33,6 @@ namespace PixelDefense.Gameplay
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
             CenterOrigin();
-           
-            Direction = new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation));
 
             float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
             timer -= elapsed;
@@ -65,10 +63,19 @@ namespace PixelDefense.Gameplay
             bullets.Add(bullet);
         }
 
-        public List<Bullet> getBullets() {
+        public List<Bullet> GetBullets() {
             return bullets;
         }
 
-
+        public void RemoveBullet()
+        {
+            foreach(Bullet bullet in GetBullets())
+            {
+                if(bullet.bulletIsDead)
+                {
+                    bullets.Remove(bullet);
+                }
+            }    
+        }
     }
 }

@@ -16,32 +16,27 @@ namespace PixelDefense.States
     public class GameState : State
     {
         private List<Button> _button;
-        
         private List<Sprite> _sprites;
+        public List<Rectangle> towerPlacements;
+        public List<Map> _maps;
+
         public Map map1;
         public Map map2;
-        public List<Map> _maps;
-        public Crab crab;
-        public Wave wave;
-        public bool IsOnAnotherTower;
-
-        public List<Rectangle> towerPlacements;
-
-        float timer;
-        public bool IsOnPath;
-
-        //Bat bat;
         
+        public Wave wave;
 
+        public bool IsOnAnotherTower;
+        public bool IsOnPath;
+        public float FollowDistance;
         public int gold;
-        private float FollowDistance;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-     
-            _sprites = new List<Sprite>();
             gold = 100;
+
+            _sprites = new List<Sprite>();
+            towerPlacements = new List<Rectangle>();
             _maps = new List<Map>();
 
             map1 = new Map(content, "Content/Test.tmx");
@@ -49,9 +44,6 @@ namespace PixelDefense.States
 
             wave = new Wave(content);
 
-            //map1.AddPath();
-            //map2.AddPath();
-            towerPlacements = new List<Rectangle>();
             map1.AddCollisionPath();
             map2.AddCollisionPath();
             
@@ -63,7 +55,6 @@ namespace PixelDefense.States
                 Position = new Vector2(1110, 740),
                 Text = "Surrender",
             };
-
             chooseSurrenderButton.Click += ChooseSurrenderButton_Click;
 
             var shopButton = new Button(buttonTexture, buttonFont)
@@ -71,7 +62,6 @@ namespace PixelDefense.States
                 Position = new Vector2(945, 740),
                 Text = "Shop",
             };
-
             shopButton.Click += ShopButton_click;
 
             _button = new List<Button>()
@@ -80,7 +70,6 @@ namespace PixelDefense.States
             shopButton,
             };
         }
-
         public void AddTowerPlacement()
         {
             foreach (var tower in _sprites)
@@ -92,7 +81,6 @@ namespace PixelDefense.States
                 }
             }
         }
-
         public bool IsTowerColliding(Rectangle target)
         {
             foreach (Rectangle rec in towerPlacements)
@@ -170,7 +158,6 @@ namespace PixelDefense.States
                         }
                     }
             }
-
         }
 
 
@@ -181,9 +168,7 @@ namespace PixelDefense.States
 
         public void AddEnemy(Enemy enemy)
         {
-
-          
-                _sprites.Add(enemy);
+            _sprites.Add(enemy);
            
             if (_maps.Contains(map1))
             {
@@ -215,7 +200,6 @@ namespace PixelDefense.States
                 }
             }
         }
-
         public void RemoveEnemy(GameTime gameTime)
         {
             for (int i = 0; i < wave.enemies.Count; i++)
@@ -228,17 +212,13 @@ namespace PixelDefense.States
             }
         }
 
-
-
-
         public void RemoveMap(Map map)
         {
             _maps.Remove(map);
         }
 
         public override void Update(GameTime gameTime)
-        {
-            
+        { 
             PlaceTower();
             AddTowerPlacement();
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
@@ -272,29 +252,18 @@ namespace PixelDefense.States
             wave.Update(gameTime, _game.shopState.basicTowers);
                 PostUpdate(gameTime);
 
-           
-
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
-                foreach (Bullet bullet in tower.getBullets())
+                foreach (Bullet bullet in tower.GetBullets())
                 {
                     foreach (Enemy enemy in wave.enemies)
                     {
-                        if (!bullet.bulletIsDead)
+                        foreach(var towers in _sprites)
                         {
-
-                            var distance = enemy._position - bullet._position;
-                            bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
-                            Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
-                            var currentDistance = Vector2.Distance(bullet._position, enemy._position);
-                            if (currentDistance > FollowDistance)
-                            {
-                                var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
-                                var velocity = Direction * t;
-
-                                bullet._position += velocity;
-                            }
-                        }
+                            var enemyloc = new Vector2(enemy._position.X, enemy._position.Y);
+                            Vector2 direction = towers._position - enemyloc;
+                            towers._rotation = (float)Math.Atan2(direction.Y, direction.X);
+                        }    
 
                         if (bullet.Bounds.Intersects(enemy.InteractionBox))
                         {
@@ -306,18 +275,33 @@ namespace PixelDefense.States
                             {
                                 enemy._movement = new Vector2(0, 0);
                                 gold += enemy.goldDrop;
-
-                                
                             }
+                        }
 
+                        if (!bullet.bulletIsDead)
+                        {
+                            var distance = enemy._position - bullet._position;
+                            bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
+                            Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
+                            var currentDistance = Vector2.Distance(bullet._position, enemy._position);
+                            if (currentDistance > FollowDistance)
+                            {
+                                var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
+                                var velocity = Direction * t;
+
+                                bullet._position += velocity;
+                            }
+                            /*else
+                            {
+                                tower.RemoveBullet();
+                            }*/
                         }
                     }
                 }
             }
+
             RemoveEnemy(gameTime);
         }
-
-
        
         public void DrawMap(SpriteBatch spriteBatch)
         {
@@ -335,11 +319,7 @@ namespace PixelDefense.States
 
         {
             foreach (var sprite in _sprites.ToArray())
-                
-                   
-                        sprite.Draw(spriteBatch);
-                  
-               
+                sprite.Draw(spriteBatch);
         }
 
         public void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch)
