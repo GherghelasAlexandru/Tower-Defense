@@ -32,6 +32,7 @@ namespace PixelDefense.States
         public bool IsOnPath;
         public float FollowDistance;
         public int gold;
+        public int score;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
@@ -56,21 +57,21 @@ namespace PixelDefense.States
 
             var chooseSurrenderButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(1110, 740),
+                Position = new Vector2(1110, 774),
                 Text = "Surrender",
             };
             chooseSurrenderButton.Click += ChooseSurrenderButton_Click;
 
             var shopButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(945, 740),
+                Position = new Vector2(945, 774),
                 Text = "Shop",
             };
             shopButton.Click += ShopButton_click;
 
             this.startWaveButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(779, 740),
+                Position = new Vector2(779, 774),
                 //Text = " ",
             };
             startWaveButton.Click += StartWaveButton_click;
@@ -239,6 +240,7 @@ namespace PixelDefense.States
                     wave.enemies.RemoveAt(i);
                     i--;
                     wave.deadEnemies++;
+                    score++;
                 }
             }
         }
@@ -382,13 +384,15 @@ namespace PixelDefense.States
             wave.Draw(spriteBatch);
             if(IsOnPath)
             {
-                spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 760), Color.Black);
+                spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 780), Color.Black);
             }
             else if (IsOnAnotherTower)
             {
-                spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(10, 760), Color.Black);
+                spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(10, 780), Color.Black);
             }
-            spriteBatch.DrawString(textFont, "Gold = " + _game.gameState.GetGold(), new Vector2(10, 10), Color.Black);
+            spriteBatch.DrawString(textFont, "Gold  " + _game.gameState.GetGold(), new Vector2(20, 10), Color.Black);
+            spriteBatch.DrawString(textFont, "Wave number  " + wave.GetWaveNumber(), new Vector2(560, 10), Color.Black);
+            spriteBatch.DrawString(textFont, "Score  " + score, new Vector2(1100, 10), Color.Black);
         }
     }
 }
