@@ -234,6 +234,7 @@ namespace PixelDefense.States
                 {
                     wave.enemies.RemoveAt(i);
                     i--;
+                    wave.deadEnemies++;
                 }
             }
         }
@@ -341,7 +342,7 @@ namespace PixelDefense.States
 
 
             RemoveEnemy();
-
+            
         }
        
         public void DrawMap(SpriteBatch spriteBatch)
