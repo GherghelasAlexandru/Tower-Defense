@@ -117,7 +117,7 @@ namespace PixelDefense.States
 
         public void StartWaveButton_click(object sender, EventArgs e)
         {
-            waves.StartWave(true);
+            waves.StartWave(false);
         }
 
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)

@@ -100,8 +100,6 @@ namespace PixelDefense.Gameplay
                     enemy.Update(gameTime, sprites);
                 }
             }
-
-            RemoveEnemies();
         }
 
         public void RemoveEnemies()
@@ -146,7 +144,7 @@ namespace PixelDefense.Gameplay
             if(deadEnemies ==  enemyNumbers)
             {
                 //enemies.Clear();
-                waveNumber++;
+              
                     deadEnemies = 0;
                     enemies.Clear();
                     IncreaseDifficulty();
