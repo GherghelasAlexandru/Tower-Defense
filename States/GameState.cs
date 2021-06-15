@@ -22,7 +22,10 @@ namespace PixelDefense.States
 
         public Map map1;
         public Map map2;
-        
+
+        protected WavesManager waves;
+        protected Button startWaveButton;
+
         public Wave wave;
 
         public bool IsOnAnotherTower;
@@ -42,6 +45,7 @@ namespace PixelDefense.States
             map1 = new Map(content, "Content/Test.tmx");
             map2 = new Map(content, "Content/SecondMap2.tmx");
 
+            waves = new WavesManager(content);
             wave = new Wave(content);
 
             map1.AddCollisionPath();
@@ -64,10 +68,18 @@ namespace PixelDefense.States
             };
             shopButton.Click += ShopButton_click;
 
+            this.startWaveButton = new Button(buttonTexture, buttonFont)
+            {
+                Position = new Vector2(779, 740),
+                //Text = " ",
+            };
+            startWaveButton.Click += StartWaveButton_click;
+
             _button = new List<Button>()
             {
             chooseSurrenderButton,
             shopButton,
+            startWaveButton
             };
         }
         public void AddTowerPlacement()
@@ -102,6 +114,12 @@ namespace PixelDefense.States
         {
             gold += goldToAdd;
         }
+
+        public void StartWaveButton_click(object sender, EventArgs e)
+        {
+            waves.StartWave(true);
+        }
+
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
         {
 
@@ -111,6 +129,11 @@ namespace PixelDefense.States
         public List<Sprite> getSprites()
         {
             return _sprites;
+        }
+
+        public void SetStartWaveButton()
+        {
+           this.startWaveButton.Text = "Start Wave" + " " + waves.GetWaveNumber();
         }
 
         public void PlaceTower()
@@ -217,12 +240,13 @@ namespace PixelDefense.States
         }
 
         public override void Update(GameTime gameTime)
-        { 
+        {
+            SetStartWaveButton();
             PlaceTower();
             AddTowerPlacement();
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
-                wave.SetMap(map1);
+                waves.SetAttackingPath(map1);
                 //wave.CreateEnemy();
                 AddMap(map1);
                 RemoveMap(map2);
@@ -232,8 +256,8 @@ namespace PixelDefense.States
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
             {
-                wave.SetMap(map2);
-                
+                waves.SetAttackingPath(map2); 
+
                 AddMap(map2);
                 RemoveMap(map1);
 
@@ -248,13 +272,13 @@ namespace PixelDefense.States
                 button.Update(gameTime);
 
 
-            wave.Update(gameTime, _game.shopState.basicTowers);
+            waves.Update(gameTime, _game.shopState.basicTowers);
                 PostUpdate(gameTime);
 
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
 
-                foreach (Enemy enemy in wave.enemies)
+                foreach (Enemy enemy in waves.GetEnemies())
                 {
                     foreach (var towers in _sprites)
                     {
@@ -263,8 +287,8 @@ namespace PixelDefense.States
                         towers._rotation = (float)Math.Atan2(direction.Y, direction.X);
 
                         float dis = Vector2.Distance(enemyloc, towers._position);
-                            Console.WriteLine(dis);
-                            Console.WriteLine(towers.radius);
+                           // Console.WriteLine(dis);
+                          //  Console.WriteLine(towers.radius);
                             if (dis <= towers.radius)
                             {
                                 towers.firing = true;
@@ -352,7 +376,7 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
-            wave.Draw(spriteBatch);
+            waves.Draw(spriteBatch);
             if(IsOnPath)
             {
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 760), Color.Black);

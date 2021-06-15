@@ -84,6 +84,7 @@
     <Compile Include="Gameplay\Towers\MachineGun.cs" />
     <Compile Include="Gameplay\Towers\RocketLauncher.cs" />
     <Compile Include="Gameplay\Wave.cs" />
+    <Compile Include="Gameplay\WavesManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="States\GameOverState.cs" />

@@ -143,12 +143,15 @@ namespace PixelDefense.Gameplay
         {
             if(deadEnemies ==  enemyNumbers)
             {
-                deadEnemies = 0;
-               // enemies.Clear();
-                IncreaseDifficulty();
-                waveBreak = false;
-                waveNumber += 1;
+                //enemies.Clear();
+              
+                    deadEnemies = 0;
+                    enemies.Clear();
+                    IncreaseDifficulty();
 
+                    //aici e buba 
+                    waveBreak = false;
+             
             }
 
         }

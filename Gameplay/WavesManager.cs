@@ -21,12 +21,12 @@ namespace PixelDefense.Gameplay
             this.wave = new Wave(content);
             this.waveNumber = 1;
         }
-        
+
 
         public void SetAttackingPath(Map map)
         {
             this.wave.SetMap(map);
-        
+
         }
 
         public void StartWave(bool waveBreak)
@@ -45,12 +45,13 @@ namespace PixelDefense.Gameplay
             return wave.GetEnemies();
         }
 
-         public void Update(GameTime gameTime, List<Sprite> sprites)
+        public void Update(GameTime gameTime, List<Sprite> sprites)
         {
 
             this.waveNumber = wave.GetWaveNumber();
             Console.WriteLine(wave.GetWaveNumber());
             Console.WriteLine(wave.GetWaveBreak());
+            Console.WriteLine(wave.enemies.Count);
 
             //wave.RemoveEnemies();
 
@@ -58,8 +59,9 @@ namespace PixelDefense.Gameplay
             {
                 wave.Update(gameTime, sprites);
                 Console.WriteLine(wave.GetWaveBreak());
-                wave.WaveBreak();
+                
             }
+            wave.WaveBreak();
 
             //wave.RemoveEnemies();
         }
@@ -70,16 +72,5 @@ namespace PixelDefense.Gameplay
         }
 
         //public void
-
-
-
-
-
-
-
-
-
-
-
-        }
+    }
 }
