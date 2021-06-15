@@ -207,8 +207,12 @@ namespace PixelDefense.States
 
         private void ShopButton_click(object sender, EventArgs e)
         {
-            // to be modified to change back to the gameState
-            _game.ChangeState(_game.shopState);
+            //shop can not be used when wave is active
+            if(wave.GetWaveBreak() == false)
+            {
+                _game.ChangeState(_game.shopState);
+            }
+            
         }
 
         public override void PostUpdate(GameTime gameTime)
