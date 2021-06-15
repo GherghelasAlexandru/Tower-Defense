@@ -34,18 +34,13 @@ namespace PixelDefense.Gameplay
 
             // required for wave lenght,difficulty,
             this.timebeetweenspawn = 0.7f;
-            this.enemyNumbers = 3;
-           // this.waveTime = 50f;
+            this.enemyNumbers = 1;
             this.waveBreak = false;
             this.waveNumber = 1;
 
 
         }
 
-        public void AddEnemy(Enemy enemy)
-        {
-            this.enemies.Add(enemy);
-        }
         public void SetWaveBreak(bool waveBreak)
         {
             this.waveBreak = waveBreak;
@@ -68,8 +63,7 @@ namespace PixelDefense.Gameplay
 
         public void IncreaseDifficulty()
         {
-           // waveTime += 20;
-            enemyNumbers += 4;
+            enemyNumbers += 1;
             // timebeetweenspawn -= 1;
         }
 
@@ -80,38 +74,45 @@ namespace PixelDefense.Gameplay
 
         }
 
-
         public void Update(GameTime gameTime, List<Sprite> sprites)
         {
-
+            
+            this.waveNumber = GetWaveNumber();
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            CreateEnemy();
+            Console.WriteLine("Enemie Count: " + GetEnemies().Count);
+            Console.WriteLine("Dead enemies: " + GetDeadEnemies());
 
-
-            foreach (Enemy enemy in enemies)
+            if(GetWaveBreak() == true)
             {
-                if(enemy.isDead)
+                CreateEnemy();
+
+                foreach (Enemy enemy in enemies)
                 {
-                    deadEnemies++;
+                    if (enemy.isDead)
+                    {
+                        deadEnemies++;
+                    }
+                    if (enemy.Active)
+                    {
+                        enemy.Update(gameTime, sprites);
+                    }
                 }
-                if (enemy.Active)
-                {
-                    enemy.Update(gameTime, sprites);
-                }
+
             }
+
+            WaveBreak();
         }
 
-        public void RemoveEnemies()
+        public void StartWave(bool waveBreak)
         {
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (!enemies[i].IsActive)
-                {
-                    enemies.RemoveAt(i);
-                    i--;
-                }
-            }
+            SetWaveBreak(waveBreak);
+        }
+
+        public void SetAttackingPath(Map map)
+        {
+            this.SetMap(map);
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -121,7 +122,6 @@ namespace PixelDefense.Gameplay
                 enemy.Draw(spriteBatch);
             }
         }
-
 
         public void CreateEnemy()
         {
@@ -138,26 +138,20 @@ namespace PixelDefense.Gameplay
             }
         }
 
-
         public void WaveBreak()
         {
-            if(deadEnemies ==  enemyNumbers)
+            if(enemies.Count == 0 && waveBreak == true)
             {
-                //enemies.Clear();
-              
-                    deadEnemies = 0;
-                    enemies.Clear();
-                    IncreaseDifficulty();
-
-                    //aici e buba 
-                    waveBreak = false;
-             
+                deadEnemies = 0;
+                IncreaseDifficulty();
+                waveNumber++;
+                waveBreak = false;
             }
-
         }
 
-
-
-
+        public int GetDeadEnemies()
+        {
+            return deadEnemies;
+        }
     }
 }

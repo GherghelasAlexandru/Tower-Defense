@@ -23,7 +23,7 @@ namespace PixelDefense.States
         public Map map1;
         public Map map2;
 
-        protected WavesManager waves;
+        //protected WavesManager waves;
         protected Button startWaveButton;
 
         public Wave wave;
@@ -45,7 +45,7 @@ namespace PixelDefense.States
             map1 = new Map(content, "Content/Test.tmx");
             map2 = new Map(content, "Content/SecondMap2.tmx");
 
-            waves = new WavesManager(content);
+            //waves = new WavesManager(content);
             wave = new Wave(content);
 
             map1.AddCollisionPath();
@@ -117,7 +117,7 @@ namespace PixelDefense.States
 
         public void StartWaveButton_click(object sender, EventArgs e)
         {
-            waves.StartWave(true);
+            wave.StartWave(true);
         }
 
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
@@ -133,7 +133,7 @@ namespace PixelDefense.States
 
         public void SetStartWaveButton()
         {
-           this.startWaveButton.Text = "Start Wave" + " " + waves.GetWaveNumber();
+           this.startWaveButton.Text = "Start Wave" + " " + wave.GetWaveNumber();
         }
 
         public void PlaceTower()
@@ -246,7 +246,7 @@ namespace PixelDefense.States
             AddTowerPlacement();
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
-                waves.SetAttackingPath(map1);
+                wave.SetAttackingPath(map1);
                 //wave.CreateEnemy();
                 AddMap(map1);
                 RemoveMap(map2);
@@ -256,7 +256,7 @@ namespace PixelDefense.States
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
             {
-                waves.SetAttackingPath(map2); 
+                wave.SetAttackingPath(map2); 
 
                 AddMap(map2);
                 RemoveMap(map1);
@@ -272,14 +272,15 @@ namespace PixelDefense.States
                 button.Update(gameTime);
 
 
-            waves.Update(gameTime, _game.shopState.basicTowers);
+            wave.Update(gameTime, _game.shopState.basicTowers);
                 PostUpdate(gameTime);
 
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
 
-                foreach (Enemy enemy in waves.GetEnemies())
+                foreach (Enemy enemy in wave.GetEnemies())
                 {
+                    
                     foreach (var towers in _sprites)
                     {
                         var enemyloc = new Vector2(enemy._position.X, enemy._position.Y);
@@ -308,7 +309,7 @@ namespace PixelDefense.States
 
                                     if (enemy.getHealth() == 0)
                                     {
-
+                                        enemy.isDead = true;
                                         enemy._movement = new Vector2(0, 0);
                                         gold += enemy.goldDrop;
 
@@ -342,8 +343,8 @@ namespace PixelDefense.States
 
                 }
             }
-
             RemoveEnemy();
+
         }
        
         public void DrawMap(SpriteBatch spriteBatch)
@@ -376,7 +377,7 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
-            waves.Draw(spriteBatch);
+            wave.Draw(spriteBatch);
             if(IsOnPath)
             {
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 760), Color.Black);
