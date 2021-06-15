@@ -29,6 +29,7 @@ namespace PixelDefense
         public GameOverState gameOverState;
         public MenuState menuState;
         public MouseState mouseState;
+        
 
 
         public int defaultWidth = 1280;
@@ -59,6 +60,7 @@ namespace PixelDefense
                 PreferredBackBufferHeight = defaultHeight
             };
             Content.RootDirectory = "Content";
+            Globals.appDataFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
            
            // graphics.ToggleFullScreen();
@@ -100,6 +102,7 @@ namespace PixelDefense
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.content = this.Content;
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            Globals.save = new Save("PixelDefense");
 
             _currentState = menuState;
 

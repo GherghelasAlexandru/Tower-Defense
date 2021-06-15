@@ -13,5 +13,7 @@ namespace PixelDefense.Engine
     class Globals
     {
         public static ContentManager content;
+        public static string appDataFilePath;
+        public static Save save;
     }
 }
