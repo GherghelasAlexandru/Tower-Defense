@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay.Bullets
 {
-    class The556 : Bullet
+    public class The556 : Bullet
     {
         public The556(Texture2D texture) : base(texture)
         {

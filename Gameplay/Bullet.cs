@@ -10,12 +10,12 @@ namespace PixelDefense.Gameplay
 {
     public abstract class Bullet : Sprite
     {
-        public bool bulletIsDead = false;
+      
         protected int dmg;
         public Bullet(Texture2D texture)
           : base(texture)
         {
-            LifeSpan = 1f;
+            LifeSpan = 10f;
         }
 
         public int getDmg()
@@ -30,13 +30,14 @@ namespace PixelDefense.Gameplay
         
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
-           
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-
-            if (_timer >= LifeSpan)
+            if (_timer <= LifeSpan)
+            {
+                LifeSpan--;
                 IsActive = true;
+            }
 
-            _position += Direction * xVelocity;
+
         }
     }
 }

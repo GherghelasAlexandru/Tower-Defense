@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay.Bullets
 {
-    class Brokenshot: Bullet
+    public class Brokenshot: Bullet
     {
         public Brokenshot(Texture2D texture):base(texture)
         {

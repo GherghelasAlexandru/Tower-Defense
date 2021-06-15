@@ -222,6 +222,10 @@ namespace PixelDefense.States
                 }
             }
         }
+
+
+
+
         public void RemoveEnemy()
         {
             for (int i = 0; i < wave.enemies.Count; i++)
@@ -263,86 +267,79 @@ namespace PixelDefense.States
 
                 _game.mapSelection.chooseSecondMapButton.Clicked = false;
             }
-
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
-         
+
 
             foreach (var button in _button)
                 button.Update(gameTime);
 
 
             wave.Update(gameTime, _game.shopState.basicTowers);
-                PostUpdate(gameTime);
-
+            
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
 
                 foreach (Enemy enemy in wave.GetEnemies())
                 {
-                    
+                    if(enemy.IsActive)
                     foreach (var towers in _sprites)
                     {
-                        var enemyloc = new Vector2(enemy._position.X, enemy._position.Y);
+                        var enemyloc = new Vector2(enemy.Position.X, enemy.Position.Y);
                         Vector2 direction = towers._position - enemyloc;
                         towers._rotation = (float)Math.Atan2(direction.Y, direction.X);
 
                         float dis = Vector2.Distance(enemyloc, towers._position);
-                           // Console.WriteLine(dis);
-                          //  Console.WriteLine(towers.radius);
-                            if (dis <= towers.radius)
-                            {
-                                towers.firing = true;
-
-                            }
-                            else { towers.firing = false; }
-
+          
+                        if (dis <= towers.radius)
+                        {
+                            towers.firing = true;
 
                             foreach (Bullet bullet in tower.GetBullets())
                             {
+                               
+                                    var distance = enemy.Position - bullet.Position;
+                                    bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
+                                    bullet.Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
+                                    var currentDistance = Vector2.Distance(bullet.Position, enemy.Position);
 
-                                if (bullet.Bounds.Intersects(enemy.InteractionBox))
-                                {
-                                    bullet.bulletIsDead = true;
-                                    //bullet._position = enemy._position;
-                                    enemy.setHealth(enemy.getHealth() - bullet.getDmg());
+                                    var t = MathHelper.Min((float)Math.Abs(currentDistance), bullet.xVelocity);
+                                    var velocity = bullet.Direction * t;
 
-                                    if (enemy.getHealth() == 0)
+                                    bullet.Position += velocity;
+
+
+                                    if (bullet.Bounds.Intersects(enemy.Bounds) && bullet.IsActive)
                                     {
-                                        enemy.isDead = true;
+  
+                                        bullet.IsActive = false;
+                                       
+                                        enemy.health -= bullet.getDmg();
+                                        Console.WriteLine(enemy.health);
+                                    }
+                                    if (enemy.getHealth() == 0 && !enemy.isDead)
+                                    {
+
+                                        bullet.IsActive = false;
                                         enemy._movement = new Vector2(0, 0);
+                                        enemy.isDead = true;
                                         gold += enemy.goldDrop;
 
-
                                     }
+                              
 
-                                }
-
-                                if (!bullet.bulletIsDead)
-                                {
-                                
-                                    var distance = enemy._position - bullet._position;
-                                    bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
-                                    Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
-                                    var currentDistance = Vector2.Distance(bullet._position, enemy._position);
-                                    if (currentDistance > FollowDistance)
-                                    {
-                                        var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
-                                        var velocity = Direction * t;
-
-                                        bullet._position += velocity;
-                                    }
-                                } else { bullet._position = tower._position; }
-
-                               
                             }
 
-                        
+                        }
+                        else { towers.firing = false; }
                     }
-
-
                 }
             }
+
+            
+           PostUpdate(gameTime);
+
+
             RemoveEnemy();
 
         }

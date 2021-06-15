@@ -17,7 +17,7 @@ namespace PixelDefense.Gameplay
             health = 3;
             mSpeed = 1f;
             xVelocity = 1f;
-            rotationVelocity = 2f;
+
             goldDrop = 5;
             _timer = 1;
         }

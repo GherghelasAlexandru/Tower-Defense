@@ -12,7 +12,7 @@ namespace PixelDefense.Gameplay.Towers
     {
         public RocketLauncher(Texture2D texture) : base(texture)
         {
-            timer = 4;
+            _timer = 4;
             TIMER = 4;
             Bullet = new Rocket(_texture);
             xVelocity += Bullet.xVelocity;

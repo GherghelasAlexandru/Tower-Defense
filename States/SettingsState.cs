@@ -44,7 +44,7 @@ namespace PixelDefense.States
                 chooseBackButton,
             };
 
-            XDocument xml = XDocument.Load("C:\\Users\\User\\AppData\\Roaming\\PixelDefense\\XML\\Settings.xml");
+            //XDocument xml = XDocument.Load("C:\\Users\\User\\AppData\\Roaming\\PixelDefense\\XML\\Settings.xml");
                             //Globals.save.GetFile("XML\\Settings.xml"); throws null exception?????
             
         }

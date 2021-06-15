@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay.Bullets
 {
-    class Grapeshot : Bullet
+    public class Grapeshot : Bullet
     {
         public Grapeshot(Texture2D texture) : base(texture)
         {

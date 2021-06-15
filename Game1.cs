@@ -32,7 +32,7 @@ namespace PixelDefense
         
 
 
-        public int defaultWidth = 1280;
+        public int defaultWidth = 1600;
         public int defaultHeight = 800;
 
         private State _currentState;

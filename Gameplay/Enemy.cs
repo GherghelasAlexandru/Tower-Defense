@@ -166,7 +166,7 @@ namespace PixelDefense.Gameplay
             {
 
                 _animationManager.Play(_animations["Death"]);
-
+               
                 _animationManager._animation.IsLooping = false;
                 isDead = true;
             }

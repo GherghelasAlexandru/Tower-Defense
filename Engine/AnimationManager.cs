@@ -27,7 +27,7 @@ namespace PixelDefense.Engine
             int row = _animation.CurrentFrame / _animation.Columns;
             int column = _animation.CurrentFrame % _animation.Columns;
             spriteBatch.Draw(_animation.Texture,
-                            _position,
+                            Position,
                              new Rectangle(_animation.FrameWidth * column,
                                            _animation.FrameHeight * row,
                                            _animation.FrameWidth,

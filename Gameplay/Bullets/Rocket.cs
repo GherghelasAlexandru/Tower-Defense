@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PixelDefense.Gameplay.Bullets
 {
-    class Rocket : Bullet
+    public class Rocket : Bullet
     {
         public Rocket(Texture2D texture) : base(texture)
         {

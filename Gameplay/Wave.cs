@@ -142,6 +142,7 @@ namespace PixelDefense.Gameplay
         {
             if(enemies.Count == 0 && waveBreak == true)
             {
+                
                 deadEnemies = 0;
                 IncreaseDifficulty();
                 waveNumber++;

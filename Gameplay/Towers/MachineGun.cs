@@ -12,7 +12,7 @@ namespace PixelDefense.Gameplay.Towers
     {
         public MachineGun(Texture2D texture) : base(texture)
         {
-            timer = 2;
+            _timer = 2;
             TIMER = 1;
             Bullet = new The556(_texture);
             xVelocity += Bullet.xVelocity;
