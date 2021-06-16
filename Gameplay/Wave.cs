@@ -41,7 +41,10 @@ namespace PixelDefense.Gameplay
 
         }
 
-
+        public void IncreaseDeadEnemies()
+        {
+            this.deadEnemies += 1;
+        }
 
 
         public void IncreaseDifficulty()

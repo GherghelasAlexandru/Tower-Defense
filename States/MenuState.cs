@@ -21,7 +21,7 @@ namespace PixelDefense.States
         {
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
-            textFontTitle = _content.Load<SpriteFont>("Fonts/TextFont");
+            this.textFontTitle = _content.Load<SpriteFont>("Fonts/TextFont");
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {

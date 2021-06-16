@@ -28,19 +28,50 @@ namespace PixelDefense.States
 
         public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
         {
-            _game = game;
+            this._game = game;
 
-            _graphicsDevice = graphicsDevice;
+            this._graphicsDevice = graphicsDevice;
 
-            _content = content; 
+            this._content = content; 
             
-            textFont = _content.Load<SpriteFont>("Fonts/Font");
+            this.textFont = _content.Load<SpriteFont>("Fonts/Font");
 
 
         }
 
+        //get and set methods
+        public void SetContent(ContentManager content)
+        {
+            this._content = content;
+        }
 
-        
+        public ContentManager GetContent()
+        {
+            return this._content;
+        }
+
+        public void SetGame(Game1 game)
+        {
+            this._game = game;
+        }
+
+        public Game1 GetGame()
+        {
+            return this._game;
+        }
+
+       public void SetGraphicsDevice(GraphicsDevice graphics)
+        {
+            this._graphicsDevice = graphics;
+        }
+
+        public GraphicsDevice GetGraphicsDevice()
+        {
+            return this._graphicsDevice;
+        }
+
+
+
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
         public abstract void PostUpdate(GameTime gameTime);

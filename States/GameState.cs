@@ -46,7 +46,7 @@ namespace PixelDefense.States
             map1 = new Map(content, "Content/Test.tmx");
             map2 = new Map(content, "Content/SecondMap2.tmx");
 
-            //waves = new WavesManager(content);
+            
             wave = new Wave(content);
 
             map1.AddCollisionPath();
@@ -89,7 +89,7 @@ namespace PixelDefense.States
             {
                 if(tower.IsPlaced)
                 {          
-                    towerPlacements.Add(new Rectangle((int)tower._position.X, (int)tower._position.Y, (int)tower._texture.Width, (int)tower._texture.Height));
+                    towerPlacements.Add(new Rectangle((int)tower.GetPosition().X, (int)tower.GetPosition().Y, (int)tower.GetTexture().Width, (int)tower.GetTexture().Height));
                 }
             }
         }
@@ -147,34 +147,34 @@ namespace PixelDefense.States
 
                     if (tower is BasicTower)
                     {
-                        if (_game.mouseState.LeftButton == ButtonState.Released && tower.dragging)
+                        if (_game.mouseState.LeftButton == ButtonState.Released && tower.GetDragged())
                         {
                             tower._position.X = _game.mouseState.X;
                             tower._position.Y = _game.mouseState.Y;
                         }
-                        else if (_game.mouseState.LeftButton == ButtonState.Pressed && tower.BoundingBox.Contains(mousePosition) && tower.dragging)
+                        else if (_game.mouseState.LeftButton == ButtonState.Pressed && tower.BoundingBox.Contains(mousePosition) && tower.GetDragged())
                         {
                             foreach (var map in _maps)
                             {
                                 if (map.IsCollision(tower.BoundingBox) == true)
                                 {
                                     IsOnPath = true;
-                                    tower.dragging = true;
+                                    tower.SetIsDragged(true);
 
                                 }
                                 else if (IsTowerColliding(tower.BoundingBox))
                                 {
                                     IsOnAnotherTower = true;
-                                    tower.dragging = true;
+                                    tower.SetIsDragged(true);
                                 }
                                 else
                                 {
                                     IsOnPath = false;
                                     IsOnAnotherTower = false;
-                                    tower.dragging = false;
+                                    tower.SetIsDragged(false); 
                                     tower._position.X = _game.mouseState.X;
                                     tower._position.Y = _game.mouseState.Y;
-                                    tower.IsPlaced = true;
+                                    tower.SetIsPlaced(true);
                                 }
                             }
                             
@@ -233,13 +233,13 @@ namespace PixelDefense.States
 
         public void RemoveEnemy()
         {
-            for (int i = 0; i < wave.enemies.Count; i++)
+            for (int i = 0; i < wave.GetEnemies().Count; i++)
             {
-                if (!wave.enemies[i].IsActive)
+                if (!wave.GetEnemies()[i].IsActive)
                 {
-                    wave.enemies.RemoveAt(i);
+                    wave.GetEnemies().RemoveAt(i);
                     i--;
-                    wave.deadEnemies++;
+                    wave.IncreaseDeadEnemies();
                     score++;
                 }
             }
@@ -258,7 +258,6 @@ namespace PixelDefense.States
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
                 wave.SetAttackingPath(map1);
-                //wave.CreateEnemy();
                 AddMap(map1);
                 RemoveMap(map2);
                 
@@ -289,16 +288,16 @@ namespace PixelDefense.States
 
                 foreach (Enemy enemy in wave.GetEnemies())
                 {
-                    if(enemy.IsActive)
+                    if(enemy.GetIsActive())
                     foreach (var towers in _sprites)
                     {
                         var enemyloc = new Vector2(enemy.Position.X, enemy.Position.Y);
-                        Vector2 direction = towers._position - enemyloc;
-                        towers._rotation = (float)Math.Atan2(direction.Y, direction.X);
+                        Vector2 direction = towers.GetPosition() - enemyloc;
+                        towers.SetRotation((float)Math.Atan2(direction.Y, direction.X));
 
                         float dis = Vector2.Distance(enemyloc, towers._position);
           
-                        if (dis <= towers.radius)
+                        if (dis <= towers.GetRadius())
                         {
                             towers.firing = true;
 
@@ -306,31 +305,32 @@ namespace PixelDefense.States
                             {
                                
                                     var distance = enemy.Position - bullet.Position;
-                                    bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
-                                    bullet.Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
+                                    bullet.SetRotation((float)Math.Atan2(distance.Y, distance.X));
+                                    bullet.SetDirection(new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation)));
                                     var currentDistance = Vector2.Distance(bullet.Position, enemy.Position);
 
                                     var t = MathHelper.Min((float)Math.Abs(currentDistance), bullet.xVelocity);
-                                    var velocity = bullet.Direction * t;
+                                    var velocity = bullet.GetDirection() * t;
 
-                                    bullet.Position += velocity;
+                                    bullet.SetPosition(bullet.GetPosition() + velocity);
+                                   
 
 
                                     if (bullet.Bounds.Intersects(enemy.Bounds) && bullet.IsActive)
                                     {
   
-                                        bullet.IsActive = false;
-                                       
-                                        enemy.health -= bullet.GetDmg();
+                                        bullet.SetIsActive(false);
+                                        enemy.SetHealth(enemy.GetHealth() - bullet.GetDmg());
+ 
                                         Console.WriteLine(enemy.health);
                                     }
                                     if (enemy.GetHealth() == 0 && !enemy.isDead)
                                     {
 
-                                        bullet.IsActive = false;
-                                        enemy._movement = new Vector2(0, 0);
-                                        enemy.isDead = true;
-                                        gold += enemy.goldDrop;
+                                        bullet.SetIsActive(false);
+                                        enemy.SetMovement(new Vector2(0, 0));
+                                        enemy.SetIsDead(true);
+                                        gold += enemy.GetGoldDrop();
 
                                     }
                               
@@ -338,7 +338,7 @@ namespace PixelDefense.States
                             }
 
                         }
-                        else { towers.firing = false; }
+                        else { towers.SetIsFiring(false); }
                     }
                 }
             }

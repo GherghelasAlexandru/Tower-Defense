@@ -245,6 +245,36 @@ namespace PixelDefense.Gameplay
             return this._position;
         }
 
+        public void SetRotation(float rotation)
+        {
+            this._rotation = rotation;
+        }
+
+        public float GetRotation()
+        {
+            return this._rotation;
+        }
+
+
+        public void SetRadius(float radius)
+        {
+            this.radius = radius;
+        }
+
+        public float GetRadius()
+        {
+            return this.radius;
+        }
+
+        public void SetIsFiring(bool isfiring)
+        {
+            this.firing = isfiring;
+        }
+
+        public bool GetFiring()
+        {
+            return this.firing;       
+        }
         public void SetTexture(Texture2D texture)
         {
             this._texture = texture;

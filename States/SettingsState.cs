@@ -18,6 +18,8 @@ namespace PixelDefense.States
         private List<Button> _button;
         public List<ArrowSelector> arrowSelector = new List<ArrowSelector>();
         PassObject applyOptions;
+
+
         public SettingsState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
          : base(game, graphicsDevice, content)
         {

@@ -49,56 +49,56 @@ namespace PixelDefense.States
             var buttonTexture4 = _content.Load<Texture2D>("Controls/button4");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
-            cannonTexture = content.Load<Texture2D>("Tower/T1");
-            rocketLauncherTexture = content.Load<Texture2D>("Tower/T5");
-            doubleCannonTexture = content.Load<Texture2D>("Tower/T4");
-            machineGunTexture = content.Load<Texture2D>("Tower/T3");
-            brokenGunTexture = content.Load<Texture2D>("Tower/T2");
+            this.cannonTexture = content.Load<Texture2D>("Tower/T1");
+            this.rocketLauncherTexture = content.Load<Texture2D>("Tower/T5");
+            this.doubleCannonTexture = content.Load<Texture2D>("Tower/T4");
+            this.machineGunTexture = content.Load<Texture2D>("Tower/T3");
+            this.brokenGunTexture = content.Load<Texture2D>("Tower/T2");
 
-            buyCannonButton = new Button(buttonTexture4, buttonFont)
+            this.buyCannonButton = new Button(buttonTexture4, buttonFont)
             {
                 Position = new Vector2(930, 160),
             };
 
-            buyMachineGunButton = new Button(buttonTexture4, buttonFont)
+            this.buyMachineGunButton = new Button(buttonTexture4, buttonFont)
             {
                 Position = new Vector2(930, 280),
             };
 
-            buyDoubleCannonButton = new Button(buttonTexture4, buttonFont)
+            this.buyDoubleCannonButton = new Button(buttonTexture4, buttonFont)
             {
                 Position = new Vector2(930, 400),
             };
 
-            buyRocketLauncherButton = new Button(buttonTexture4, buttonFont)
+            this.buyRocketLauncherButton = new Button(buttonTexture4, buttonFont)
             {
                 Position = new Vector2(930, 520),
             };
 
-            buyBrokenGunButton = new Button(buttonTexture4, buttonFont)
+            this.buyBrokenGunButton = new Button(buttonTexture4, buttonFont)
             {
                 Position = new Vector2(930, 640),
             };
 
-            basicTowers = new List<Sprite>();
+            this.basicTowers = new List<Sprite>();
 
-            cannonTower = new Cannon(cannonTexture) {Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
+            this.cannonTower = new Cannon(cannonTexture) {Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
 
-            machineGunTower = new MachineGun(machineGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/MG")), _position = new Vector2(190, 280) };
+            this.machineGunTower = new MachineGun(machineGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/MG")), _position = new Vector2(190, 280) };
 
-            doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/GrapeShot")), _position = new Vector2(190, 400)  };
+            this.doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/GrapeShot")), _position = new Vector2(190, 400)  };
 
-            rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/Rocket")), _position = new Vector2(190, 520) };
+            this.rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/Rocket")), _position = new Vector2(190, 520) };
 
-            brokenGunTower = new BrokenGun(brokenGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/BrokenShot")), _position = new Vector2(190, 640) };
+            this.brokenGunTower = new BrokenGun(brokenGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/BrokenShot")), _position = new Vector2(190, 640) };
 
             AddBasicTower(cannonTower);
             AddBasicTower(brokenGunTower);
             AddBasicTower(rocketLauncherTower);
             AddBasicTower(doubleCannonTower);
             AddBasicTower(machineGunTower);
-          
-            bkg = content.Load<Texture2D>("Controls/bkg");
+
+            this.bkg = content.Load<Texture2D>("Controls/bkg");
 
             buyMachineGunButton.Click += BuyButton_Click;
             buyDoubleCannonButton.Click += BuyButton_Click;

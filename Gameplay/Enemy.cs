@@ -227,7 +227,7 @@ namespace PixelDefense.Gameplay
             return this._timer;
         }
 
-        public void SetPosition(Vector2 position)
+        /*public void SetPosition(Vector2 position)
         {
             this.Position = position;
         }
@@ -235,7 +235,24 @@ namespace PixelDefense.Gameplay
         public Vector2 GetPosition()
         {
             return this.Position;
+        }*/
+
+        public void SetIsDead(bool isdead)
+        {
+            this.isDead = isdead;
         }
+
+        public bool GetIsDead()
+        {
+
+            return this.isDead;
+
+        }
+
+
+
+
+
 
         public void SetPath(Queue<Vector2> path)
         {
