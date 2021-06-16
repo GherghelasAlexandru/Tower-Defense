@@ -14,7 +14,7 @@ namespace PixelDefense.Gameplay
 
             this.health = 3;
             this.mSpeed = 1f;
-            this.xVelocity = 1f;
+            this.xVelocity = 2f;
             this.goldDrop = 10;
             this._timer = 1;
         }

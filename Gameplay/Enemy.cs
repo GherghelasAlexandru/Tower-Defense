@@ -123,7 +123,7 @@ namespace PixelDefense.Gameplay
 
                 }
 
-                Position += _movement;
+                Position += _movement * xVelocity;
 
             }
 
