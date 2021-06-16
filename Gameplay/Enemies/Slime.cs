@@ -12,11 +12,12 @@ namespace PixelDefense.Gameplay
         public Slime(Dictionary<string, Animation> animations) : base(animations)
         {
 
-            health = 3;
-            mSpeed = 1f;
-            xVelocity = 1f;
-            goldDrop = 10;
-            _timer = 1;
+            this.health = 3;
+            this.mSpeed = 1f;
+            this.xVelocity = 1f;
+            this.goldDrop = 10;
+            this._timer = 1;
         }
+
     }
 }

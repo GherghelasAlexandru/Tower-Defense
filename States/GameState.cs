@@ -275,13 +275,28 @@ namespace PixelDefense.States
             waves.Update(gameTime, _game.shopState.basicTowers);
                 PostUpdate(gameTime);
 
-            foreach (BasicTower tower in _game.shopState.basicTowers)
-            {
 
+            //1  => Pentru fiecare turn
+            foreach (BasicTower tower in _game.shopState.basicTowers)
+            { 
+
+<<<<<<< Updated upstream
                 foreach (Enemy enemy in waves.GetEnemies())
                 {
+=======
+
+                //2 => Pentru fiecare inamic
+                foreach (Enemy enemy in wave.GetEnemies())
+                {
+
+
+                    //3 => Pentru fiecare turn, pe mapa
+>>>>>>> Stashed changes
                     foreach (var towers in _sprites)
                     {
+
+
+
                         var enemyloc = new Vector2(enemy._position.X, enemy._position.Y);
                         Vector2 direction = towers._position - enemyloc;
                         towers._rotation = (float)Math.Atan2(direction.Y, direction.X);
@@ -297,16 +312,19 @@ namespace PixelDefense.States
                             else { towers.firing = false; }
 
 
+
+                            //4 pentru fiecare glont pe mapa  
                             foreach (Bullet bullet in tower.GetBullets())
                             {
+
 
                                 if (bullet.Bounds.Intersects(enemy.InteractionBox))
                                 {
                                     bullet.bulletIsDead = true;
                                     //bullet._position = enemy._position;
-                                    enemy.setHealth(enemy.getHealth() - bullet.getDmg());
+                                    enemy.SetHealth(enemy.GetHealth() - bullet.GetDmg());
 
-                                    if (enemy.getHealth() == 0)
+                                    if (enemy.GetHealth() == 0)
                                     {
 
                                         enemy._movement = new Vector2(0, 0);
@@ -320,10 +338,10 @@ namespace PixelDefense.States
                                 if (!bullet.bulletIsDead)
                                 {
                                 
-                                    var distance = enemy._position - bullet._position;
+                                    var distance = enemy.GetPosition() - bullet._position;
                                     bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
                                     Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
-                                    var currentDistance = Vector2.Distance(bullet._position, enemy._position);
+                                    var currentDistance = Vector2.Distance(bullet._position, enemy.GetPosition());
                                     if (currentDistance > FollowDistance)
                                     {
                                         var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
@@ -333,7 +351,9 @@ namespace PixelDefense.States
                                     }
                                 } else { bullet._position = tower._position; }
 
-                               
+                              // var pula = 0;
+
+
                             }
 
                         
@@ -341,7 +361,12 @@ namespace PixelDefense.States
 
 
                 }
+<<<<<<< Updated upstream
             }
+=======
+           }
+            RemoveEnemy();
+>>>>>>> Stashed changes
 
             RemoveEnemy();
         }

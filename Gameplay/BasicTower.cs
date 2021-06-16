@@ -16,7 +16,7 @@ namespace PixelDefense.Gameplay
         public float timer;         //Initialize a 10 second timer
         public float TIMER;
         public int towerPrice;
-        private List<Bullet> bullets;
+        protected List<Bullet> bullets;
 
         
         public MouseState mouseState;
@@ -24,12 +24,14 @@ namespace PixelDefense.Gameplay
         public BasicTower(Texture2D texture)
           : base(texture)
         {
-            bullets = new List<Bullet>();
+            this.bullets = new List<Bullet>();
         }
 
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
             CenterOrigin();
+
+            //  maybe move  firing inside basic tower?? cause only the tower is shooting
             if(firing)
             {
                 float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -42,11 +44,8 @@ namespace PixelDefense.Gameplay
                 }
             }
         }
-        
-        public int GetPrice()
-        {
-            return towerPrice;
-        }
+       
+      
 
         private void AddBullet(List<Sprite> sprites)
         {
@@ -61,10 +60,6 @@ namespace PixelDefense.Gameplay
             bullets.Add(bullet);
         }
 
-        public List<Bullet> GetBullets() {
-            return bullets;
-        }
-
         public void RemoveBullet()
         {
 
@@ -76,5 +71,67 @@ namespace PixelDefense.Gameplay
                 }
             }    
         }
+
+        // get and set methods
+
+        public void SetPrice(int towerPrice)
+        {
+            this.towerPrice = towerPrice;
+        }
+        public int GetPrice()
+        {
+            return towerPrice;
+        }
+
+        public void Settimer(float timer)
+        {
+            this.timer = timer;
+        }
+
+        public float Gettimer()
+        {
+            return this.timer;
+        }
+
+        public void SetTIMER(float TIMER)
+        {
+            this.TIMER = TIMER;
+        }
+
+        public float GetTIMER()
+        {
+            return this.TIMER;
+        }
+
+        public void SetBullets(List<Bullet> bullets)
+        {
+            this.bullets = bullets;
+        }
+
+        public List<Bullet> GetBullets()
+        {
+            return this.bullets;
+        }
+
+        public void SetBullet(Bullet bullet)
+        {
+            this.Bullet = bullet;
+        }
+
+        public Bullet GetBullet()
+        {
+            return this.Bullet;
+        }
+
+        public void SetMouseState(MouseState mouse)
+        {
+            this.mouseState = mouse;
+        }
+
+        public MouseState GetMouseState()
+        {
+            return this.mouseState;
+        }
+
     }
 }

@@ -34,6 +34,44 @@ namespace PixelDefense.States
             {
                 chooseBackButton,
             };
+<<<<<<< Updated upstream
+=======
+
+            //XDocument xml = XDocument.Load("C:\\Users\\User\\AppData\\Roaming\\PixelDefense\\XML\\Settings.xml");
+                            //Globals.save.GetFile("XML\\Settings.xml"); throws null exception?????
+            
+        }
+
+        public virtual void LoadSaveFile(XDocument saveData)
+        {
+            if(saveData != null)
+            {
+                List<string> allSettings = new List<string>();
+                for (int i = 0; i < arrowSelector.Count; i++)
+                {
+                    allSettings.Add(arrowSelector[i].title);
+                }
+
+                for (int i = 0; i < allSettings.Count; i++)
+                {
+                    List<XElement> optionList = (from t in saveData.Element("Root").Element("Settings").Descendants("setting")
+                                                 where t.Element("name").Value == allSettings[i]
+                                                 select t).ToList<XElement>();
+
+                    if (optionList.Count > 0)
+                    {
+                        for (int j = 0; j < arrowSelector.Count; j++)
+                        {
+                            if (arrowSelector[j].title == allSettings[i])
+                            {
+                                arrowSelector[j].selected = Convert.ToInt32(optionList[0].Element("selected").Value);
+                            }
+                        }
+                    }
+                }
+
+            }
+>>>>>>> Stashed changes
         }
         private void BackButton_Click(object sender, EventArgs e)
         {

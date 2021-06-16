@@ -11,9 +11,9 @@ namespace PixelDefense.Gameplay.Bullets
     {
         public Grapeshot(Texture2D texture) : base(texture)
         {
-            dmg = 1;
-            xVelocity = 3f;
-            yVelocity = 3f;
+            this.dmg = 1;
+            this.xVelocity = 3f;
+            this.yVelocity = 3f;
         }
     }
 }

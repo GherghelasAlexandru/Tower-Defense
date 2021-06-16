@@ -12,11 +12,11 @@ namespace PixelDefense.Gameplay
         public Rat(Dictionary<string, Animation> animations) : base(animations)
         {
 
-            health = 3;
-            mSpeed = 1f;
-            xVelocity = 1f;
-            goldDrop = 20;
-            _timer = 1;
+            this.health = 3;
+            this.mSpeed = 1f;
+            this.xVelocity = 1f;
+            this.goldDrop = 20;
+            this._timer = 1;
         }
     }
 }

@@ -37,18 +37,7 @@ namespace PixelDefense.Gameplay
           
         }
 
-        public int getHealth()
-        {
-            return health;
-        }
-
-        public void setHealth( int health)
-        {
-            this.health = health;
-        }
-
-
-        
+       
            
         
 
@@ -91,7 +80,7 @@ namespace PixelDefense.Gameplay
             Position = pos;
             //IsActive = true;
       
-            path = p;
+            SetPath(p);
             Active = true;
             
 
@@ -188,6 +177,83 @@ namespace PixelDefense.Gameplay
      
             // runAnimation.DrawAnimation(spriteBatch);
         }
+
+
+       
+
+        // get and set
+
+        public void SetHealth(int health)
+        {
+            this.health = health;
+        }
+
+        public int GetHealth()
+        {
+            return this.health;
+        }
+
+        public void SetSpeed(float speed)
+        {
+            this.mSpeed = speed;
+        }
+
+        public float GetSpeed()
+        {
+            return this.mSpeed;
+        }
+
+        public void SetVelocity(float velocity)
+        {
+            this.xVelocity = velocity;
+        }
+
+        public float GetVelocity()
+        {
+            return this.xVelocity;
+        }
+
+        public void SetGoldDrop(int gold)
+        {
+            this.goldDrop = gold;
+        }
+
+        public int GetGoldDrop()
+        {
+            return this.goldDrop;
+        }
+
+        public void SetTimer(float timer)
+        {
+            this._timer = timer;
+        }
+
+        public float GetTimer()
+        {
+            return this._timer;
+        }
+
+        public void SetPosition(Vector2 position)
+        {
+            this.Position = position;
+        }
+
+        public Vector2 GetPosition()
+        {
+            return this.Position;
+        }
+
+        public void SetPath(Queue<Vector2> path)
+        {
+            this.path = path;
+        }
+
+        public Queue<Vector2> GetPath()
+        {
+            return this.path;
+        }
+
+
 
     }
 }

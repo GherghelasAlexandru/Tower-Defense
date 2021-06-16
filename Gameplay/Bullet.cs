@@ -15,18 +15,9 @@ namespace PixelDefense.Gameplay
         public Bullet(Texture2D texture)
           : base(texture)
         {
-            LifeSpan = 1f;
+            this.LifeSpan = 1f;
         }
-
-        public int getDmg()
-        {
-            return dmg;
-        }
-
-        public void setDmg(int dmg)
-        {
-            this.dmg = dmg;
-        }
+    
         
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
@@ -37,6 +28,28 @@ namespace PixelDefense.Gameplay
                 IsActive = true;
 
             _position += Direction * xVelocity;
+        }
+
+        // get and set methods
+
+        public void SetDmg(int dmg)
+        {
+            this.dmg = dmg;
+        }
+
+        public int GetDmg()
+        {
+            return dmg;
+        }
+
+        public void SetBulletIsDead(bool bulletIsDead)
+        {
+            this.bulletIsDead = bulletIsDead;
+        }
+
+        public bool GetBulletIsDead()
+        {
+            return this.bulletIsDead;
         }
     }
 }
