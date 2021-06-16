@@ -21,7 +21,6 @@ namespace PixelDefense.Gameplay
         public float FrameSpeed { get; set; }
 
         public int FrameWidth { get { return Texture.Width / Columns; } }
-        public bool IsDone { get; set; }
         public bool IsLooping { get; set; }
 
         public Texture2D Texture { get; private set; }

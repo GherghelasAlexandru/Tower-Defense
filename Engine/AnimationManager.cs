@@ -76,14 +76,14 @@ namespace PixelDefense.Engine
 
                 }
             }
-            if (_timer > _animation.FrameSpeed && _animation.IsLooping == false && _animation.IsDone == false)
+            if (_timer > _animation.FrameSpeed && _animation.IsLooping == false)
             {
                 _timer = 0f;
                 _animation.CurrentFrame++;
 
                 if (_animation.CurrentFrame >= _animation.FrameCount)
                 {
-                    _animation.IsDone = true;
+
                     _animation.CurrentFrame = _animation.FrameCount;
                 }
             }

@@ -46,7 +46,7 @@ namespace PixelDefense.Engine
             float musicVolumePercent = 1.0f;
             if(musicVolume != null)
             {
-                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value)/30.0f;
+                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value)/180.0f;
             }
             Console.WriteLine(musicVolumePercent);
             AdjustVolume(musicVolumePercent);
