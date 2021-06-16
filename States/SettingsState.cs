@@ -17,7 +17,7 @@ namespace PixelDefense.States
     {
         private List<Button> _button;
         public List<ArrowSelector> arrowSelector = new List<ArrowSelector>();
-       
+        PassObject applyOptions;
         public SettingsState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
          : base(game, graphicsDevice, content)
         {
@@ -26,8 +26,18 @@ namespace PixelDefense.States
             var arrowBtnLeftTexture = _content.Load<Texture2D>("Controls/arrowBtn");
             var arrowBtnRightTexture = _content.Load<Texture2D>("Controls/arrowBtn-Right");
             arrowSelector.Add(new ArrowSelector(550, 320, "Sound", content));
-            arrowSelector.Add(new ArrowSelector(550, 380, "Bg Music", content));
+            for (int i = 0; i < 31; i++)
+            {
+                arrowSelector[arrowSelector.Count - 1].AddOption(new FormOption("" + i, i));
+            }
+            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].options.Count / 2);
 
+            arrowSelector.Add(new ArrowSelector(550, 380, "Bg Music", content));
+            for (int i = 0; i < 30; i++)
+            {
+                arrowSelector[arrowSelector.Count - 1].AddOption(new FormOption("" + i, i));
+            }
+            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].options.Count/2);
 
             var chooseBackButton = new Button(buttonTexture, font)
             {
@@ -49,7 +59,24 @@ namespace PixelDefense.States
             
         }
 
-        public virtual void LoadSaveFile(XDocument saveData)
+        public virtual void ApplyOptions(PassObject applyOptions)
+        {
+            this.applyOptions = applyOptions;
+        }
+
+        public virtual FormOption GetOptionValue(string name)
+        {
+            for(int i = 0; i< arrowSelector.Count; i++)
+            {
+                if(arrowSelector[i].title == name)
+                {
+                    return arrowSelector[i].GetCurrentOption();
+                }
+            }
+            return null;
+        }
+
+        public virtual void LoadSaveFile(XDocument saveData)//Doesn't work
         {
             if(saveData != null)
             {
@@ -96,6 +123,7 @@ namespace PixelDefense.States
                 xml.Element("Root").Element("Settings").Add(arrow.Returnxml());
 
             Globals.save.HandleSaveFormates(xml, "Settings.xml");
+            _game.ApplyOptions(applyOptions);
         }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {

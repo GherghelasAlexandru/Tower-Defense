@@ -20,6 +20,7 @@ namespace PixelDefense.Controls
         public int posx;
         public int posy;
         public SpriteFont textFont;
+        public List<FormOption> options = new List<FormOption>();
         public ArrowSelector(int posx, int posy, string title, ContentManager content)
         {
             textFont = content.Load<SpriteFont>("Fonts/Font");
@@ -62,15 +63,27 @@ namespace PixelDefense.Controls
                                                
         }
 
+        public virtual FormOption GetCurrentOption()
+        {
+            return options[selected];
+            
+        }
+
 
         public void Update(GameTime gameTime)
         {
             foreach (var arrow in _arrowbutton)
                 arrow.Update(gameTime);
         }
+        public virtual void AddOption(FormOption FORMOPTION)
+        {
+            options.Add(FORMOPTION);
+        }
+
         public virtual void ArrowLeftClick(object sender, EventArgs e)
         {
             selected--;
+
             if (selected < 0)
             {
                 selected = 0;
@@ -80,11 +93,13 @@ namespace PixelDefense.Controls
         public virtual void ArrowRightClick(object sender, EventArgs e)
         {
             selected++;
-            if (selected >= 100)
+
+            if (selected >= options.Count)
             {
-                selected = 100;
+                selected = options.Count - 1;
             }
         }
+
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             foreach (var arrow in _arrowbutton)

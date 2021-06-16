@@ -7,6 +7,7 @@ using TiledSharp;
 using PixelDefense.States;
 using System.Collections.Generic;
 using PixelDefense.Engine;
+using PixelDefense.Controls;
 
 namespace PixelDefense
 {
@@ -29,7 +30,7 @@ namespace PixelDefense
         public GameOverState gameOverState;
         public MenuState menuState;
         public MouseState mouseState;
-        
+        public SoundControl soundControl;
 
 
         public int defaultWidth = 1280;
@@ -82,6 +83,8 @@ namespace PixelDefense
             menuState = new MenuState(this, graphics.GraphicsDevice, Content);
             instructionsState = new InstructionsState(this, graphics.GraphicsDevice, Content);
             settingsState = new SettingsState(this, graphics.GraphicsDevice, Content);
+            settingsState.ApplyOptions(ApplyOptions);
+           
             mapSelection = new MapSelectionState(this, graphics.GraphicsDevice, Content);
             gameState = new GameState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);
@@ -102,6 +105,7 @@ namespace PixelDefense
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.content = this.Content;
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            soundControl = new SoundControl("Sounds/bgMusic", Content, settingsState);
             Globals.save = new Save("PixelDefense");
 
             _currentState = menuState;
@@ -150,6 +154,17 @@ namespace PixelDefense
             // TODO: Add your update logic here
 
             base.Update(gameTime);
+        }
+
+        public virtual void ApplyOptions(object option)
+        {
+            FormOption musicVolume = settingsState.GetOptionValue("Bg Music");
+            float musicVolumePercent = 1.0f;
+            if (musicVolume != null)
+            {
+                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value) / 30.0f;
+            }
+            soundControl.AdjustVolume(musicVolumePercent);
         }
 
         /// <summary>
