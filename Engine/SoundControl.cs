@@ -17,7 +17,9 @@ namespace PixelDefense.Engine
     {
         public ContentManager content;
         public SettingsState settingsState;
-        public SoundItem bgMusicMain;
+        public SoundEffect bgMusicMain;
+        public SoundEffectInstance instance;
+        public float volume;
         public List<SoundItem> sounds= new List<SoundItem>();
 
         public SoundControl(string soundPath, ContentManager content, SettingsState settingsState)
@@ -64,32 +66,32 @@ namespace PixelDefense.Engine
 
         public virtual void ChangeMusic(string soundPath)
         {
-            bgMusicMain = new SoundItem("BG main music", soundPath, .10f);
-            bgMusicMain.createInstance();
+            bgMusicMain = Globals.content.Load<SoundEffect>(soundPath);
+            instance = bgMusicMain.CreateInstance();
+            volume = .25f;
 
             FormOption musicVolume = settingsState.GetOptionValue("Bg Music");
-            //Console.WriteLine(settingsState.GetOptionValue("Bg Music"));
             float musicVolumePercent = 1.0f;
             if(musicVolume != null)
             {
-                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value)/180.0f;
+                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value)/30.0f;
             }
             AdjustVolume(musicVolumePercent);
-            bgMusicMain.instance.IsLooped = true;
-            bgMusicMain.instance.Play();
+            instance.IsLooped = true;
+            instance.Play();
 
         }
 
         public virtual void stopMusic()
         {
-            bgMusicMain.instance.Stop();
+            instance.Stop();
         }
 
         public virtual void AdjustVolume(float percentage)
         {
-            if(bgMusicMain.instance != null)
+            if(instance != null)
             {
-                bgMusicMain.instance.Volume = percentage * bgMusicMain.volume;
+                instance.Volume = percentage * volume;
             }
         }
     }

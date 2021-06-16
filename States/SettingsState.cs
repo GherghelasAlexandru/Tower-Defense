@@ -39,7 +39,7 @@ namespace PixelDefense.States
             {
                 arrowSelector[arrowSelector.Count - 1].AddOption(new FormOption("" + i, i));
             }
-            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].options.Count/2);
+            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].options.Count/4);
 
             var chooseBackButton = new Button(buttonTexture, font)
             {
