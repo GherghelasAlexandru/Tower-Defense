@@ -12,13 +12,13 @@ namespace PixelDefense.Gameplay.Towers
     {
         public BrokenGun(Texture2D texture) : base(texture)
         {
-            Bullet = new Brokenshot(_texture);
-            _timer = 3;
-            TIMER = 3/2;
-            xVelocity += Bullet.xVelocity;
-            yVelocity += Bullet.yVelocity;
-            towerPrice = 45;
-            radius = 300;
+            this.Bullet = new Brokenshot(_texture);
+            this._timer = 3;
+            this.TIMER = 3/2;
+            this.xVelocity += Bullet.xVelocity;
+            this.yVelocity += Bullet.yVelocity;
+            this.towerPrice = 45;
+            this.radius = 300;
         }
     }
 }

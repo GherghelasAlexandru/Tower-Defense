@@ -19,16 +19,15 @@ namespace PixelDefense.Gameplay
 
         public ForgeMaster(ContentManager content)
         {
-            enemiesOptions = new List<string>();
+            this.enemiesOptions = new List<string>();
             LoadEnemyOptions();
-            random = new Random();
+            this.random = new Random();
             this.content = content;
 
             
 
 
         }
-
 
         public void LoadEnemyOptions()
         {
@@ -135,6 +134,27 @@ namespace PixelDefense.Gameplay
 
             return rat;
 
+        }
+
+        // get and set methods
+        public void SetEnemiesOptions(List<String> enemiesOpions)
+        {
+            this.enemiesOptions = enemiesOpions;
+        }
+
+        public List<String> GetEnemies()
+        {
+            return this.enemiesOptions;
+        }
+
+        public void SetContent(ContentManager content)
+        {
+            this.content = content;
+        }
+
+        public ContentManager GetContent()
+        {
+            return this.content;
         }
 
 

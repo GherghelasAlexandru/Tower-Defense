@@ -12,13 +12,13 @@ namespace PixelDefense.Gameplay.Towers
     {
         public DoubleCannon(Texture2D texture):base(texture)
         {
-            Bullet = new Grapeshot(_texture);
-            _timer = 3;
-            TIMER = 3;
-            xVelocity += Bullet.xVelocity;
-            yVelocity += Bullet.yVelocity;
-            towerPrice = 25;
-            radius = 300;
+            this.Bullet = new Grapeshot(_texture);
+            this._timer = 3;
+            this.TIMER = 3;
+            this.xVelocity += Bullet.xVelocity;
+            this.yVelocity += Bullet.yVelocity;
+            this.towerPrice = 25;
+            this.radius = 300;
         }
     }
 }

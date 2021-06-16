@@ -11,9 +11,9 @@ namespace PixelDefense.Gameplay.Bullets
     {
         public Brokenshot(Texture2D texture):base(texture)
         {
-            dmg = 1;
-            xVelocity = 5f;
-            yVelocity = 5f;
+            this.dmg = 1;
+            this.xVelocity = 5f;
+            this.yVelocity = 5f;
 
         }
         

@@ -12,13 +12,13 @@ namespace PixelDefense.Gameplay
 {
     public class Map
     {
-        TmxMap map;
-        TmxTileset tileSet;
-        Texture2D tileTexture;
-        int tileWidth;
-        int tileHeight;
-        int tilesetTilesWide;
-        int tilesetTilesHigh;
+        protected TmxMap map;
+       //protected TmxTileset tileSet;
+        protected Texture2D tileTexture;
+        protected int tileWidth;
+        protected int tileHeight;
+        protected int tilesetTilesWide;
+        protected int tilesetTilesHigh;
         public Queue<Vector2> path;
         public List<Rectangle> pathList;
 
@@ -141,5 +141,68 @@ namespace PixelDefense.Gameplay
         {
             return new Vector2((float)map.ObjectGroups["Objects"].Objects["Start"].X, (float)map.ObjectGroups["Objects"].Objects["Start"].Y);
         }
+
+
+        // get and set methods
+        public void SetTmxMap(TmxMap map)
+        {
+            this.map = map;
+        }
+
+        public TmxMap GetMap()
+        {
+            return this.map;
+        }
+
+        public void SetTexture(Texture2D texture)
+        {
+            this.tileTexture = texture;
+        }
+
+        public Texture2D GetTexture()
+        {
+            return this.tileTexture;
+        }
+
+        public void SetTileWidth(int width)
+        {
+            this.tileWidth = width;
+        }
+
+        public int GetTileWidth()
+        {
+            return this.tileWidth;
+        }
+
+        public void SetTileHeight(int height)
+        {
+            this.tileHeight = height;
+        }
+
+        public int GetTileHeight()
+        {
+            return this.tileHeight;
+        }
+
+        public void SetTilesetTilesWidth(int width)
+        {
+            this.tilesetTilesWide = width;
+        }
+
+        public int GetTilesetTilesWidth()
+        {
+            return this.tilesetTilesWide;
+        }
+
+        public void SetTilesetTilesHeight(int height)
+        {
+            this.tilesetTilesHigh = height;
+        }
+
+        public int GetTilesetTilesHeight()
+        {
+            return this.tilesetTilesHigh;
+        }
+
     }
 }

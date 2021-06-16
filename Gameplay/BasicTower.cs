@@ -23,7 +23,7 @@ namespace PixelDefense.Gameplay
         public BasicTower(Texture2D texture)
           : base(texture)
         {
-            bullets = new List<Bullet>();
+            this.bullets = new List<Bullet>();
 
         }
 
@@ -49,10 +49,7 @@ namespace PixelDefense.Gameplay
             bullets.Remove(Bullet);
         }
         
-        public int GetPrice()
-        {
-            return towerPrice;
-        }
+ 
 
    
     
@@ -68,9 +65,6 @@ namespace PixelDefense.Gameplay
         
         }
 
-        public List<Bullet> GetBullets() {
-            return bullets;
-        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -83,6 +77,65 @@ namespace PixelDefense.Gameplay
             }
                 base.Draw(spriteBatch);
             
+        }
+
+        public void SetPrice(int towerPrice)
+        {
+            this.towerPrice = towerPrice;
+        }
+        public int GetPrice()
+        {
+            return towerPrice;
+        }
+
+     /*   public void Settimer(float timer)
+        {
+            this.timer = timer;
+        }
+
+        public float Gettimer()
+        {
+            return this.timer;
+        }
+*/
+        public void SetTIMER(float TIMER)
+        {
+            this.TIMER = TIMER;
+        }
+
+        public float GetTIMER()
+        {
+            return this.TIMER;
+        }
+
+        public void SetBullets(List<Bullet> bullets)
+        {
+            this.bullets = bullets;
+        }
+
+        public List<Bullet> GetBullets()
+        {
+            return this.bullets;
+        }
+
+        public void SetBullet(Bullet bullet)
+        {
+            this.Bullet = bullet;
+        }
+
+        public Bullet GetBullet()
+        {
+            return this.Bullet;
+        }
+
+        public void SetMouseState(MouseState mouse)
+        {
+            this.mouseState = mouse;
+        }
+
+        public MouseState GetMouseState()
+        {
+            return this.mouseState;
         }
     }
 }

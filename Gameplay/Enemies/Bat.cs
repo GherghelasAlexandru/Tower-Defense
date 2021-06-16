@@ -12,11 +12,11 @@ namespace PixelDefense.Gameplay
         public Bat(Dictionary<string, Animation> animations) : base(animations)
         {
 
-            health = 3;
-            mSpeed = 1f;
-            xVelocity = 1f;
-            goldDrop = 19;
-            _timer = 1;
+            this.health = 3;
+            this.mSpeed = 1f;
+            this.xVelocity = 1f;
+            this.goldDrop = 19;
+            this._timer = 1;
         }
     }
 }

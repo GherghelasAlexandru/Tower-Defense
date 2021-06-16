@@ -321,10 +321,10 @@ namespace PixelDefense.States
   
                                         bullet.IsActive = false;
                                        
-                                        enemy.health -= bullet.getDmg();
+                                        enemy.health -= bullet.GetDmg();
                                         Console.WriteLine(enemy.health);
                                     }
-                                    if (enemy.getHealth() == 0 && !enemy.isDead)
+                                    if (enemy.GetHealth() == 0 && !enemy.isDead)
                                     {
 
                                         bullet.IsActive = false;

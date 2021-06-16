@@ -41,25 +41,8 @@ namespace PixelDefense.Gameplay
 
         }
 
-        public void SetWaveBreak(bool waveBreak)
-        {
-            this.waveBreak = waveBreak;
-        }
 
-        public int GetWaveNumber()
-        {
-            return this.waveNumber;
-        }
 
-        public bool GetWaveBreak()
-        {
-            return this.waveBreak;
-        }
-
-        public List<Enemy> GetEnemies()
-        {
-            return this.enemies;
-        }
 
         public void IncreaseDifficulty()
         {
@@ -67,12 +50,6 @@ namespace PixelDefense.Gameplay
             // timebeetweenspawn -= 1;
         }
 
-        public void SetMap(Map map)
-        {
-            //get the map 
-            this.map = map;
-
-        }
 
         public void Update(GameTime gameTime, List<Sprite> sprites)
         {
@@ -150,9 +127,88 @@ namespace PixelDefense.Gameplay
             }
         }
 
+        // get and set methods
+
+        public void SetDeadEnemies(int deadEnemies)
+        {
+            this.deadEnemies = deadEnemies;
+        }
+
+
+
         public int GetDeadEnemies()
         {
-            return deadEnemies;
+            return this.deadEnemies;
+        }
+
+        public void SetWaveBreak(bool waveBreak)
+        {
+            this.waveBreak = waveBreak;
+        }
+
+        public bool GetWaveBreak()
+        {
+            return this.waveBreak;
+        }
+
+        public void SetWaveNumber(int number)
+        {
+            this.waveNumber = number;
+        }
+
+        public int GetWaveNumber()
+        {
+            return this.waveNumber;
+        }
+
+        public void SetEnemyNumbers(int number)
+        {
+            this.enemyNumbers = number;
+        }
+
+        public int GetEnemyNumbers()
+        {
+            return this.enemyNumbers;
+        }
+
+        public void SetTimeBetweenSpawn(float time)
+        {
+            this.timebeetweenspawn = time;
+        }
+
+        public float GetTimeBetweenSpawn()
+        {
+            return this.timebeetweenspawn;
+        }
+
+        public void SetEnemies(List<Enemy> enemies)
+        {
+            this.enemies = enemies;
+        }
+
+        public List<Enemy> GetEnemies()
+        {
+            return this.enemies;
+        }
+
+        public void SetForge(ForgeMaster forge)
+        {
+            this.forge = forge;
+        }
+
+        public ForgeMaster GetForge()
+        {
+            return this.forge;
+        }
+
+        public void SetMap(Map map)
+        {
+            this.map = map;
+        }
+
+        public Map GetMap()
+        {
+            return this.map;
         }
     }
 }

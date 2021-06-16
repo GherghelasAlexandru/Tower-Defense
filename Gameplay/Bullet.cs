@@ -15,17 +15,7 @@ namespace PixelDefense.Gameplay
         public Bullet(Texture2D texture)
           : base(texture)
         {
-            LifeSpan = 10f;
-        }
-
-        public int getDmg()
-        {
-            return dmg;
-        }
-
-        public void setDmg(int dmg)
-        {
-            this.dmg = dmg;
+            this.LifeSpan = 10f;
         }
         
         public override void Update(GameTime gameTime, List<Sprite> sprites)
@@ -39,5 +29,27 @@ namespace PixelDefense.Gameplay
 
 
         }
+
+        // get and set methods
+
+        public void SetDmg(int dmg)
+        {
+            this.dmg = dmg;
+        }
+
+        public int GetDmg()
+        {
+            return dmg;
+        }
+
+/*        public void SetBulletIsDead(bool bulletIsDead)
+        {
+            this.bulletIsDead = bulletIsDead;
+        }
+
+        public bool GetBulletIsDead()
+        {
+            return this.bulletIsDead;
+        }*/
     }
 }
