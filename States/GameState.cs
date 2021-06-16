@@ -19,13 +19,9 @@ namespace PixelDefense.States
         private List<Sprite> _sprites;
         public List<Rectangle> towerPlacements;
         public List<Map> _maps;
-
         public Map map1;
         public Map map2;
-
-        //protected WavesManager waves;
         protected Button startWaveButton;
-
         public Wave wave;
 
         public bool IsOnAnotherTower;
@@ -46,7 +42,6 @@ namespace PixelDefense.States
             map1 = new Map(content, "Content/Test.tmx");
             map2 = new Map(content, "Content/SecondMap2.tmx");
 
-            
             wave = new Wave(content);
 
             map1.AddCollisionPath();
@@ -72,7 +67,6 @@ namespace PixelDefense.States
             this.startWaveButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(779, 774),
-                //Text = " ",
             };
             startWaveButton.Click += StartWaveButton_click;
 
@@ -89,7 +83,7 @@ namespace PixelDefense.States
             {
                 if(tower.IsPlaced)
                 {          
-                    towerPlacements.Add(new Rectangle((int)tower.GetPosition().X, (int)tower.GetPosition().Y, (int)tower.GetTexture().Width, (int)tower.GetTexture().Height));
+                    towerPlacements.Add(new Rectangle((int)tower.GetPosition().X, (int)tower.GetPosition().Y, (int)tower.GetTexture().Width/2, (int)tower.GetTexture().Height/4));
                 }
             }
         }
@@ -128,11 +122,6 @@ namespace PixelDefense.States
             _game.ChangeState(_game.gameOverState);
         }
 
-        public List<Sprite> getSprites()
-        {
-            return _sprites;
-        }
-
         public void SetStartWaveButton()
         {
             this.startWaveButton.Text = "Start Wave" + " " + wave.GetWaveNumber();
@@ -142,8 +131,6 @@ namespace PixelDefense.States
         {
             _game.mouseState = Mouse.GetState();
             Vector2 mousePosition = new Vector2(_game.mouseState.X, _game.mouseState.Y);
-
-            {
                 foreach (var tower in _sprites)
 
                     if (tower is BasicTower)
@@ -182,7 +169,6 @@ namespace PixelDefense.States
                             
                         }
                     }
-            }
         }
 
 
@@ -197,13 +183,10 @@ namespace PixelDefense.States
            
             if (_maps.Contains(map1))
             {
-
                 enemy.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-
             }
             else if (_maps.Contains(map2))
             {
-
                 enemy.SpawnEnemy(map2.GetStartingPoint(), map2.GetPath());
             }
         }
@@ -231,9 +214,6 @@ namespace PixelDefense.States
             }
         }
 
-
-
-
         public void RemoveEnemy()
         {
             for (int i = 0; i < wave.GetEnemies().Count; i++)
@@ -247,7 +227,6 @@ namespace PixelDefense.States
                 }
             }
         }
-
         public void RemoveMap(Map map)
         {
             _maps.Remove(map);
@@ -263,8 +242,6 @@ namespace PixelDefense.States
                 wave.SetAttackingPath(map1);
                 AddMap(map1);
                 RemoveMap(map2);
-                
-               
                 _game.mapSelection.chooseFirstMapButton.Clicked = false;
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
@@ -279,16 +256,13 @@ namespace PixelDefense.States
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
 
-
             foreach (var button in _button)
                 button.Update(gameTime);
-
 
             wave.Update(gameTime, _game.shopState.basicTowers);
             
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
-
                 foreach (Enemy enemy in wave.GetEnemies())
                 {
                     if(enemy.GetIsActive())
@@ -296,28 +270,25 @@ namespace PixelDefense.States
                     {
                         var enemyloc = new Vector2(enemy.Position.X, enemy.Position.Y);
                         Vector2 direction = towers.GetPosition() - enemyloc;
-                        towers.SetRotation((float)Math.Atan2(direction.Y, direction.X));
 
                         float dis = Vector2.Distance(enemyloc, towers._position);
           
                         if (dis <= towers.GetRadius())
                         {
                             towers.firing = true;
+                            towers.SetRotation((float)Math.Atan2(direction.Y, direction.X));
 
                             foreach (Bullet bullet in tower.GetBullets())
                             {
-                               
-                                    var distance = enemy.Position - bullet.Position;
-                                    bullet.SetRotation((float)Math.Atan2(distance.Y, distance.X));
-                                    bullet.SetDirection(new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation)));
-                                    var currentDistance = Vector2.Distance(bullet.Position, enemy.Position);
+                                var distance = enemy.Position - bullet.Position;
+                                bullet.SetRotation((float)Math.Atan2(distance.Y, distance.X));
+                                bullet.SetDirection(new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation)));
+                                var currentDistance = Vector2.Distance(bullet.Position, enemy.Position);
 
-                                    var t = MathHelper.Min((float)Math.Abs(currentDistance), bullet.xVelocity);
-                                    var velocity = bullet.GetDirection() * t;
+                                var t = MathHelper.Min((float)Math.Abs(currentDistance), bullet.xVelocity);
+                                var velocity = bullet.GetDirection() * t;
 
-                                    bullet.SetPosition(bullet.GetPosition() + velocity);
-                                   
-
+                                bullet.SetPosition(bullet.GetPosition() + velocity);                               
 
                                     if (bullet.Bounds.Intersects(enemy.Bounds) && bullet.IsActive)
                                     {
@@ -337,22 +308,15 @@ namespace PixelDefense.States
                                         gold += enemy.GetGoldDrop();
 
                                     }
-                              
-
                             }
-
                         }
                         else { towers.SetIsFiring(false); }
                     }
                 }
             }
 
-            
            PostUpdate(gameTime);
-
-
-            RemoveEnemy();
-            
+           RemoveEnemy();  
         }
        
         public void DrawMap(SpriteBatch spriteBatch)
@@ -368,7 +332,6 @@ namespace PixelDefense.States
         }
 
         public void DrawSprites(SpriteBatch spriteBatch)
-
         {
             foreach (var sprite in _sprites.ToArray())
                 sprite.Draw(spriteBatch);
@@ -379,7 +342,6 @@ namespace PixelDefense.States
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
         }
-
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             DrawMap(spriteBatch);
@@ -391,8 +353,7 @@ namespace PixelDefense.States
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 780), Color.Black);
             }
             else if (IsOnAnotherTower)
-            {
-                
+            {  
                 spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(10, 780), Color.Black);
             }
             spriteBatch.DrawString(textFont, "Gold  " + _game.gameState.GetGold(), new Vector2(20, 10), Color.Black);
