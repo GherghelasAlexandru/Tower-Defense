@@ -129,6 +129,12 @@
 /processorParam:Quality=Best
 /build:Sounds/bgMusic.wav
 
+#begin Sounds/bgMusic2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/bgMusic2.wav
+
 #begin Sounds/button-click.mp3
 /importer:Mp3Importer
 /processor:SoundEffectProcessor
@@ -170,6 +176,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Sounds/tower_choose.mp3
+
+#begin Sounds/wrong.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/wrong.mp3
 
 #begin spritesheets/Bat_Attack.png
 /importer:TextureImporter

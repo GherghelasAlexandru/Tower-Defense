@@ -15,17 +15,14 @@ namespace PixelDefense.Engine
 {
     public class SoundControl
     {
-        public float maxVolume;
-        public SoundEffect sound;
-        public SoundEffectInstance instance;
         public ContentManager content;
         public SettingsState settingsState;
+        public SoundItem bgMusicMain;
+        public List<SoundItem> sounds= new List<SoundItem>();
 
         public SoundControl(string soundPath, ContentManager content, SettingsState settingsState)
         {
             this.content = content;
-            sound = null;
-            instance = null;
             this.settingsState = settingsState;
 
             if (soundPath != null)
@@ -34,42 +31,66 @@ namespace PixelDefense.Engine
             }
         }
 
+        public virtual void addSound(string name, string path, float volume)
+        {
+            sounds.Add(new SoundItem(name, path, volume));
+        }
+
+        public virtual void playSound(string name)
+        {
+            foreach(var sound in sounds)
+            {
+                if(sound.name == name)
+                {
+                    //sound.createInstance();
+                    RunSound(sound.sound, sound.instance, sound.volume);
+                }
+            }
+        }
+
+        public void RunSound(SoundEffect sound, SoundEffectInstance instance, float volume)
+        {
+            FormOption soundVolume = settingsState.GetOptionValue("Sound");
+            Console.WriteLine(soundVolume.value);
+            float soundcVolumePercent = 1.0f;
+            if (soundVolume != null)
+            {
+                soundcVolumePercent = (float)Convert.ToDecimal(soundVolume.value) / 30.0f;
+            }
+
+            instance.Volume = soundcVolumePercent * volume;
+            instance.Play();
+        }
+
         public virtual void ChangeMusic(string soundPath)
         {
-            sound = content.Load<SoundEffect>(soundPath);
-            instance = sound.CreateInstance();
-            maxVolume = .25f;
+            bgMusicMain = new SoundItem("BG main music", soundPath, .10f);
+            bgMusicMain.createInstance();
 
             FormOption musicVolume = settingsState.GetOptionValue("Bg Music");
-            Console.WriteLine(musicVolume.value);
             //Console.WriteLine(settingsState.GetOptionValue("Bg Music"));
             float musicVolumePercent = 1.0f;
             if(musicVolume != null)
             {
                 musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value)/180.0f;
             }
-            Console.WriteLine(musicVolumePercent);
             AdjustVolume(musicVolumePercent);
-            instance.Volume = musicVolumePercent * maxVolume;
-            instance.IsLooped = true;
-            instance.Play();
+            bgMusicMain.instance.IsLooped = true;
+            bgMusicMain.instance.Play();
 
+        }
+
+        public virtual void stopMusic()
+        {
+            bgMusicMain.instance.Stop();
         }
 
         public virtual void AdjustVolume(float percentage)
         {
-            if(instance != null)
+            if(bgMusicMain.instance != null)
             {
-                instance.Volume = percentage * maxVolume;
+                bgMusicMain.instance.Volume = percentage * bgMusicMain.volume;
             }
         }
-
-
-        public void playSound()
-        {
-            instance.Play();
-        }
-
-
     }
 }

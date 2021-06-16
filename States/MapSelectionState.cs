@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PixelDefense.Controls;
+using PixelDefense.Engine;
 using PixelDefense.Gameplay;
 
 namespace PixelDefense.States
@@ -74,12 +75,14 @@ namespace PixelDefense.States
 
         private void MapButton_Click(object sender, EventArgs e)
         {
+            Globals.soundControl.playSound("click");
             _game.ChangeState(_game.gameState);
 
         }
 
         private void BackButton_Click(object sender, EventArgs e)
         {
+            Globals.soundControl.playSound("click");
             _game.ChangeState(_game.menuState);
         }
 

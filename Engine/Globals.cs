@@ -16,6 +16,6 @@ namespace PixelDefense.Engine
         public static ContentManager content;
         public static string appDataFilePath;
         public static Save save;
-
+        public static SoundControl soundControl;
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PixelDefense.Controls;
+using PixelDefense.Engine;
 using PixelDefense.Gameplay;
 using PixelDefense.Gameplay.Bullets;
 using PixelDefense.Gameplay.Towers;
@@ -144,6 +145,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
+                    Globals.soundControl.playSound("negative");
                     notEnoughtMoney = true;
                 }
             }
@@ -158,6 +160,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
+                    Globals.soundControl.playSound("negative");
                     notEnoughtMoney = true;
                 }
             }
@@ -172,6 +175,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
+                    Globals.soundControl.playSound("negative");
                     notEnoughtMoney = true;
                 }
             }
@@ -186,6 +190,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
+                    Globals.soundControl.playSound("negative");
                     notEnoughtMoney = true;
                 }    
             }
@@ -200,6 +205,7 @@ namespace PixelDefense.States
                 }
                 else 
                 {
+                    Globals.soundControl.playSound("negative");
                     notEnoughtMoney = true;
                 }      
             }
@@ -208,7 +214,7 @@ namespace PixelDefense.States
         private void BackButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
-            
+            Globals.soundControl.playSound("click");
             _game.ChangeState(_game.gameState);
             notEnoughtMoney = false;
         }

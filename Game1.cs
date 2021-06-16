@@ -105,8 +105,13 @@ namespace PixelDefense
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.content = this.Content;
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            soundControl = new SoundControl("Sounds/bgMusic", Content, settingsState);
+            Globals.soundControl = new SoundControl("Sounds/bgMusic2", Content, settingsState);
             Globals.save = new Save("PixelDefense");
+            Globals.soundControl.addSound("game over", "Sounds/gameOver", .10f);
+            Globals.soundControl.addSound("click", "Sounds/button-click", .10f);
+            Globals.soundControl.addSound("shop", "Sounds/shop_open", .25f);
+            Globals.soundControl.addSound("negative", "Sounds/wrong", .25f);
+            Globals.soundControl.addSound("shoot", "Sounds/shoot", .25f);
 
             _currentState = menuState;
 
@@ -164,7 +169,7 @@ namespace PixelDefense
             {
                 musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value) / 30.0f;
             }
-            soundControl.AdjustVolume(musicVolumePercent);
+            Globals.soundControl.AdjustVolume(musicVolumePercent);
         }
 
         /// <summary>

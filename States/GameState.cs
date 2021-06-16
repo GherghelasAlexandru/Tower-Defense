@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PixelDefense.Controls;
 using Microsoft.Xna.Framework.Input;
-
+using PixelDefense.Engine;
 
 namespace PixelDefense.States
 {
@@ -38,7 +38,7 @@ namespace PixelDefense.States
           : base(game, graphicsDevice, content)
         {
             gold = 100;
-
+            //Globals.soundControl.ChangeMusic("Sounds/bgMusic2");
             _sprites = new List<Sprite>();
             towerPlacements = new List<Rectangle>();
             _maps = new List<Map>();
@@ -123,7 +123,8 @@ namespace PixelDefense.States
 
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
         {
-
+            Globals.soundControl.stopMusic();
+            Globals.soundControl.playSound("game over");
             _game.ChangeState(_game.gameOverState);
         }
 
@@ -134,7 +135,7 @@ namespace PixelDefense.States
 
         public void SetStartWaveButton()
         {
-           this.startWaveButton.Text = "Start Wave" + " " + wave.GetWaveNumber();
+            this.startWaveButton.Text = "Start Wave" + " " + wave.GetWaveNumber();
         }
 
         public void PlaceTower()
@@ -164,6 +165,7 @@ namespace PixelDefense.States
                                 }
                                 else if (IsTowerColliding(tower.BoundingBox))
                                 {
+                                    Globals.soundControl.playSound("negative");
                                     IsOnAnotherTower = true;
                                     tower.SetIsDragged(true);
                                 }
@@ -211,6 +213,7 @@ namespace PixelDefense.States
             //shop can not be used when wave is active
             if(wave.GetWaveBreak() == false)
             {
+                Globals.soundControl.playSound("shop");
                 _game.ChangeState(_game.shopState);
             }
             
@@ -318,6 +321,7 @@ namespace PixelDefense.States
 
                                     if (bullet.Bounds.Intersects(enemy.Bounds) && bullet.IsActive)
                                     {
+                                        Globals.soundControl.playSound("shoot");
   
                                         bullet.SetIsActive(false);
                                         enemy.SetHealth(enemy.GetHealth() - bullet.GetDmg());
@@ -326,7 +330,7 @@ namespace PixelDefense.States
                                     }
                                     if (enemy.GetHealth() == 0 && !enemy.isDead)
                                     {
-
+                                        Globals.soundControl.playSound("click");
                                         bullet.SetIsActive(false);
                                         enemy.SetMovement(new Vector2(0, 0));
                                         enemy.SetIsDead(true);
@@ -388,6 +392,7 @@ namespace PixelDefense.States
             }
             else if (IsOnAnotherTower)
             {
+                
                 spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(10, 780), Color.Black);
             }
             spriteBatch.DrawString(textFont, "Gold  " + _game.gameState.GetGold(), new Vector2(20, 10), Color.Black);
