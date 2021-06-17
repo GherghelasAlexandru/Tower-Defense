@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using PixelDefense.Controls;
 using Microsoft.Xna.Framework.Input;
-
+using System.Timers;
 
 namespace PixelDefense.States
 {
@@ -32,11 +32,16 @@ namespace PixelDefense.States
         public bool IsOnPath;
         public float FollowDistance;
         public int gold;
+        private static System.Timers.Timer aTimer;
+        private static int baseHealth;
+
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             gold = 100;
+            
+            baseHealth = 100000;
 
             _sprites = new List<Sprite>();
             towerPlacements = new List<Rectangle>();
@@ -50,7 +55,7 @@ namespace PixelDefense.States
 
             map1.AddCollisionPath();
             map2.AddCollisionPath();
-            
+
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
@@ -86,8 +91,8 @@ namespace PixelDefense.States
         {
             foreach (var tower in _sprites)
             {
-                if(tower.IsPlaced)
-                {          
+                if (tower.IsPlaced)
+                {
                     towerPlacements.Add(new Rectangle((int)tower._position.X, (int)tower._position.Y, (int)tower._texture.Width, (int)tower._texture.Height));
                 }
             }
@@ -133,7 +138,7 @@ namespace PixelDefense.States
 
         public void SetStartWaveButton()
         {
-           this.startWaveButton.Text = "Start Wave" + " " + waves.GetWaveNumber();
+            this.startWaveButton.Text = "Start Wave" + " " + waves.GetWaveNumber();
         }
 
         public void PlaceTower()
@@ -176,7 +181,7 @@ namespace PixelDefense.States
                                     tower.IsPlaced = true;
                                 }
                             }
-                            
+
                         }
                     }
             }
@@ -191,7 +196,7 @@ namespace PixelDefense.States
         public void AddEnemy(Enemy enemy)
         {
             _sprites.Add(enemy);
-           
+
             if (_maps.Contains(map1))
             {
 
@@ -250,13 +255,13 @@ namespace PixelDefense.States
                 //wave.CreateEnemy();
                 AddMap(map1);
                 RemoveMap(map2);
-                
-               
+
+
                 _game.mapSelection.chooseFirstMapButton.Clicked = false;
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
             {
-                waves.SetAttackingPath(map2); 
+                waves.SetAttackingPath(map2);
 
                 AddMap(map2);
                 RemoveMap(map1);
@@ -266,14 +271,14 @@ namespace PixelDefense.States
 
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
-         
+
 
             foreach (var button in _button)
                 button.Update(gameTime);
 
 
             waves.Update(gameTime, _game.shopState.basicTowers);
-                PostUpdate(gameTime);
+            PostUpdate(gameTime);
 
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
@@ -287,65 +292,101 @@ namespace PixelDefense.States
                         towers._rotation = (float)Math.Atan2(direction.Y, direction.X);
 
                         float dis = Vector2.Distance(enemyloc, towers._position);
-                           // Console.WriteLine(dis);
-                          //  Console.WriteLine(towers.radius);
-                            if (dis <= towers.radius)
+                        // Console.WriteLine(dis);
+                        //  Console.WriteLine(towers.radius);
+                        if (dis <= towers.radius)
+                        {
+                            towers.firing = true;
+
+                        }
+                        else { towers.firing = false; }
+
+
+                        foreach (Bullet bullet in tower.GetBullets())
+                        {
+
+                            if (bullet.Bounds.Intersects(enemy.InteractionBox))
                             {
-                                towers.firing = true;
+                                bullet.bulletIsDead = true;
+                                //bullet._position = enemy._position;
+                                enemy.setHealth(enemy.getHealth() - bullet.getDmg());
 
-                            }
-                            else { towers.firing = false; }
-
-
-                            foreach (Bullet bullet in tower.GetBullets())
-                            {
-
-                                if (bullet.Bounds.Intersects(enemy.InteractionBox))
+                                if (enemy.getHealth() == 0)
                                 {
-                                    bullet.bulletIsDead = true;
-                                    //bullet._position = enemy._position;
-                                    enemy.setHealth(enemy.getHealth() - bullet.getDmg());
 
-                                    if (enemy.getHealth() == 0)
-                                    {
+                                    enemy._movement = new Vector2(0, 0);
+                                    gold += enemy.goldDrop;
 
-                                        enemy._movement = new Vector2(0, 0);
-                                        gold += enemy.goldDrop;
-
-
-                                    }
 
                                 }
 
-                                if (!bullet.bulletIsDead)
-                                {
-                                
-                                    var distance = enemy._position - bullet._position;
-                                    bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
-                                    Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
-                                    var currentDistance = Vector2.Distance(bullet._position, enemy._position);
-                                    if (currentDistance > FollowDistance)
-                                    {
-                                        var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
-                                        var velocity = Direction * t;
-
-                                        bullet._position += velocity;
-                                    }
-                                } else { bullet._position = tower._position; }
-
-                               
                             }
 
-                        
+                            if (!bullet.bulletIsDead)
+                            {
+
+                                var distance = enemy._position - bullet._position;
+                                bullet._rotation = (float)Math.Atan2(distance.Y, distance.X);
+                                Vector2 Direction = new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation));
+                                var currentDistance = Vector2.Distance(bullet._position, enemy._position);
+                                if (currentDistance > FollowDistance)
+                                {
+                                    var t = MathHelper.Min((float)Math.Abs(currentDistance), enemy.xVelocity);
+                                    var velocity = Direction * t;
+
+                                    bullet._position += velocity;
+                                }
+                            }
+                            else { bullet._position = tower._position; }
+
+
+                        }
+
+
                     }
 
 
                 }
             }
 
+
+
+
+            AttackBase();
+
             RemoveEnemy();
         }
-       
+
+        public void AttackBase() {
+            foreach (Map map in _maps)
+            {
+                foreach (Enemy enemy in waves.GetEnemies())
+                {
+                    if (enemy._position.X >= 112 && enemy._position.X <= 113 && enemy._position.Y >= 269 && enemy._position.Y <= 270)
+                    {
+                        SetTimer();
+                    }
+                } 
+            }
+        }
+
+        public static void BaseLoseHealth(Object source, ElapsedEventArgs e) {
+            Console.WriteLine(baseHealth);
+            baseHealth--;
+        }
+
+
+
+        private static void SetTimer()
+        {
+            // Create a timer with a two second interval.
+            aTimer = new System.Timers.Timer(2000);
+            // Hook up the Elapsed event for the timer. 
+            aTimer.Elapsed += BaseLoseHealth;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+        }
+
         public void DrawMap(SpriteBatch spriteBatch)
         {
             foreach(var map in _maps)

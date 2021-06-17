@@ -141,5 +141,12 @@ namespace PixelDefense.Gameplay
         {
             return new Vector2((float)map.ObjectGroups["Objects"].Objects["Start"].X, (float)map.ObjectGroups["Objects"].Objects["Start"].Y);
         }
+
+        public Vector2 GetEndPoint()
+        {
+            return new Vector2((float)map.ObjectGroups["Objects"].Objects["End"].X, (float)map.ObjectGroups["Objects"].Objects["End"].Y);
+        }
     }
+
+
 }
