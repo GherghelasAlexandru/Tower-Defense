@@ -15,6 +15,7 @@ namespace PixelDefense.States
     public class GameOverState : State
     {
         public SpriteFont textFontTitle;
+        public SpriteFont buttonFont;
         private List<Button> _button;
         public bool IsRestarted = false;
         public GameOverState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
@@ -24,10 +25,11 @@ namespace PixelDefense.States
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var font = _content.Load<SpriteFont>("Fonts/Font");
             textFontTitle = _content.Load<SpriteFont>("Fonts/TextFont");
+            buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
             var chooseBackButton = new Button(buttonTexture, font)
             {
-                Position = new Vector2(550, 450),
+                Position = new Vector2(550, 460),
                 Text = "Go to main menu",
             };
 
@@ -63,6 +65,8 @@ namespace PixelDefense.States
 
             string tempStr = "Game over!";
             spriteBatch.DrawString(textFontTitle, tempStr, new Vector2(490, 250), Color.Black);
+            spriteBatch.DrawString(buttonFont, "You made it to wave " + _game.gameState.GetWaveNumber(), new Vector2(530, 340), Color.Black);
+            spriteBatch.DrawString(buttonFont, "Your score is " + _game.gameState.GetScore(), new Vector2(550, 380), Color.Black);
         }
     }
 }
