@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace PixelDefense.Gameplay
 {
@@ -22,12 +23,16 @@ namespace PixelDefense.Gameplay
         public int goldDrop;
         public Queue<Vector2> path;
         public bool active;
+        public static int baseHealth;
+        public int damage;
+        private System.Timers.Timer aTimer;
 
 
 
         public Enemy(Dictionary<string,Animation>animations) : base(animations)
 
         {
+            baseHealth = 100;
             this.LifeSpan = 2f;
             this._animations = animations;
             this._animationManager = new AnimationManager(animations);
@@ -114,6 +119,7 @@ namespace PixelDefense.Gameplay
                     if (path.Count == 0)
                     {
                         // active need to be changed, here must be implemented the atack logic
+                        SetTimer();
                         Active = false;
                         xVelocity = 0;
                     }
@@ -133,10 +139,51 @@ namespace PixelDefense.Gameplay
             base.Update(gameTime,sprites);
         }
 
+        public void BaseLoseHealth(Object source, ElapsedEventArgs e)
+        {
+            baseHealth = baseHealth - damage;
+            Console.WriteLine(baseHealth);
+        }
+
+
+
+        private void SetTimer()
+        {
+            // Create a timer with a two second interval.
+            aTimer = new System.Timers.Timer(2000);
+            // Hook up the Elapsed event for the timer. 
+            aTimer.Elapsed += BaseLoseHealth;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
+        }
+
 
         protected virtual void SetAnimations()
-        {
-
+        { 
+           /* if (baseHealth >= 80)
+            {
+                _animationManager.Play(_animations["5_Bars"]);
+            }
+            else if (baseHealth < 80 && baseHealth >= 60) 
+            {
+                _animationManager.Play(_animations["4_Bars"]);
+            }
+            else if (baseHealth < 60 && baseHealth >= 40)
+            {
+                _animationManager.Play(_animations["3_Bars"]);
+            }
+            else if (baseHealth < 40 && baseHealth >= 20)
+            {
+                _animationManager.Play(_animations["2_Bars"]);
+            }
+            else if (baseHealth < 20 && baseHealth > 0)
+            {
+                _animationManager.Play(_animations["1_Bars"]);
+            }
+            else if (baseHealth == 0)
+            {
+                _animationManager.Play(_animations["0_Bars"]);
+            }*/
 
 
             if (health > 0)
