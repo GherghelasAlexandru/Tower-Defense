@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace PixelDefense.Gameplay
 {
@@ -22,6 +23,9 @@ namespace PixelDefense.Gameplay
         public int goldDrop;
         public Queue<Vector2> path;
         public bool active;
+        public int baseHealth;
+        public int damage;
+        private System.Timers.Timer aTimer;
 
 
 
@@ -114,6 +118,7 @@ namespace PixelDefense.Gameplay
                     if (path.Count == 0)
                     {
                         // active need to be changed, here must be implemented the atack logic
+                        SetTimer();
                         Active = false;
                         xVelocity = 0;
                     }
@@ -131,6 +136,24 @@ namespace PixelDefense.Gameplay
             SetAnimations();
             _animationManager.Update(gameTime);
             base.Update(gameTime,sprites);
+        }
+
+        public void BaseLoseHealth(Object source, ElapsedEventArgs e)
+        {
+            baseHealth = baseHealth - damage;
+            Console.WriteLine("BaseHealth: "+ baseHealth);
+        }
+
+
+
+        private void SetTimer()
+        {
+            // Create a timer with a two second interval.
+            aTimer = new System.Timers.Timer(2000);
+            // Hook up the Elapsed event for the timer. 
+            aTimer.Elapsed += BaseLoseHealth;
+            aTimer.AutoReset = true;
+            aTimer.Enabled = true;
         }
 
 
@@ -262,6 +285,16 @@ namespace PixelDefense.Gameplay
         public Queue<Vector2> GetPath()
         {
             return this.path;
+        }
+
+        public void SetBaseHealth(int health)
+        {
+            this.baseHealth = health;
+        }
+
+        public int GetBaseHealth()
+        {
+            return this.baseHealth;
         }
 
     }
