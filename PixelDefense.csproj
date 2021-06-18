@@ -67,6 +67,7 @@
     <Compile Include="Engine\SoundItem.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\Animation.cs" />
+    <Compile Include="Gameplay\Base.cs" />
     <Compile Include="Gameplay\BasicTower.cs" />
     <Compile Include="Gameplay\Bullet.cs" />
     <Compile Include="Gameplay\Bullets\Brokenshot.cs" />

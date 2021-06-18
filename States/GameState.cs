@@ -22,6 +22,7 @@ namespace PixelDefense.States
         public Map map1;
         public Map map2;
         protected Button startWaveButton;
+        public Base mainBase;
         public Wave wave;
 
         public bool IsOnAnotherTower;
@@ -43,6 +44,8 @@ namespace PixelDefense.States
             map2 = new Map(content, "Content/SecondMap2.tmx");
 
             wave = new Wave(content);
+
+            mainBase = new Base(100);
 
             map1.AddCollisionPath();
             map2.AddCollisionPath();
