@@ -14,7 +14,7 @@ namespace PixelDefense.Engine
         public Animation _animation;
 
 
-
+     
 
         public AnimationManager(Dictionary<string, Animation> animations) : base(animations.ElementAt(0).Value.Texture)
         {
@@ -90,6 +90,13 @@ namespace PixelDefense.Engine
 
 
 
+        }
+
+        protected virtual void SetAnimations()
+        {
+
+            
+             
         }
 
 

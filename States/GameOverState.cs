@@ -65,8 +65,8 @@ namespace PixelDefense.States
 
             string tempStr = "Game over!";
             spriteBatch.DrawString(textFontTitle, tempStr, new Vector2(490, 250), Color.Black);
-            spriteBatch.DrawString(buttonFont, "You made it to wave " + _game.gameState.GetWaveNumber(), new Vector2(530, 340), Color.Black);
-            spriteBatch.DrawString(buttonFont, "Your score is " + _game.gameState.GetScore(), new Vector2(550, 380), Color.Black);
+            spriteBatch.DrawString(buttonFont, "You made it to wave " + _game.gameState.wave.GetWaveNumber(), new Vector2(530, 340), Color.Black);
+            spriteBatch.DrawString(buttonFont, "Your score is " + _game.gameState.score, new Vector2(550, 380), Color.Black);
         }
     }
 }

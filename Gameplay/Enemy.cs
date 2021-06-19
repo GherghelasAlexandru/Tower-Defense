@@ -157,7 +157,7 @@ namespace PixelDefense.Gameplay
         }
 
 
-        protected virtual void SetAnimations()
+        protected override void SetAnimations()
         {
 
 
