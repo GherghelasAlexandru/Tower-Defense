@@ -17,24 +17,56 @@ namespace PixelDefense.Gameplay
         {
             _animation = animation;
             _animationManager = new AnimationManager(animation);
-            this.health = 120;
-            Position = new Vector2(200, 200);
-            _animationManager.Scale = 2;
+            health = 120;
+            Position = new Vector2(90, 90);
+            _animationManager.Scale = 1.5f;
         }
 
-        public override void Update(GameTime gameTime, List<Sprite> sprites)
+        public override void Update(GameTime gameTime)
         {
-            SetAnimations();
-            _animationManager.Update(gameTime);
-            base.Update(gameTime, sprites);
+            switch(health)
+            {
+
+                case 90:
+                    _animationManager._animation.CurrentFrame = 1;
+                    break;
+                case 75:
+                    _animationManager._animation.CurrentFrame = 2;
+                    break;
+                case 60:
+                    _animationManager._animation.CurrentFrame = 3;
+                    break;
+                case 45:
+                    _animationManager._animation.CurrentFrame = 4;
+                    break;
+                case 30:
+                    _animationManager._animation.CurrentFrame = 5;
+                    break;
+                case 15:
+                    _animationManager._animation.CurrentFrame = 6;
+                    break;
+                case 0:
+                    _animationManager._animation.CurrentFrame = 7;
+                    break;
+
+                default:
+                    _animationManager._animation.CurrentFrame = 0;
+                    break;
+
+
+            }
+
+
+
         }
 
         protected override void SetAnimations()
         {
-            _animationManager.Play(_animation);
             
-           
-            _animationManager.UpdateBoundingBox();
+                _animationManager.Play(_animation);
+            
+            
+                _animationManager.UpdateBoundingBox();
         }
 
 

@@ -30,11 +30,12 @@ namespace PixelDefense.States
         public float FollowDistance;
         public int gold;
         public int score;
+        public Animation healthBar;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-            var healthBar = new Animation(content.Load<Texture2D>("spritesheets/Stitched_HP_Bar"), 8, 1, 0) { IsLooping = false };
+            healthBar = new Animation(content.Load<Texture2D>("spritesheets/Stitched_HP_Bar"), 8, 1, 0) { IsLooping = false };
            
             mainBase = new Base(healthBar);
             gold = 100;
@@ -240,6 +241,7 @@ namespace PixelDefense.States
 
         public override void Update(GameTime gameTime)
         {
+            AttackBase(gameTime);
             SetStartWaveButton();
             PlaceTower();
             AddTowerPlacement();
@@ -271,7 +273,9 @@ namespace PixelDefense.States
             {
                 foreach (Enemy enemy in wave.GetEnemies())
                 {
-                    if(enemy.GetIsActive())
+
+                    if (enemy.GetIsActive())
+ 
                     foreach (var towers in _sprites)
                     {
                         var enemyloc = new Vector2(enemy.Position.X, enemy.Position.Y);
@@ -314,7 +318,9 @@ namespace PixelDefense.States
                                         gold += enemy.GetGoldDrop();
 
                                     }
-                            }
+                                    
+                                    
+                                }
                         }
                         else { towers.SetIsFiring(false); }
                     }
@@ -334,6 +340,24 @@ namespace PixelDefense.States
                 map.DrawShadow(spriteBatch);
                 map.DrawBase(spriteBatch);
                 map.DrawDecorations(spriteBatch);
+            }
+        }
+
+        public void AttackBase(GameTime gameTime)
+        {
+            foreach (Enemy enemy in wave.GetEnemies())
+            {
+
+                if (enemy.GetIsActive())
+                
+                    if (enemy.GetPath().Count == 0)
+                    {
+                        
+                            Console.WriteLine(mainBase.health);
+                            mainBase.health -= enemy.damage;
+                           
+                        
+                    }
             }
         }
 

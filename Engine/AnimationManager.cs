@@ -54,6 +54,12 @@ namespace PixelDefense.Engine
 
         }
 
+        public void PlayOneFrame(Animation animation,int frame)
+        {
+            _animation = animation;
+            _animation.CurrentFrame = frame;
+        }
+
         public void Stop()
         {
             _timer = 0f;
@@ -61,7 +67,7 @@ namespace PixelDefense.Engine
             _animation.CurrentFrame = 0;
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
 
             _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
