@@ -34,6 +34,9 @@ namespace PixelDefense.States
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
+            var healthBar = new Animation(content.Load<Texture2D>("spritesheets/Stitched_HP_Bar"), 8, 1, 0) { IsLooping = false };
+           
+            mainBase = new Base(healthBar);
             gold = 100;
             //Globals.soundControl.ChangeMusic("Sounds/bgMusic2");
             _sprites = new List<Sprite>();
@@ -44,8 +47,8 @@ namespace PixelDefense.States
             map2 = new Map(content, "Content/SecondMap2.tmx");
 
             wave = new Wave(content);
-
-            mainBase = new Base(100);
+            
+            
 
             map1.AddCollisionPath();
             map2.AddCollisionPath();
@@ -263,7 +266,7 @@ namespace PixelDefense.States
                 button.Update(gameTime);
 
             wave.Update(gameTime, _game.shopState.basicTowers);
-            
+            mainBase.Update(gameTime);
             foreach (BasicTower tower in _game.shopState.basicTowers)
             {
                 foreach (Enemy enemy in wave.GetEnemies())
@@ -351,6 +354,7 @@ namespace PixelDefense.States
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
             wave.Draw(spriteBatch);
+            mainBase.Draw(spriteBatch);
             if(IsOnPath)
             {
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 780), Color.Black);

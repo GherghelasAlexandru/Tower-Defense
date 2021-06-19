@@ -20,6 +20,10 @@ namespace PixelDefense.Engine
         {
 
         }
+        public AnimationManager(Animation animation):base(animation.Texture)
+        {
+            _animation = animation;
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -32,7 +36,7 @@ namespace PixelDefense.Engine
                                            _animation.FrameHeight * row,
                                            _animation.FrameWidth,
                                            _animation.FrameHeight),
-                             Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+                             Color.White, _rotation, Origin, Scale, SpriteEffects.None, 0);
 
         }
 

@@ -17,7 +17,7 @@ namespace PixelDefense.Gameplay
         public float yVelocity;
         public float xVelocity;
         public float LifeSpan = 0f;
-  
+        public float Scale { get; set; }
 
         public Vector2 Origin;
         public Vector2 Direction;
@@ -73,6 +73,7 @@ namespace PixelDefense.Gameplay
             // The default origin in the centre of the sprite
             this.Origin = new Vector2(0, 0);
             this.IsActive = true;
+            Scale = 1;
         }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
@@ -84,7 +85,7 @@ namespace PixelDefense.Gameplay
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, Scale, SpriteEffects.None, 0);
  
         }
 

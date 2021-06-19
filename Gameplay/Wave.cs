@@ -32,7 +32,7 @@ namespace PixelDefense.Gameplay
             this.content = content;
             this.forge = new ForgeMaster(this.content);
             this.enemies = new List<Enemy>();
-            this.mainBase = new Base(100);
+            
 
             // required for wave lenght,difficulty,
             this.timebeetweenspawn = 0.7f;
@@ -113,7 +113,7 @@ namespace PixelDefense.Gameplay
                 if(enemies.Count + deadEnemies  < enemyNumbers)
                 {
                     Enemy enemy = forge.ForgeEnemy(forge.GetRandomEnemy());
-                    enemy.SetBaseHealth(mainBase.GetBaseHealth());
+                    
                     enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
                     this.enemies.Add(enemy);
                 }

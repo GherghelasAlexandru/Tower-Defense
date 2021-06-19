@@ -37,7 +37,7 @@ namespace PixelDefense.Gameplay
             this._animationManager = new AnimationManager(animations);
             this.active = false;
             this.path = new Queue<Vector2>();
-
+            
           
         }    
         
