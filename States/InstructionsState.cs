@@ -16,18 +16,25 @@ namespace PixelDefense.States
     public class InstructionsState : State
     {
         private List<Button> _button;
+        private Texture2D firstSlide;
+        private Texture2D secondSlide;
+        private Texture2D thirdSlide;
+        private Texture2D fourthSlide;
 
         public InstructionsState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var font = _content.Load<SpriteFont>("Fonts/Font");
-
+             this.firstSlide = _content.Load<Texture2D>("Controls/firstSlide");
+             this.secondSlide = _content.Load<Texture2D>("Controls/secondSlide");
+            this.thirdSlide = _content.Load<Texture2D>("Controls/thirdSlide");
+            this.fourthSlide = _content.Load<Texture2D>("Controls/fourthSlide");
 
 
             var chooseBackButton = new Button(buttonTexture, font)
             {
-                Position = new Vector2(550, 450),
+                Position = new Vector2(550, 750),
                 Text = "Back",
             };
 
@@ -61,6 +68,16 @@ namespace PixelDefense.States
         {
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
+
+            spriteBatch.Draw(firstSlide, new Vector2( 65,10));
+
+            spriteBatch.Draw(secondSlide, new Vector2(800, 10));
+
+            spriteBatch.Draw(thirdSlide, new Vector2(65, 400));
+
+            spriteBatch.Draw(fourthSlide, new Vector2(800, 400));
+
+
         }
     }
 }
