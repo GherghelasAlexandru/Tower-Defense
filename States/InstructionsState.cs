@@ -38,7 +38,7 @@ namespace PixelDefense.States
             var chooseBackButton = new Button(buttonTexture, font)
             {
                 Position = new Vector2(550, 760),
-                Text = "Back",
+                Text = "Got it!",
             };
 
             chooseBackButton.Click += BackButton_Click;
