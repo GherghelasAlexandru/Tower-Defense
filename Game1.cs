@@ -32,7 +32,6 @@ namespace PixelDefense
         public MouseState mouseState;
         public SoundControl soundControl;
 
-
         public int defaultWidth = 1280;
         public int defaultHeight = 830;
 
