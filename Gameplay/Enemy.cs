@@ -49,10 +49,10 @@ namespace PixelDefense.Gameplay
                 // interactionBox need to be bigger than bounding box
                 Rectangle interactionBox = _animationManager.BoundingBox;
 
-                interactionBox.X += 45;
-                interactionBox.Y += 40;
-                interactionBox.Width -= 55;
-                interactionBox.Height -= 60;
+                interactionBox.X += 0;
+                interactionBox.Y += 5;
+                interactionBox.Width -= 20;
+                interactionBox.Height -= 15;
 
                 return interactionBox;
             }
@@ -168,13 +168,6 @@ namespace PixelDefense.Gameplay
            
         }
 
-
-
-
-
-
-
-
         protected override void SetAnimations()
         {
 
@@ -184,17 +177,17 @@ namespace PixelDefense.Gameplay
             {
                 _animationManager.Play(_animations["Run"]);
             }
-            else if (xVelocity == 0)
+            else if (GetPath().Count == 0)
             {
                 _animationManager.Play(_animations["Attack"]);
             }
-            else if (health <= 0)
+            else if (isDead)
             {
 
                 _animationManager.Play(_animations["Death"]);
                
                 _animationManager._animation.IsLooping = false;
-                isDead = true;
+                
             }
 
             else _animationManager.Stop();

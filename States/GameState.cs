@@ -87,9 +87,9 @@ namespace PixelDefense.States
         }
         public void AddTowerPlacement()
         {
-            foreach (var tower in _sprites)
+            foreach (BasicTower tower in _sprites)
             {
-                if(tower.IsPlaced)
+                if(tower.GetIsPlaced())
                 {          
                     towerPlacements.Add(new Rectangle((int)tower.GetPosition().X, (int)tower.GetPosition().Y, (int)tower.GetTexture().Width/2, (int)tower.GetTexture().Height/4));
                 }
@@ -139,10 +139,9 @@ namespace PixelDefense.States
         {
             _game.mouseState = Mouse.GetState();
             Vector2 mousePosition = new Vector2(_game.mouseState.X, _game.mouseState.Y);
-                foreach (var tower in _sprites)
+                foreach (BasicTower tower in _sprites)
 
-                    if (tower is BasicTower)
-                    {
+                    
                         if (_game.mouseState.LeftButton == ButtonState.Released && tower.GetDragged())
                         {
                             tower._position.X = _game.mouseState.X;
@@ -176,31 +175,10 @@ namespace PixelDefense.States
                             }
                             
                         }
-                    }
+                    
         }
 
-        public void AddBullets(GameTime gameTime)
-        {
-            foreach (BasicTower tower in _sprites)
-            {
-                foreach (Enemy enemy in wave.GetEnemies())
-                {
-                    float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                    tower._timer -= elapsed;
-                    if (enemy.IsActive && tower._timer < 0 && tower.firing)
-                    {
-
-                        tower.AddBullet();
-                        tower._timer = tower.TIMER;
-                    }
-                    else if (!enemy.IsActive || !tower.firing)
-                    {
-                        tower.Bullet.IsActive = false;
-                        RemoveBullets(gameTime);
-                    }
-                }
-            }
-        }
+      
 
         public void AddTower(BasicTower tower)
         {
@@ -238,7 +216,7 @@ namespace PixelDefense.States
                 
             for (int i = 0; i < tower.GetBullets().Count; i++)
             {
-                if (tower.GetBullets()[i].IsActive)
+                if (!tower.GetBullets()[i].IsActive || !wave.GetWaveBreak())
                 {
                         tower.GetBullets().RemoveAt(i);
                     i--;
@@ -266,7 +244,7 @@ namespace PixelDefense.States
 
         public override void Update(GameTime gameTime)
         {
-            AddBullets(gameTime);
+            
             if (mainBase.health == 0)
             {
                 Globals.soundControl.stopMusic();
@@ -305,64 +283,43 @@ namespace PixelDefense.States
 
             wave.Update(gameTime, _game.shopState.basicTowers);
             mainBase.Update(gameTime);
-            foreach (BasicTower tower in _game.shopState.basicTowers)
+            foreach (BasicTower tower in _sprites)
             {
+                
                 foreach (Enemy enemy in wave.GetEnemies())
                 {
                     
-                    if (enemy.GetIsActive())
- 
-                    foreach (var towers in _sprites)
-                    {
-                        var enemyloc = new Vector2(enemy.Position.X, enemy.Position.Y);
-                        Vector2 direction = towers.GetPosition() - enemyloc;
+                    if (enemy.IsActive)
+                    tower.RotateOnEnemy(gameTime,enemy);
 
-                        float dis = Vector2.Distance(enemyloc, towers._position);
-          
-                        if (dis <= towers.GetRadius())
-                        {
-                            towers.firing = true;
-                            towers.SetRotation((float)Math.Atan2(direction.Y, direction.X));
-
-                            foreach (Bullet bullet in tower.GetBullets())
+                    foreach (Bullet bullet in tower.GetBullets())
                             {
-                                var distance = enemy.Position - bullet.Position;
-                                bullet.SetRotation((float)Math.Atan2(distance.Y, distance.X));
-                                bullet.SetDirection(new Vector2((float)Math.Cos(bullet._rotation), (float)Math.Sin(bullet._rotation)));
-                                var currentDistance = Vector2.Distance(bullet.Position, enemy.Position);
 
-                                var t = MathHelper.Min((float)Math.Abs(currentDistance), bullet.xVelocity);
-                                var velocity = bullet.GetDirection() * t;
+                        bullet.FollowEnemy(enemy);
+                        if (bullet.Bounds.Intersects(enemy.InteractionBox) && bullet.IsActive)
+                                {
 
-                                bullet.SetPosition(bullet.GetPosition() + velocity);                               
+                                    Globals.soundControl.playSound("shoot");
 
-                                    if (bullet.Bounds.Intersects(enemy.BoundingBox) && bullet.IsActive)
-                                    {
-                                        Globals.soundControl.playSound("shoot");
-  
-                                        bullet.SetIsActive(false);
-                                        enemy.SetHealth(enemy.GetHealth() - bullet.GetDmg());
- 
-                                        Console.WriteLine(enemy.health);
-                                    }
-                                    if (enemy.GetHealth() == 0 && !enemy.isDead)
-                                    {
-                                        Globals.soundControl.playSound("click");
-                                        bullet.SetIsActive(false);
-                                        enemy.SetMovement(new Vector2(0, 0));
-                                        enemy.SetIsDead(true);
-                                        gold += enemy.GetGoldDrop();
+                                    bullet.SetIsActive(false);
+                                    enemy.SetHealth(enemy.GetHealth() - bullet.GetDmg());
 
-                                    }
-                                    
-                                    
+                                    Console.WriteLine(enemy.health);
                                 }
-                        }
-                        else { towers.SetIsFiring(false); }
+                                if (enemy.GetHealth() <= 0 && !enemy.isDead)
+                                {
+                                    Globals.soundControl.playSound("click");
+                                    bullet.SetIsActive(false);
+                                    enemy.SetMovement(new Vector2(0, 0));
+                                    enemy.SetIsDead(true);
+                                    gold += enemy.GetGoldDrop();
+
+                                }
                     }
+
                 }
             }
-           
+           RemoveBullets(gameTime);
            PostUpdate(gameTime);
            RemoveEnemy();  
         }
@@ -381,20 +338,9 @@ namespace PixelDefense.States
 
         public void AttackBase(GameTime GameTime)
         {
-            //timer = (float)GameTime.ElapsedGameTime.TotalSeconds;
             foreach (Enemy enemy in wave.GetEnemies())
             {
 
-                /*if (enemy.GetIsActive())
-                
-                    if (enemy.GetPath().Count == 0)
-                    {
-                        
-                            Console.WriteLine(mainBase.health);
-                            mainBase.health -= enemy.damage;
-                           
-                        
-                    }*/
                     enemy.AttackBase(mainBase,GameTime);
                 
             }

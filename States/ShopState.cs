@@ -83,11 +83,11 @@ namespace PixelDefense.States
 
             this.basicTowers = new List<Sprite>();
 
-            this.cannonTower = new Cannon(cannonTexture) {Bullet = new The556(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
+            this.cannonTower = new Cannon(cannonTexture) {Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
 
-            this.machineGunTower = new MachineGun(machineGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/MG")), _position = new Vector2(190, 280) };
+            this.machineGunTower = new MachineGun(machineGunTexture) { Bullet = new The556(_content.Load<Texture2D>("Tower/MG")), _position = new Vector2(190, 280) };
 
-            this.doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new The556(_content.Load<Texture2D>("Tower/GrapeShot")), _position = new Vector2(190, 400)  };
+            this.doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/GrapeShot")), _position = new Vector2(190, 400)  };
 
             this.rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Rocket(_content.Load<Texture2D>("Tower/Rocket")), _position = new Vector2(190, 520) };
 

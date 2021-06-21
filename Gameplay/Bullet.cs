@@ -24,6 +24,18 @@ namespace PixelDefense.Gameplay
 
         }
 
+        public  void FollowEnemy(Enemy enemy)
+        {
+            var distance = enemy.Position - Position;
+            SetRotation((float)Math.Atan2(distance.Y, distance.X));
+            SetDirection(new Vector2((float)Math.Cos(_rotation), (float)Math.Sin(_rotation)));
+            var currentDistance = Vector2.Distance(Position, enemy.InteractionBox.Location.ToVector2());
+
+            var t = MathHelper.Min((float)Math.Abs(currentDistance), xVelocity);
+            var velocity = GetDirection() * t;
+
+            SetPosition(GetPosition() + velocity);
+        }
         // get and set methods
 
         public void SetDmg(int dmg)

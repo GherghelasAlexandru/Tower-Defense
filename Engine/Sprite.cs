@@ -38,17 +38,17 @@ namespace PixelDefense.Gameplay
             }
         }
 
-        public SpriteEffects flip;
+        
 
         public Texture2D _texture;
         protected AnimationManager _animationManager;
         protected Dictionary<string, Animation> _animations;
 
-        public bool IsPlaced = false;
+        
         public bool IsActive = false;
-        public bool dragging = true;
-        public bool firing = false;
-
+     
+   
+        
 
         public Sprite Parent;
  
@@ -75,7 +75,7 @@ namespace PixelDefense.Gameplay
             this.Origin = new Vector2(0, 0);
             this.IsActive = true;
             Scale = 1;
-            flip = SpriteEffects.FlipHorizontally;
+            
             
         }
 
@@ -179,25 +179,8 @@ namespace PixelDefense.Gameplay
             return this.Direction;
         }
 
-        public void SetIsDragged(bool isdrag)
-        {
-            this.dragging = isdrag;
-        }
-
-        public bool GetDragged()
-        {
-            return this.dragging;
-        }
-
-        public void SetIsPlaced(bool isplaced)
-        {
-            this.IsPlaced = isplaced;
-        }
-
-        public bool GetIsPlaced()
-        {
-            return this.IsPlaced;
-        }
+        
+        
 
         public void SetAnimation(Dictionary<string, Animation> _animations)
         {
@@ -270,15 +253,7 @@ namespace PixelDefense.Gameplay
             return this.radius;
         }
 
-        public void SetIsFiring(bool isfiring)
-        {
-            this.firing = isfiring;
-        }
-
-        public bool GetFiring()
-        {
-            return this.firing;       
-        }
+        
         public void SetTexture(Texture2D texture)
         {
             this._texture = texture;

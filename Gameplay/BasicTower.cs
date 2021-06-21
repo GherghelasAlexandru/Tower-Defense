@@ -17,6 +17,9 @@ namespace PixelDefense.Gameplay
         public float TIMER;
         public int towerPrice;
         public List<Sprite> bullets;
+        protected bool firing = false;
+        protected bool IsPlaced = false;
+        protected bool dragging = true;
 
         public MouseState mouseState;
         
@@ -31,17 +34,39 @@ namespace PixelDefense.Gameplay
         {
             Bullet.CenterOrigin();
             CenterOrigin();
-           
-      
+
+
         }
 
-        public void RemoveBullet()
-        {
-            bullets.Remove(Bullet);
-        }
-        
  
+        public void RotateOnEnemy(GameTime gameTime,Enemy enemy)
+        {
+            var enemyloc = new Vector2(enemy.Position.X, enemy.Position.Y);
+            Direction = GetPosition() - enemyloc;
 
+            float dis = Vector2.Distance(enemyloc, _position);
+
+            
+            if (dis <= GetRadius())
+            {
+               
+                firing = true;
+                SetRotation((float)Math.Atan2(Direction.Y, Direction.X));
+                _timer -= (float)gameTime.ElapsedGameTime.TotalSeconds;
+                if (_timer < 0 && firing)
+                {
+                    AddBullet();
+                    _timer = TIMER;
+                }
+
+
+            }
+            else
+            {
+                Bullet.IsActive = false;
+                SetIsFiring(false);
+            }
+        }
    
     
         public void AddBullet()
@@ -49,7 +74,7 @@ namespace PixelDefense.Gameplay
             //Bullet newBullet = new Bullet()
             var bullet = Bullet.Clone() as Bullet;
             bullet.IsActive = true;
-            bullet.Position = _position;  
+            bullet.Position = Position;  
             bullet.LifeSpan = 0f;
             bullet.Parent = this;
             bullets.Add(bullet);
@@ -128,5 +153,34 @@ namespace PixelDefense.Gameplay
         {
             return this.mouseState;
         }
+        public void SetIsFiring(bool isfiring)
+        {
+            this.firing = isfiring;
+        }
+
+        public bool GetFiring()
+        {
+            return this.firing;
+        }
+
+        public void SetIsPlaced(bool isplaced)
+        {
+            this.IsPlaced = isplaced;
+        }
+
+        public bool GetIsPlaced()
+        {
+            return this.IsPlaced;
+        }
+        public void SetIsDragged(bool isdrag)
+        {
+            this.dragging = isdrag;
+        }
+
+        public bool GetDragged()
+        {
+            return this.dragging;
+        }
+
     }
 }
