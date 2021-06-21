@@ -62,6 +62,8 @@ namespace PixelDefense.Gameplay
             else if (GetBaseHealth() <= 0)
             {
                 _animationManager._animation.CurrentFrame = 8;
+                Globals.soundControl.stopMusic();
+                Globals.soundControl.playSound("game over");
                 game.ChangeState(game.gameOverState);
             }
         }
