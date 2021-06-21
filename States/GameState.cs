@@ -30,6 +30,7 @@ namespace PixelDefense.States
         public float FollowDistance;
         public int gold;
         public int score;
+        public float timer;
         public Animation healthBar;
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
@@ -343,12 +344,13 @@ namespace PixelDefense.States
             }
         }
 
-        public void AttackBase(GameTime gameTime)
+        public void AttackBase(GameTime GameTime)
         {
+            //timer = (float)GameTime.ElapsedGameTime.TotalSeconds;
             foreach (Enemy enemy in wave.GetEnemies())
             {
 
-                if (enemy.GetIsActive())
+                /*if (enemy.GetIsActive())
                 
                     if (enemy.GetPath().Count == 0)
                     {
@@ -357,7 +359,9 @@ namespace PixelDefense.States
                             mainBase.health -= enemy.damage;
                            
                         
-                    }
+                    }*/
+                    enemy.AttackBase(mainBase,GameTime);
+                
             }
         }
 

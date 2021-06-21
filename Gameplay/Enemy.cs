@@ -25,6 +25,7 @@ namespace PixelDefense.Gameplay
         public bool active;
         public int damage;
         private System.Timers.Timer aTimer;
+        public float timer;
 
 
 
@@ -144,11 +145,35 @@ namespace PixelDefense.Gameplay
             base.Update(gameTime,sprites);
         }
 
-     
+        public void AttackBase(Base MainBase, GameTime GameTime)
+        {
+
+            timer += (float)GameTime.ElapsedGameTime.TotalSeconds;
+            if (GetIsActive())
+
+                    if (GetPath().Count == 0)
+                    {
+                    // pus timer? 
+                    // Timer increment
+                    Console.WriteLine(MainBase.health);
+                    //Console.WriteLine(timer);
+
+                    if (timer > 1)
+                    {
+                        
+                        MainBase.SetBaseHealth(MainBase.GetBaseHealth() - damage);
+                        timer = 0;
+                    }
+
+                }
+           
+        }
 
 
 
-  
+
+
+
 
 
         protected override void SetAnimations()
