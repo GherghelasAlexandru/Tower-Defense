@@ -26,6 +26,7 @@ namespace PixelDefense.Gameplay
 
         public override void Update(GameTime gameTime)
         {
+            
             SetAnimations();
             
         }
