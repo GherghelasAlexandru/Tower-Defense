@@ -26,6 +26,14 @@ namespace PixelDefense.Gameplay
 
         public override void Update(GameTime gameTime)
         {
+            SetAnimations();
+            
+        }
+
+        protected override void SetAnimations()
+        {
+            
+                _animationManager.Play(_animation);
 
             if (GetBaseHealth() <= 100 && GetBaseHealth() >= 88)
             {
@@ -62,18 +70,10 @@ namespace PixelDefense.Gameplay
             else if (GetBaseHealth() <= 0)
             {
                 _animationManager._animation.CurrentFrame = 8;
-            
-                
-            }
-        }
 
-        protected override void SetAnimations()
-        {
-            
-                _animationManager.Play(_animation);
-            
-            
-                _animationManager.UpdateBoundingBox();
+
+            }
+            _animationManager.UpdateBoundingBox();
         }
 
 
