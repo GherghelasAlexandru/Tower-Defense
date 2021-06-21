@@ -83,15 +83,15 @@ namespace PixelDefense.States
 
             this.basicTowers = new List<Sprite>();
 
-            this.cannonTower = new Cannon(cannonTexture) {Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
+            this.cannonTower = new Cannon(cannonTexture) {Bullet = new The556(_content.Load<Texture2D>("Tower/bullet")) , _position = new Vector2(190, 160) };
 
             this.machineGunTower = new MachineGun(machineGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/MG")), _position = new Vector2(190, 280) };
 
-            this.doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/GrapeShot")), _position = new Vector2(190, 400)  };
+            this.doubleCannonTower = new DoubleCannon(doubleCannonTexture) { Bullet = new The556(_content.Load<Texture2D>("Tower/GrapeShot")), _position = new Vector2(190, 400)  };
 
-            this.rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/Rocket")), _position = new Vector2(190, 520) };
+            this.rocketLauncherTower = new RocketLauncher(rocketLauncherTexture) { Bullet = new Rocket(_content.Load<Texture2D>("Tower/Rocket")), _position = new Vector2(190, 520) };
 
-            this.brokenGunTower = new BrokenGun(brokenGunTexture) { Bullet = new Grapeshot(_content.Load<Texture2D>("Tower/BrokenShot")), _position = new Vector2(190, 640) };
+            this.brokenGunTower = new BrokenGun(brokenGunTexture) { Bullet = new Brokenshot(_content.Load<Texture2D>("Tower/BrokenShot")), _position = new Vector2(190, 640) };
 
             AddBasicTower(cannonTower);
             AddBasicTower(brokenGunTower);
@@ -156,7 +156,7 @@ namespace PixelDefense.States
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(brokenGunTower.Clone() as BrokenGun);
                     buyBrokenGunButton.Clicked = false;
-                    _game.gameState.SetGold(-45);
+                    _game.gameState.SetGold(-brokenGunTower.GetPrice());
                 }
                 else
                 {
@@ -171,7 +171,7 @@ namespace PixelDefense.States
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(rocketLauncherTower.Clone() as RocketLauncher);
                     buyRocketLauncherButton.Clicked = false;
-                    _game.gameState.SetGold(-30);
+                    _game.gameState.SetGold(-rocketLauncherTower.GetPrice());
                 }
                 else
                 {
@@ -186,7 +186,7 @@ namespace PixelDefense.States
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(doubleCannonTower.Clone() as DoubleCannon);
                     buyDoubleCannonButton.Clicked = false;
-                    _game.gameState.SetGold(-25);
+                    _game.gameState.SetGold(-doubleCannonTower.GetPrice());
                 }
                 else
                 {
@@ -201,7 +201,7 @@ namespace PixelDefense.States
                     _game.ChangeState(_game.gameState);
                     _game.gameState.AddTower(machineGunTower.Clone() as MachineGun);
                     buyMachineGunButton.Clicked = false;
-                    _game.gameState.SetGold(-20);
+                    _game.gameState.SetGold(-machineGunTower.GetPrice());
                 }
                 else 
                 {
@@ -249,38 +249,48 @@ namespace PixelDefense.States
             spriteBatch.DrawString(textFont, buy, new Vector2(950, 80), Color.White);
 
             string cannon = "Cannon";
-            string cannonText = "This is a very good tower";
-            string price1 = "10";
-            spriteBatch.DrawString(textFont, cannon, new Vector2(270, 175), Color.White);
+            string cannonText = "* A bit rusty but trusty";
+            string cannonDescription = "FIRE RATE 3   |   DMG 1   |   RANGE 200 ";
+            string price1 = "50";
+            spriteBatch.DrawString(textFont, cannon, new Vector2(270, 170), Color.LightGray);
             spriteBatch.DrawString(textFont, cannonText, new Vector2(270, 190), Color.White);
+            spriteBatch.DrawString(textFont, cannonDescription, new Vector2(270, 210), Color.LightSkyBlue);
             spriteBatch.DrawString(textFont, price1, new Vector2(720, 190), Color.Yellow);
 
             string machineGun = "Machine Gun";
-            string machineGunText = "This is a very good tower";
-            string price5 = "20";
-            spriteBatch.DrawString(textFont, machineGun, new Vector2(270, 295), Color.White);
+            string machineGunText = "* Nothing can go wrong with brrrrrr";
+            string machineGunDescription = "FIRE RATE 2   |   DMG 1   |   RANGE 200 ";
+            string price5 = "100";
+            spriteBatch.DrawString(textFont, machineGun, new Vector2(270, 290), Color.LightGray);
             spriteBatch.DrawString(textFont, machineGunText, new Vector2(270, 310), Color.White);
+            spriteBatch.DrawString(textFont, machineGunDescription, new Vector2(270, 330), Color.LightSkyBlue);
             spriteBatch.DrawString(textFont, price5, new Vector2(720, 310), Color.Yellow);
 
             string doubleCannon = "Double Cannon";
-            string doubleCannonText = "This is a very good tower";
-            string price4 = "25";
-            spriteBatch.DrawString(textFont, doubleCannon, new Vector2(270, 415), Color.White);
+            string doubleCannonText = "* Double rusty double trusty";
+            string doubleCannonDescription = "FIRE RATE 3   |   DMG 2   |   RANGE 200 ";
+            string price4 = "150";
+            spriteBatch.DrawString(textFont, doubleCannon, new Vector2(270, 410), Color.LightGray);
             spriteBatch.DrawString(textFont, doubleCannonText, new Vector2(270, 430), Color.White);
+            spriteBatch.DrawString(textFont, doubleCannonDescription, new Vector2(270, 450), Color.LightSkyBlue);
             spriteBatch.DrawString(textFont, price4, new Vector2(720, 430), Color.Yellow);
 
             string rocketLauncher = "Rocket Launcher";
-            string rocketLauncherText = "This is a very good tower";
-            string price3 = "30";
-            spriteBatch.DrawString(textFont, rocketLauncher, new Vector2(270, 530), Color.White);
+            string rocketLauncherText = "* Stolen technology from aliens ";
+            string rocketLauncherDescription = "FIRE RATE 4   |   DMG 3   |   RANGE 400 ";
+            string price3 = "300";
+            spriteBatch.DrawString(textFont, rocketLauncher, new Vector2(270, 530), Color.LightGray);
             spriteBatch.DrawString(textFont, rocketLauncherText, new Vector2(270, 550), Color.White);
+            spriteBatch.DrawString(textFont, rocketLauncherDescription, new Vector2(270, 570), Color.LightSkyBlue);
             spriteBatch.DrawString(textFont, price3, new Vector2(720, 550), Color.Yellow);
 
             string brokenGun = "Broken Gun";
-            string brokenGunText = "This is a very good tower";
-            string price2 = "45";
-            spriteBatch.DrawString(textFont, brokenGun, new Vector2(270, 650), Color.White);
+            string brokenGunText = "* This is crazy bruh";
+            string brokenGunDescription = "FIRE RATE 1.5   |   DMG 1   |   RANGE 150 ";
+            string price2 = "450";
+            spriteBatch.DrawString(textFont, brokenGun, new Vector2(270, 650), Color.LightGray);
             spriteBatch.DrawString(textFont, brokenGunText, new Vector2(270, 670), Color.White);
+            spriteBatch.DrawString(textFont, brokenGunDescription, new Vector2(270, 690), Color.LightSkyBlue);
             spriteBatch.DrawString(textFont, price2, new Vector2(720, 670), Color.Yellow);
 
             foreach (var button in _button)

@@ -17,8 +17,8 @@ namespace PixelDefense.Gameplay.Towers
             this.Bullet = new Rocket(_texture);
             this.xVelocity += Bullet.xVelocity;
             this.yVelocity += Bullet.yVelocity;
-            this.towerPrice = 30;
-            this.radius = 300;
+            this.towerPrice = 300;
+            this.radius = 400;
         }
     }
 }
