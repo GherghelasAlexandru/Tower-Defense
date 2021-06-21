@@ -25,7 +25,7 @@ namespace PixelDefense.Engine
             _animation = animation;
         }
 
-        public override void Draw(SpriteBatch spriteBatch,SpriteEffects spriteEffects)
+        public virtual void Draw(SpriteBatch spriteBatch,SpriteEffects spriteEffects)
         {
 
             int row = _animation.CurrentFrame / _animation.Columns;

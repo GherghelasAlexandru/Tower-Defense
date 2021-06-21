@@ -403,7 +403,7 @@ namespace PixelDefense.States
         public void DrawSprites(SpriteBatch spriteBatch)
         {
             foreach (var sprite in _sprites.ToArray())
-                sprite.Draw(spriteBatch, SpriteEffects.None);
+                sprite.Draw(spriteBatch);
         }
 
         public void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch)

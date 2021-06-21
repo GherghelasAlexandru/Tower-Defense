@@ -298,7 +298,7 @@ namespace PixelDefense.States
 
             foreach (var tower in basicTowers)
             {
-                tower.Draw(spriteBatch,SpriteEffects.None);
+                tower.Draw(spriteBatch);
             }
         }
     }

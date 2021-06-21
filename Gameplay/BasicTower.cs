@@ -57,7 +57,7 @@ namespace PixelDefense.Gameplay
         }
 
 
-        public override void Draw(SpriteBatch spriteBatch, SpriteEffects spriteEffects)
+        public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (Bullet bullet in bullets)
             {
@@ -66,7 +66,7 @@ namespace PixelDefense.Gameplay
                     spriteBatch.Draw(bullet._texture, bullet._position, Color.White);
                 }
             }
-                base.Draw(spriteBatch, spriteEffects);
+                base.Draw(spriteBatch);
             
         }
 

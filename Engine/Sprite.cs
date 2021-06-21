@@ -86,9 +86,9 @@ namespace PixelDefense.Gameplay
 
         
 
-        public virtual void Draw(SpriteBatch spriteBatch,SpriteEffects spriteEffects)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, Scale, spriteEffects, 0);
+            spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, Scale, SpriteEffects.None, 0);
  
         }
 
