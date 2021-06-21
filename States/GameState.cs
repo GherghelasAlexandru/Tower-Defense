@@ -37,7 +37,7 @@ namespace PixelDefense.States
         {
             healthBar = new Animation(content.Load<Texture2D>("spritesheets/Stitched_HP_Bar"), 8, 1, 0) { IsLooping = false };
            
-            mainBase = new Base(healthBar);
+            mainBase = new Base(healthBar,_game);
             gold = 100;
             //Globals.soundControl.ChangeMusic("Sounds/bgMusic2");
             _sprites = new List<Sprite>();
