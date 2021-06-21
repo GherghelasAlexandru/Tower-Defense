@@ -24,7 +24,6 @@ namespace PixelDefense.Gameplay
         public Queue<Vector2> path;
         public bool active;
         public int damage;
-        private System.Timers.Timer aTimer;
         public float timer;
 
 

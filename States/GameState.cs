@@ -39,7 +39,7 @@ namespace PixelDefense.States
             healthBar = new Animation(content.Load<Texture2D>("spritesheets/Stitched_HP_Bar"), 8, 1, 0) { IsLooping = false };
            
             mainBase = new Base(healthBar);
-            gold = 100;
+            gold = 1000;
             //Globals.soundControl.ChangeMusic("Sounds/bgMusic2");
             _sprites = new List<Sprite>();
             towerPlacements = new List<Rectangle>();

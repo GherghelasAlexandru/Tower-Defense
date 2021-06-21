@@ -250,7 +250,7 @@ namespace PixelDefense.States
 
             string cannon = "Cannon";
             string cannonText = "* A bit rusty but trusty";
-            string cannonDescription = "FIRE RATE 3   |   DMG 1   |   RANGE 200 ";
+            string cannonDescription = "FIRE RATE 3   |   DMG 1   |   RANGE 300 ";
             string price1 = "50";
             spriteBatch.DrawString(textFont, cannon, new Vector2(270, 170), Color.LightGray);
             spriteBatch.DrawString(textFont, cannonText, new Vector2(270, 190), Color.White);
@@ -259,7 +259,7 @@ namespace PixelDefense.States
 
             string machineGun = "Machine Gun";
             string machineGunText = "* Nothing can go wrong with brrrrrr";
-            string machineGunDescription = "FIRE RATE 2   |   DMG 1   |   RANGE 200 ";
+            string machineGunDescription = "FIRE RATE 2   |   DMG 1   |   RANGE 250 ";
             string price5 = "100";
             spriteBatch.DrawString(textFont, machineGun, new Vector2(270, 290), Color.LightGray);
             spriteBatch.DrawString(textFont, machineGunText, new Vector2(270, 310), Color.White);
@@ -268,7 +268,7 @@ namespace PixelDefense.States
 
             string doubleCannon = "Double Cannon";
             string doubleCannonText = "* Double rusty double trusty";
-            string doubleCannonDescription = "FIRE RATE 3   |   DMG 2   |   RANGE 200 ";
+            string doubleCannonDescription = "FIRE RATE 3   |   DMG 2   |   RANGE 300 ";
             string price4 = "150";
             spriteBatch.DrawString(textFont, doubleCannon, new Vector2(270, 410), Color.LightGray);
             spriteBatch.DrawString(textFont, doubleCannonText, new Vector2(270, 430), Color.White);
@@ -286,7 +286,7 @@ namespace PixelDefense.States
 
             string brokenGun = "Broken Gun";
             string brokenGunText = "* This is crazy bruh";
-            string brokenGunDescription = "FIRE RATE 1.5   |   DMG 1   |   RANGE 150 ";
+            string brokenGunDescription = "FIRE RATE 1.5   |   DMG 1   |   RANGE 250 ";
             string price2 = "450";
             spriteBatch.DrawString(textFont, brokenGun, new Vector2(270, 650), Color.LightGray);
             spriteBatch.DrawString(textFont, brokenGunText, new Vector2(270, 670), Color.White);
