@@ -18,46 +18,46 @@ namespace PixelDefense.Gameplay
             _animation = animation;
             _animationManager = new AnimationManager(animation);
             health = 120;
-            Position = new Vector2(90, 90);
-            _animationManager.Scale = 1.5f;
+            Position = new Vector2(30, 780);
+            _animationManager.Scale = 2.2f;
         }
 
         public override void Update(GameTime gameTime)
         {
-            switch(health)
+            
+
+            if (GetBaseHealth() <= 100 && GetBaseHealth() >= 88)
             {
-
-                case 90:
-                    _animationManager._animation.CurrentFrame = 1;
-                    break;
-                case 75:
-                    _animationManager._animation.CurrentFrame = 2;
-                    break;
-                case 60:
-                    _animationManager._animation.CurrentFrame = 3;
-                    break;
-                case 45:
-                    _animationManager._animation.CurrentFrame = 4;
-                    break;
-                case 30:
-                    _animationManager._animation.CurrentFrame = 5;
-                    break;
-                case 15:
-                    _animationManager._animation.CurrentFrame = 6;
-                    break;
-                case 0:
-                    _animationManager._animation.CurrentFrame = 7;
-                    break;
-
-                default:
-                    _animationManager._animation.CurrentFrame = 0;
-                    break;
-
-
+                _animationManager._animation.CurrentFrame = 1;
             }
-
-
-
+            else if (GetBaseHealth() < 88 && GetBaseHealth() >= 76)
+            {
+                _animationManager._animation.CurrentFrame = 2;
+            }
+            else if (GetBaseHealth() < 76 && GetBaseHealth() >= 64)
+            {
+                _animationManager._animation.CurrentFrame = 3;
+            }
+            else if (GetBaseHealth() < 64 && GetBaseHealth() >= 52)
+            {
+                _animationManager._animation.CurrentFrame = 4;
+            }
+            else if (GetBaseHealth() < 52 && GetBaseHealth() >= 40)
+            {
+                _animationManager._animation.CurrentFrame = 5;
+            }
+            else if (GetBaseHealth() < 40 && GetBaseHealth() >= 28)
+            {
+                _animationManager._animation.CurrentFrame = 6;
+            }
+            else if (GetBaseHealth() < 28 && GetBaseHealth() > 0)
+            {
+                _animationManager._animation.CurrentFrame = 7;
+            }
+            else if (GetBaseHealth() == 0)
+            {
+                _animationManager._animation.CurrentFrame = 7;
+            }
         }
 
         protected override void SetAnimations()
