@@ -97,11 +97,11 @@ namespace PixelDefense.Gameplay
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch,SpriteEffects spriteEffects)
         {
             foreach (Enemy enemy in enemies)
             {
-                enemy.Draw(spriteBatch);
+                enemy.Draw(spriteBatch, spriteEffects);
             }
         }
 

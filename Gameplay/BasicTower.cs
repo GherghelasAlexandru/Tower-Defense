@@ -16,14 +16,14 @@ namespace PixelDefense.Gameplay
        //Initialize a 10 second timer
         public float TIMER;
         public int towerPrice;
-        public List<Bullet> bullets;
+        public List<Sprite> bullets;
 
         public MouseState mouseState;
         
         public BasicTower(Texture2D texture)
           : base(texture)
         {
-            this.bullets = new List<Bullet>();
+            this.bullets = new List<Sprite>();
 
         }
 
@@ -32,16 +32,7 @@ namespace PixelDefense.Gameplay
             Bullet.CenterOrigin();
             CenterOrigin();
            
-                float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
-                _timer -= elapsed;
-                if (_timer < 0 && firing)
-                {
-                    
-                    AddBullet();
-                    _timer = TIMER;   //Reset Timer
-                }
-
-            
+      
         }
 
         public void RemoveBullet()
@@ -53,11 +44,11 @@ namespace PixelDefense.Gameplay
 
    
     
-        private void AddBullet()
+        public void AddBullet()
         {
             //Bullet newBullet = new Bullet()
             var bullet = Bullet.Clone() as Bullet;
-           
+            bullet.IsActive = true;
             bullet.Position = _position;  
             bullet.LifeSpan = 0f;
             bullet.Parent = this;
@@ -66,7 +57,7 @@ namespace PixelDefense.Gameplay
         }
 
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, SpriteEffects spriteEffects)
         {
             foreach (Bullet bullet in bullets)
             {
@@ -75,7 +66,7 @@ namespace PixelDefense.Gameplay
                     spriteBatch.Draw(bullet._texture, bullet._position, Color.White);
                 }
             }
-                base.Draw(spriteBatch);
+                base.Draw(spriteBatch, spriteEffects);
             
         }
 
@@ -108,12 +99,12 @@ namespace PixelDefense.Gameplay
             return this.TIMER;
         }
 
-        public void SetBullets(List<Bullet> bullets)
+        public void SetBullets(List<Sprite> bullets)
         {
             this.bullets = bullets;
         }
 
-        public List<Bullet> GetBullets()
+        public List<Sprite> GetBullets()
         {
             return this.bullets;
         }

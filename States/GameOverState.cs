@@ -44,7 +44,7 @@ namespace PixelDefense.States
         private void BackButton_Click(object sender, EventArgs e)
         {
             IsRestarted = true;
-            _game.ChangeState(new MenuState(_game, _graphicsDevice, _content));
+            _game.ChangeState(_game.menuState);
         }
 
         public override void PostUpdate(GameTime gameTime)

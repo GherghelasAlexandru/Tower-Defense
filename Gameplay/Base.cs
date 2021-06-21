@@ -12,16 +12,16 @@ namespace PixelDefense.Gameplay
     public class Base:AnimationManager
     {
         public int health;
-        public Game1 game;
+ 
 
-        public Base(Animation animation, Game1 game):base(animation)
+        public Base(Animation animation):base(animation)
         {
             _animation = animation;
             _animationManager = new AnimationManager(animation);
-            health = 100;
+            health = 1;
             Position = new Vector2(30, 780);
             _animationManager.Scale = 2.2f;
-            this.game = game;
+          
         }
 
         public override void Update(GameTime gameTime)
@@ -62,7 +62,7 @@ namespace PixelDefense.Gameplay
             else if (GetBaseHealth() <= 0)
             {
                 _animationManager._animation.CurrentFrame = 8;
-                game.ChangeState(game.gameOverState);
+                
             }
         }
 
@@ -76,11 +76,11 @@ namespace PixelDefense.Gameplay
         }
 
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch,SpriteEffects spriteEffects)
         {
             if (_animationManager != null)
             {
-                _animationManager.Draw(spriteBatch);
+                _animationManager.Draw(spriteBatch,spriteEffects);
             }
             
         }

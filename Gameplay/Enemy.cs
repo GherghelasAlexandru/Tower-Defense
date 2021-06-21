@@ -205,12 +205,12 @@ namespace PixelDefense.Gameplay
           
         
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, SpriteEffects spriteEffects)
         {
             
             if (_animationManager != null && IsActive)
             {
-                _animationManager.Draw(spriteBatch);
+                _animationManager.Draw(spriteBatch, spriteEffects);
             }
      
             // runAnimation.DrawAnimation(spriteBatch);

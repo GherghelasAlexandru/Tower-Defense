@@ -20,13 +20,7 @@ namespace PixelDefense.Gameplay
         
         public override void Update(GameTime gameTime, List<Sprite> sprites)
         {
-            _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (_timer <= LifeSpan)
-            {
-                LifeSpan--;
-                IsActive = true;
-            }
-
+           
 
         }
 

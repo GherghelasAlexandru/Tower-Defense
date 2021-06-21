@@ -38,7 +38,7 @@ namespace PixelDefense.States
         {
             healthBar = new Animation(content.Load<Texture2D>("spritesheets/Stitched_HP_Bar"), 8, 1, 0) { IsLooping = false };
            
-            mainBase = new Base(healthBar,_game);
+            mainBase = new Base(healthBar);
             gold = 100;
             //Globals.soundControl.ChangeMusic("Sounds/bgMusic2");
             _sprites = new List<Sprite>();
@@ -179,25 +179,34 @@ namespace PixelDefense.States
                     }
         }
 
+        public void AddBullets(GameTime gameTime)
+        {
+            foreach (BasicTower tower in _sprites)
+            {
+                foreach (Enemy enemy in wave.GetEnemies())
+                {
+                    float elapsed = (float)gameTime.ElapsedGameTime.TotalSeconds;
+                    tower._timer -= elapsed;
+                    if (enemy.IsActive && tower._timer < 0 && tower.firing)
+                    {
+
+                        tower.AddBullet();
+                        tower._timer = tower.TIMER;
+                    }
+                    else if (!enemy.IsActive || !tower.firing)
+                    {
+                        tower.Bullet.IsActive = false;
+                        RemoveBullets(gameTime);
+                    }
+                }
+            }
+        }
 
         public void AddTower(BasicTower tower)
         {
             _sprites.Add(tower);
         }
 
-        public void AddEnemy(Enemy enemy)
-        {
-            _sprites.Add(enemy);
-           
-            if (_maps.Contains(map1))
-            {
-                enemy.SpawnEnemy(map1.GetStartingPoint(), map1.GetPath());
-            }
-            else if (_maps.Contains(map2))
-            {
-                enemy.SpawnEnemy(map2.GetStartingPoint(), map2.GetPath());
-            }
-        }
 
         private void ShopButton_click(object sender, EventArgs e)
         {
@@ -217,6 +226,21 @@ namespace PixelDefense.States
                 if (!_sprites[i].IsActive)
                 {
                     _sprites.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+
+        public  void RemoveBullets(GameTime gameTime)
+        {
+            foreach(BasicTower tower in _sprites)
+                
+            for (int i = 0; i < tower.GetBullets().Count; i++)
+            {
+                if (tower.GetBullets()[i].IsActive)
+                {
+                        tower.GetBullets().RemoveAt(i);
                     i--;
                 }
             }
@@ -242,7 +266,18 @@ namespace PixelDefense.States
 
         public override void Update(GameTime gameTime)
         {
-            AttackBase(gameTime);
+            AddBullets(gameTime);
+            if (mainBase.health == 0)
+            {
+                Globals.soundControl.stopMusic();
+                Globals.soundControl.playSound("game over");
+                _game.ChangeState(_game.gameOverState);
+            }
+            if(mainBase.health > 0)
+            {
+                AttackBase(gameTime);
+            }
+
             SetStartWaveButton();
             PlaceTower();
             AddTowerPlacement();
@@ -274,7 +309,7 @@ namespace PixelDefense.States
             {
                 foreach (Enemy enemy in wave.GetEnemies())
                 {
-
+                    
                     if (enemy.GetIsActive())
  
                     foreach (var towers in _sprites)
@@ -301,7 +336,7 @@ namespace PixelDefense.States
 
                                 bullet.SetPosition(bullet.GetPosition() + velocity);                               
 
-                                    if (bullet.Bounds.Intersects(enemy.Bounds) && bullet.IsActive)
+                                    if (bullet.Bounds.Intersects(enemy.BoundingBox) && bullet.IsActive)
                                     {
                                         Globals.soundControl.playSound("shoot");
   
@@ -327,7 +362,7 @@ namespace PixelDefense.States
                     }
                 }
             }
-
+           
            PostUpdate(gameTime);
            RemoveEnemy();  
         }
@@ -368,7 +403,7 @@ namespace PixelDefense.States
         public void DrawSprites(SpriteBatch spriteBatch)
         {
             foreach (var sprite in _sprites.ToArray())
-                sprite.Draw(spriteBatch);
+                sprite.Draw(spriteBatch, SpriteEffects.None);
         }
 
         public void DrawButtons(GameTime gameTime, SpriteBatch spriteBatch)
@@ -381,8 +416,11 @@ namespace PixelDefense.States
             DrawMap(spriteBatch);
             DrawButtons(gameTime, spriteBatch);
             DrawSprites(spriteBatch);
-            wave.Draw(spriteBatch);
-            mainBase.Draw(spriteBatch);
+            if(_maps.Contains(map1))
+            wave.Draw(spriteBatch,SpriteEffects.FlipHorizontally);
+            if(_maps.Contains(map2))
+                wave.Draw(spriteBatch, SpriteEffects.None);
+            mainBase.Draw(spriteBatch,SpriteEffects.None);
             if(IsOnPath)
             {
                 spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 780), Color.Black);

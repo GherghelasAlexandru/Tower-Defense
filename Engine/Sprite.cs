@@ -37,7 +37,8 @@ namespace PixelDefense.Gameplay
                 UpdateBoundingBox();
             }
         }
-        
+
+        public SpriteEffects flip;
 
         public Texture2D _texture;
         protected AnimationManager _animationManager;
@@ -74,6 +75,8 @@ namespace PixelDefense.Gameplay
             this.Origin = new Vector2(0, 0);
             this.IsActive = true;
             Scale = 1;
+            flip = SpriteEffects.FlipHorizontally;
+            
         }
 
         public virtual void Update(GameTime gameTime, List<Sprite> sprites)
@@ -83,9 +86,9 @@ namespace PixelDefense.Gameplay
 
         
 
-        public virtual void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch,SpriteEffects spriteEffects)
         {
-            spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, Scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(_texture, _position, null, Color.White, _rotation, Origin, Scale, spriteEffects, 0);
  
         }
 

@@ -25,7 +25,7 @@ namespace PixelDefense.Engine
             _animation = animation;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch,SpriteEffects spriteEffects)
         {
 
             int row = _animation.CurrentFrame / _animation.Columns;
@@ -36,7 +36,7 @@ namespace PixelDefense.Engine
                                            _animation.FrameHeight * row,
                                            _animation.FrameWidth,
                                            _animation.FrameHeight),
-                             Color.White, _rotation, Origin, Scale, SpriteEffects.None, 0);
+                             Color.White, _rotation, Origin, Scale, spriteEffects, 0);
 
         }
 
