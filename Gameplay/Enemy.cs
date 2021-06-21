@@ -111,19 +111,26 @@ namespace PixelDefense.Gameplay
                 Vector2 difference = _destination - Position;
                 if (difference.X > -1 && difference.X < 1 && difference.Y > -1 && difference.Y < 1)
                 {
-                    Console.WriteLine(path.Peek());
-                 
-                    path.Dequeue();
+                    //Console.WriteLine(path.Peek());
+                    if (path.Count > 0)
+                    {
+                        path.Dequeue();
+                    }
                     if (path.Count == 0)
                     {
                         // active need to be changed, here must be implemented the atack logic
-         
-                        Active = false;
                         xVelocity = 0;
-                    }
+                       
 
+                    }
+                    else if (health <= 0)
+                    {
+                        IsActive = false;
+                    }
                     else
+                    {
                         Active = true;
+                    }
 
                 }
 
@@ -149,7 +156,7 @@ namespace PixelDefense.Gameplay
 
 
 
-            if (health > 0)
+            if (health > 0 && path.Count > 0)
             {
                 _animationManager.Play(_animations["Run"]);
             }
@@ -157,7 +164,6 @@ namespace PixelDefense.Gameplay
             {
                 _animationManager.Play(_animations["Attack"]);
             }
-
             else if (health <= 0)
             {
 
