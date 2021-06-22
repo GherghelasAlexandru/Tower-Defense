@@ -75,7 +75,7 @@ namespace PixelDefense.Engine
         {
             if (CheckIfFileExists(FILE))
             {
-                return XDocument.Load(Globals.appDataFilePath + "\\" + gameName + "\\" + FILE);
+                return XDocument.Load(Globals.appDataFilePath + "\\" + "PixelDefense" + "\\" + "XML" + "\\" + FILE);
                
             }
 
@@ -104,31 +104,6 @@ namespace PixelDefense.Engine
         }
 
 
-        #region Converting to Binary and back
-
-        public static string StringToBinary(string data)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            foreach (char c in data.ToCharArray())
-            {
-                sb.Append(Convert.ToString(c, 2).PadLeft(8, '0'));
-            }
-            return sb.ToString();
-        }
-
-        public static string BinaryToString(string data)
-        {
-            List<Byte> byteList = new List<Byte>();
-
-            for (int i = 0; i < data.Length; i += 8)
-            {
-                byteList.Add(Convert.ToByte(data.Substring(i, 8), 2));
-            }
-
-            return Encoding.ASCII.GetString(byteList.ToArray());
-        }
-        #endregion
 
 
 

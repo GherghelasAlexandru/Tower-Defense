@@ -56,10 +56,11 @@ namespace PixelDefense.States
             {
                 chooseBackButton,
             };
-
-            //XDocument xml = XDocument.Load("C:\\Users\\User\\AppData\\Roaming\\PixelDefense\\XML\\Settings.xml");
-                            //Globals.save.GetFile("XML\\Settings.xml"); throws null exception?????
-            
+            if (Globals.save.CheckIfFileExists("XML\\Settings.xml"))
+            {
+                XDocument xml = XDocument.Load(Globals.appDataFilePath + "\\" + "PixelDefense" + "\\" + "XML" + "\\" + "Settings.xml");
+                LoadSaveFile(xml);
+            }
         }
 
         public virtual void ApplyOptions(PassObject applyOptions)
@@ -79,7 +80,7 @@ namespace PixelDefense.States
             return null;
         }
 
-        public virtual void LoadSaveFile(XDocument saveData)//Doesn't work
+        public virtual void LoadSaveFile(XDocument saveData)
         {
             if(saveData != null)
             {
@@ -91,7 +92,7 @@ namespace PixelDefense.States
 
                 for (int i = 0; i < allSettings.Count; i++)
                 {
-                    List<XElement> optionList = (from t in saveData.Element("Root").Element("Settings").Descendants("setting")
+                    List<XElement> optionList = (from t in saveData.Element("Root").Element("Settings").Descendants("settings")
                                                  where t.Element("name").Value == allSettings[i]
                                                  select t).ToList<XElement>();
 
@@ -109,16 +110,6 @@ namespace PixelDefense.States
 
             }
         }
-
-        
-
-        private void BackButton_Click(object sender, EventArgs e)
-        {
-            SaveSettings();
-            Globals.soundControl.playSound("click");
-            _game.ChangeState(_game.menuState);
-        }
-
         public void SaveSettings()
         {
             XDocument xml = new XDocument(new XElement("Root", new XElement("Settings", "")));
@@ -140,6 +131,12 @@ namespace PixelDefense.States
                 arrow.Draw(gameTime, spriteBatch);
         }
 
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            SaveSettings();
+            Globals.soundControl.playSound("click");
+            _game.ChangeState(_game.menuState);
+        }
         public override void PostUpdate(GameTime gameTime)
         {
             // remove sprites if they're not needed

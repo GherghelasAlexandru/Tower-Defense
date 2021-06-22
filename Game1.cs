@@ -62,7 +62,7 @@ namespace PixelDefense
             Content.RootDirectory = "Content";
             Globals.appDataFilePath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
 
-           
+            Console.WriteLine(Globals.appDataFilePath);
            // graphics.ToggleFullScreen();
             graphics.ApplyChanges();
 
@@ -79,6 +79,7 @@ namespace PixelDefense
             // TODO: Add your initialization logic here
 
             mouseState = Mouse.GetState();
+            Globals.save = new Save("PixelDefense");
             menuState = new MenuState(this, graphics.GraphicsDevice, Content);
             instructionsState = new InstructionsState(this, graphics.GraphicsDevice, Content);
             settingsState = new SettingsState(this, graphics.GraphicsDevice, Content);
@@ -88,7 +89,7 @@ namespace PixelDefense
             gameState = new GameState(this, graphics.GraphicsDevice, Content);
             shopState = new ShopState(this, graphics.GraphicsDevice, Content);
             gameOverState = new GameOverState(this, graphics.GraphicsDevice, Content);
-
+            
             IsMouseVisible = true;
             base.Initialize();
         }
@@ -103,9 +104,9 @@ namespace PixelDefense
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             Globals.content = this.Content;
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.soundControl = new SoundControl("Sounds/bgMusic2", Content, settingsState);
-            Globals.save = new Save("PixelDefense");
             Globals.soundControl.addSound("game over", "Sounds/gameOver", .10f);
             Globals.soundControl.addSound("click", "Sounds/button-click", .10f);
             Globals.soundControl.addSound("shop", "Sounds/shop_open", .25f);
