@@ -29,7 +29,7 @@ namespace PixelDefense.States
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
              font = _content.Load<SpriteFont>("Fonts/Font");
              this.firstSlide = _content.Load<Texture2D>("Controls/firstSlide");
-             this.secondSlide = _content.Load<Texture2D>("Controls/secondSlide");
+             this.secondSlide = _content.Load<Texture2D>("Controls/secondSlide2");
             this.thirdSlide = _content.Load<Texture2D>("Controls/thirdSlide");
             this.fourthSlide = _content.Load<Texture2D>("Controls/fourthSlide");
             this.debugColor = _content.Load<Texture2D>("Controls/textBg");
