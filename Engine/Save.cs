@@ -37,7 +37,6 @@ namespace PixelDefense.Engine
         {
             CreateFolder(Globals.appDataFilePath + "\\" + gameName + "");
             CreateFolder(Globals.appDataFilePath + "\\" + gameName + "\\XML");
-           // CreateFolder(Globals.appDataFilePath + "\\" + gameName + "\\XML\\SavedGames");
         }
 
         public void CreateFolder(string s)
@@ -57,7 +56,6 @@ namespace PixelDefense.Engine
 
 
             return fileExists;
-            //return true;
         }
 
 
@@ -71,7 +69,7 @@ namespace PixelDefense.Engine
 
         #region Getting XML Files
 
-        public XDocument GetFile(string FILE)
+        public XDocument GetFile(string FILE)// throws null pointer exception 
         {
             if (CheckIfFileExists(FILE))
             {
