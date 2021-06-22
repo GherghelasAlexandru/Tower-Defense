@@ -18,11 +18,12 @@ namespace PixelDefense.States
         private List<Button> _button;
         public List<ArrowSelector> arrowSelector = new List<ArrowSelector>();
         PassObject applyOptions;
-
+        private Texture2D Background;
 
         public SettingsState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
          : base(game, graphicsDevice, content)
         {
+            Background = _content.Load<Texture2D>("Controls/Background2");
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var font = _content.Load<SpriteFont>("Fonts/Font");
             var arrowBtnLeftTexture = _content.Load<Texture2D>("Controls/arrowBtn");
@@ -130,6 +131,8 @@ namespace PixelDefense.States
         }
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(Background, new Vector2(0, 0));
+
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
 

@@ -17,16 +17,19 @@ namespace PixelDefense.States
 
         public SpriteFont textFontTitle;
 
+        private Texture2D Background;
+
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
+            Background = _content.Load<Texture2D>("Controls/Background");
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
             this.textFontTitle = _content.Load<SpriteFont>("Fonts/TextFont");
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(550, 350),
+                Position = new Vector2(570, 400),
                 Text = "New Game",
             };
 
@@ -34,7 +37,7 @@ namespace PixelDefense.States
 
             var instructionsButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(550, 400),
+                Position = new Vector2(570, 450),
                 Text = "Instructions",
             };
 
@@ -42,7 +45,7 @@ namespace PixelDefense.States
 
             var settingsButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(550, 450),
+                Position = new Vector2(570, 500),
                 Text = "Settings",
             };
 
@@ -50,7 +53,7 @@ namespace PixelDefense.States
 
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(550, 500),
+                Position = new Vector2(570, 550),
                 Text = "Quit Game",
             };
 
@@ -67,13 +70,13 @@ namespace PixelDefense.States
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-          
-
-            foreach (var button in _button)
-                button.Draw(gameTime, spriteBatch);
 
             string tempStr = "Pixel Defense";
             spriteBatch.DrawString(textFontTitle, tempStr, new Vector2(450, 200), Color.Black);
+            spriteBatch.Draw(Background, new Vector2(0, 0));
+            foreach (var button in _button)
+                button.Draw(gameTime, spriteBatch);
+
 
         }
 

@@ -22,10 +22,12 @@ namespace PixelDefense.States
 
         public SpriteFont textFontTitle;
 
+        private Texture2D Background;
+
         public MapSelectionState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
-
+            Background = _content.Load<Texture2D>("Controls/Background2");
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var firstMapTexture = _content.Load<Texture2D>("Controls/FirstMap");
             var secondMapTexture= _content.Load<Texture2D>("Controls/SecondMap");
@@ -34,7 +36,7 @@ namespace PixelDefense.States
 
             chooseFirstMapButton = new Button(firstMapTexture, buttonFont)
             {
-                Position = new Vector2(400, 250),
+                Position = new Vector2(400, 300),
                 Text = "1",
             };
 
@@ -42,7 +44,7 @@ namespace PixelDefense.States
 
            chooseSecondMapButton = new Button(secondMapTexture, buttonFont)
             {
-                Position = new Vector2(650, 250),
+                Position = new Vector2(650, 300),
                 Text = "2", 
             };
 
@@ -50,7 +52,7 @@ namespace PixelDefense.States
 
             var chooseBackButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(550, 450),
+                Position = new Vector2(550, 500),
                 Text = "Back",
             };
 
@@ -66,11 +68,12 @@ namespace PixelDefense.States
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(Background, new Vector2(0, 0));
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
 
             string tempStr = "Choose your map";
-            spriteBatch.DrawString(textFontTitle, tempStr, new Vector2(420, 150), Color.Black);
+            spriteBatch.DrawString(textFontTitle, tempStr, new Vector2(420, 120), Color.Black);
         }
 
         private void MapButton_Click(object sender, EventArgs e)
