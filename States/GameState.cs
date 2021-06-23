@@ -369,11 +369,11 @@ namespace PixelDefense.States
             mainBase.Draw(spriteBatch,SpriteEffects.None);
             if(IsOnPath)
             {
-                spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(10, 780), Color.Black);
+                spriteBatch.DrawString(textFont, "You can only place a tower on grass!", new Vector2(250, 790), Color.Black);
             }
             else if (IsOnAnotherTower)
             {  
-                spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(10, 780), Color.Black);
+                spriteBatch.DrawString(textFont, "You can not stack towers on top of eachother!", new Vector2(250, 790), Color.Black);
             }
             spriteBatch.DrawString(textFont, "Gold  " + _game.gameState.GetGold(), new Vector2(20, 10), Color.Black);
             spriteBatch.DrawString(textFont, "Wave number  " + wave.GetWaveNumber(), new Vector2(560, 10), Color.Black);
