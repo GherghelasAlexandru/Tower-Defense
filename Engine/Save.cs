@@ -9,24 +9,24 @@ namespace PixelDefense.Engine
 {
     public class Save
     {
-        public string gameName, baseFolder, backupFolder, backupPath;
+        protected string gameName, baseFolder, backupFolder, backupPath;
 
-        public bool loadingID = true;
+        protected bool loadingID = true;
 
-        public XDocument saveFile;
+        protected XDocument saveFile;
 
 
 
         public Save(string GAMENAME)
         {
-            gameName = GAMENAME;
+            this.gameName = GAMENAME;
+
             //heroLevel = 1;
-
             //LoadGame();
-            backupFolder = "bzaxcyk";
-            backupPath = "bath";
 
-            baseFolder = Globals.appDataFilePath + "\\" + gameName + "";
+            this.backupFolder = "bzaxcyk";
+            this.backupPath = "bath";
+            this.baseFolder = Globals.appDataFilePath + "\\" + gameName + "";
 
             CreateBaseFolders();
 

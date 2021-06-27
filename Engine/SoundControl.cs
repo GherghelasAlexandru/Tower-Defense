@@ -33,7 +33,7 @@ namespace PixelDefense.Engine
             }
         }
 
-        public virtual void addSound(string name, string path, float volume)
+        public virtual void AddSound(string name, string path, float volume)
         {
             sounds.Add(new SoundItem(name, path, volume));
         }
@@ -53,11 +53,11 @@ namespace PixelDefense.Engine
         public void RunSound(SoundEffect sound, SoundEffectInstance instance, float volume)
         {
             FormOption soundVolume = settingsState.GetOptionValue("Sound");
-            Console.WriteLine(soundVolume.value);
+            Console.WriteLine(soundVolume.GetValue());
             float soundcVolumePercent = 1.0f;
             if (soundVolume != null)
             {
-                soundcVolumePercent = (float)Convert.ToDecimal(soundVolume.value) / 30.0f;
+                soundcVolumePercent = (float)Convert.ToDecimal(soundVolume.GetValue()) / 30.0f;
             }
 
             instance.Volume = soundcVolumePercent * volume;
@@ -74,7 +74,7 @@ namespace PixelDefense.Engine
             float musicVolumePercent = 1.0f;
             if(musicVolume != null)
             {
-                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value)/30.0f;
+                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.GetValue())/30.0f;
             }
             AdjustVolume(musicVolumePercent);
             instance.IsLooped = true;

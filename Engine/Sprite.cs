@@ -187,7 +187,7 @@ namespace PixelDefense.Gameplay
             this._animations = _animations;
         }
 
-        public Dictionary<string, Animation> GetAnimation()
+        public Dictionary<string, Animation> GetAnimations()
         {
             return this._animations;
         }

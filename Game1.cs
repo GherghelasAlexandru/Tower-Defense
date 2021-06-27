@@ -107,11 +107,11 @@ namespace PixelDefense
             
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Globals.soundControl = new SoundControl("Sounds/bgMusic2", Content, settingsState);
-            Globals.soundControl.addSound("game over", "Sounds/gameOver", .10f);
-            Globals.soundControl.addSound("click", "Sounds/button-click", .10f);
-            Globals.soundControl.addSound("shop", "Sounds/shop_open", .25f);
-            Globals.soundControl.addSound("negative", "Sounds/wrong", .25f);
-            Globals.soundControl.addSound("shoot", "Sounds/shoot", .25f);
+            Globals.soundControl.AddSound("game over", "Sounds/gameOver", .10f);
+            Globals.soundControl.AddSound("click", "Sounds/button-click", .10f);
+            Globals.soundControl.AddSound("shop", "Sounds/shop_open", .25f);
+            Globals.soundControl.AddSound("negative", "Sounds/wrong", .25f);
+            Globals.soundControl.AddSound("shoot", "Sounds/shoot", .25f);
 
             _currentState = menuState;
 
@@ -167,7 +167,7 @@ namespace PixelDefense
             float musicVolumePercent = 1.0f;
             if (musicVolume != null)
             {
-                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.value) / 30.0f;
+                musicVolumePercent = (float)Convert.ToDecimal(musicVolume.GetValue()) / 30.0f;
             }
             Globals.soundControl.AdjustVolume(musicVolumePercent);
         }

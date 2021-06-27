@@ -38,39 +38,39 @@ namespace PixelDefense.Gameplay
 
             if (GetBaseHealth() <= 100 && GetBaseHealth() >= 88)
             {
-                _animationManager._animation.CurrentFrame = 0;
+                _animationManager.GetAnimation().CurrentFrame = 0;
             }
             else if (GetBaseHealth() < 88 && GetBaseHealth() >= 76)
             {
-                _animationManager._animation.CurrentFrame = 1;
+                _animationManager.GetAnimation().CurrentFrame = 1;
             }
             else if (GetBaseHealth() < 76 && GetBaseHealth() >= 64)
             {
-                _animationManager._animation.CurrentFrame = 2;
+                _animationManager.GetAnimation().CurrentFrame = 2;
             }
             else if (GetBaseHealth() < 64 && GetBaseHealth() >= 52)
             {
-                _animationManager._animation.CurrentFrame = 3;
+                _animationManager.GetAnimation().CurrentFrame = 3;
             }
             else if (GetBaseHealth() < 52 && GetBaseHealth() >= 40)
             {
-                _animationManager._animation.CurrentFrame = 4;
+                _animationManager.GetAnimation().CurrentFrame = 4;
             }
             else if (GetBaseHealth() < 40 && GetBaseHealth() >= 28)
             {
-                _animationManager._animation.CurrentFrame = 5;
+                _animationManager.GetAnimation().CurrentFrame = 5;
             }
             else if (GetBaseHealth() < 28 && GetBaseHealth() > 16)
             {
-                _animationManager._animation.CurrentFrame = 6;
+                _animationManager.GetAnimation().CurrentFrame = 6;
             }
             else if (GetBaseHealth() < 16 && GetBaseHealth() > 0)
             {
-                _animationManager._animation.CurrentFrame = 7;
+                _animationManager.GetAnimation().CurrentFrame = 7;
             }
             else if (GetBaseHealth() <= 0)
             {
-                _animationManager._animation.CurrentFrame = 8;
+                _animationManager.GetAnimation().CurrentFrame = 8;
 
 
             }

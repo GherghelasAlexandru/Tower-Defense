@@ -28,18 +28,21 @@ namespace PixelDefense.Gameplay
         public Animation(Texture2D texture,int column, int row, int emptyFrames)
         {
 
-            EmptyFrame = emptyFrames;
-            Rows = row;
-            Columns = column;
+            this.EmptyFrame = emptyFrames;
 
-            CurrentFrame = 0;
-            Texture = texture;
+            this.Rows = row;
 
-            FrameCount = (Rows * Columns) - EmptyFrame;
+            this.Columns = column;
 
-            IsLooping = true;
+            this.CurrentFrame = 0;
 
-            FrameSpeed = 0.15f;
+            this.Texture = texture;
+
+            this.FrameCount = (Rows * Columns) - EmptyFrame;
+
+            this.IsLooping = true;
+
+            this.FrameSpeed = 0.15f;
            
         }
 

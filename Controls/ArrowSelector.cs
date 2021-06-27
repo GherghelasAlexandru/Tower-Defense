@@ -16,20 +16,25 @@ namespace PixelDefense.Controls
 
         public int selected;
         public string title;
-        private List<Button> _arrowbutton;
+        protected List<Button> _arrowbutton;
         public int posx;
         public int posy;
-        public SpriteFont textFont;
-        public List<FormOption> options = new List<FormOption>();
+        protected SpriteFont textFont;
+        protected List<FormOption> options;
+
+
         public ArrowSelector(int posx, int posy, string title, ContentManager content)
         {
-            textFont = content.Load<SpriteFont>("Fonts/Font");
+            this.options = new List<FormOption>(); 
+            this.textFont = content.Load<SpriteFont>("Fonts/Font");
+
             var arrowBtnLeftTexture = content.Load<Texture2D>("Controls/arrowBtn");
             var arrowBtnRightTexture = content.Load<Texture2D>("Controls/arrowBtn-Right");
+
             this.title = title;
             this.posx = posx;
             this.posy = posy;
-            selected = 20;
+            this.selected = 20;
 
 
             var arrowBtnLeft = new Button(arrowBtnLeftTexture, textFont)
@@ -107,6 +112,12 @@ namespace PixelDefense.Controls
 
             spriteBatch.DrawString(textFont, selected.ToString(), new Vector2(posx + 65, posy+10), Color.Black);
             spriteBatch.DrawString(textFont, title + ": ", new Vector2(posx - 100, posy+10), Color.Black);
+        }
+
+
+        public List<FormOption> GetOptions()
+        {
+            return this.options;
         }
 
     }

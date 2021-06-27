@@ -11,10 +11,8 @@ namespace PixelDefense.Engine
 {
     public class AnimationManager : Sprite
     {
-        public Animation _animation;
+        protected Animation _animation;
 
-
-     
 
         public AnimationManager(Dictionary<string, Animation> animations) : base(animations.ElementAt(0).Value.Texture)
         {
@@ -126,6 +124,16 @@ namespace PixelDefense.Engine
                 (int)(_position.X - (int)Math.Ceiling(Origin.X)),
                 (int)(_position.Y - (int)Math.Ceiling(Origin.Y)),
                 width, height);
+        }
+
+        public void SetAnimation(Animation animation)
+        {
+            this._animation = animation;
+        }
+
+        public Animation GetAnimation()
+        {
+            return this._animation;
         }
     }
 }

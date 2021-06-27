@@ -13,15 +13,15 @@ namespace PixelDefense.Controls
     {
         #region Fields
 
-        private MouseState _currentMouse;
+        protected MouseState _currentMouse;
 
-        private SpriteFont _font;
+        protected SpriteFont _font;
 
-        public bool _isHovering;
+        protected bool _isHovering;
 
-        private MouseState _previousMouse;
+        protected MouseState _previousMouse;
 
-        private Texture2D _texture;
+        protected Texture2D _texture;
 
         #endregion
 

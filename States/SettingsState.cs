@@ -33,14 +33,14 @@ namespace PixelDefense.States
             {
                 arrowSelector[arrowSelector.Count - 1].AddOption(new FormOption("" + i, i));
             }
-            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].options.Count / 2);
+            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].GetOptions().Count / 2);
 
             arrowSelector.Add(new ArrowSelector(550, 380, "Bg Music", content));
             for (int i = 0; i < 30; i++)
             {
                 arrowSelector[arrowSelector.Count - 1].AddOption(new FormOption("" + i, i));
             }
-            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].options.Count/4);
+            arrowSelector[arrowSelector.Count - 1].selected = (int)(arrowSelector[arrowSelector.Count - 1].GetOptions().Count/4);
 
             var chooseBackButton = new Button(buttonTexture, font)
             {
