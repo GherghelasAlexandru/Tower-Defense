@@ -233,6 +233,7 @@ namespace PixelDefense.States
         }
 
 
+        // Prepare the choosen map for the game 
         public void ChooseMap(Game1 _game)
         {
             if (_game.mapSelection.chooseFirstMapButton.Clicked)
@@ -253,42 +254,32 @@ namespace PixelDefense.States
             }
         }
 
-
-        //Update Logic
-        public override void Update(GameTime gameTime)
+        public void BaseManagement(Base mainBase,GameTime gameTime)
         {
-            
             if (mainBase.GetBaseHealth() == 0)
             {
                 Globals.soundControl.StopMusic();
                 Globals.soundControl.PlaySound("game over");
                 _game.ChangeState(_game.gameOverState);
             }
-            if(mainBase.GetBaseHealth() > 0)
+            if (mainBase.GetBaseHealth() > 0)
             {
                 AttackBase(gameTime);
             }
+        }
+
+
+        //Update Logic
+        public override void Update(GameTime gameTime)
+        {
+            
 
             ChooseMap(_game);
             SetStartWaveButton();
             PlaceTower();
             AddTowerPlacement();
-         /*   if (_game.mapSelection.chooseFirstMapButton.Clicked)
-            {
-                wave.SetAttackingPath(map1);
-                AddMap(map1);
-                RemoveMap(map2);
-                _game.mapSelection.chooseFirstMapButton.Clicked = false;
-            }
-            else if (_game.mapSelection.chooseSecondMapButton.Clicked)
-            {
-                wave.SetAttackingPath(map2);
+            BaseManagement(mainBase, gameTime);
 
-                AddMap(map2);
-                RemoveMap(map1);
-
-                _game.mapSelection.chooseSecondMapButton.Clicked = false;
-            }*/
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
 
@@ -297,13 +288,15 @@ namespace PixelDefense.States
 
             wave.Update(gameTime, _game.shopState.basicTowers);
             mainBase.Update(gameTime);
+
+
             foreach (BasicTower tower in _sprites)
             {
                 
                 foreach (Enemy enemy in wave.GetEnemies())
                 {
                     
-                    if (enemy.IsActive)
+                    if (enemy.GetIsActive())
                     tower.RotateOnEnemy(gameTime,enemy);
 
                     foreach (Bullet bullet in tower.GetBullets())
@@ -391,6 +384,9 @@ namespace PixelDefense.States
             spriteBatch.DrawString(textFont, "Score  " + score, new Vector2(1100, 10), Color.Black);
         }
 
+
+
+        
         public void AddMap(Map map)
         {
             _maps.Add(map);

@@ -151,7 +151,6 @@ namespace PixelDefense
 
             _currentState.Update(gameTime);
 
-            //_currentState.PostUpdate(gameTime);
 
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
