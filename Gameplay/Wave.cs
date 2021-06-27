@@ -44,7 +44,7 @@ namespace PixelDefense.Gameplay
 
         public void IncreaseDeadEnemies()
         {
-            this.deadEnemies += 1;
+            deadEnemies += 1;
         }
 
 
@@ -58,7 +58,7 @@ namespace PixelDefense.Gameplay
         public void Update(GameTime gameTime, List<Sprite> sprites)
         {
             
-            this.waveNumber = GetWaveNumber();
+            waveNumber = GetWaveNumber();
             timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             Console.WriteLine("Enemie Count: " + GetEnemies().Count);
@@ -70,10 +70,6 @@ namespace PixelDefense.Gameplay
 
                 foreach (Enemy enemy in enemies)
                 {
-                    /*if (enemy.isDead)
-                    {
-                        deadEnemies++;
-                    }*/
                     if (enemy.Active)
                     {
                         enemy.Update(gameTime, sprites);
@@ -92,7 +88,7 @@ namespace PixelDefense.Gameplay
 
         public void SetAttackingPath(Map map)
         {
-            this.SetMap(map);
+            SetMap(map);
 
         }
 
@@ -114,7 +110,7 @@ namespace PixelDefense.Gameplay
                     Enemy enemy = forge.ForgeEnemy(forge.GetRandomEnemy());
                     
                     enemy.SpawnEnemy(map.GetStartingPoint(), map.GetPath());
-                    this.enemies.Add(enemy);
+                    enemies.Add(enemy);
                 }
                 timer = 0;
             }
@@ -143,7 +139,7 @@ namespace PixelDefense.Gameplay
 
         public int GetDeadEnemies()
         {
-            return this.deadEnemies;
+            return deadEnemies;
         }
 
         public void SetWaveBreak(bool waveBreak)
@@ -153,37 +149,37 @@ namespace PixelDefense.Gameplay
 
         public bool GetWaveBreak()
         {
-            return this.waveBreak;
+            return waveBreak;
         }
 
-        public void SetWaveNumber(int number)
+        public void SetWaveNumber(int waveNumber)
         {
-            this.waveNumber = number;
+            this.waveNumber = waveNumber;
         }
 
         public int GetWaveNumber()
         {
-            return this.waveNumber;
+            return waveNumber;
         }
 
-        public void SetEnemyNumbers(int number)
+        public void SetEnemyNumbers(int enemyNumbers)
         {
-            this.enemyNumbers = number;
+            this.enemyNumbers = enemyNumbers;
         }
 
         public int GetEnemyNumbers()
         {
-            return this.enemyNumbers;
+            return enemyNumbers;
         }
 
-        public void SetTimeBetweenSpawn(float time)
+        public void SetTimeBetweenSpawn(float timebeetweenspawn)
         {
-            this.timebeetweenspawn = time;
+            this.timebeetweenspawn = timebeetweenspawn;
         }
 
         public float GetTimeBetweenSpawn()
         {
-            return this.timebeetweenspawn;
+            return timebeetweenspawn;
         }
 
         public void SetEnemies(List<Enemy> enemies)
@@ -193,7 +189,7 @@ namespace PixelDefense.Gameplay
 
         public List<Enemy> GetEnemies()
         {
-            return this.enemies;
+            return enemies;
         }
 
         public void SetForge(ForgeMaster forge)
@@ -203,7 +199,7 @@ namespace PixelDefense.Gameplay
 
         public ForgeMaster GetForge()
         {
-            return this.forge;
+            return forge;
         }
 
         public void SetMap(Map map)
@@ -213,7 +209,7 @@ namespace PixelDefense.Gameplay
 
         public Map GetMap()
         {
-            return this.map;
+            return map;
         }
     }
 }

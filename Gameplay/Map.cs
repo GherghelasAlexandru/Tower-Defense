@@ -97,7 +97,6 @@ namespace PixelDefense.Gameplay
 
         public void AddCollisionPath()
         {
-
             foreach (var point in map.ObjectGroups["CollisionPath"].Objects)
             {
                 pathList.Add(new Rectangle((int)point.X, (int)point.Y, (int)point.Width, (int)point.Height));
@@ -151,57 +150,57 @@ namespace PixelDefense.Gameplay
 
         public TmxMap GetMap()
         {
-            return this.map;
+            return map;
         }
 
-        public void SetTexture(Texture2D texture)
+        public void SetTexture(Texture2D tileTexture)
         {
-            this.tileTexture = texture;
+            this.tileTexture = tileTexture;
         }
 
         public Texture2D GetTexture()
         {
-            return this.tileTexture;
+            return tileTexture;
         }
 
-        public void SetTileWidth(int width)
+        public void SetTileWidth(int tileWidth)
         {
-            this.tileWidth = width;
+            this.tileWidth = tileWidth;
         }
 
         public int GetTileWidth()
         {
-            return this.tileWidth;
+            return tileWidth;
         }
 
-        public void SetTileHeight(int height)
+        public void SetTileHeight(int tileHeight)
         {
-            this.tileHeight = height;
+            this.tileHeight = tileHeight;
         }
 
         public int GetTileHeight()
         {
-            return this.tileHeight;
+            return tileHeight;
         }
 
-        public void SetTilesetTilesWidth(int width)
+        public void SetTilesetTilesWidth(int tilesetTilesWide)
         {
-            this.tilesetTilesWide = width;
+            this.tilesetTilesWide = tilesetTilesWide;
         }
 
         public int GetTilesetTilesWidth()
         {
-            return this.tilesetTilesWide;
+            return tilesetTilesWide;
         }
 
-        public void SetTilesetTilesHeight(int height)
+        public void SetTilesetTilesHeight(int tilesetTilesHigh)
         {
-            this.tilesetTilesHigh = height;
+            this.tilesetTilesHigh = tilesetTilesHigh;
         }
 
         public int GetTilesetTilesHeight()
         {
-            return this.tilesetTilesHigh;
+            return tilesetTilesHigh;
         }
 
     }
