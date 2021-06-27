@@ -42,10 +42,10 @@ namespace PixelDefense.Engine
         {
             foreach(var sound in sounds)
             {
-                if(sound.name == name)
+                if(sound.GetName() == name)
                 {
                     //sound.createInstance();
-                    RunSound(sound.sound, sound.instance, sound.volume);
+                    RunSound(sound.GetSound(), sound.GetSoundInstance(), sound.GetVolume());
                 }
             }
         }
