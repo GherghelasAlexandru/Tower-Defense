@@ -11,35 +11,34 @@ namespace PixelDefense.Gameplay
 {
    public class Wave
     {
-        public ForgeMaster forge;
-        public Map map;
-        public List<Enemy> enemies;
+        protected ForgeMaster forge;
+        protected Map map;
+        protected List<Enemy> enemies;
         public ContentManager content;
 
         protected bool waveBreak;
-        public float timer;
-        public int waveNumber;
-        public float timebeetweenspawn;
-        public int enemyNumbers;
-        public int deadEnemies;
-        public Base mainBase;
+        protected float timer;
+        protected int waveNumber;
+        protected float timebeetweenspawn;
+        protected int enemyNumbers;
+        protected int deadEnemies;
+        protected Base mainBase;
 
 
         public Wave(ContentManager content)
         {
            
-            //create and render enemies
+            //required for create and render enemies
             this.content = content;
-            this.forge = new ForgeMaster(this.content);
-            this.enemies = new List<Enemy>();
+            forge = new ForgeMaster(this.content);
+            enemies = new List<Enemy>();
             
 
             // required for wave lenght,difficulty,
-            this.timebeetweenspawn = 0.7f;
-            this.enemyNumbers = 1;
-            this.waveBreak = false;
-            this.waveNumber = 1;
-
+            timebeetweenspawn = 0.7f;
+            enemyNumbers = 1;
+            waveBreak = false;
+            waveNumber = 1;
 
         }
 

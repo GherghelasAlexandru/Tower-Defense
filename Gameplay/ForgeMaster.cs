@@ -10,10 +10,10 @@ namespace PixelDefense.Gameplay
 {
     public class ForgeMaster
     {
-        public List<string> enemiesOptions;
+        protected List<string> enemiesOptions;
         public Random random;
         public ContentManager content;
-        public Enemy enemy;
+        protected Enemy enemy;
 
        
 
@@ -24,19 +24,16 @@ namespace PixelDefense.Gameplay
             this.random = new Random();
             this.content = content;
 
-            
-
-
         }
 
         public void LoadEnemyOptions()
         {
             // add extra enemy if necessary
 
-            this.enemiesOptions.Add("Slime");
-            this.enemiesOptions.Add("Rat");
-            this.enemiesOptions.Add("Crab");
-            this.enemiesOptions.Add("Bat");
+            enemiesOptions.Add("Slime");
+            enemiesOptions.Add("Rat");
+            enemiesOptions.Add("Crab");
+            enemiesOptions.Add("Bat");
         }
 
         public string GetRandomEnemy()
@@ -52,23 +49,22 @@ namespace PixelDefense.Gameplay
             switch (enemyName)
             {
                 case "Slime":
-                   this.enemy = ForgeSlime();
+                   enemy = ForgeSlime();
                     break;
 
                 case "Rat":
-                    this.enemy = ForgeRat();
+                    enemy = ForgeRat();
                     break;
 
                 case "Crab":
-                     this.enemy = ForgeCrab ();
+                     enemy = ForgeCrab ();
                     break;
 
                 case "Bat":
-                    this.enemy = ForgeBat();
+                    enemy = ForgeBat();
                     break;
 
                 default:
-                   // ForgeRat();
                     break;
             }
 
@@ -76,6 +72,7 @@ namespace PixelDefense.Gameplay
             
         }
 
+        // Set the enemy animations
         public Enemy ForgeCrab()
         {
             var crabAnimations = new Dictionary<string, Animation>()
@@ -139,12 +136,12 @@ namespace PixelDefense.Gameplay
         // get and set methods
         public void SetEnemiesOptions(List<String> enemiesOpions)
         {
-            this.enemiesOptions = enemiesOpions;
+            enemiesOptions = enemiesOpions;
         }
 
         public List<String> GetEnemies()
         {
-            return this.enemiesOptions;
+            return enemiesOptions;
         }
 
         public void SetContent(ContentManager content)
@@ -154,7 +151,7 @@ namespace PixelDefense.Gameplay
 
         public ContentManager GetContent()
         {
-            return this.content;
+            return content;
         }
 
 
