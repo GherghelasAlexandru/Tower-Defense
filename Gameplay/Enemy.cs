@@ -73,16 +73,13 @@ namespace PixelDefense.Gameplay
             }
         }
 
+        // set the enemy spawning position and path
         public void SpawnEnemy(Vector2 pos,Queue<Vector2> p)
         {
 
-           
-            Position = pos;
-            //IsActive = true;
-      
-            path = p;
-            Active = true;
-            
+            SetPosition(pos);
+            SetPath(p);
+            Active = true;       
 
         }
 
@@ -90,9 +87,7 @@ namespace PixelDefense.Gameplay
     
 
         public override void Update(GameTime gameTime,List<Sprite>sprites)
-        {
-            
-            
+        {   
 
             if(isDead)
             {
@@ -118,10 +113,8 @@ namespace PixelDefense.Gameplay
                     }
                     if (path.Count == 0)
                     {
-                        // active need to be changed, here must be implemented the atack logic
                         xVelocity = 0;
                        
-
                     }
                     else if (health <= 0)
                     {
@@ -152,14 +145,12 @@ namespace PixelDefense.Gameplay
 
                     if (GetPath().Count == 0)
                     {
-                    // pus timer? 
-                    // Timer increment
-                    Console.WriteLine(MainBase.health);
+                    // Timer observation
+                    // Console.WriteLine(MainBase.health);
                     //Console.WriteLine(timer);
 
                     if (timer > 1)
-                    {
-                        
+                    {   
                         MainBase.SetBaseHealth(MainBase.GetBaseHealth() - damage);
                         timer = 0;
                     }
@@ -170,8 +161,6 @@ namespace PixelDefense.Gameplay
 
         protected override void SetAnimations()
         {
-
-
 
             if (health > 0 && path.Count > 0)
             {
@@ -220,65 +209,55 @@ namespace PixelDefense.Gameplay
             return this.health;
         }
 
-        public void SetSpeed(float speed)
+        public void SetSpeed(float mSpeed)
         {
-            this.mSpeed = speed;
+            this.mSpeed = mSpeed;
         }
 
         public float GetSpeed()
         {
-            return this.mSpeed;
+            return mSpeed;
         }
 
-        public void SetVelocity(float velocity)
+        public void SetVelocity(float xVelocity)
         {
-            this.xVelocity = velocity;
+            this.xVelocity = xVelocity;
         }
 
         public float GetVelocity()
         {
-            return this.xVelocity;
+            return xVelocity;
         }
 
-        public void SetGoldDrop(int gold)
+        public void SetGoldDrop(int goldDrop)
         {
-            this.goldDrop = gold;
+            this.goldDrop = goldDrop;
         }
 
         public int GetGoldDrop()
         {
-            return this.goldDrop;
+            return goldDrop;
         }
 
-        public void SetTimer(float timer)
+        public void SetTimer(float _timer)
         {
-            this._timer = timer;
+            this._timer = _timer;
         }
 
         public float GetTimer()
         {
-            return this._timer;
+            return _timer;
         }
 
-        /*public void SetPosition(Vector2 position)
+        public void SetIsDead(bool isDead)
         {
-            this.Position = position;
-        }
-
-        public Vector2 GetPosition()
-        {
-            return this.Position;
-        }*/
-
-        public void SetIsDead(bool isdead)
-        {
-            this.isDead = isdead;
+            this.isDead = isDead;
         }
 
         public bool GetIsDead()
         {
 
-            return this.isDead;
+            return isDead;
 
         }
 
@@ -294,10 +273,8 @@ namespace PixelDefense.Gameplay
 
         public Queue<Vector2> GetPath()
         {
-            return this.path;
+            return path;
         }
-
-
 
     }
 }

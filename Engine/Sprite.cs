@@ -119,64 +119,64 @@ namespace PixelDefense.Gameplay
 
         // get and set methods
 
-        public void SetIsActive(bool isActive)
+        public void SetIsActive(bool IsActive)
         {
-            this.IsActive = isActive;
+            this.IsActive = IsActive;
         }
 
         public bool GetIsActive()
         {
-            return this.IsActive;
+            return IsActive;
         }
 
-        public void SetLifeSpan(float lifeSpan)
+        public void SetLifeSpan(float LifeSpan)
         {
-            this.LifeSpan = lifeSpan;
+            this.LifeSpan = LifeSpan;
         }
 
         public float GetLifeSpan()
         {
-            return this.LifeSpan;
+            return LifeSpan;
         }
 
         public void SetXvelocity(float velocity)
         {
-            this.xVelocity = velocity;
+            xVelocity = velocity;
         }
 
         public float GetXvelocity()
         {
-            return this.xVelocity;
+            return xVelocity;
         }
 
         public void SetYvelocity(float velocity)
         {
-            this.yVelocity = velocity;
+            yVelocity = velocity;
         }
 
         public float GetYvelocity()
         {
-            return this.yVelocity;
+            return yVelocity;
         }
 
-        public void SetOrigin(Vector2 origin)
+        public void SetOrigin(Vector2 Origin)
         {
-            this.Origin = origin;
+            this.Origin = Origin;
         }
 
         public Vector2 GetOrigin()
         {
-            return this.Origin;
+            return Origin;
         }
 
-        public void SetDirection(Vector2 direction)
+        public void SetDirection(Vector2 Direction)
         {
-            this.Direction = direction;
+            this.Direction = Direction;
         }
 
         public Vector2 GetDirection()
         {
-            return this.Direction;
+            return Direction;
         }
 
         
