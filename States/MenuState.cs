@@ -98,10 +98,10 @@ namespace PixelDefense.States
             _game.ChangeState(_game.mapSelection);
         }
 
-        public override void PostUpdate(GameTime gameTime)
+      /*  public override void PostUpdate(GameTime gameTime)
         {
             // remove sprites if they're not needed
-        }
+        }*/
 
         public override void Update(GameTime gameTime)
         {

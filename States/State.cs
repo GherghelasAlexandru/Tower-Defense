@@ -26,55 +26,55 @@ namespace PixelDefense.States
 
         #region Methods
 
-        public State(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
+        public State(Game1 _game, GraphicsDevice _graphicsDevice, ContentManager _content)
         {
-            this._game = game;
+            this._game = _game;
 
-            this._graphicsDevice = graphicsDevice;
+            this._graphicsDevice = _graphicsDevice;
 
-            this._content = content; 
+            this._content = _content; 
             
-            this.textFont = _content.Load<SpriteFont>("Fonts/Font");
+            textFont = _content.Load<SpriteFont>("Fonts/Font");
 
 
         }
 
         //get and set methods
-        public void SetContent(ContentManager content)
+        public void SetContent(ContentManager _content)
         {
-            this._content = content;
+            this._content = _content;
         }
 
         public ContentManager GetContent()
         {
-            return this._content;
+            return _content;
         }
 
-        public void SetGame(Game1 game)
+        public void SetGame(Game1 _game)
         {
-            this._game = game;
+            this._game = _game;
         }
 
         public Game1 GetGame()
         {
-            return this._game;
+            return _game;
         }
 
        public void SetGraphicsDevice(GraphicsDevice graphics)
         {
-            this._graphicsDevice = graphics;
+            _graphicsDevice = graphics;
         }
 
         public GraphicsDevice GetGraphicsDevice()
         {
-            return this._graphicsDevice;
+            return _graphicsDevice;
         }
 
 
 
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
-        public abstract void PostUpdate(GameTime gameTime);
+        //public abstract void PostUpdate(GameTime gameTime);
 
         public abstract void Update(GameTime gameTime);
 

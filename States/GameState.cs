@@ -24,37 +24,46 @@ namespace PixelDefense.States
         protected Button startWaveButton;
         public Base mainBase;
         public Wave wave;
+        public Animation healthBar;
 
         public bool IsOnAnotherTower;
         public bool IsOnPath;
         public float FollowDistance;
         public int gold;
         public int score;
-        public float timer;
-        public Animation healthBar;
+       
+       
+
+
 
         public GameState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content)
           : base(game, graphicsDevice, content)
         {
             healthBar = new Animation(content.Load<Texture2D>("spritesheets/Stitched_HP_Bar"), 8, 1, 0) { IsLooping = false };
-           
+           //the health and gold values are for testing purpouse
             mainBase = new Base(healthBar);
-            gold = 1000;
+            gold = 500;
+
+
             //Globals.soundControl.ChangeMusic("Sounds/bgMusic2");
             _sprites = new List<Sprite>();
             towerPlacements = new List<Rectangle>();
+           
+            
+            // Maps management
             _maps = new List<Map>();
 
             map1 = new Map(content, "Content/Test.tmx");
+            map1.AddCollisionPath();
+
             map2 = new Map(content, "Content/SecondMap2.tmx");
+            map2.AddCollisionPath();
+
 
             wave = new Wave(content);
             
             
-
-            map1.AddCollisionPath();
-            map2.AddCollisionPath();
-            
+            // Buttons Creation
             var buttonTexture = _content.Load<Texture2D>("Controls/button3");
             var buttonFont = _content.Load<SpriteFont>("Fonts/Font");
 
@@ -72,7 +81,7 @@ namespace PixelDefense.States
             };
             shopButton.Click += ShopButton_click;
 
-            this.startWaveButton = new Button(buttonTexture, buttonFont)
+            startWaveButton = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(779, 774),
             };
@@ -85,6 +94,38 @@ namespace PixelDefense.States
             startWaveButton
             };
         }
+
+
+        // Buttons Methods to respond to events
+
+        public void StartWaveButton_click(object sender, EventArgs e)
+        {
+            wave.StartWave(true);
+        }
+
+        private void ChooseSurrenderButton_Click(object sender, EventArgs e)
+        {
+            Globals.soundControl.StopMusic();
+            Globals.soundControl.PlaySound("game over");
+            _game.ChangeState(_game.gameOverState);
+        }
+
+
+        private void ShopButton_click(object sender, EventArgs e)
+        {
+            //shop can not be used when wave is active
+            if (wave.GetWaveBreak() == false)
+            {
+                Globals.soundControl.PlaySound("shop");
+                _game.ChangeState(_game.shopState);
+            }
+
+        }
+
+
+
+        // Tower placement and collision logic
+
         public void AddTowerPlacement()
         {
             foreach (BasicTower tower in _sprites)
@@ -104,36 +145,7 @@ namespace PixelDefense.States
                 }
             return false;
         }
-        public void AddMap(Map map)
-        {
-            _maps.Add(map);
-        }
-        public int GetGold()
-        {
-            return gold;
-        }
-
-        public void SetGold(int goldToAdd)
-        {
-            gold += goldToAdd;
-        }
-
-        public void StartWaveButton_click(object sender, EventArgs e)
-        {
-            wave.StartWave(true);
-        }
-
-        private void ChooseSurrenderButton_Click(object sender, EventArgs e)
-        {
-            Globals.soundControl.StopMusic();
-            Globals.soundControl.PlaySound("game over");
-            _game.ChangeState(_game.gameOverState);
-        }
-
-        public void SetStartWaveButton()
-        {
-            this.startWaveButton.Text = "Start Wave" + " " + wave.GetWaveNumber();
-        }
+       
 
         public void PlaceTower()
         {
@@ -178,39 +190,10 @@ namespace PixelDefense.States
                     
         }
 
-      
-
-        public void AddTower(BasicTower tower)
-        {
-            _sprites.Add(tower);
-        }
 
 
-        private void ShopButton_click(object sender, EventArgs e)
-        {
-            //shop can not be used when wave is active
-            if(wave.GetWaveBreak() == false)
-            {
-                Globals.soundControl.PlaySound("shop");
-                _game.ChangeState(_game.shopState);
-            }
-            
-        }
-
-        public override void PostUpdate(GameTime gameTime)
-        {
-            for (int i = 0; i < _sprites.Count; i++)
-            {
-                if (!_sprites[i].IsActive)
-                {
-                    _sprites.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
-
-
-        public  void RemoveBullets(GameTime gameTime)
+        // Removing elements from the game 
+        public void RemoveBullets()
         {
             foreach(BasicTower tower in _sprites)
                 
@@ -237,11 +220,41 @@ namespace PixelDefense.States
                 }
             }
         }
-        public void RemoveMap(Map map)
+
+        //Multiple enemies attacking the base
+        public void AttackBase(GameTime GameTime)
         {
-            _maps.Remove(map);
+            foreach (Enemy enemy in wave.GetEnemies())
+            {
+
+                enemy.AttackBase(mainBase, GameTime);
+
+            }
         }
 
+
+        public void ChooseMap(Game1 _game)
+        {
+            if (_game.mapSelection.chooseFirstMapButton.Clicked)
+            {
+                wave.SetAttackingPath(map1);
+                AddMap(map1);
+                RemoveMap(map2);
+                _game.mapSelection.chooseFirstMapButton.Clicked = false;
+            }
+            else if (_game.mapSelection.chooseSecondMapButton.Clicked)
+            {
+                wave.SetAttackingPath(map2);
+
+                AddMap(map2);
+                RemoveMap(map1);
+
+                _game.mapSelection.chooseSecondMapButton.Clicked = false;
+            }
+        }
+
+
+        //Update Logic
         public override void Update(GameTime gameTime)
         {
             
@@ -256,10 +269,11 @@ namespace PixelDefense.States
                 AttackBase(gameTime);
             }
 
+            ChooseMap(_game);
             SetStartWaveButton();
             PlaceTower();
             AddTowerPlacement();
-            if (_game.mapSelection.chooseFirstMapButton.Clicked)
+         /*   if (_game.mapSelection.chooseFirstMapButton.Clicked)
             {
                 wave.SetAttackingPath(map1);
                 AddMap(map1);
@@ -268,13 +282,13 @@ namespace PixelDefense.States
             }
             else if (_game.mapSelection.chooseSecondMapButton.Clicked)
             {
-                wave.SetAttackingPath(map2); 
+                wave.SetAttackingPath(map2);
 
                 AddMap(map2);
                 RemoveMap(map1);
 
                 _game.mapSelection.chooseSecondMapButton.Clicked = false;
-            }
+            }*/
             foreach (var sprite in _sprites.ToArray())
                 sprite.Update(gameTime, _sprites);
 
@@ -319,30 +333,24 @@ namespace PixelDefense.States
 
                 }
             }
-           RemoveBullets(gameTime);
-           PostUpdate(gameTime);
+           RemoveBullets();
            RemoveEnemy();  
         }
        
+       
+    
+
+
+        // Draw Logic
         public void DrawMap(SpriteBatch spriteBatch)
         {
-            foreach(var map in _maps)
+            foreach (var map in _maps)
             {
                 map.DrawGrass(spriteBatch);
                 map.DrawPath(spriteBatch);
                 map.DrawShadow(spriteBatch);
                 map.DrawBase(spriteBatch);
                 map.DrawDecorations(spriteBatch);
-            }
-        }
-
-        public void AttackBase(GameTime GameTime)
-        {
-            foreach (Enemy enemy in wave.GetEnemies())
-            {
-
-                    enemy.AttackBase(mainBase,GameTime);
-                
             }
         }
 
@@ -357,6 +365,9 @@ namespace PixelDefense.States
             foreach (var button in _button)
                 button.Draw(gameTime, spriteBatch);
         }
+
+
+
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             DrawMap(spriteBatch);
@@ -378,6 +389,35 @@ namespace PixelDefense.States
             spriteBatch.DrawString(textFont, "Gold  " + _game.gameState.GetGold(), new Vector2(20, 10), Color.Black);
             spriteBatch.DrawString(textFont, "Wave number  " + wave.GetWaveNumber(), new Vector2(560, 10), Color.Black);
             spriteBatch.DrawString(textFont, "Score  " + score, new Vector2(1100, 10), Color.Black);
+        }
+
+        public void AddMap(Map map)
+        {
+            _maps.Add(map);
+        }
+        public int GetGold()
+        {
+            return gold;
+        }
+
+        public void SetGold(int goldToAdd)
+        {
+            gold += goldToAdd;
+        }
+
+        public void AddTower(BasicTower tower)
+        {
+            _sprites.Add(tower);
+        }
+
+        public void SetStartWaveButton()
+        {
+            startWaveButton.Text = "Start Wave" + " " + wave.GetWaveNumber();
+        }
+
+        public void RemoveMap(Map map)
+        {
+            _maps.Remove(map);
         }
     }
 }

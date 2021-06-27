@@ -68,7 +68,6 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Engine\Animation.cs" />
     <Compile Include="Gameplay\Base.cs" />
-    <Compile Include="Gameplay\BasicTower.cs" />
     <Compile Include="Gameplay\Bullets\Brokenshot.cs" />
     <Compile Include="Gameplay\Bullets\Bullet.cs" />
     <Compile Include="Gameplay\Bullets\Grapeshot.cs" />
@@ -82,6 +81,7 @@
     <Compile Include="Engine\Sprite.cs" />
     <Compile Include="Gameplay\Enemies\Bat.cs" />
     <Compile Include="Gameplay\Enemies\Slime.cs" />
+    <Compile Include="Gameplay\Towers\BasicTower.cs" />
     <Compile Include="Gameplay\Towers\BrokenGun.cs" />
     <Compile Include="Gameplay\Towers\Cannon.cs" />
     <Compile Include="Gameplay\Towers\DoubleCannon.cs" />

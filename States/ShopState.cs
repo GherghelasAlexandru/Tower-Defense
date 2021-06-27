@@ -219,11 +219,11 @@ namespace PixelDefense.States
             notEnoughtMoney = false;
         }
 
-        public override void PostUpdate(GameTime gameTime)
+   /*     public override void PostUpdate(GameTime gameTime)
         {
            
         }
-
+*/
         public override void Update(GameTime gameTime)
         {
             foreach (var button in _button)
