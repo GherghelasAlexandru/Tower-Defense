@@ -59,7 +59,7 @@ namespace PixelDefense.Controls
 
             
         }
-        public virtual XElement Returnxml()
+        public  XElement Returnxml()
         {
             XElement xml = new XElement("settings",
                                         new XElement("name", title),
@@ -68,7 +68,7 @@ namespace PixelDefense.Controls
                                                
         }
 
-        public virtual FormOption GetCurrentOption()
+        public FormOption GetCurrentOption()
         {
             return options[selected];
             
@@ -80,12 +80,12 @@ namespace PixelDefense.Controls
             foreach (var arrow in _arrowbutton)
                 arrow.Update(gameTime);
         }
-        public virtual void AddOption(FormOption FORMOPTION)
+        public void AddOption(FormOption FORMOPTION)
         {
             options.Add(FORMOPTION);
         }
 
-        public virtual void ArrowLeftClick(object sender, EventArgs e)
+        public void ArrowLeftClick(object sender, EventArgs e)
         {
             selected--;
 
@@ -95,7 +95,7 @@ namespace PixelDefense.Controls
             }
         }
 
-        public virtual void ArrowRightClick(object sender, EventArgs e)
+        public void ArrowRightClick(object sender, EventArgs e)
         {
             selected++;
 

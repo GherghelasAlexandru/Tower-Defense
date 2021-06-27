@@ -63,12 +63,12 @@ namespace PixelDefense.States
             }
         }
 
-        public virtual void ApplyOptions(PassObject applyOptions)
+        public void ApplyOptions(PassObject applyOptions)
         {
             this.applyOptions = applyOptions;
         }
 
-        public virtual FormOption GetOptionValue(string name)
+        public FormOption GetOptionValue(string name)
         {
             for(int i = 0; i< arrowSelector.Count; i++)
             {
@@ -80,7 +80,7 @@ namespace PixelDefense.States
             return null;
         }
 
-        public virtual void LoadSaveFile(XDocument saveData)
+        public void LoadSaveFile(XDocument saveData)
         {
             if(saveData != null)
             {
