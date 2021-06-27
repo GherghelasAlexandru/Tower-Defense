@@ -125,8 +125,8 @@ namespace PixelDefense.States
 
         private void ChooseSurrenderButton_Click(object sender, EventArgs e)
         {
-            Globals.soundControl.stopMusic();
-            Globals.soundControl.playSound("game over");
+            Globals.soundControl.StopMusic();
+            Globals.soundControl.PlaySound("game over");
             _game.ChangeState(_game.gameOverState);
         }
 
@@ -159,7 +159,7 @@ namespace PixelDefense.States
                                 }
                                 else if (IsTowerColliding(tower.BoundingBox))
                                 {
-                                    Globals.soundControl.playSound("negative");
+                                    Globals.soundControl.PlaySound("negative");
                                     IsOnAnotherTower = true;
                                     tower.SetIsDragged(true);
                                 }
@@ -191,7 +191,7 @@ namespace PixelDefense.States
             //shop can not be used when wave is active
             if(wave.GetWaveBreak() == false)
             {
-                Globals.soundControl.playSound("shop");
+                Globals.soundControl.PlaySound("shop");
                 _game.ChangeState(_game.shopState);
             }
             
@@ -247,8 +247,8 @@ namespace PixelDefense.States
             
             if (mainBase.health == 0)
             {
-                Globals.soundControl.stopMusic();
-                Globals.soundControl.playSound("game over");
+                Globals.soundControl.StopMusic();
+                Globals.soundControl.PlaySound("game over");
                 _game.ChangeState(_game.gameOverState);
             }
             if(mainBase.health > 0)
@@ -299,7 +299,7 @@ namespace PixelDefense.States
                         if (bullet.Bounds.Intersects(enemy.InteractionBox) && bullet.IsActive)
                                 {
 
-                                    Globals.soundControl.playSound("shoot");
+                                    Globals.soundControl.PlaySound("shoot");
 
                                     bullet.SetIsActive(false);
                                     enemy.SetHealth(enemy.GetHealth() - bullet.GetDmg());
@@ -308,7 +308,7 @@ namespace PixelDefense.States
                                 }
                                 if (enemy.GetHealth() <= 0 && !enemy.isDead)
                                 {
-                                    Globals.soundControl.playSound("click");
+                                    Globals.soundControl.PlaySound("click");
                                     bullet.SetIsActive(false);
                                     enemy.SetMovement(new Vector2(0, 0));
                                     enemy.SetIsDead(true);

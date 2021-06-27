@@ -82,19 +82,19 @@ namespace PixelDefense.States
 
         private void IntructionsButton_Click(object sender, EventArgs e)
         {
-            Globals.soundControl.playSound("click");
+            Globals.soundControl.PlaySound("click");
             _game.ChangeState(_game.instructionsState);
         }
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
-            Globals.soundControl.playSound("click");
+            Globals.soundControl.PlaySound("click");
             _game.ChangeState(_game.settingsState);
         }
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            Globals.soundControl.playSound("click");
+            Globals.soundControl.PlaySound("click");
             _game.ChangeState(_game.mapSelection);
         }
 

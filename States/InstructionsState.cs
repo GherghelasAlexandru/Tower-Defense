@@ -52,7 +52,7 @@ namespace PixelDefense.States
 
         private void BackButton_Click(object sender, EventArgs e)
         {
-            Globals.soundControl.playSound("click");
+            Globals.soundControl.PlaySound("click");
             _game.ChangeState(_game.menuState);
         }
 

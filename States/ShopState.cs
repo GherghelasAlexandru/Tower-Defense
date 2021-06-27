@@ -145,7 +145,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
-                    Globals.soundControl.playSound("negative");
+                    Globals.soundControl.PlaySound("negative");
                     notEnoughtMoney = true;
                 }
             }
@@ -160,7 +160,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
-                    Globals.soundControl.playSound("negative");
+                    Globals.soundControl.PlaySound("negative");
                     notEnoughtMoney = true;
                 }
             }
@@ -175,7 +175,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
-                    Globals.soundControl.playSound("negative");
+                    Globals.soundControl.PlaySound("negative");
                     notEnoughtMoney = true;
                 }
             }
@@ -190,7 +190,7 @@ namespace PixelDefense.States
                 }
                 else
                 {
-                    Globals.soundControl.playSound("negative");
+                    Globals.soundControl.PlaySound("negative");
                     notEnoughtMoney = true;
                 }    
             }
@@ -205,7 +205,7 @@ namespace PixelDefense.States
                 }
                 else 
                 {
-                    Globals.soundControl.playSound("negative");
+                    Globals.soundControl.PlaySound("negative");
                     notEnoughtMoney = true;
                 }      
             }
@@ -214,7 +214,7 @@ namespace PixelDefense.States
         private void BackButton_Click(object sender, EventArgs e)
         {
             // to be modified to change back to the gameState
-            Globals.soundControl.playSound("click");
+            Globals.soundControl.PlaySound("click");
             _game.ChangeState(_game.gameState);
             notEnoughtMoney = false;
         }

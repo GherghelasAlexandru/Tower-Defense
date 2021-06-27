@@ -38,7 +38,7 @@ namespace PixelDefense.Engine
             sounds.Add(new SoundItem(name, path, volume));
         }
 
-        public virtual void playSound(string name)
+        public virtual void PlaySound(string name)
         {
             foreach(var sound in sounds)
             {
@@ -82,7 +82,7 @@ namespace PixelDefense.Engine
 
         }
 
-        public virtual void stopMusic()
+        public virtual void StopMusic()
         {
             instance.Stop();
         }
