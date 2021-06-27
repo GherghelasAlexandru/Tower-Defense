@@ -35,7 +35,6 @@ namespace PixelDefense.Gameplay
             Bullet.CenterOrigin();
             CenterOrigin();
 
-
         }
 
  
@@ -104,16 +103,6 @@ namespace PixelDefense.Gameplay
             return towerPrice;
         }
 
-     /*   public void Settimer(float timer)
-        {
-            this.timer = timer;
-        }
-
-        public float Gettimer()
-        {
-            return this.timer;
-        }
-*/
         public void SetTIMER(float TIMER)
         {
             this.TIMER = TIMER;
@@ -134,52 +123,52 @@ namespace PixelDefense.Gameplay
             return this.bullets;
         }
 
-        public void SetBullet(Bullet bullet)
+        public void SetBullet(Bullet Bullet)
         {
-            this.Bullet = bullet;
+            this.Bullet = Bullet;
         }
 
         public Bullet GetBullet()
         {
-            return this.Bullet;
+            return Bullet;
         }
 
-        public void SetMouseState(MouseState mouse)
+        public void SetMouseState(MouseState mouseState)
         {
-            this.mouseState = mouse;
+            this.mouseState = mouseState;
         }
 
         public MouseState GetMouseState()
         {
-            return this.mouseState;
+            return mouseState;
         }
-        public void SetIsFiring(bool isfiring)
+        public void SetIsFiring(bool firing)
         {
-            this.firing = isfiring;
+            this.firing = firing;
         }
 
         public bool GetFiring()
         {
-            return this.firing;
+            return firing;
         }
 
-        public void SetIsPlaced(bool isplaced)
+        public void SetIsPlaced(bool isPlaced)
         {
-            this.IsPlaced = isplaced;
+            this.IsPlaced = isPlaced;
         }
 
         public bool GetIsPlaced()
         {
-            return this.IsPlaced;
+            return IsPlaced;
         }
-        public void SetIsDragged(bool isdrag)
+        public void SetIsDragged(bool dragging)
         {
-            this.dragging = isdrag;
+            this.dragging = dragging;
         }
 
         public bool GetDragged()
         {
-            return this.dragging;
+            return dragging;
         }
 
     }

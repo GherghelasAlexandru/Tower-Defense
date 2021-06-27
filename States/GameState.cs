@@ -245,13 +245,13 @@ namespace PixelDefense.States
         public override void Update(GameTime gameTime)
         {
             
-            if (mainBase.health == 0)
+            if (mainBase.GetBaseHealth() == 0)
             {
                 Globals.soundControl.StopMusic();
                 Globals.soundControl.PlaySound("game over");
                 _game.ChangeState(_game.gameOverState);
             }
-            if(mainBase.health > 0)
+            if(mainBase.GetBaseHealth() > 0)
             {
                 AttackBase(gameTime);
             }

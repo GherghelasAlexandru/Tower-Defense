@@ -69,12 +69,12 @@
     <Compile Include="Engine\Animation.cs" />
     <Compile Include="Gameplay\Base.cs" />
     <Compile Include="Gameplay\BasicTower.cs" />
-    <Compile Include="Gameplay\Bullet.cs" />
     <Compile Include="Gameplay\Bullets\Brokenshot.cs" />
+    <Compile Include="Gameplay\Bullets\Bullet.cs" />
     <Compile Include="Gameplay\Bullets\Grapeshot.cs" />
     <Compile Include="Gameplay\Bullets\Rocket.cs" />
     <Compile Include="Gameplay\Bullets\The556.cs" />
-    <Compile Include="Gameplay\Enemy.cs" />
+    <Compile Include="Gameplay\Enemies\Enemy.cs" />
     <Compile Include="Gameplay\Enemies\Rat.cs" />
     <Compile Include="Gameplay\Enemies\Crab.cs" />
     <Compile Include="Gameplay\ForgeMaster.cs" />

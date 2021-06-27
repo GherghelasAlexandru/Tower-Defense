@@ -11,7 +11,7 @@ namespace PixelDefense.Gameplay
 {
     public class Base:AnimationManager
     {
-        public int health;
+        protected int health;
        
 
         public Base(Animation animation):base(animation)
@@ -93,7 +93,7 @@ namespace PixelDefense.Gameplay
 
         public int GetBaseHealth()
         {
-            return this.health;
+            return health;
         }
     }
 }
